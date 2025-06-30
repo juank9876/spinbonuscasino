@@ -6,7 +6,6 @@ import { fetchSiteSettings } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
 import { hexToOklch } from "@/utils/hex-to-oklch";
 import { Providers } from "./providers";
-import { CookiesProvider } from "next-client-cookies/server";
 
 const onest = Onest({
   variable: "--font-onest",
@@ -61,7 +60,6 @@ export default async function RootLayout ({ children }: Readonly<{ children: Rea
           className={`bg-gradient-dark max-w-screen antialiased`}
           suppressHydrationWarning
         >
-          <CookiesProvider>
             <Providers>
               <div className="flex min-h-[100dvh] flex-col">
                 <Header />
@@ -69,7 +67,6 @@ export default async function RootLayout ({ children }: Readonly<{ children: Rea
                 <Footer settings={settings} />
               </div>
             </Providers>
-          </CookiesProvider>
         </body>
       </html>
     </ViewTransitions>
