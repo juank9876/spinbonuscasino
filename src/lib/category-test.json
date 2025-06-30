@@ -1,0 +1,29 @@
+{
+  "status": "success",
+  "message": "Loaded successfully",
+  "data": {
+    "id": "12",
+    "project_id": "5",
+    "name": "Restaurants",
+    "slug": "restaurants",
+    "description": "Restaurant reviews and recommendations.",
+    "parent_id": null,
+    "sort_order": "0",
+    "meta_title": null,
+    "meta_description": null,
+    "schema_data": null,
+    "status": "active",
+    "created_at": "2025-06-02 14:41:29",
+    "updated_at": "2025-06-02 14:41:29",
+    "posts": [
+      {
+        "id": "7",
+        "title": "The Best Italian Restaurant in Downtown",
+        "slug": "best-italian-restaurant-downtown",
+        "excerpt": "A comprehensive review of Giuseppe\\'s authentic Italian cuisine and dining experience.",
+        "featured_image": "data:image/webp;base64,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",
+        "published_at": "2024-01-22 19:00:00"
+      }
+    ]
+  }
+}

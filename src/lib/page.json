@@ -1,0 +1,31 @@
+{
+  "status": "success",
+  "message": "Loaded successfully",
+  "data": {
+    "id": "18",
+    "project_id": "5",
+    "author_id": "6",
+    "category_id": null,
+    "title": "about us",
+    "slug": "about-us",
+    "excerpt": "",
+    "html_content": "\u003Csection class=\"py-5\" id=\"izo2\"\u003E\u003Cdiv class=\"container\"\u003E\u003Cdiv class=\"row\"\u003E\u003Cdiv class=\"col-12\"\u003E\u003Ch2\u003ENew Section\u003C/h2\u003E\u003Cdiv class=\"container\"\u003E\u003Cdiv class=\"row\"\u003E\u003Cdiv class=\"col-12\"\u003E\u003Ch2\u003EYour Heading\u003C/h2\u003E\u003Cdiv class=\"row\"\u003E\u003Cdiv class=\"col-md-6\"\u003E\u003Cp\u003EColumn 1\u003C/p\u003E\u003C/div\u003E\u003Cdiv class=\"col-md-6\"\u003E\u003Cp\u003EColumn 2\u003C/p\u003E\u003C/div\u003E\u003C/div\u003E\u003Cdiv class=\"text-element\"\u003E\u003Cp\u003EInsert your text here\u003C/p\u003E\u003C/div\u003E\u003Cp id=\"i0fpi\"\u003EContainer content\u003C/p\u003E\u003C/div\u003E\u003C/div\u003E\u003C/div\u003E\u003Cp\u003EAdd your content here...\u003C/p\u003E\u003C/div\u003E\u003C/div\u003E\u003C/div\u003E\u003C/section\u003E",
+    "featured_image": "",
+    "meta_title": "",
+    "meta_description": "",
+    "meta_keywords": "",
+    "schema_data": [],
+    "custom_fields": [],
+    "view_count": "4",
+    "comment_count": "0",
+    "sort_order": "0",
+    "allow_comments": "1",
+    "type": "page",
+    "template": "default",
+    "show_in_menu": "0",
+    "status": "published",
+    "created_at": "2025-06-10 14:23:03",
+    "updated_at": "2025-06-12 13:53:05",
+    "published_at": "2025-06-10 14:23:03"
+  }
+}

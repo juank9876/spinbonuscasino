@@ -1,0 +1,48 @@
+{
+  "status": "success",
+  "message": "Loaded successfully",
+  "data": [
+    {
+      "id": "7",
+      "project_id": "5",
+      "author_id": "6",
+      "category_id": "12",
+      "title": "The Best Italian Restaurant in Downtown",
+      "slug": "best-italian-restaurant-downtown",
+      "excerpt": "A comprehensive review of Giuseppe's authentic Italian cuisine and dining experience.",
+      "html_content": "\u003Ch2\u003EYour Heading\u003C/h2\u003E\u003Ch2\u003EAuthentic Italian Experience\u003C/h2\u003E\u003Cp\u003EGiuseppe's has been serving authentic Italian cuisine for over 30 years...\u003C/p\u003E\u003Cdiv class=\"row\"\u003E\u003Cdiv class=\"col-md-6\"\u003E\u003Cp id=\"ipoc\"\u003EColumn 1\u003C/p\u003E\u003C/div\u003E\u003Cdiv class=\"col-md-6\"\u003E\u003Cp\u003EColumn 2\u003C/p\u003E\u003C/div\u003E\u003C/div\u003E\u003Ca href=\"#\" class=\"btn btn-primary\"\u003EClick me\u003C/a\u003E\u003Csection class=\"py-5\" id=\"i29of\"\u003E\u003Cdiv class=\"container\"\u003E\u003Cdiv class=\"row\"\u003E\u003Cdiv class=\"col-12\"\u003E\u003Ch2\u003ENew Section\u003C/h2\u003E\u003Cdiv class=\"card\"\u003E\u003Cdiv class=\"text-element\"\u003E\u003Cp\u003EInsert your text here\u003C/p\u003E\u003C/div\u003E\u003Ca href=\"#\" class=\"btn btn-primary\"\u003EClick me\u003C/a\u003E\u003Cimg src=\"https://via.placeholder.com/400x200/e9ecef/6c757d?text=Card+Image\" alt=\"Card image\" class=\"card-img-top\"/\u003E\u003Cdiv class=\"card-body\"\u003E\u003Ch5 class=\"card-title\"\u003ECard title\u003C/h5\u003E\u003Cp class=\"card-text\"\u003ESome quick example text to build on the card title and make up the bulk of the card's content.\u003C/p\u003E\u003Ca href=\"section\" class=\"btn btn-primary\"\u003EGo somewhere\u003C/a\u003E\u003C/div\u003E\u003C/div\u003E\u003Cp\u003EAdd your content here...\u003C/p\u003E\u003C/div\u003E\u003C/div\u003E\u003C/div\u003E\u003C/section\u003E",      "featured_image": "https://via.placeholder.com/800x400",
+      "meta_title": "Giuseppe's Restaurant Review",
+      "meta_description": "Detailed review of the best Italian restaurant downtown",
+      "meta_keywords": null,
+      "schema_data": [],
+      "custom_fields": [],
+      "view_count": "149",
+      "comment_count": "0",
+      "sort_order": "0",
+      "allow_comments": "1",
+      "type": "post",
+      "template": "default",
+      "show_in_menu": "0",
+      "status": "published",
+      "created_at": "2025-06-02 14:41:29",
+      "updated_at": "2025-06-09 11:47:57",
+      "published_at": "2024-01-22 19:00:00",
+      "author_name": "Mike Davis",
+      "author_bio": "Food critic and culinary expert with refined taste.",
+      "author_avatar": "https://via.placeholder.com/150",
+      "category_name": "Restaurants",
+      "category_slug": "restaurants",
+      "tags": []
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "per_page": 10,
+    "current_page": 1,
+    "total_pages": 1,
+    "has_next": false,
+    "has_prev": false,
+    "next_page": null,
+    "prev_page": null
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "status": "success",
+  "message": "Loaded successfully",
+  "data": [
+    {
+      "id": "15",
+      "project_id": "5",
+      "title": "home",
+      "url": "/",
+      "parent_id": null,
+      "sort_order": "1",
+      "target": "_self",
+      "css_class": "",
+      "status": "active",
+      "created_at": "2025-06-09 15:10:00",
+      "updated_at": "2025-06-09 15:10:00",
+      "children": [
+        {
+        "id": "32",
+        "project_id": "5",
+        "title": "child",
+        "url": "/",
+        "parent_id": "15",
+        "sort_order": "1",
+        "target": "_self",
+        "css_class": "",
+        "status": "active",
+        "created_at": "2025-06-09 15:10:00",
+        "updated_at": "2025-06-09 15:10:00"
+      },
+      {
+        "id": "33",
+        "project_id": "5",
+        "title": "child",
+        "url": "/",
+        "parent_id": "15",
+        "sort_order": "1",
+        "target": "_self",
+        "css_class": "",
+        "status": "active",
+        "created_at": "2025-06-09 15:10:00",
+        "updated_at": "2025-06-09 15:10:00"
+      },
+      {
+        "id": "34",
+        "project_id": "5",
+        "title": "child",
+        "url": "/",
+        "parent_id": "15",
+        "sort_order": "1",
+        "target": "_self",
+        "css_class": "",
+        "status": "active",
+        "created_at": "2025-06-09 15:10:00",
+        "updated_at": "2025-06-09 15:10:00"
+      }
+    ]
+    },
+    {
+      "id": "16",
+      "project_id": "5",
+      "title": "hom",
+      "url": "/",
+      "parent_id": null,
+      "sort_order": "1",
+      "target": "_self",
+      "css_class": "",
+      "status": "active",
+      "created_at": "2025-06-09 15:10:15",
+      "updated_at": "2025-06-09 15:10:15"
+    },
+    {
+      "id": "17",
+      "project_id": "5",
+      "title": "home",
+      "url": "/",
+      "parent_id": null,
+      "sort_order": "2",
+      "target": "_self",
+      "css_class": "",
+      "status": "active",
+      "created_at": "2025-06-09 15:10:30",
+      "updated_at": "2025-06-09 15:10:30"
+    },
+    {
+      "id": "18",
+      "project_id": "5",
+      "title": "home",
+      "url": "/",
+      "parent_id": null,
+      "sort_order": "3",
+      "target": "_self",
+      "css_class": "",
+      "status": "active",
+      "created_at": "2025-06-11 10:52:21",
+      "updated_at": "2025-06-11 10:52:21"
+    },
+    {
+      "id": "19",
+      "project_id": "5",
+      "title": "About",
+      "url": "/about-us",
+      "parent_id": null,
+      "sort_order": "4",
+      "target": "_self",
+      "css_class": "",
+      "status": "active",
+      "created_at": "2025-06-11 10:54:20",
+      "updated_at": "2025-06-11 10:54:20"
+    }
+  ]
+}
