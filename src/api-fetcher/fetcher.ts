@@ -26,7 +26,8 @@ export async function fetcher<T>({ method, id }: FetcherParams): Promise<T> {
 
   try {
     const res = await fetch(url, {
-      cache: 'no-store'
+      next: { revalidate: 5 }
+      
     })
     const data: ResponseInterface<T> = await res.json();
 
