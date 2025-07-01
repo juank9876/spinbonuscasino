@@ -14,6 +14,9 @@ import {
   transformCardBody,
   transformCode,
   transformStrong,
+  transformForm,
+  transformP,
+  transformPre,
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -42,10 +45,14 @@ const rules: TransformerRule[] = [
     transformer: transformBrandlisty,
   },
   //Tags HTML
+  { tagName: 'form', transformer: transformForm },
   { tagName: 'h2', transformer: transformH2 },
   { tagName: 'h3', transformer: transformH3 },
   { tagName: 'li', transformer: transformLi },
+  { tagName: 'p', transformer: transformP },
+  { tagName: 'img', transformer: transformImg },
   { tagName: 'code', transformer: transformCode },
+  { tagName: 'pre', transformer: transformPre },
   { tagName: 'strong', transformer: transformStrong },
 ]
 

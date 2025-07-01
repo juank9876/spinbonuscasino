@@ -57,16 +57,16 @@ export default async function RootLayout ({ children }: Readonly<{ children: Rea
 
           } as React.CSSProperties
           }
-          className={`bg-gradient-dark max-w-screen antialiased`}
+          className={`bg-gradient-light max-w-screen antialiased`}
           suppressHydrationWarning
         >
-            <Providers>
-              <div className="flex min-h-[100dvh] flex-col">
-                <Header />
-                {children}
-                <Footer settings={settings} />
-              </div>
-            </Providers>
+          <Providers>
+            <div className="flex min-h-[100dvh] flex-col">
+              <Header />
+              {children}
+              <Footer settings={settings} />
+            </div>
+          </Providers>
         </body>
       </html>
     </ViewTransitions>

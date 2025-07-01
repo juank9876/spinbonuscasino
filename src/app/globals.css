@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -61,6 +59,34 @@
   100% {
     background-position: bottom center;}}}
 
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: #333333;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
 
 body {
   font-family: var(--font-onest), sans-serif;
@@ -115,34 +141,7 @@ body {
   background-image: linear-gradient(45deg, var(--color-primary-light), var(--color-secondary-light));
 }
 
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+
 
 .theme-dark {
   --background: oklch(0.145 0 0);
@@ -189,7 +188,7 @@ body {
     @apply w-full flex flex-col space-y-5
   }
   h1 {
-    @apply font-bold text-start lg:text-center lg:text-6xl text-3xl
+    @apply font-bold text-start lg:text-center lg:text-6xl text-3xl px-1 text-black
   }
   h2 {
     @apply font-bold text-start lg:text-center text-xl lg:text-4xl 
@@ -203,7 +202,7 @@ body {
   }
 
   p {
-    @apply text-base lg:text-xl leading-relaxed py-2 text-muted-foreground hover:text-white transition duration-500
+    @apply text-base lg:text-xl leading-relaxed py-2 text-muted-foreground hover:text-black transition duration-500
   }
   
 }
@@ -267,6 +266,15 @@ body {
   #2b2b2b 30%,
   #1f1f1f 60%,
   var(--color-primary-dark) 100%
+);
+}
+.bg-gradient-light {
+  background: linear-gradient(
+  160deg,
+  var(--color-primary-light) 0%,
+  #eaeaea 30%,
+  #e0e0e0 50%,
+  var(--color-primary-light) 80%
 );
 }
 .bg-gradient-reverse {

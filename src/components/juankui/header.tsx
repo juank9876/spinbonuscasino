@@ -12,28 +12,6 @@ import { contextSiteSettings } from '@/app/context/getSiteSettings'
 import { Logo } from './logo'
 import { RenderMenu } from './render-menu'
 
-/*
-function buildMenuTree (items: NavItemType[]): NavItemType[] {
-  const tree: NavItemType[] = []
-  const lookup: Record<string, NavItemType & { children?: NavItemType[] }> = {}
-
-  items.forEach(item => {
-    lookup[item.id] = { ...item, children: [] }
-  })
-
-  items.forEach(item => {
-    if (item.parent_id) {
-      lookup[item.parent_id]?.children?.push(lookup[item.id])
-    } else {
-      tree.push(lookup[item.id])
-    }
-  })
-
-  return tree
-}
-*/
-
-
 
 export async function Header () {
   const rawNavItems = await fetchMenu()
@@ -49,7 +27,7 @@ export async function Header () {
   const settings = await contextSiteSettings()
   return (
     <>
-      <header className="sticky top-0 z-50 flex w-full flex-row items-center justify-center bg-[var(--color-primary-dark)] px-5 py-3">
+      <header className="sticky top-0 z-50 flex w-full flex-row items-center justify-center bg-[var(--color-primary)] px-5 py-3">
         <div className="w-custom mx-auto flex h-full flex-row items-center justify-between">
           <Logo
             {...settings}
@@ -67,7 +45,7 @@ export async function Header () {
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="lg:hidden">
-              <MenuIcon className="size-7 text-[var(--color-primary)]" />
+              <MenuIcon className="size-7 text-[var(--color-accent)]" />
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>

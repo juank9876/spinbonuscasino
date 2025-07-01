@@ -11,12 +11,8 @@ export function Providers ({ children }: { children: ReactNode }) {
 
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark"
-      forcedTheme='dark'
-      value={{
-        dark: 'theme-dark',
-        newspaper: 'theme-newspaper',
-      }}
+      defaultTheme="light"
+      forcedTheme='light'
       enableSystem={false}
       disableTransitionOnChange
     >

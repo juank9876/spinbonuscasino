@@ -16,12 +16,14 @@ type ListItemProps = {
 
 function ListItem ({ title, href, children }: ListItemProps) {
   return (
-    <li>
-      <NavigationMenuLink asChild>
-        <Link href={href} className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors">
-          <p className="text-sm font-medium leading-none text-white">{title}</p>
+    <li className='group/link duration-400 h-full rounded-md bg-[var(--color-accent-dark)] transition hover:bg-[var(--color-accent-light)]'>
+      <NavigationMenuLink asChild className='h-full'>
+        <Link
+          href={href}
+          className="duration-400 focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline outline-none transition focus:bg-[var(--color-accent)] group-hover/link:text-white">
+          <p className="text-muted group-hover/link:text-muted-foreground text-sm font-medium leading-none">{title}</p>
           {children && (
-            <p className="line-clamp-2 text-sm leading-snug">
+            <p className="text-muted group-hover/link:text-muted-foreground line-clamp-2 text-sm leading-snug">
               {children}
             </p>
           )}
@@ -43,7 +45,7 @@ export function RenderMenu ({ normalizedItems, categoriesItems }: { normalizedIt
 
               // LINK CON CHILDREN
               <>
-                <NavigationMenuTrigger>{capitalize(item.title)}</NavigationMenuTrigger>
+                <NavigationMenuTrigger className='font-medium'>{capitalize(item.title)}</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-2 p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                     {item.children.map((child) => (
@@ -62,9 +64,9 @@ export function RenderMenu ({ normalizedItems, categoriesItems }: { normalizedIt
                 if (!isCategories) setIsCategories(true); // Actualiza el estado si aún no estaba en true
                 return (
                   <>
-                    <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className='font-medium'>{item.title}</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-2 p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      <ul className="grid w-[400px] gap-2 bg-[var(--color-primary)] p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                         {categoriesItems.map((category) => (
                           <ListItem key={category.id} title={capitalize(category.name)} href={`/categories/${category.slug}`}>
                             {category.description}
@@ -79,7 +81,7 @@ export function RenderMenu ({ normalizedItems, categoriesItems }: { normalizedIt
               // LINK NORMAL
             ) : (
               <NavigationMenuLink asChild>
-                <Link href={`${item.url}`} className="hover:text-primary px-4 py-2 text-sm font-medium transition-colors">
+                <Link href={`${item.url}`} className="hover:text-primary px-4 py-2 font-medium transition-colors">
                   {capitalize(item.title)}
                 </Link>
               </NavigationMenuLink>
@@ -90,8 +92,8 @@ export function RenderMenu ({ normalizedItems, categoriesItems }: { normalizedIt
           !isCategories && (
             <NavigationMenuItem>
               <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-2 p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+              <NavigationMenuContent className='bg-[var(--color-primary)]'>
+                <ul className="grid w-[400px] gap-2 bg-[var(--color-primary)] p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                   {categoriesItems.map((category) => (
                     <ListItem key={category.id} title={capitalize(category.name)} href={`/categories/${category.slug}`}>
                       {category.description}

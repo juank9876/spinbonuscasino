@@ -54,13 +54,13 @@ export default async function CategoryPage ({
     if (!posts || posts.length === 0) {
       return (
         <PreCategory category={category} className='flex h-full flex-col items-center justify-center'>
-          <span className="text-muted bg-primary rounded-lg px-5 py-10 text-xl italic">Sorry! No posts available in this category.</span>
+          <span className="text-muted bg-primary mx-auto rounded-lg px-5 py-10 text-xl italic">Oops! No posts available in this category.</span>
         </PreCategory>
 
       )
     }
     return (
-      <PreCategory category={category} className='flex flex-col items-center justify-center space-y-5'>
+      <PreCategory category={category} className='flex w-[90vw] grid-cols-2 flex-col justify-center space-y-5 rounded-lg lg:grid lg:w-[60vw] lg:gap-5'>
         {posts?.map((post) => (
           <CardPostCategory key={post.id} post={post} category={category} />
         ))}

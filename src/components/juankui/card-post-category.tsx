@@ -9,7 +9,7 @@ export function CardPostCategory ({ post, category }: { post: Post, category: Ca
   return (
     <>
       {/*Card para PC*/}
-      <Card className="duration-400 scale-custom relative hidden w-[40vw] overflow-hidden border-none p-0 shadow-none transition hover:bg-[var(--color-primary-dark)] lg:flex">
+      <Card className="duration-400 scale-custom relative hidden h-full overflow-hidden border-none p-0 shadow-none transition hover:bg-[var(--color-primary-light)] lg:flex">
         <Link href={`/categories/${category.slug}/${post.slug}`} className="w-full">
           <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
           <CardContent className="p-5">
@@ -30,7 +30,7 @@ export function CardPostCategory ({ post, category }: { post: Post, category: Ca
               {/* Contenido derecho con altura igual */}
               <div className="flex flex-1 flex-col justify-between px-6 py-3">
                 <div className='mb-0 gap-y-3 pb-0'>
-                  <h2 className="mb-0 text-start font-semibold">{post.title}</h2>
+                  <h2 className="mb-0 text-start text-3xl font-bold">{post.title}</h2>
                   <p className="text-muted-foreground mb-0 pb-0 text-sm">{formatDate(post.published_at)}</p>
                   <p className="text-muted-foreground text-base">{post.excerpt}</p>
                 </div>
@@ -91,7 +91,7 @@ export function CardPostCategory ({ post, category }: { post: Post, category: Ca
                     className="object-cover"
                   />
                 </div>
-                <p className="text-sm">{post.author_name}</p>
+                <p className="text-muted text-sm">{post.author_name}</p>
               </div>
             </CardContent>
           </div>

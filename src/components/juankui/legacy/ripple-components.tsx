@@ -25,23 +25,12 @@ export function rippleEffect (
   if (ripple) {
     ripple.remove();
   }
-  console.log("click")
   btn.appendChild(circle);
 }
 
 export function ButtonRipple ({ /*id,*/ children, className }: { id: string, children: React.ReactNode, className?: string }) {
-  /*
-  function handleClick (event: React.MouseEvent<HTMLButtonElement>) {
-    rippleEffect(event);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-*/
   return (
     <HoverBorderGradient
-
       as="button"
       className={`${className} h-full flex items-center justify-center font-semibold  px-5 py-3 min-w-max overflow-hidden relative transition-all duration-300 shadow-lg hover:shadow-xl`}
       duration={1}
@@ -64,7 +53,7 @@ export function LinkRipple ({ href, children, className }: { href: string, child
         <Link
           href={href}
           type="button"
-          className={`${className} flex bg-transparent rounded-xl justify-center items-center font-bold px-3 py-1 lg:px-5 lg:py-3 overflow-hidden relative hover:bg-opacity-90 transition-all duration-300`}
+          className={`${className} flex text-white bg-transparent rounded-xl justify-center items-center font-bold px-3 py-1 lg:px-5 lg:py-3 overflow-hidden relative hover:bg-opacity-90 transition-all duration-300`}
           onClick={handleClick}
         >
           {children}

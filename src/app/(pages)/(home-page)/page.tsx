@@ -14,7 +14,7 @@ async function getHomePageFromParams () {
   const slug = "";
   const id = map[slug];
 
-  if (!id) throw new Error(`No page ID found for slug: "${slug}"`);
+  if (!id) throw notFound();
 
   const homePage = await fetchPageById(id)
   return homePage
