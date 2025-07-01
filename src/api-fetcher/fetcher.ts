@@ -14,7 +14,7 @@ export interface ResponseInterface<T = unknown> {
 }
 
 export async function fetcher<T>({ method, id }: FetcherParams): Promise<T> {
-  const baseUrl = `https://intercms.dev/api/v1/data.php`
+  const baseUrl = `https://intercms.dev/api/v2/data.php`
   const url = baseUrl + `?method=${method}` + `&api_key=${process.env.API_KEY}` + `&project_id=${process.env.PROJECT_ID}` + (id ? `&id=${id}` : ``)
   
   if (method === "page" && id == undefined) {
@@ -25,7 +25,9 @@ export async function fetcher<T>({ method, id }: FetcherParams): Promise<T> {
   }
 
   try {
-    const res = await fetch(url)
+    const res = await fetch(url, {
+      cache: 'no-store'
+    })
     const data: ResponseInterface<T> = await res.json();
 
     if (data.status === "success") {
