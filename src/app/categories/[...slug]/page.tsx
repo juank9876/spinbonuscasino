@@ -14,7 +14,7 @@ type RouteData =
     | { type: 'post'; post: Post }
     | { type: 'category'; category: Category }
 
-export async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
+async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
     if (slugArray.length === 0) notFound()
 
     // 🚨 Eliminar el prefijo "categories" si existe
