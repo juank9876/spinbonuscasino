@@ -6,7 +6,7 @@ import Link from "next/link";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 
 
-export function rippleEffect (
+export function rippleEffect(
   event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement | HTMLDivElement>
 ) {
   const btn = event.currentTarget as HTMLElement;
@@ -28,11 +28,11 @@ export function rippleEffect (
   btn.appendChild(circle);
 }
 
-export function ButtonRipple ({ /*id,*/ children, className }: { id: string, children: React.ReactNode, className?: string }) {
+export function ButtonRipple({ /*id,*/ children, className }: { children: React.ReactNode, className?: string }) {
   return (
     <HoverBorderGradient
       as="button"
-      className={`${className} h-full flex items-center justify-center font-semibold  px-5 py-3 min-w-max overflow-hidden relative transition-all duration-300 shadow-lg hover:shadow-xl`}
+      className={`${className} bg-white h-full flex items-center justify-center font-semibold  px-5 py-3 min-w-max overflow-hidden relative transition-all duration-300 shadow-lg hover:shadow-xl`}
       duration={1}
     >
       <div className="relative">
@@ -42,8 +42,8 @@ export function ButtonRipple ({ /*id,*/ children, className }: { id: string, chi
   )
 }
 
-export function LinkRipple ({ href, children, className }: { href: string, children: React.ReactNode, className?: string }) {
-  function handleClick (event: React.MouseEvent<HTMLAnchorElement>) {
+export function LinkRipple({ href, children, className }: { href: string, children: React.ReactNode, className?: string }) {
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
     rippleEffect(event);
   }
 

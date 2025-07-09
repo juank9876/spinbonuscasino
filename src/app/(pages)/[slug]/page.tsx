@@ -5,11 +5,23 @@ import { capitalize } from '@/utils/capitalize'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PrePage } from '@/components/juankui/pre-rendered/pre-page'
 //import { PageSlugProps } from '@/types/types'
-import { fetchPageById } from '@/api-fetcher/fetcher'
+import { fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
 import { getPageSlugToIdMap } from '@/lib/utils'
+import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 //import { Metadata } from 'next'
+async function getHomePageFromParams() {
 
-async function getPageFromParams ({
+  const map = await getPageSlugToIdMap();
+  const slug = "home";
+  const id = map[slug];
+
+  if (!id) throw notFound();
+
+  const homePage = await fetchPageById(id)
+  return homePage
+}
+
+async function getPageFromParams({
   params,
 }: {
   params: Promise<{ slug: string }>
@@ -24,7 +36,7 @@ async function getPageFromParams ({
   return category
 }
 
-export async function generateMetadata ({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>
@@ -42,23 +54,42 @@ export async function generateMetadata ({
   }
 }
 
-export default async function Page ({
+export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
-  try {
-    const page = await getPageFromParams({ params })
 
-    if (!page || page.status !== 'published') return notFound()
+  if ((await params).slug === "home") {
+    console.log((await params).slug);
+    const page = await getHomePageFromParams()
+    const settings = await fetchSiteSettings()
 
-    return (
-      <PrePage page={page}>
+    console.log(page)
+    if (page) return (
+
+      <PreHomePage
+        settings={settings}
+      >
         <HtmlRenderer html={page.html_content} />
-      </PrePage>
+      </PreHomePage>
     )
-  } catch (error) {
-    console.log('Error generating metadata:', error)
-    notFound()
+  } else {
+
+    try {
+      const page = await getPageFromParams({ params })
+
+      if (!page || page.status !== 'published') return notFound()
+
+      return (
+        <PrePage page={page}>
+          <HtmlRenderer html={page.html_content} />
+        </PrePage>
+      )
+    } catch (error) {
+      console.log('Error generating metadata:', error)
+      notFound()
+    }
   }
+
 }

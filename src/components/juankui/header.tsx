@@ -24,7 +24,7 @@ export async function Header() {
   const navProps = { categoriesItems, settings, normalizedItems }
   return (
     <>
-      <header className="sticky top-0 z-50 flex w-full flex-row items-center justify-center bg-[var(--color-primary)] px-5 py-3">
+      <header className="sticky top-0 z-50 flex w-full flex-row items-center justify-center bg-[var(--color-primary-dark)] px-5 py-3">
         <div className="w-custom mx-auto flex h-full flex-row items-center justify-between">
           <Logo
             {...settings}

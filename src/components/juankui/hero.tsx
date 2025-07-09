@@ -1,6 +1,6 @@
-import { Calendar1, Gift, Star } from "lucide-react"
+import { Calendar1, Dice6, Gift, Star } from "lucide-react"
 import { BoxReveal } from "../magicui/box-reveal"
-import { LinkRipple } from "./legacy/ripple-components"
+import { ButtonRipple, LinkRipple } from "./legacy/ripple-components"
 import { VideoHero } from "./optionals/video-hero"
 import Image from "next/image"
 import { Post, Page, SiteSettings, Category } from '@/types/types'
@@ -9,38 +9,46 @@ import { BorderBeam } from "../magicui/border-beam"
 import { Card, CardContent } from "../ui/card"
 import { MagicCard } from "../magicui/magic-card"
 import { Breadcrumbs } from "./breadcrumbs"
+import { ParticlesFull } from "./particles"
 
 
 
-export function HeroHomePage({ meta_title, meta_description, site_title }: SiteSettings) {
+export function HeroHomePage({ meta_title, meta_description, site_title, site_description }: SiteSettings) {
   return (
     <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
+      <ParticlesFull />
       <VideoHero />
-      <Card className="w-custom my-10 flex h-full flex-col items-center justify-center bg-[var(--color-primary)] p-0">
-        <MagicCard className="m-0 w-full p-0">
-          <CardContent className="flex flex-col items-center justify-center space-y-5 p-10">
+      <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
+        <div className="m-0 w-full flex items-center justify-center gap-5 p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
+
+          <div className="flex flex-col w-full items-center justify-center space-y-5">
             <div
-              className="group/badge duration-400 flex flex-row items-center justify-center rounded-full bg-gradient-to-r from-[var(--color-accent-dark)] to-[var(--color-accent)] px-5 opacity-90 transition hover:to-[var(--color-primary-semi-dark)]">
+              className=" group/badge duration-400 w-1/7 flex flex-row items-center justify-center rounded-full bg-gradient-to-t from-[var(--color-accent)] to-[var(--color-accent)] px-5 opacity-90 transition hover:to-[var(--color-primary)]"
+            >
               <Star size={18} className="mr-2 inline text-[var(--color-accent-light)]" />
-              <p className="text-md text-muted font-bold group-hover/badge:text-white">{site_title}</p>
+              <p className="text-lg text-muted font-bold group-hover/badge:text-white">{site_title}</p>
             </div>
             <BoxReveal duration={0.5}>
-              <h1 className="text-muted text-center lg:leading-normal">
-                {meta_title}
+              <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
+                {site_title || meta_title}
               </h1>
             </BoxReveal>
+
             <BoxReveal duration={0.6}>
-              <p className="hero-text-description text-muted text-center">{meta_description}</p>
+              <p className=" line-clamp-2 text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{site_description || meta_description}</p>
             </BoxReveal>
+
             <div className="flex flex-row items-center justify-center space-x-5 lg:py-5">
+              <ButtonRipple>
+                New Casinos <Dice6 size={20} className="ml-2 inline" />
+              </ButtonRipple>
               <LinkRipple href="#">
-                See more <Gift size={20} className="ml-2 inline" />
+                Bonus <Gift size={20} className="ml-2 inline" />
               </LinkRipple>
             </div>
-            <BorderBeam duration={12} size={200} />
-          </CardContent>
-        </MagicCard>
-      </Card>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

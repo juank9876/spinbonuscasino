@@ -6,7 +6,7 @@ export const navPosition = "justify-" + navPositionConfig
 
 //View transitions
 export const isViewTransitions = true
-export const isParticles = false
+export const isParticles = true
 
 //Language
 export const language = "en"

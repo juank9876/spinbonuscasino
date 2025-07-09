@@ -19,16 +19,19 @@ const poppins = Poppins({
 });
 
 
-export default async function RootLayout ({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const settings = await fetchSiteSettings()
   //cambiar el valor para distinta tonalidad
-  const primaryLightColor = hexToOklch(settings.primary_color, 0.80)
-  const secondaryLightColor = hexToOklch(settings.secondary_color, 0.80);
-  const accentLightColor = hexToOklch(settings.accent_color, 0.80);
+  const primaryLightColor = hexToOklch(settings.primary_color, 0.90)
+  const primarySemiLightColor = hexToOklch(settings.primary_color, 0.50)
+  const primarySemiDarkColor = hexToOklch(settings.primary_color, 0.5, 'darker')
+  const primaryDarkColor = hexToOklch(settings.primary_color, 0.6, 'darker')
 
-  const primarySemiDarkColor = hexToOklch(settings.primary_color, 0.75, 'darker')
-  const primaryDarkColor = hexToOklch(settings.primary_color, 0.8, 'darker')
+  const secondaryLightColor = hexToOklch(settings.secondary_color, 0.80);
   const secondaryDarkColor = hexToOklch(settings.secondary_color, 0.2, 'darker');
+
+  const accentLightColor = hexToOklch(settings.accent_color, 0.80);
+  const accentSemiLightColor = hexToOklch(settings.accent_color, 0.60);
   const accentDarkColor = hexToOklch(settings.accent_color, 0.2, 'darker');
 
   return (
@@ -42,19 +45,20 @@ export default async function RootLayout ({ children }: Readonly<{ children: Rea
         </head>
         <body
           style={{
-            '--color-primary': settings.primary_color,
-            '--color-secondary': settings.secondary_color,
-            '--color-accent': settings.accent_color,
-
             '--color-primary-light': primaryLightColor,
-            '--color-secondary-light': secondaryLightColor,
-            '--color-accent-light': accentLightColor,
-
+            '--color-primary-semi-light': primarySemiLightColor,
+            '--color-primary': settings.primary_color,
             '--color-primary-semi-dark': primarySemiDarkColor,
             '--color-primary-dark': primaryDarkColor,
-            '--color-secondary-dark': secondaryDarkColor,
+
+            '--color-accent-light': accentLightColor,
+            '--color-accent-semi-light': accentSemiLightColor,
+            '--color-accent': settings.accent_color,
             '--color-accent-dark': accentDarkColor,
 
+            '--color-secondary-light': secondaryLightColor,
+            '--color-secondary': settings.secondary_color,
+            '--color-secondary-dark': secondaryDarkColor,
           } as React.CSSProperties
           }
           className={`bg-gradient-light max-w-screen antialiased`}
