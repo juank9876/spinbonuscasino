@@ -68,8 +68,8 @@ export function MagicCard({
           `,
         }}
       />
-      <div className="absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <div className="absolute inset-px rounded-[inherit] casino-bg" />
+      <div className="absolute inset-0 rounded-[inherit] bg-[var(--color-primary)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-px rounded-[inherit] bg-[var(--color-primary)]" />
       <motion.div
         className="pointer-events-none absolute inset-px rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
@@ -79,7 +79,7 @@ export function MagicCard({
           opacity: gradientOpacity,
         }}
       />
-      <div className="relative z-10 w-full h-full">{children}</div>
+      <div className="relative z-10">{children}</div>
     </div>
   )
 }

@@ -32,7 +32,7 @@ export function ButtonRipple({ /*id,*/ children, className }: { children: React.
   return (
     <HoverBorderGradient
       as="button"
-      className={`${className} bg-white h-full flex items-center justify-center font-semibold  px-5 py-3 min-w-max overflow-hidden relative transition-all duration-300 shadow-lg hover:shadow-xl`}
+      className={`${className} cursor-pointer bg-white h-full flex items-center justify-center font-semibold  px-5 py-3 min-w-max overflow-hidden relative transition-all duration-300 shadow-lg hover:shadow-xl`}
       duration={1}
     >
       <div className="relative">

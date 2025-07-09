@@ -2,7 +2,7 @@ import { SiteSettings } from "@/types/types";
 
 export function Footer({ settings }: { settings: SiteSettings }) {
   return (
-    <footer className="flex w-full flex-col items-center justify-center bg-[var(--color-primary)] px-5 py-10">
+    <footer className="flex w-full flex-col items-center justify-center bg-[var(--color-primary-dark)] px-5 py-10">
       <div className="grid w-full grid-cols-1 gap-x-10 space-y-5 rounded-lg border-2 bg-transparent p-5 transition duration-300 hover:shadow-lg lg:w-[60vw] lg:grid-cols-3 lg:space-y-0">
         <div className="space-y-3">
           <h4 className="text-muted">{settings.site_title}</h4>
