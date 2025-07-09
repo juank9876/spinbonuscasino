@@ -66,3 +66,7 @@ export async function getPostSlugToIdMap(): Promise<SlugToIdMap> {
 
   return map
 }
+
+export function cleanSlug(slug: string) {
+  return slug.replace(/^\/+|\/+$/g, '')
+}

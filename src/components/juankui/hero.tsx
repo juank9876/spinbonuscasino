@@ -12,7 +12,7 @@ import { Breadcrumbs } from "./breadcrumbs"
 
 
 
-export function HeroHomePage ({ meta_title, meta_description, site_title }: SiteSettings) {
+export function HeroHomePage({ meta_title, meta_description, site_title }: SiteSettings) {
   return (
     <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
       <VideoHero />
@@ -45,7 +45,7 @@ export function HeroHomePage ({ meta_title, meta_description, site_title }: Site
   )
 }
 
-export function HeroPage ({ title, meta_description, breadcrumbs }: Page) {
+export function HeroPage({ title, meta_description, breadcrumbs }: Page) {
   return (
     <section className="itju-center mb-20 mt-5 flex w-full overflow-hidden bg-transparent">
       <div className="w-custom flex w-full items-start justify-start">
@@ -62,7 +62,7 @@ export function HeroPage ({ title, meta_description, breadcrumbs }: Page) {
   )
 }
 
-export function HeroPost ({ title, excerpt, author_avatar, author_name, created_at, breadcrumbs }: Post) {
+export function HeroPost({ title, excerpt, author_avatar, author_name, created_at, breadcrumbs }: Post) {
   return (
     <>
       <section className="itju-center mb-20 mt-5 flex w-full overflow-hidden bg-transparent">
@@ -74,7 +74,7 @@ export function HeroPost ({ title, excerpt, author_avatar, author_name, created_
           <MagicCard className="m-0 w-full p-0">
             <CardContent className="flex flex-col items-center justify-center space-y-5 p-10">
               <BoxReveal duration={0.5}>
-                <h1 className="z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[var(--color-primary-light)] from-35% to-[var(--color-accent-light)] bg-clip-text text-center leading-normal tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+                <h1 className="z-10 h-full whitespace-pre-wrap  text-center leading-normal tracking-tighter text-white dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
                   {title}
                 </h1>
               </BoxReveal>
@@ -114,7 +114,7 @@ export function HeroPost ({ title, excerpt, author_avatar, author_name, created_
   )
 }
 
-export function HeroCategory ({ name, description, breadcrumbs }: Category) {
+export function HeroCategory({ name, description, breadcrumbs }: Category) {
   return (
     <>
       <section className="itju-center mb-20 mt-5 flex w-full overflow-hidden bg-transparent">
@@ -125,7 +125,7 @@ export function HeroCategory ({ name, description, breadcrumbs }: Category) {
           <MagicCard className="m-0 w-full p-0">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-10">
               <BoxReveal duration={0.5}>
-                <h1 className="z-10 h-full bg-gradient-to-br from-[var(--color-primary-light)] from-35% to-[var(--color-accent)] bg-clip-text text-center font-bold leading-normal text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+                <h1 className="z-10 h-full text-center font-bold leading-normal text-white dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
                   {name}
                 </h1>
               </BoxReveal>

@@ -40,24 +40,33 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --animate-shine: shine var(--duration) infinite linear;
+
   @keyframes shine {
-  0% {
-    background-position: 0% 0%;
+    0% {
+      background-position: 0% 0%;
     }
-  50% {
-    background-position: 100% 100%;
+
+    50% {
+      background-position: 100% 100%;
     }
-  to {
-    background-position: 0% 0%;
+
+    to {
+      background-position: 0% 0%;
     }
   }
-  --animate-background-position-spin: background-position-spin 3000ms infinite alternate
-;
+
+  --animate-background-position-spin: background-position-spin 3000ms infinite alternate;
+
   @keyframes background-position-spin {
-  0% {
-    background-position: top center;}
-  100% {
-    background-position: bottom center;}}}
+    0% {
+      background-position: top center;
+    }
+
+    100% {
+      background-position: bottom center;
+    }
+  }
+}
 
 :root {
   --radius: 0.625rem;
@@ -95,12 +104,15 @@ body {
 .text-primary {
   color: var(--color-primary);
 }
+
 .bg-primary {
   background-color: var(--color-primary);
 }
+
 .bg-primary-dark {
   background-color: var(--color-primary-dark);
 }
+
 .border-primary {
   border-color: var(--color-primary);
 }
@@ -108,9 +120,11 @@ body {
 .text-secondary {
   color: var(--color-secondary);
 }
+
 .bg-secondary {
   background-color: var(--color-secondary);
 }
+
 .border-secondary {
   border-color: var(--color-secondary);
 }
@@ -118,9 +132,11 @@ body {
 .text-accent {
   color: var(--color-accent);
 }
+
 .bg-accent {
   background-color: var(--color-accent);
 }
+
 .border-accent {
   border-color: var(--color-accent);
 }
@@ -181,20 +197,25 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply text-foreground;
   }
+
   section {
     @apply w-full flex flex-col space-y-5
   }
+
   h1 {
     @apply font-bold text-start lg:text-center lg:text-6xl text-3xl px-1 text-black
   }
+
   h2 {
-    @apply font-bold text-start lg:text-center text-xl lg:text-4xl 
+    @apply font-bold text-start lg:text-center text-xl lg:text-4xl
   }
+
   h3 {
-    @apply font-bold text-start text-2xl 
+    @apply font-bold text-start text-2xl
   }
 
   h4, h5 {
@@ -204,40 +225,38 @@ body {
   p {
     @apply text-base lg:text-xl leading-relaxed py-2 text-muted-foreground hover:text-black transition duration-500
   }
-  
+
 }
 
 @layer utilities {
   .hero-text-description {
     @apply text-lg lg:text-2xl
   }
-  
+
   .itju-center {
     @apply items-center justify-center
   }
+
   .itju-start {
     @apply items-center justify-start
   }
+
   .itju-end {
     @apply items-center justify-end
   }
 
   .bg-gradient-top {
-    background: linear-gradient(
-      to bottom, 
-      hsla(0, 87%, 53%, 0.05), 
-      transparent 20%
-    );
+    background: linear-gradient(to bottom,
+        hsla(0, 87%, 53%, 0.05),
+        transparent 20%);
   }
 
   .bg-gradient-middle {
-    background: linear-gradient(
-      180deg,
-      transparent,
-      rgba(97, 106, 115, 0.85) 40%,
-      rgba(97, 106, 115, 0.50) 60%,
-      rgba(97, 106, 115, 0.65)
-    );
+    background: linear-gradient(180deg,
+        transparent,
+        rgba(97, 106, 115, 0.85) 40%,
+        rgba(97, 106, 115, 0.50) 60%,
+        rgba(97, 106, 115, 0.65));
   }
 
   .scale-custom {
@@ -260,42 +279,36 @@ body {
 }
 
 .bg-gradient-dark {
-  background: linear-gradient(
-  160deg,
-  var(--color-primary-dark) 0%,
-  #2b2b2b 30%,
-  #1f1f1f 60%,
-  var(--color-primary-dark) 100%
-);
-}
-.bg-gradient-light {
-  background: linear-gradient(
-  160deg,
-  var(--color-primary-light) 0%,
-  #eaeaea 30%,
-  #e0e0e0 50%,
-  var(--color-primary-light) 80%
-);
-}
-.bg-gradient-reverse {
-  background: linear-gradient(
-  160deg,
-  var(--color-primary-dark) 0%,
-  #2b2b2b 30%,
-  #1f1f1f 60%,
-  var(--color-primary-dark) 100%
-);
+  background: linear-gradient(160deg,
+      var(--color-primary-dark) 0%,
+      #2b2b2b 30%,
+      #1f1f1f 60%,
+      var(--color-primary-dark) 100%);
 }
 
-/* Custom scrollbar styles */ 
+.bg-gradient-light {
+  background: linear-gradient(to bottom, #ffffff, #f4f4f5, #ececec);
+}
+
+.bg-gradient-reverse {
+  background: linear-gradient(160deg,
+      var(--color-primary-dark) 0%,
+      #2b2b2b 30%,
+      #1f1f1f 60%,
+      var(--color-primary-dark) 100%);
+}
+
+/* Custom scrollbar styles */
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
+
 *::-webkit-scrollbar-thumb {
   background-color: var(--color-accent);
   border-radius: 4px;
 }
+
 *::-webkit-scrollbar-track {
   background-color: transparent;
 }

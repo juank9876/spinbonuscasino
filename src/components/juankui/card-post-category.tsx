@@ -5,12 +5,14 @@ import { formatDate } from '@/lib/utils'
 import { Link } from '@/components/juankui/optionals/link'
 import { Category, Post } from '@/types/types'
 
-export function CardPostCategory ({ post, category }: { post: Post, category: Category }) {
+export function CardPostCategory({ post, category }: { post: Post, category: Category }) {
+  const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
+
   return (
     <>
       {/*Card para PC*/}
       <Card className="duration-400 scale-custom relative hidden h-full overflow-hidden border-none p-0 shadow-none transition hover:bg-[var(--color-primary-light)] lg:flex">
-        <Link href={`/categories/${category.slug}/${post.slug}`} className="w-full">
+        <Link href={`/categories/${categoryUrl}/${post.slug}`} className="h-full w-full">
           <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
           <CardContent className="p-5">
             <div className="itju-center flex h-full flex-row overflow-hidden rounded">

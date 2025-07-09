@@ -6,14 +6,14 @@ import { Section } from '../wrappers/section'
 import { ParticlesFull } from '../particles'
 import { isParticles } from '@/config/options'
 
-export function PrePost ({ children, post }: { children: ReactNode, post: Post }) {
+export function PrePost({ children, post }: { children: ReactNode, post: Post }) {
   return (
     <MainWrapper>
       {isParticles && <ParticlesFull />}
       <HeroPost {...post} />
 
       <Section>
-        <div className='flex w-full flex-col space-y-5 lg:max-w-[60vw]'>
+        <div className='flex w-full flex-col lg:max-w-[60vw]'>
           {children}
         </div>
       </Section>
