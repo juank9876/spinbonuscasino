@@ -223,7 +223,7 @@ body {
   }
 
   p {
-    @apply text-base lg:text-xl leading-relaxed py-2 text-muted-foreground hover:text-black transition duration-500
+    @apply text-base lg:text-lg leading-relaxed py-2 transition duration-500
   }
 
 }

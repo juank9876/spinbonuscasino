@@ -5,8 +5,9 @@ import Image from 'next/image'
 import { CardShine } from '../juankui/legacy/card-shine'
 import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle } from 'lucide-react'
 import BrandlistyWidget from '../juankui/brandlisty-widget'
+import { MagicCard } from '../magicui/magic-card'
 
-export function transformBrandlisty (el: Element) {
+export function transformBrandlisty(el: Element) {
   const { apikey, listid, boton, limit, id } = el.attribs
 
   return (
@@ -23,7 +24,7 @@ export function transformBrandlisty (el: Element) {
 }
 
 //Version upgraded chatgp
-export function transformRow (el: Element, options: HTMLReactParserOptions) {
+export function transformRow(el: Element, options: HTMLReactParserOptions) {
   const validChildren = el.children.filter(
     (child) => child.type === 'tag'
   ) as Element[]
@@ -37,7 +38,7 @@ export function transformRow (el: Element, options: HTMLReactParserOptions) {
   )
 }
 
-export function transformCol (el: Element, options: HTMLReactParserOptions) {
+export function transformCol(el: Element, options: HTMLReactParserOptions) {
   const classStr = el.attribs?.class || ''
 
   const getTailwindWidth = (classStr: string): string | number => {
@@ -83,14 +84,15 @@ export function transformCol (el: Element, options: HTMLReactParserOptions) {
 
 //Version Bootstrap
 
-export function transformCard (el: Element, options: HTMLReactParserOptions) {
+export function transformCard(el: Element, options: HTMLReactParserOptions) {
   return (
     <CardShine className='relative mx-auto my-5 flex w-full max-w-[350px] overflow-hidden transition duration-500 hover:scale-105 hover:bg-[var(--color-primary-light)]'>
       {domToReact(el.children as DOMNode[], options)}
     </CardShine>
   )
 }
-export function transformCardBody (el: Element, options: HTMLReactParserOptions) {
+
+export function transformCardBody(el: Element, options: HTMLReactParserOptions) {
   return (
     <div className='flex flex-col space-y-3'>
       {domToReact(el.children as DOMNode[], options)}
@@ -98,7 +100,58 @@ export function transformCardBody (el: Element, options: HTMLReactParserOptions)
   )
 }
 
-export function transformTextElement (el: Element, options: HTMLReactParserOptions) {
+export function transformFeatureItem(el: Element, options: HTMLReactParserOptions) {
+  // Extrae el badge si existe
+  const badge = el.attribs?.badge || '1';
+  // Busca la imagen y el resto del contenido
+  const imageElement = (el.children as Element[]).find(child => child.name === 'img');
+  const otherChildren = (el.children as Element[]).filter(child => child !== imageElement);
+  // El primer hijo no imagen es el título, el resto es el texto
+  const [titleNode, ...rest] = otherChildren;
+
+  return (
+    <div className=" relative flex flex-col w-full max-w-[370px] h-[430px] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] hover:to-[var(--color-primary-semi-dark)] rounded-2xl shadow-2xl shadow-blue-200 overflow-hidden items-center justify-center mx-auto my-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-3xl">
+      {/* Badge/Número o Imagen */}
+      <div className=" z-10 flex items-center justify-center py-5">
+        {imageElement ? (
+          <div className="bg-gradient-to-b from-[#6a5cff] to-[#3b82f6] p-2 rounded-full shadow-lg ring-4 ring-white ring-offset-2 flex items-center justify-center">
+            <div className="w-24 h-24 rounded-full overflow-hidden flex items-center justify-center bg-white">
+              {domToReact([imageElement], options)}
+            </div>
+          </div>
+        ) : (
+          <div className="bg-gradient-to-b from-[#6a5cff] to-[#3b82f6] text-white text-4xl font-bold rounded-full shadow-lg ring-4 ring-white ring-offset-2 px-8 py-6">
+            {badge}
+          </div>
+        )}
+      </div>
+      {/* Contenido */}
+      <div className="flex flex-col flex-1 justify-start items-center text-center pt-10 px-5">
+        <div className="text-2xl font-semibold tracking-wide mb-2 text-white">
+          {domToReact([titleNode], options)}
+        </div>
+        <div className="w-12 h-1 bg-gradient-to-r from-[#6a5cff] to-[#3b82f6] rounded-full mb-4" />
+        <div className="text-base text-white font-normal">
+          {domToReact(rest as DOMNode[], options)}
+        </div>
+      </div>
+      {/* Onda inferior más notoria */}
+
+    </div>
+  )
+}
+
+export function transformFeatureList(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div className='flex flex-wrap items-center justify-center gap-4'>
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
+
+
+
+export function transformTextElement(el: Element, options: HTMLReactParserOptions) {
   return (
     <div className="text-element py-3">
       {domToReact(el.children as DOMNode[], options)}
@@ -106,7 +159,7 @@ export function transformTextElement (el: Element, options: HTMLReactParserOptio
   )
 }
 
-export function transformContainer (el: Element, options: HTMLReactParserOptions) {
+export function transformContainer(el: Element, options: HTMLReactParserOptions) {
   return (
     <div className="border-primary container rounded-lg">
       {domToReact(el.children as DOMNode[], options)}
@@ -115,7 +168,7 @@ export function transformContainer (el: Element, options: HTMLReactParserOptions
 }
 
 //Elementos HTML
-export function transformButton (el: Element, options: HTMLReactParserOptions) {
+export function transformButton(el: Element, options: HTMLReactParserOptions) {
   return (
     <Button variant={'accent'} asChild>
       <a
@@ -128,24 +181,22 @@ export function transformButton (el: Element, options: HTMLReactParserOptions) {
   )
 }
 
-export function transformImg (el: Element) {
+export function transformImg(el: Element) {
   return (
-    <div className='relative h-[300px] w-full'>
+    <div className='relative h-full w-full'>
       <Image
         alt={el.attribs.alt}
-        //src={'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTKbWAJHSZvmB6idZtJ6VtB1O6pvq2K7UVgIzsSxcpyxmu2GOqZwBlgV-NJm1kSNLJl7fnqNRG4ep75DRePRSgWM_v99GQISy6BUURYHYHnOg'}
         src={el.attribs.src || 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTKbWAJHSZvmB6idZtJ6VtB1O6pvq2K7UVgIzsSxcpyxmu2GOqZwBlgV-NJm1kSNLJl7fnqNRG4ep75DRePRSgWM_v99GQISy6BUURYHYHnOg'}
         fill
-        className="rounded-lg object-contain"
+        className="rounded-t-2xl object-cover w-full h-full"
       />
-
     </div>
   )
 }
 
-export function transformH2 (el: Element, options: HTMLReactParserOptions) {
+export function transformH2(el: Element, options: HTMLReactParserOptions) {
   return (
-    <div className='flex flex-col space-y-5 pb-5 pt-10'>
+    <div className='flex flex-col space-y-5 pt-10'>
       <h2>
         {domToReact(el.children as DOMNode[], options)}
       </h2>
@@ -154,23 +205,23 @@ export function transformH2 (el: Element, options: HTMLReactParserOptions) {
   )
 }
 
-export function transformH3 (el: Element, options: HTMLReactParserOptions) {
+export function transformH3(el: Element, options: HTMLReactParserOptions) {
   const icons = [ArrowRight, Star, Sparkles, Flame, Bolt]
   const RandomIcon = icons[Math.floor(Math.random() * icons.length)]
 
   return (
     <div className='mt-8 flex flex-row items-center justify-start space-x-3'>
       <RandomIcon className='text-accent mb-0 pb-0' />
-      <h3 className='text-accent'>
+      <h3 className='text-[var(--color-accent-dark)]'>
         {domToReact(el.children as DOMNode[], options)}
       </h3>
     </div>
   )
 }
 
-export function transformLi (el: Element, options: HTMLReactParserOptions) {
+export function transformLi(el: Element, options: HTMLReactParserOptions) {
   return (
-    <li className="text-p-custom text-muted-foreground relative mt-4 pl-6 leading-relaxed">
+    <li className="text-p-custom text-muted-foreground relative mt-2 pl-6 leading-relaxed">
       <span className="absolute left-0 top-1.5">
         <Circle className="size-3 text-[var(--color-primary)]" />
       </span>
@@ -182,7 +233,7 @@ export function transformLi (el: Element, options: HTMLReactParserOptions) {
   )
 }
 
-export function transformCode (el: Element) {
+export function transformCode(el: Element) {
 
   const getText = (nodes: DOMNode[]): string =>
     nodes
@@ -211,7 +262,7 @@ export function transformCode (el: Element) {
   );
 }
 
-export function transformStrong (el: Element, options: HTMLReactParserOptions) {
+export function transformStrong(el: Element, options: HTMLReactParserOptions) {
   return (
     <strong className="mx-2 flex font-bold">
       {domToReact(el.children as DOMNode[], options)}
@@ -219,16 +270,16 @@ export function transformStrong (el: Element, options: HTMLReactParserOptions) {
   )
 }
 
-export function transformP (el: Element, options: HTMLReactParserOptions) {
+export function transformP(el: Element, options: HTMLReactParserOptions) {
   return (
 
-    <p className="[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold">
+    <p className="[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold ">
       {domToReact(el.children as DOMNode[], options)}
     </p>
   )
 }
 
-export function transformPre (el: Element, options: HTMLReactParserOptions) {
+export function transformPre(el: Element, options: HTMLReactParserOptions) {
 
   return (
     <pre className="overflow-x-auto rounded-md bg-zinc-900 p-4 text-white">
@@ -237,10 +288,70 @@ export function transformPre (el: Element, options: HTMLReactParserOptions) {
   );
 }
 
-export function transformForm (el: Element, options: HTMLReactParserOptions) {
+export function transformForm(el: Element, options: HTMLReactParserOptions) {
   return (
     <form className="flex flex-row border border-gray-700">
       {domToReact(el.children as DOMNode[], options)}
     </form>
+  )
+}
+
+export function transformSectionBonuses(el: Element, options: HTMLReactParserOptions) {
+  return (
+
+    <section className='rounded-lg px-5 min-h-[50vh] flex flex-row bg-gradient-to-tr from-[var(--color-accent)] to-[var(--color-accent-dark)] text-white items-center justify-center gap-4'>
+      {domToReact(el.children as DOMNode[], options)}
+    </section>
+
+  )
+}
+
+export function transformBonusList(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div className="bonus-list grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
+
+export function transformBonusItem(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div className="bonus-item bg-white rounded-2xl shadow-lg px-6 py-3 flex flex-col gap-4 items-start text-slate-800 border border-slate-100 transition-all duration-300 hover:shadow-2xl">
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
+
+export function transformBonusLink(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <a
+      href={el.attribs.href || '#'}
+      className="bonus-link inline-block mt-2 px-5 py-2 rounded-lg bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-dark)] transition-colors text-white font-bold shadow hover:from-[var(--color-accent-dark)] hover:to-[var(--color-accent)] duration-200"
+    >
+      {domToReact(el.children as DOMNode[], options)}
+    </a>
+  )
+}
+
+export function transformTestimonials(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <section className="testimonials py-12 px-4  flex flex-col items-center justify-center w-full">
+      {domToReact(el.children as DOMNode[], options)}
+    </section>
+  )
+}
+
+export function transformBlockquote(el: Element, options: HTMLReactParserOptions) {
+  // Busca el span (nombre usuario)
+  const userSpan = (el.children as Element[]).find(child => child.name === 'span');
+  const quoteText = (el.children as DOMNode[]).filter(child => child !== userSpan);
+  return (
+    <blockquote className="relative bg-white rounded-2xl shadow-lg p-8 my-4 max-w-xl mx-auto text-slate-800 text-lg font-medium flex flex-col items-center">
+      <span className="absolute left-4 top-2 text-5xl text-blue-200 font-serif select-none">“</span>
+      <span className="block text-center z-10">{domToReact(quoteText, options)}</span>
+      {userSpan && (
+        <span className="block mt-6 text-[var(--color-accent)] font-semibold text-base">{domToReact([userSpan], options)}</span>
+      )}
+    </blockquote>
   )
 }

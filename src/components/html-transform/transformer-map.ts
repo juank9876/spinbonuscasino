@@ -17,6 +17,14 @@ import {
   transformForm,
   transformP,
   transformPre,
+  transformFeatureItem,
+  transformFeatureList,
+  transformSectionBonuses,
+  transformBonusList,
+  transformBonusItem,
+  transformBonusLink,
+  transformTestimonials,
+  transformBlockquote
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -36,14 +44,24 @@ const rules: TransformerRule[] = [
     matcher: (el) => /col-(xs|sm|md|lg|xl)-\d+/.test(el.attribs?.class || ''),
     transformer: transformCol
   },
-  { className: 'text-element', transformer: transformTextElement },
-  { className: 'btn', transformer: transformButton },
-  { className: 'card-img-top', transformer: transformImg },
-  { className: 'container', transformer: transformContainer },
   {
     matcher: (el) => 'data-apikey' in el.attribs || 'apikey' in el.attribs,
     transformer: transformBrandlisty,
   },
+  { className: 'text-element', transformer: transformTextElement },
+  { className: 'btn', transformer: transformButton },
+  { className: 'card-img-top', transformer: transformImg },
+  { className: 'container', transformer: transformContainer },
+  { className: 'testimonials', transformer: transformTestimonials },
+
+  { className: 'feature-item', transformer: transformFeatureItem },
+  { className: 'feature-list', transformer: transformFeatureList },
+  { className: 'bonuses', transformer: transformSectionBonuses },
+  { className: 'bonus-list', transformer: transformBonusList },
+  { className: 'bonus-item', transformer: transformBonusItem },
+  { className: 'bonus-link', transformer: transformBonusLink },
+
+
   //Tags HTML
   { tagName: 'form', transformer: transformForm },
   { tagName: 'h2', transformer: transformH2 },
@@ -54,6 +72,8 @@ const rules: TransformerRule[] = [
   { tagName: 'code', transformer: transformCode },
   { tagName: 'pre', transformer: transformPre },
   { tagName: 'strong', transformer: transformStrong },
+  { tagName: 'blockquote', transformer: transformBlockquote },
+
 ]
 
 export function getTransformer(el: Element, options: HTMLReactParserOptions) {

@@ -28,6 +28,7 @@ export default async function Home() {
 
     <PreHomePage
       settings={settings}
+      pageProps={page}
     >
       <HtmlRenderer html={page.html_content} />
     </PreHomePage>

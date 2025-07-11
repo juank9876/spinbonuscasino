@@ -107,11 +107,13 @@ export default async function Page({
     params: Promise<{ slug: string[] }>
 }) {
     const slugArray = (await params).slug || []
+    console.log(slugArray)
     const data = await getDataFromParams(slugArray)
 
 
     if (data.type === 'post') {
         const post = data.post
+
         return (
             <PrePost post={post}>
                 <HtmlRenderer html={post.html_content} />

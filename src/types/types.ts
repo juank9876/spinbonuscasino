@@ -1,3 +1,12 @@
+
+interface SocialLinks {
+  facebook?: string;
+  twitter?: string;
+  instagram?: string;
+  youtube?: string;
+  linkedin?: string;
+}
+
 export interface SiteSettings {
   id: string
   project_id: string
@@ -14,12 +23,30 @@ export interface SiteSettings {
   meta_keywords: string | null
   ga_tracking_id: string | null
   facebook_pixel: string | null
-  social_links: unknown[] // puedes tiparlo mejor si tienes la estructura
+  social_links: SocialLinks // puedes tiparlo mejor si tienes la estructura
   custom_css: string | null
   custom_js: string | null
   created_at: string
   updated_at: string
   schema_data: unknown[]
+}
+
+export interface Author {
+  id: string;
+  project_id: string;
+  name: string;
+  slug: string;
+  email: string;
+  bio: string;
+  avatar: string;
+  social_links: SocialLinks
+  meta_title: string;
+  meta_description: string;
+  schema_data: unknown | null;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  post_count: string;
 }
 
 export interface NavItemType {
@@ -69,45 +96,45 @@ export interface PostResponse {
 }
 
 export interface Post {
-    id: string
-    project_id: string
-    parent_id: string | null
-    author_id: string
-    title: string
-    slug: string
-    excerpt: string
-    html_content: string
-    featured_image: string
-    meta_title: string | null
-    meta_description: string | null
-    meta_keywords: string
-    schema_data: unknown[] // Ajusta si sabes su estructura
-    custom_fields: unknown[] // Igual aquí
-    view_count: string
-    comment_count: string
-    sort_order: string
-    allow_comments: string
-    type: 'post'
-    status: 'published' | 'draft' | string
-    created_at: string
-    updated_at: string
-    published_at: string
-    template: string
-    show_in_menu: string
-    is_home: string
-    author_name: string
-    author_bio: string
-    author_avatar: string
-    parent_title: string | null
-    parent_slug: string | null
-    tags: Tag[]
-    categories: CategoryWithPrimaryFlag[]
-    primary_category: Category
-    category_id: string
-    category_name: string
-    category_slug: string
-    seo_url: string
-    breadcrumbs: Breadcrumb[]
+  id: string
+  project_id: string
+  parent_id: string | null
+  author_id: string
+  title: string
+  slug: string
+  excerpt: string
+  html_content: string
+  featured_image: string
+  meta_title: string | null
+  meta_description: string | null
+  meta_keywords: string
+  schema_data: unknown[] // Ajusta si sabes su estructura
+  custom_fields: unknown[] // Igual aquí
+  view_count: string
+  comment_count: string
+  sort_order: string
+  allow_comments: string
+  type: 'post'
+  status: 'published' | 'draft' | string
+  created_at: string
+  updated_at: string
+  published_at: string
+  template: string
+  show_in_menu: string
+  is_home: string
+  author_name: string
+  author_bio: string
+  author_avatar: string
+  parent_title: string | null
+  parent_slug: string | null
+  tags: Tag[]
+  categories: CategoryWithPrimaryFlag[]
+  primary_category: Category
+  category_id: string
+  category_name: string
+  category_slug: string
+  seo_url: string
+  breadcrumbs: Breadcrumb[]
 }
 
 export interface Sidebar {

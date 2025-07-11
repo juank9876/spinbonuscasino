@@ -6,11 +6,11 @@ import { ShineBorder } from "@/components/magicui/shine-border";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export function CardShine ({ children, className }: { children: ReactNode, className?: string }) {
+export function CardShine({ children, className }: { children: ReactNode, className?: string }) {
   return (
     <Card className={cn(className)}>
       <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
-      <CardContent className="flex flex-col space-y-10">
+      <CardContent className="flex flex-col h-full justify-center space-y-3 items-center">
         {children}
       </CardContent>
     </Card>
