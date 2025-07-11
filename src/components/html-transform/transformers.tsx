@@ -290,9 +290,35 @@ export function transformPre(el: Element, options: HTMLReactParserOptions) {
 
 export function transformForm(el: Element, options: HTMLReactParserOptions) {
   return (
-    <form className="flex flex-row border border-gray-700">
+    <form className="flex flex-col border border-gray-700 rounded-lg p-5 gap-y-3">
       {domToReact(el.children as DOMNode[], options)}
     </form>
+  )
+}
+
+export function transformInput(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <input
+      type={el.attribs.type || 'text'}
+      placeholder={el.attribs.placeholder || ''}
+      className="w-full p-2 rounded-md border border-gray-300"
+      {...el.attribs}
+    />
+  )
+}
+export function transformTextarea(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <textarea
+      {...el.attribs}
+      className="w-full p-2 rounded-md border border-gray-300"
+    />
+  )
+}
+export function transformBtnSubmit(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <Button variant={'accent'} className='text-white'>
+      {domToReact(el.children as DOMNode[], options)}
+    </Button>
   )
 }
 

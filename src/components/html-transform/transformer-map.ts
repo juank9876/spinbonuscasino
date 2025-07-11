@@ -24,7 +24,10 @@ import {
   transformBonusItem,
   transformBonusLink,
   transformTestimonials,
-  transformBlockquote
+  transformBlockquote,
+  transformInput,
+  transformBtnSubmit,
+  transformTextarea
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -60,7 +63,7 @@ const rules: TransformerRule[] = [
   { className: 'bonus-list', transformer: transformBonusList },
   { className: 'bonus-item', transformer: transformBonusItem },
   { className: 'bonus-link', transformer: transformBonusLink },
-
+  { className: 'btn-submit', transformer: transformBtnSubmit },
 
   //Tags HTML
   { tagName: 'form', transformer: transformForm },
@@ -73,7 +76,8 @@ const rules: TransformerRule[] = [
   { tagName: 'pre', transformer: transformPre },
   { tagName: 'strong', transformer: transformStrong },
   { tagName: 'blockquote', transformer: transformBlockquote },
-
+  { tagName: 'input', transformer: transformInput },
+  { tagName: 'textarea', transformer: transformTextarea },
 ]
 
 export function getTransformer(el: Element, options: HTMLReactParserOptions) {
