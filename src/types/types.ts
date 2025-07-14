@@ -262,3 +262,36 @@ export interface Page {
   seo_url: string
   breadcrumbs: Breadcrumb[]
 }
+
+// TIPOS PARA RESPUESTA DE PERMALINK
+export interface PermalinkCategoryHierarchy {
+  id: string;
+  name: string;
+  slug: string;
+  parent_id: string | null;
+}
+
+export interface PermalinkBreadcrumb {
+  title: string;
+  url: string;
+  type: 'home' | 'category' | string;
+  current?: boolean;
+}
+
+export interface PermalinkData {
+  id: string;
+  name: string;
+  slug: string;
+  type: string;
+  permalink: string;
+  seo_url: string;
+  category_hierarchy: PermalinkCategoryHierarchy[];
+  breadcrumbs: PermalinkBreadcrumb[];
+  url_segments: string[];
+}
+
+export interface PermalinkResponse {
+  status: string;
+  message: string;
+  data: PermalinkData;
+}

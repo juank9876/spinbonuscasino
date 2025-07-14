@@ -98,11 +98,11 @@ export function HeroPost({ title, excerpt, author_avatar, author_name, created_a
               {title}
             </h1>
             <p className=" text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{excerpt}</p>
-            <div className="flex flex-row items-center justify-center gap-3 mt-4">
-              <div className="flex w-max flex-row items-center justify-between space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-bl from-[var(--color-accent)] to-[var(--color-primary)] px-3 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)]">
-                <Calendar1 className="text-white" />
-                <p className="text-gray-200 hover:text-white">{formatDate(created_at)}</p>
-              </div>
+            <div className="flex w-max flex-row items-center justify-between space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-bl from-[var(--color-accent)] to-[var(--color-primary)] px-3 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)]">
+              <Calendar1 className="text-white" />
+              <p className="text-gray-200 hover:text-white">{formatDate(created_at)}</p>
+            </div>
+            <div className="flex flex-row items-center justify-center gap-3 mt-8">
               {breadcrumbs && <Breadcrumbs className="flex justify-center" breadcrumbs={breadcrumbs} />}
             </div>
           </div>

@@ -18,7 +18,7 @@ type BreadcrumbsProps = {
   className?: string
 };
 
-export function Breadcrumbs ({ breadcrumbs, className }: BreadcrumbsProps) {
+export function Breadcrumbs({ breadcrumbs, className }: BreadcrumbsProps) {
 
   const { nonCurrentBreadcrumbs, currentBreadcrumb } = useMemo(() => {
     // 1. Normaliza el array: solo el último es "current"
@@ -56,7 +56,6 @@ export function Breadcrumbs ({ breadcrumbs, className }: BreadcrumbsProps) {
           url: `/${cleanUrl}`, // asegurar slash inicial
         };
 
-        console.log("✅ Final category URL:", `/${cleanUrl}`);
       }
     }
 

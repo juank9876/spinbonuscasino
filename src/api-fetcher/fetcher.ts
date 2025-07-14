@@ -1,10 +1,11 @@
-import { Author, Category, NavItemType, Page, Post, PostResponse, SiteSettings } from "@/types/types";
+import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
-type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author";
+type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink";
 
 interface FetcherParams {
   method: MethodType;
   id?: string
+  type?: string
 }
 
 export interface ResponseInterface<T = unknown> {
@@ -13,9 +14,9 @@ export interface ResponseInterface<T = unknown> {
   data: T // Puedes ajustar el tipo según lo que esperes
 }
 
-export async function fetcher<T>({ method, id }: FetcherParams): Promise<T> {
+export async function fetcher<T>({ method, id, type }: FetcherParams): Promise<T> {
   const baseUrl = `https://intercms.dev/api/v2/data.php`
-  const url = baseUrl + `?method=${method}` + `&api_key=${process.env.API_KEY}` + `&project_id=${process.env.PROJECT_ID}` + (id ? `&id=${id}` : ``)
+  const url = baseUrl + `?method=${method}` + `&api_key=${process.env.API_KEY}` + `&project_id=${process.env.PROJECT_ID}` + (id ? `&id=${id}` : ``) + (type ? `&type=${type}` : ``)
 
   if (method === "page" && id == undefined) {
     console.log("ID is required for method 'page'");
@@ -28,7 +29,6 @@ export async function fetcher<T>({ method, id }: FetcherParams): Promise<T> {
     const res = await fetch(url, {
       next: { revalidate: 3 },
     })
-    console.log(method, await res)
     const data: ResponseInterface<T> = await res.json();
 
     if (data.status === "success") {
@@ -75,5 +75,10 @@ export async function fetchAuthors() {
 
 export async function fetchAuthorById(id: string): Promise<Author> {
   return fetcher<Author>({ method: "author", id });
+}
+
+type PermalinkType = "category" | "post"
+export async function fetchPermalink(id: string, type: PermalinkType): Promise<PermalinkData> {
+  return fetcher<PermalinkData>({ method: "permalink", id, type });
 }
 
