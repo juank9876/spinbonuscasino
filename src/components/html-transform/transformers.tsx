@@ -264,7 +264,7 @@ export function transformCode(el: Element) {
 
 export function transformStrong(el: Element, options: HTMLReactParserOptions) {
   return (
-    <strong className="mx-2 flex font-bold">
+    <strong className="flex font-bold">
       {domToReact(el.children as DOMNode[], options)}
     </strong>
   )

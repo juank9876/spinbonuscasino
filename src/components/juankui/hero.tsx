@@ -29,7 +29,7 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
               <p className="text-lg text-muted font-bold group-hover/badge:text-white">{site_title}</p>
             </div>
             <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
-              {title || meta_title}
+              {site_title}
             </h1>
             <p className="  text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{site_description || meta_description}</p>
 
