@@ -17,6 +17,14 @@ const LEGAL_LINKS = [
   { href: "/sitemap", label: "Mapa del Sitio" },
 ];
 
+const RESPONSIBLE_GAMING_LINKS = [
+  { href: "/iconos-footer/auto-prohibicion.png", label: "Juego Responsable" },
+  { href: "/iconos-footer/juego-seguro.png", label: "Juego Responsable" },
+  { href: "/iconos-footer/jugar-bien.png", label: "Juego Responsable" },
+  { href: "/iconos-footer/logo.png", label: "Juego Responsable" },
+  { href: "/iconos-footer/mayor-edad.png", label: "Juego Responsable" },
+];
+
 
 
 function FooterLinkList({ title, links }: { title: string, links: { href: string, label: string }[] }) {
@@ -123,13 +131,15 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
   const currentYear = new Date().getFullYear();
   const menuItems = await fetchMenu()
   const categoriesItems = await fetchCategories()
+
+
   return (
     <footer className="w-full bg-[var(--color-primary-dark)]">
       {/* Main Footer Content */}
       <div className="mx-auto w-[70vw] px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Brand Section */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 {settings.site_logo && (
@@ -177,7 +187,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
           </div>
 
           {/* Social & Newsletter */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <h4 className="text-sm font-semibold text-slate-100 uppercase tracking-wide mb-4">
               Síguenos
             </h4>
@@ -186,6 +196,23 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
               <FooterNewsletter />
             </div>
           </div>
+
+          <div className="lg:col-span-2">
+            <h4 className="text-sm font-semibold text-slate-100 uppercase tracking-wide mb-4">
+              Juego Responsable
+            </h4>
+            <div className="space-x-4 flex flex-row ">
+              {RESPONSIBLE_GAMING_LINKS.map(link => (
+                <img
+                  key={link.href}
+                  src={link.href}
+                  alt={link.label}
+                  className="w-fit h-10"
+                />
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
 
