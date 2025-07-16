@@ -256,7 +256,7 @@ export function transformCode(el: Element) {
   if (!codeContent) return null; // ⛔ No renderizar si está vacío
 
   return (
-    <code className="mx-2 block items-end justify-start whitespace-pre px-2">
+    <code className="block items-end justify-start whitespace-pre px-2">
       {getText(el.children as DOMNode[])}
     </code>
   );
