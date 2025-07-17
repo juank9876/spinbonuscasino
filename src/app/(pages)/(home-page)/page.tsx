@@ -1,6 +1,7 @@
 //import data from '@/lib/data.json'
 
 import { fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
+import NotFound from '@/app/not-found'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import { getPageSlugToIdMap } from '@/lib/utils'
@@ -11,8 +12,10 @@ import { notFound } from 'next/navigation'
 async function getHomePageFromParams() {
 
   const map = await getPageSlugToIdMap();
-  let slug = "";
+
+  let slug = "/";
   let id = map[slug];
+
 
   if (!id) {
     slug = "home"
@@ -20,7 +23,12 @@ async function getHomePageFromParams() {
   }
 
   const homePage = await fetchPageById(id)
-  return homePage
+  console.log('homePage', homePage)
+  if (homePage.is_home === "1") {
+    return homePage
+
+  }
+
 }
 
 export default async function Home() {

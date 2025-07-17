@@ -201,7 +201,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
             <h4 className="text-sm font-semibold text-slate-100 uppercase tracking-wide mb-4">
               Juego Responsable
             </h4>
-            <div className="space-x-4 flex flex-row ">
+            <div className="space-x-4 flex flex-wrap flex-row">
               {RESPONSIBLE_GAMING_LINKS.map(link => (
                 <img
                   key={link.href}
@@ -226,7 +226,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
                 reservados.
               </span>
             </div>
-            <div className="mt-4 flex items-center space-x-6 sm:mt-0">
+            <div className="mt-4 items-center space-x-6 sm:mt-0">
               {LEGAL_LINKS.map(link => (
                 <Link
                   key={link.href}

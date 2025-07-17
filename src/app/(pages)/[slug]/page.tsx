@@ -82,7 +82,7 @@ export default async function Page({
       const page = await getPageFromParams({ params })
 
       if (!page || page.status !== 'published') return notFound()
-
+      console.log(page.html_content)
       return (
         <PrePage page={page}>
           <HtmlRenderer html={page.html_content} />
