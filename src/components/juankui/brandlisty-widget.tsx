@@ -117,7 +117,8 @@ export default function BrandlistyWidget({
         e.preventDefault();
 
         // Determinar el índice del enlace clickeado
-        const filterLinks = Array.from(contenedor.querySelectorAll('a.filter-btn'));
+        // Se agrega verificación para evitar posible error si 'contenedor' es null
+        const filterLinks = contenedor ? Array.from(contenedor.querySelectorAll('a.filter-btn')) : [];
         const index = filterLinks.indexOf(filterLink);
 
         // Asignar categoría según el índice
