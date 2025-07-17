@@ -62,11 +62,10 @@ export default async function Page({
 }) {
 
   if ((await params).slug === "home") {
-    console.log((await params).slug);
+
     const page = await getHomePageFromParams()
     const settings = await fetchSiteSettings()
 
-    console.log(page)
     if (page) return (
 
       <PreHomePage
@@ -82,7 +81,7 @@ export default async function Page({
       const page = await getPageFromParams({ params })
 
       if (!page || page.status !== 'published') return notFound()
-      console.log(page.html_content)
+
       return (
         <PrePage page={page}>
           <HtmlRenderer html={page.html_content} />

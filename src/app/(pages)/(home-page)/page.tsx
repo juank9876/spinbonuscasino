@@ -23,7 +23,7 @@ async function getHomePageFromParams() {
   }
 
   const homePage = await fetchPageById(id)
-  console.log('homePage', homePage)
+
   if (homePage.is_home === "1") {
     return homePage
 

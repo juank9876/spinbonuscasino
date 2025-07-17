@@ -39,7 +39,9 @@ export default function BrandlistyWidget({
           limit,
         })
 
-        const url = `https://app.brandlisty.com/nowpcms.php?${params.toString()}`
+        //const url = `https://app.brandlisty.com/nowpcms.php?${params.toString()}`
+        const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}`
+        console.log(url)
         const res = await fetch(url)
 
         if (!res.ok) throw new Error(`Error ${res.status}`)
