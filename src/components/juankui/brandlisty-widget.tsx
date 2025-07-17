@@ -22,7 +22,6 @@ export default function BrandlistyWidget({
 }: Props) {
   const [html, setHtml] = useState<string>("")
   const [error, setError] = useState<string | null>(null)
-  const ref = useRef<HTMLDivElement>(null)
   const contenedorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,7 +35,7 @@ export default function BrandlistyWidget({
         })
 
         //const url = `https://app.brandlisty.com/nowpcms.php?${params.toString()}`
-        const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}`
+        const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}&category=all`
 
         const res = await fetch(url)
 
@@ -104,35 +103,67 @@ export default function BrandlistyWidget({
     const contenedor = contenedorRef.current;
     if (!contenedor) return;
 
-    // Delegación de eventos (ya implementado)
     function handleClick(e: MouseEvent) {
       const target = e.target as HTMLElement;
       const button = target.closest('.more-info-toggle') as HTMLElement | null;
       if (button) {
         toggleMoreInfo(button);
+        return;
+      }
+
+      // --- Interceptar clicks en los filtros ---
+      const filterLink = target.closest('a.filter-btn') as HTMLAnchorElement | null;
+      if (filterLink) {
+        e.preventDefault();
+
+        // Determinar el índice del enlace clickeado
+        const filterLinks = Array.from(contenedor.querySelectorAll('a.filter-btn'));
+        const index = filterLinks.indexOf(filterLink);
+
+        // Asignar categoría según el índice
+        let category = "all";
+        if (index === 1) category = "crypto";
+        else if (index === 2) category = "low-deposit";
+        else if (index === 3) category = "premium";
+
+        // Hacer fetch con la nueva categoría
+        const params = new URLSearchParams({
+          apikey: apiKey,
+          hash: listId,
+          boton,
+          limit,
+          category,
+        });
+
+        const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}`;
+
+        fetch(url)
+          .then(res => {
+            if (!res.ok) throw new Error(`Error ${res.status}`);
+            return res.text();
+          })
+          .then(htmlString => {
+            const cleanedHtml = removeUniversalReset(htmlString);
+            setHtml(cleanedHtml);
+          })
+          .catch(err => {
+            setError("Error al cargar contenido de Brandlisty.");
+          });
       }
     }
 
     contenedor.addEventListener('click', handleClick);
 
-    // --- NUEVO: Modificar los href de los filtros ---
+    // Modificar los href de los filtros (opcional, para evitar navegación)
     const filterLinks = contenedor.querySelectorAll('a.filter-btn');
     filterLinks.forEach((link) => {
-      const a = link as HTMLAnchorElement;
-      // Solo modificar si el href no empieza ya por https://pro.brandlisty.com/nowph.php?
-      if (!a.href.startsWith('https://pro.brandlisty.com/nowph.php?')) {
-        // Si el href es relativo (empieza por ?), lo concatenamos
-        if (a.getAttribute('href')?.startsWith('?')) {
-          a.href = 'https://pro.brandlisty.com/nowph.php' + a.getAttribute('href');
-        }
-      }
+      link.setAttribute('href', '#');
     });
-    // --- FIN NUEVO ---
 
     return () => {
       contenedor.removeEventListener('click', handleClick);
     };
-  }, [html]);
+  }, [html, apiKey, listId, boton, limit]);
 
 
   return (
