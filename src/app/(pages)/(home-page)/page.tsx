@@ -11,10 +11,13 @@ import { notFound } from 'next/navigation'
 async function getHomePageFromParams() {
 
   const map = await getPageSlugToIdMap();
-  const slug = "";
-  const id = map[slug];
+  let slug = "";
+  let id = map[slug];
 
-  if (!id) throw notFound();
+  if (!id) {
+    slug = "home"
+    id = map[slug]
+  }
 
   const homePage = await fetchPageById(id)
   return homePage

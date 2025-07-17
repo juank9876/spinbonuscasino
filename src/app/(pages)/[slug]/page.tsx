@@ -30,6 +30,7 @@ async function getPageFromParams({
   const { slug } = await params
   const id = map[slug]
 
+
   if (!id) return notFound()
 
   const category = await fetchPageById(id)

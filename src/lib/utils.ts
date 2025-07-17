@@ -31,7 +31,9 @@ type SlugToIdMap = Record<string, string>
 export async function getPageSlugToIdMap(): Promise<SlugToIdMap> {
   const pages = await fetchPages()
   //console.log(pages)
+  //console.log(pages.length)
   const slugIds: PageMeta[] = pages
+  //console.log(slugIds)
 
   const map: SlugToIdMap = {}
   for (const slugId of slugIds) {

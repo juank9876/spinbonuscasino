@@ -24,7 +24,6 @@ type ListItemProps = {
 
 function ListItem({ title, href, children, className, isChild = false, childCategories, parentSlug }: ListItemProps) {
   const hasSubcategories = childCategories && childCategories.length > 0;
-  console.log(parentSlug, href)
   return (
     <li className={hasSubcategories ? 'group relative' : ''}>
 

@@ -6,13 +6,14 @@ import { CardShine } from '../juankui/legacy/card-shine'
 import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle } from 'lucide-react'
 import BrandlistyWidget from '../juankui/brandlisty-widget'
 import { MagicCard } from '../magicui/magic-card'
+import { BrandlistyScript } from '../juankui/brandlisty-script'
 
 export function transformBrandlisty(el: Element) {
   const { apikey, listid, boton, limit, id } = el.attribs
 
   return (
     <div className="flex h-full">
-      <BrandlistyWidget
+      <BrandlistyScript
         key={id}
         apiKey={apikey || el.attribs['data-apikey']}
         listId={listid || el.attribs['data-listid']}
@@ -81,7 +82,6 @@ export function transformCol(el: Element, options: HTMLReactParserOptions) {
   )
 }
 
-
 //Version Bootstrap
 
 export function transformCard(el: Element, options: HTMLReactParserOptions) {
@@ -148,8 +148,6 @@ export function transformFeatureList(el: Element, options: HTMLReactParserOption
     </div>
   )
 }
-
-
 
 export function transformTextElement(el: Element, options: HTMLReactParserOptions) {
   return (
