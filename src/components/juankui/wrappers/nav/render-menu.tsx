@@ -10,7 +10,7 @@ import { Category, NavItemType } from '@/types/types';
 import { ArrowRight } from 'lucide-react';
 import { ChevronRight } from 'lucide-react';
 import { ChevronDown } from 'lucide-react';
-import { Link } from '../optionals/link';
+import { Link } from '@/components/juankui/optionals/link';
 
 type ListItemProps = {
   title: string;

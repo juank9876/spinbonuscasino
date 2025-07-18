@@ -1,7 +1,7 @@
 
-import { Particles } from "../magicui/particles";
+import { Particles } from "../../magicui/particles";
 
-export function ParticlesFull ({ color: _color }: { color?: string }) {
+export function ParticlesFull({ color: _color }: { color?: string }) {
   const color = _color ? _color : "#fff"
 
   return (

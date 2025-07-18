@@ -3,7 +3,7 @@ import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { fetchCategories, fetchMenu } from '@/api-fetcher/fetcher'
 import { normalizeUrl } from '@/lib/utils'
 import { contextSiteSettings } from '@/app/context/getSiteSettings'
-import { Logo } from '../logo'
+import { Logo } from './logo'
 import { RenderMenu } from './render-menu'
 import { NavMobile } from './nav-mobile'
 

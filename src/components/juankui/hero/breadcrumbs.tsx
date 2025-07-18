@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Breadcrumb as BreadcrumbType } from "@/types/types"
 import { Fragment, useMemo } from "react";
-import { Link } from "./optionals/link";
+import { Link } from "../optionals/link";
 
 type BreadcrumbsProps = {
   breadcrumbs: BreadcrumbType[];

@@ -1,13 +1,9 @@
 import { Calendar1, Dice6, Gift, Star } from "lucide-react"
-import { BoxReveal } from "../magicui/box-reveal"
-import { ButtonRipple, LinkRipple } from "./legacy/ripple-components"
-import { VideoHero } from "./optionals/video-hero"
+import { ButtonRipple, LinkRipple } from "../legacy/ripple-components"
+import { VideoHero } from "../optionals/video-hero"
 import Image from "next/image"
 import { Post, Page, SiteSettings, Category } from '@/types/types'
 import { formatDate } from "@/lib/utils"
-import { BorderBeam } from "../magicui/border-beam"
-import { Card, CardContent } from "../ui/card"
-import { MagicCard } from "../magicui/magic-card"
 import { Breadcrumbs } from "./breadcrumbs"
 import { ParticlesFull } from "./particles"
 

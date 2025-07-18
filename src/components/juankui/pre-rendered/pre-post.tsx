@@ -1,12 +1,11 @@
-import { HeroPost } from '@/components/juankui/hero'
+import { HeroPost } from '@/components/juankui/hero/hero'
 import { MainWrapper } from '@/components/juankui/wrappers/main-wrapper'
 import { Post } from '@/types/types'
 import { ReactNode } from 'react'
-import { ParticlesFull } from '../particles'
+import { ParticlesFull } from '../hero/particles'
 import { isParticles } from '@/config/options'
 import { Section } from '../wrappers/section'
 import Image from 'next/image';
-import NextLink from 'next/link';
 import { fetchAuthorById } from '@/api-fetcher/fetcher'
 
 async function AuthorCard({ name, avatar, bio, author_id }: { name: string, avatar?: string, bio?: string, author_id: string }) {

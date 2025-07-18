@@ -3,7 +3,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/s
 import { MenuIcon } from 'lucide-react'
 import { Fragment } from 'react'
 import { capitalize } from '@/utils/capitalize'
-import { Link } from "../optionals/link";
+import { Link } from "@/components/juankui/optionals/link";
 import { Category, NavItemType, SiteSettings } from "@/types/types";
 
 interface NavProps {

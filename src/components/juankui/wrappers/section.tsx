@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ParticlesFull } from "../particles";
+import { ParticlesFull } from "../hero/particles";
 import { isParticles } from "@/config/options";
 
 interface SectionProps {

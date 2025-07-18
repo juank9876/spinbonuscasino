@@ -76,25 +76,30 @@ export default function BrandlistyWidget({
         // Determinar el índice del enlace clickeado
         // Se agrega verificación para evitar posible error si 'contenedor' es null
         const filterLinks = contenedor ? Array.from(contenedor.querySelectorAll('a.filter-btn')) : [];
-        const index = filterLinks.indexOf(filterLink);
+        const parsedLink = new URL(filterLink.href);
+        //const index = filterLinks.indexOf(filterLink);
+        //console.log(parsedLink.searchParams.get('category'))
 
         // Asignar categoría según el índice
-        let category = "all";
-        if (index === 1) category = "crypto";
-        else if (index === 2) category = "low-deposit";
-        else if (index === 3) category = "premium";
-
-        // Hacer fetch con la nueva categoría
-        const params = new URLSearchParams({
-          apikey: apiKey,
-          hash: listId,
-          boton,
-          limit,
-          category,
-        });
-
-        const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}`;
-
+        /*
+                let category = "all";
+                if (index === 1) category = "crypto";
+                else if (index === 2) category = "low-deposit";
+                else if (index === 3) category = "premium";
+        
+                // Hacer fetch con la nueva categoría
+                const params = new URLSearchParams({
+                  apikey: apiKey,
+                  hash: listId,
+                  boton,
+                  limit,
+                  category,
+                });
+        
+                const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}`;
+        */
+        const url = `https://pro.brandlisty.com/nowph.php${parsedLink.search}`;
+        //console.log(url)
         fetch(url)
           .then(res => {
             if (!res.ok) throw new Error(`Error ${res.status}`);
@@ -113,11 +118,11 @@ export default function BrandlistyWidget({
     contenedor.addEventListener('click', handleClick);
 
     // Modificar los href de los filtros (opcional, para evitar navegación)
-    const filterLinks = contenedor.querySelectorAll('a.filter-btn');
+    /*const filterLinks = contenedor.querySelectorAll('a.filter-btn');
     filterLinks.forEach((link) => {
       link.setAttribute('href', '#');
     });
-
+*/
     return () => {
       contenedor.removeEventListener('click', handleClick);
     };

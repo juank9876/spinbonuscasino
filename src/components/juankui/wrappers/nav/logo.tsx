@@ -1,9 +1,9 @@
 import { SiteSettings } from "@/types/types";
 import Image from "next/image";
-import { Link } from "./optionals/link";
+import { Link } from "@/components/juankui/optionals/link";
 
 
-export function Logo ({ site_title, site_logo }: SiteSettings) {
+export function Logo({ site_title, site_logo }: SiteSettings) {
   return (
     <Link href="/" className="relative mb-0 flex items-start justify-end pb-0">
       <Image

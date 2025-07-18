@@ -1,10 +1,10 @@
-import { HeroHomePage } from '@/components/juankui/hero'
+import { HeroHomePage } from '@/components/juankui/hero/hero'
 import { MainWrapper } from '@/components/juankui/wrappers/main-wrapper'
 //import { capitalize } from '@/utils/capitalize'
 import { ReactNode } from 'react'
 import { Section } from '../wrappers/section'
 import { isParticles } from '@/config/options'
-import { ParticlesFull } from '../particles'
+import { ParticlesFull } from '../hero/particles'
 import { Page, SiteSettings } from '@/types/types'
 
 interface HomePage {
