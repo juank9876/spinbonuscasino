@@ -1,6 +1,6 @@
 import { Onest, Poppins } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/juankui/header";
+import { Header } from "@/components/juankui/nav/header";
 import { Footer } from "@/components/juankui/footer";
 import { fetchSiteSettings } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'

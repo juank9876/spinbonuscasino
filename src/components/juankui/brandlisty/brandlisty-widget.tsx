@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
+import { toggleMoreInfo } from "./toggleMoreInfo"
 
 interface Props {
   apiKey: string
@@ -9,9 +10,10 @@ interface Props {
   limit?: string
 }
 function removeUniversalReset(cssString: string) {
-  const exactRuleRegex = cssString.replace(/\*\s*{[^}]*}/g, '');
+  let exactRuleRegex = cssString.replace(/\*\s*{[^}]*}/g, '');
+  exactRuleRegex = exactRuleRegex.replace(/onclick="[^"]*"/g, '');
 
-  return exactRuleRegex.replace(/onclick="[^"]*"/g, '');
+  return exactRuleRegex
 }
 
 export default function BrandlistyWidget({
@@ -36,7 +38,6 @@ export default function BrandlistyWidget({
 
         //const url = `https://app.brandlisty.com/nowpcms.php?${params.toString()}`
         const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}&category=all`
-
         const res = await fetch(url)
 
         if (!res.ok) throw new Error(`Error ${res.status}`)
@@ -53,51 +54,7 @@ export default function BrandlistyWidget({
     fetchHtml()
   }, [apiKey, listId, boton, limit])
 
-  function toggleMoreInfo(button: HTMLElement) {
-    const card = button.closest('.brand-card');
-    if (!card) return;
-    const content = card.querySelector('.more-info-content') as HTMLElement | null;
-    const icon = button.querySelector('i');
-    const span = button.querySelector('span');
-    if (!content || !icon || !span) return;
 
-    const isExpanded = content.classList.contains('show');
-
-    // Cerrar otros abiertos
-    if (!isExpanded) {
-      const contenedor = contenedorRef.current;
-      if (contenedor) {
-        contenedor.querySelectorAll('.more-info-content.show').forEach((otherContent) => {
-          const otherCard = otherContent.closest('.brand-card');
-          if (!otherCard) return;
-          const otherButton = otherCard.querySelector('.more-info-toggle');
-          const otherIcon = otherButton?.querySelector('i');
-          const otherSpan = otherButton?.querySelector('span');
-
-          otherContent.classList.remove('show');
-          if (otherButton) otherButton.classList.remove('active');
-          if (otherSpan) otherSpan.textContent = 'More information';
-          if (otherIcon) otherIcon.className = 'bi bi-chevron-down';
-        });
-      }
-    }
-
-    if (isExpanded) {
-      content.classList.remove('show');
-      button.classList.remove('active');
-      span.textContent = 'More information';
-      icon.className = 'bi bi-chevron-down';
-    } else {
-      content.classList.add('show');
-      button.classList.add('active');
-      span.textContent = 'Less information';
-      icon.className = 'bi bi-chevron-up';
-
-      setTimeout(() => {
-        content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 100);
-    }
-  }
 
   useEffect(() => {
     const contenedor = contenedorRef.current;
@@ -107,7 +64,7 @@ export default function BrandlistyWidget({
       const target = e.target as HTMLElement;
       const button = target.closest('.more-info-toggle') as HTMLElement | null;
       if (button) {
-        toggleMoreInfo(button);
+        toggleMoreInfo(button, contenedorRef);
         return;
       }
 
@@ -168,8 +125,9 @@ export default function BrandlistyWidget({
 
 
   return (
-    <div className=" relative flex w-full flex-col overflow-auto rounded border bg-white p-4 shadow"
-      style={{ height: 800 }}>
+    <div className=" relative flex w-full flex-col overflow-auto rounded border bg-white shadow"
+    //style={{ height: 800 }}
+    >
 
       {error && <p className="text-sm text-red-600">{error}</p>}
 
@@ -201,6 +159,7 @@ export default function BrandlistyWidget({
           * {
 
 }
+
 
       `}</style>
     </div>

@@ -1,11 +1,11 @@
 //import menu from '@/lib/menu.json'
-import { NavigationMenu } from '../ui/navigation-menu'
+import { NavigationMenu } from '@/components/ui/navigation-menu'
 import { fetchCategories, fetchMenu } from '@/api-fetcher/fetcher'
 import { normalizeUrl } from '@/lib/utils'
 import { contextSiteSettings } from '@/app/context/getSiteSettings'
-import { Logo } from './logo'
+import { Logo } from '../logo'
 import { RenderMenu } from './render-menu'
-import { NavMobile } from './nav/nav-mobile'
+import { NavMobile } from './nav-mobile'
 
 
 export async function Header() {

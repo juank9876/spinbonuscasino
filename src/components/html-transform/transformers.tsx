@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 import Image from 'next/image'
 import { CardShine } from '../juankui/legacy/card-shine'
 import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle } from 'lucide-react'
-import BrandlistyWidget from '../juankui/brandlisty-widget'
+import BrandlistyWidget from '../juankui/brandlisty/brandlisty-widget'
 import { MagicCard } from '../magicui/magic-card'
 
 export function transformBrandlisty(el: Element) {
