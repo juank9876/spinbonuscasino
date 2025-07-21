@@ -8,6 +8,7 @@ import { PrePage } from '@/components/juankui/pre-rendered/pre-page'
 import { fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
 import { getPageSlugToIdMap } from '@/lib/utils'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
+import DynamicStyle from '@/components/juankui/css-content'
 //import { Metadata } from 'next'
 async function getHomePageFromParams() {
 
@@ -72,7 +73,8 @@ export default async function Page({
         settings={settings}
         pageProps={page}
       >
-        <HtmlRenderer html={page.html_content} />
+
+        <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
       </PreHomePage>
     )
   } else {
@@ -84,7 +86,7 @@ export default async function Page({
 
       return (
         <PrePage page={page}>
-          <HtmlRenderer html={page.html_content} />
+          <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
         </PrePage>
       )
     } catch (error) {

@@ -8,6 +8,8 @@ import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PreCategory } from '@/components/juankui/pre-rendered/pre-category'
 import { CardPostCategory } from '@/components/juankui/card-post-category'
 import { Category, Post } from '@/types/types'
+import { debug } from '@/config/debug-log'
+import { debugLog } from '@/config/debug-log'
 
 /** Decide si es un post o categoría y obtiene los datos */
 type RouteData =
@@ -30,6 +32,7 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
 
     const categoryId = categoryMap[categorySlug]
     const postId = postMap[postSlug]
+
     const urlSegments = slugArray[0] === "categories" ? slugArray.slice(1) : slugArray;
     let url = "/" + urlSegments.join("/");
     if (!url.endsWith("/")) {
@@ -43,8 +46,8 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
         const permalinkData = await fetchPermalink(categoryId, "category")
         const permalink = permalinkData.permalink
 
-        console.log('permalink', permalink)
-        console.log('url', url)
+        debugLog(debug.postOrCategoryPermalink, '[+] Post or Category Permalink:' + permalink)
+        debugLog(debug.currentPostOrCategoryUrl, '[+] Current Post or Category URL:' + url)
 
         if (permalink !== url) {
             notFound()
@@ -55,11 +58,14 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
 
 
     if (postId) {
+
         const post = (await fetchArticleById(postId)).post
 
         const permalinkData = await fetchPermalink(postId, "post")
         const permalink = permalinkData.permalink
 
+        debugLog(debug.postOrCategoryPermalink, '[+] Post or Category Permalink:' + permalink)
+        debugLog(debug.currentPostOrCategoryUrl, '[+] Current Post or Category URL:' + url)
 
         if (permalink !== url) {
             notFound()
@@ -111,7 +117,7 @@ export default async function Page({
 
         return (
             <PrePost post={post}>
-                <HtmlRenderer html={post.html_content} />
+                <HtmlRenderer html={post.html_content} cssContent={post.css_content} />
             </PrePost>
         )
     }

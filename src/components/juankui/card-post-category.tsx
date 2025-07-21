@@ -6,15 +6,15 @@ import { Link } from '@/components/juankui/optionals/link'
 import { Category, Post } from '@/types/types'
 
 export function CardPostCategory({ post, category }: { post: Post, category: Category }) {
-  const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
-
+  //const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
+  const categoryUrl = category.slug
   return (
     <>
       {/*Card para PC*/}
       <Card className="duration-400 hover:to-[var(--color-primary-semi-dark)] relative hidden h-full overflow-hidden border-none p-0 shadow-none transition bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] hover:bg-[var(--color-primary-light)] lg:flex">
-        <Link href={`/categories/${categoryUrl}/${post.slug}`} className="h-full w-full">
+        <Link href={`${categoryUrl}/${post.slug}`} className="h-full w-full">
           <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
-          <CardContent className="p-5">
+          <CardContent className="p-5 h-full">
             <div className="itju-center flex h-full flex-row overflow-hidden rounded">
               {/* Imagen izquierda con altura completa */}
               <div className="relative mb-0 h-[200px] w-[200px] overflow-hidden rounded-lg">
@@ -30,12 +30,10 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
               </div>
 
               {/* Contenido derecho con altura igual */}
-              <div className="flex flex-1 flex-col justify-between px-6 py-3">
-                <div className='mb-0 gap-y-3 pb-0'>
-                  <h2 className="mb-0 text-start text-3xl font-bold text-white">{post.title}</h2>
-                  <p className="text-slate-200 mb-0 pb-0 text-sm">{formatDate(post.published_at)}</p>
-                  <p className="text-slate-200 text-base">{post.excerpt}</p>
-                </div>
+              <div className="flex flex-1 flex-col justify-between px-6 py-3 h-full">
+                <h2 className="mb-0 text-start text-3xl font-bold text-white">{post.title}</h2>
+                <p className="text-slate-200 mb-0 pb-0 text-sm">{formatDate(post.published_at)}</p>
+                <p className="text-slate-200 text-base">{post.excerpt.length > 200 ? post.excerpt.slice(0, 200) + "..." : post.excerpt}</p>
 
                 <div className=" px-5 flex flex-row items-center justify-start space-x-3  py-3 bg-[var(--color-accent-dark)] border border-[var(--color-accent-light)] rounded-lg">
                   <div className=" size-10 relative overflow-hidden rounded-full">

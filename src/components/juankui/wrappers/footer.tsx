@@ -109,15 +109,18 @@ async function FooterSocialIcons() {
 
 function FooterNewsletter() {
   return (
-    <div className="mt-6">
+    <div className="mt-6 flex flex-col">
       <p className="text-sm text-slate-100 mb-2">
         Suscríbete a nuestro boletín
       </p>
       <div className="flex">
         <input
+          id="email"
+          autoComplete="email"
           type="email"
           placeholder="tu@email.com"
-          className="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          name="email"
+          className="flex-1 py-2 text-sm border border-slate-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         <button className="px-4 py-2 text-sm font-medium text-white bg-[var(--color-accent)] cursor-pointer rounded-r-md focus:ring-offset-2 transition-colors">
           Suscribir
@@ -191,7 +194,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
             <h4 className="text-sm font-semibold text-slate-100 uppercase tracking-wide mb-4">
               Síguenos
             </h4>
-            <div className="space-y-4">
+            <div className="space-y-4 flex flex-col">
               <FooterSocialIcons />
               <FooterNewsletter />
             </div>

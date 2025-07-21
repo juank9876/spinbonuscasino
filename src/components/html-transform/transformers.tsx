@@ -6,6 +6,7 @@ import { CardShine } from '../juankui/legacy/card-shine'
 import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle } from 'lucide-react'
 import BrandlistyWidget from '../juankui/brandlisty/brandlisty-widget'
 import { MagicCard } from '../magicui/magic-card'
+import { fixAttribs } from '@/lib/utils'
 
 export function transformBrandlisty(el: Element) {
   const { apikey, listid, boton, limit, id } = el.attribs
@@ -180,13 +181,15 @@ export function transformButton(el: Element, options: HTMLReactParserOptions) {
 
 export function transformImg(el: Element) {
   return (
-    <div className='relative h-full w-full'>
+    <div className='relative h-[200px] w-[300px] rounded-lg'>
       <Image
-        alt={el.attribs.alt}
+        alt={el.attribs.alt || 'sample image'}
+        //src={'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTKbWAJHSZvmB6idZtJ6VtB1O6pvq2K7UVgIzsSxcpyxmu2GOqZwBlgV-NJm1kSNLJl7fnqNRG4ep75DRePRSgWM_v99GQISy6BUURYHYHnOg'}
         src={el.attribs.src || 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTKbWAJHSZvmB6idZtJ6VtB1O6pvq2K7UVgIzsSxcpyxmu2GOqZwBlgV-NJm1kSNLJl7fnqNRG4ep75DRePRSgWM_v99GQISy6BUURYHYHnOg'}
         fill
-        className="rounded-t-2xl object-cover w-full h-full"
+        className="rounded-lg object-contain"
       />
+
     </div>
   )
 }
@@ -294,20 +297,23 @@ export function transformForm(el: Element, options: HTMLReactParserOptions) {
 }
 
 export function transformInput(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs);
   return (
     <input
-      type={el.attribs.type || 'text'}
-      placeholder={el.attribs.placeholder || ''}
-      className="w-full p-2 rounded-md border border-gray-300"
-      {...el.attribs}
+      type={attribs.type || 'text'}
+      placeholder={attribs.placeholder || ' '}
+      {...attribs}
+      className={`w-full p-2 rounded-md border border-gray-300 ${attribs.className || ''}`}
     />
   )
 }
 export function transformTextarea(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs);
+
   return (
     <textarea
-      {...el.attribs}
-      className="w-full p-2 rounded-md border border-gray-300"
+      {...attribs}
+      className={`w-full p-2 rounded-md border border-gray-300 ${attribs.className || ''}`}
     />
   )
 }

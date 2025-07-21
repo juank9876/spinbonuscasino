@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { toggleMoreInfo } from "./toggleMoreInfo"
+import { debug, debugLog } from "@/config/debug-log"
 
 interface Props {
   apiKey: string
@@ -40,9 +41,13 @@ export default function BrandlistyWidget({
         const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}&category=all`
         const res = await fetch(url)
 
+        debugLog(debug.brandlisty.url, '[+] Brandlisty URL:' + url)
+        debugLog(debug.brandlisty.response, '[+] Brandlisty Response:' + res)
+
         if (!res.ok) throw new Error(`Error ${res.status}`)
         const htmlString = await res.text()
 
+        debugLog(debug.brandlisty.html, '[+] Brandlisty HTML:' + htmlString)
         const cleanedHtml = removeUniversalReset(htmlString)
         setHtml(cleanedHtml)
       } catch (err) {
@@ -144,28 +149,11 @@ export default function BrandlistyWidget({
         />
       )}
       <style >{`
-        .external-casino-list-container {
-          width: 100%;
-          
-          border-radius: 0.75rem;
-        }
-        
-        .external-casino-list-container a {
-          text-decoration: none;
-        }
-        
-        .external-casino-list-container img {
-          max-width: 100%;
-          height: auto;
-        }
         body {
           padding: 0px !important
         }
-          * {
-
-}
-
-
+        * {
+        }
       `}</style>
     </div>
   )

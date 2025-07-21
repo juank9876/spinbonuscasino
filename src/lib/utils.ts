@@ -30,7 +30,7 @@ type SlugToIdMap = Record<string, string>
 
 export async function getPageSlugToIdMap(): Promise<SlugToIdMap> {
   const pages = await fetchPages()
-  //console.log(pages)
+  //console.log('[+] pages:', pages)
   //console.log(pages.length)
   const slugIds: PageMeta[] = pages
   //console.log(slugIds)
@@ -71,4 +71,13 @@ export async function getPostSlugToIdMap(): Promise<SlugToIdMap> {
 
 export function cleanSlug(slug: string) {
   return slug.replace(/^\/+|\/+$/g, '')
+}
+
+export function fixAttribs(attribs: Record<string, any>) {
+  const newAttribs = { ...attribs };
+  if (newAttribs.class) {
+    newAttribs.className = newAttribs.class;
+    delete newAttribs.class;
+  }
+  return newAttribs;
 }

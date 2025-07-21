@@ -104,6 +104,7 @@ export interface Post {
   slug: string
   excerpt: string
   html_content: string
+  css_content: string | null
   featured_image: string
   meta_title: string | null
   meta_description: string | null
@@ -238,6 +239,7 @@ export interface Page {
   slug: string
   excerpt: string
   html_content: string
+  css_content: string | null
   featured_image: string
   meta_title: string
   meta_description: string

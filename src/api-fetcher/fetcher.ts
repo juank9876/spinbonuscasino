@@ -1,3 +1,4 @@
+import { debug, debugLog } from "@/config/debug-log";
 import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
 type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink";
@@ -17,6 +18,8 @@ export interface ResponseInterface<T = unknown> {
 export async function fetcher<T>({ method, id, type }: FetcherParams): Promise<T> {
   const baseUrl = `https://intercms.dev/api/v2/data.php`
   const url = baseUrl + `?method=${method}` + `&api_key=${process.env.API_KEY}` + `&project_id=${process.env.PROJECT_ID}` + (id ? `&id=${id}` : ``) + (type ? `&type=${type}` : ``)
+
+  debugLog(debug.fetcher, '[+] fetcher url:' + url)
 
   if (method === "page" && id == undefined) {
     console.log("ID is required for method 'page'");

@@ -3,6 +3,7 @@
 import { fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
 import NotFound from '@/app/not-found'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
+import DynamicStyle from '@/components/juankui/css-content'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import { getPageSlugToIdMap } from '@/lib/utils'
 import { notFound } from 'next/navigation'
@@ -12,7 +13,7 @@ import { notFound } from 'next/navigation'
 async function getHomePageFromParams() {
 
   const map = await getPageSlugToIdMap();
-
+  console.log(map)
   let slug = "/";
   let id = map[slug];
 
@@ -21,14 +22,16 @@ async function getHomePageFromParams() {
     slug = "home"
     id = map[slug]
   }
+  console.log(id)
 
   const homePage = await fetchPageById(id)
 
+  /*
   if (homePage.is_home === "1") {
     return homePage
-
   }
-
+*/
+  return homePage
 }
 
 export default async function Home() {
@@ -41,7 +44,8 @@ export default async function Home() {
       settings={settings}
       pageProps={page}
     >
-      <HtmlRenderer html={page.html_content} />
+
+      <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
     </PreHomePage>
 
   )
