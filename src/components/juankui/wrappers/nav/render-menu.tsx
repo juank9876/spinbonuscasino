@@ -58,7 +58,7 @@ function ListItem({ title, href, className, isChild = false, childCategories, pa
 }
 
 // ... existing code ...
-export function RenderMenu({ normalizedItems, categoriesItems }: { normalizedItems: NavItemType[], categoriesItems: Category[] }) {
+export function RenderMenu({ normalizedItems }: { normalizedItems: NavItemType[] }) {
 
   return (
     <nav>

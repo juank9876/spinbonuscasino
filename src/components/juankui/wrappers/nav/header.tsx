@@ -32,7 +32,6 @@ export async function Header() {
 
           <NavigationMenu className='hidden lg:flex'>
             <RenderMenu
-              categoriesItems={categoriesItems}
               normalizedItems={normalizedItems}
             />
           </NavigationMenu>
