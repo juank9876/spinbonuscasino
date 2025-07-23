@@ -67,7 +67,7 @@ export function RenderMenu({ normalizedItems }: { normalizedItems: NavItemType[]
           <li key={item.id} className="relative group/menu">
             {item.children && item.children.length > 0 ? (
               <>
-                <span className="flex text-base hover:bg-[var(--color-accent-dark)] items-center gap-1 px-4 py-2 cursor-pointer font-bold tracking-wide text-white transition-colors duration-150 rounded-lg">
+                <span className="flex text-base hover:bg-[var(--color-accent-dark)] items-center gap-1 px-4 py-3 cursor-pointer font-bold tracking-wide text-white transition-colors duration-150 rounded-lg">
                   {capitalize(item.title)}
                   <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200 group-hover/menu:rotate-180" />
                 </span>
@@ -88,7 +88,7 @@ export function RenderMenu({ normalizedItems }: { normalizedItems: NavItemType[]
             ) : (
               <Link
                 href={`${item.url}`}
-                className="px-4 py-2 text-base font-bold tracking-wide text-white transition-colors duration-150 hover:bg-[var(--color-accent-dark)] rounded-lg"
+                className="px-4 py-3 text-base font-bold tracking-wide text-white transition-colors duration-150 hover:bg-[var(--color-accent-dark)] rounded-lg"
               >
                 {item.title}
               </Link>

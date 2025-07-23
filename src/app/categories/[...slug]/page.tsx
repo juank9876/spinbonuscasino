@@ -1,7 +1,7 @@
 // app/[...slug]/page.tsx
 import { notFound } from 'next/navigation'
 import { fetchArticleById, fetchCategoryById, fetchPermalink } from '@/api-fetcher/fetcher'
-import { getPostSlugToIdMap, getCategorySlugToIdMap, cleanSlug } from '@/lib/utils'
+import { getPostSlugToIdMap, getCategorySlugToIdMap, cleanSlug, createPageTitle } from '@/lib/utils'
 import { capitalize } from '@/utils/capitalize'
 import { PrePost } from '@/components/juankui/pre-rendered/pre-post'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
@@ -10,6 +10,7 @@ import { CardPostCategory } from '@/components/juankui/card-post-category'
 import { Category, Post } from '@/types/types'
 import { debug } from '@/config/debug-log'
 import { debugLog } from '@/config/debug-log'
+import { contextSiteSettings } from '@/app/context/getSiteSettings'
 
 /** Decide si es un post o categoría y obtiene los datos */
 type RouteData =
@@ -41,7 +42,6 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
 
     if (categoryId) {
         const category = await fetchCategoryById(categoryId)
-        console.log(category)
 
         const permalinkData = await fetchPermalink(categoryId, "category")
         const permalink = permalinkData.permalink
@@ -54,6 +54,8 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
         }
 
         return { type: 'category', category }
+    } else {
+        console.error('Category not found', categoryId, categorySlug)
     }
 
 
@@ -72,19 +74,22 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
         }
         return { type: 'post', post }
     }
+    else {
+        console.error('Post not found', postId, postSlug)
+    }
 
     notFound()
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
     const { slug = [] } = await params
-
+    const settings = await contextSiteSettings()
     try {
         const data = await getDataFromParams(slug)
 
         if (data.type === 'post') {
             return {
-                title: capitalize(data.post.title),
+                title: createPageTitle(data.post.title),
                 description: capitalize(data.post.excerpt),
             }
         }
@@ -108,9 +113,7 @@ export default async function Page({
     params: Promise<{ slug: string[] }>
 }) {
     const slugArray = (await params).slug || []
-    //console.log(slugArray)
     const data = await getDataFromParams(slugArray)
-
 
     if (data.type === 'post') {
         const post = data.post

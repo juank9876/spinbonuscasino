@@ -24,7 +24,6 @@ export function transformBrandlisty(el: Element) {
   )
 }
 
-//Version upgraded chatgp
 export function transformRow(el: Element, options: HTMLReactParserOptions) {
   const validChildren = el.children.filter(
     (child) => child.type === 'tag'
@@ -32,7 +31,7 @@ export function transformRow(el: Element, options: HTMLReactParserOptions) {
 
   return (
 
-    <div className={`flex w-full flex-col lg:flex-row lg:flex-wrap ${el.attribs?.class || ''}`}>
+    <div className={`flex  flex-col lg:flex-row lg:flex-wrap ${el.attribs?.class || ''}`}>
       {domToReact(validChildren as DOMNode[], options)}
     </div>
 
@@ -80,8 +79,6 @@ export function transformCol(el: Element, options: HTMLReactParserOptions) {
     </>
   )
 }
-
-//Version Bootstrap
 
 export function transformCard(el: Element, options: HTMLReactParserOptions) {
   return (
@@ -158,7 +155,7 @@ export function transformTextElement(el: Element, options: HTMLReactParserOption
 
 export function transformContainer(el: Element, options: HTMLReactParserOptions) {
   return (
-    <div className={`border-primary container rounded-lg ${el.attribs?.class || ''}`}>
+    <div className={`border-primary flex flex-col justify-center items-center bg-white rounded-lg p-3 sm:p-4 md:p-6 lg:p-8 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )
@@ -195,7 +192,7 @@ export function transformImg(el: Element) {
 
 export function transformH2(el: Element, options: HTMLReactParserOptions) {
   return (
-    <div className={`flex flex-col space-y-5 pt-10 ${el.attribs?.class || ''}`}>
+    <div className={`flex flex-col space-y-4 py-8 ${el.attribs?.class || ''}`}>
       <h2>
         {domToReact(el.children as DOMNode[], options)}
       </h2>
@@ -306,6 +303,7 @@ export function transformInput(el: Element, options: HTMLReactParserOptions) {
     />
   )
 }
+
 export function transformTextarea(el: Element, options: HTMLReactParserOptions) {
   const attribs = fixAttribs(el.attribs);
 
@@ -316,6 +314,7 @@ export function transformTextarea(el: Element, options: HTMLReactParserOptions) 
     />
   )
 }
+
 export function transformBtnSubmit(el: Element, options: HTMLReactParserOptions) {
   return (
     <Button variant={'accent'} className={`text-white ${el.attribs?.class || ''}`}>

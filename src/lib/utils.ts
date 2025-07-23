@@ -1,4 +1,6 @@
 import { fetchArticles, fetchCategories, fetchPages } from "@/api-fetcher/fetcher"
+import { contextSiteSettings } from "@/app/context/getSiteSettings"
+import { capitalize } from "@/utils/capitalize"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -80,4 +82,11 @@ export function fixAttribs(attribs: Record<string, any>) {
     delete newAttribs.class;
   }
   return newAttribs;
+}
+
+export async function createPageTitle(pageTitle: string) {
+  const settings = await contextSiteSettings()
+  const title = capitalize(settings.site_title) + " | " + capitalize(pageTitle)
+  console.log(title)
+  return title
 }

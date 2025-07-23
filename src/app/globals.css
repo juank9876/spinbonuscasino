@@ -287,7 +287,7 @@ body {
 }
 
 .bg-gradient-light {
-  background: linear-gradient(to bottom, #ffffff, #f4f4f5, #ececec);
+  @apply bg-slate-100
 }
 
 .bg-gradient-reverse {

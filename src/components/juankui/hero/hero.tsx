@@ -11,7 +11,7 @@ type HomeProps = SiteSettings & Page
 
 export function HeroHomePage({ title, meta_title, meta_description, site_title, site_description }: HomeProps) {
   return (
-    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden pb-10">
+    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden mb-10">
       <ParticlesFull />
       <VideoHero />
       <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
@@ -40,7 +40,7 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
           </div>
 
           <div
-            className="h-[17px] w-full overflow-hidden rotate-180 absolute bottom-0 z-10 bg-transparent"
+            className="h-[15px] w-full overflow-hidden rotate-180 absolute bottom-0 z-10 bg-transparent"
             style={{
               backgroundImage:
                 'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTQ0IiBoZWlnaHQ9IjE3IiB2aWV3Qm94PSIwIDAgNTQ0IDE3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik01NDMuNSAyLjM3MjA0TDUyOS42NjEgMTEuODYwNEw1MjIuMTQ4IDIuMzcyMDRMNDg4LjE0NCA1LjkzMDJMNDgyLjIxMyA4LjY5NzY1TDQ0OC42MDQgOC42OTc2NUw0NDIuNjczIDUuOTMwMkw0MjYuNDYxIDguNjk3NjZMNDA0LjcxNCAyLjM3MjA1TDM1NC40OTggMTEuODYwNUwzMzUuNTE5IDIuMzcyMDZMMzIyLjg2NiA1LjkzMDIxTDMxMy43NzIgMi4zNzIwNkwzMDIuMzA1IDE3TDI4MC41NTggNS45MzAyMkwyNDAuNjIzIC0zLjQ1NTY4ZS0wNUwxNzQuNTkxIDExLjg2MDVMMTU0LjQyNSAyLjM3MjA3TDg5LjU3OTcgMTQuMjMyNkw4NC44MzQ4IDUuOTMwMjNMNDcuNjY3MSAxNC4yMzI2TC03LjI5MzU4IC0xLjI4ODMzZS0wNUwtNTQuNzQxNyAxNC4yMzI2TC03Ni44ODQyIDIuMzcyMDlMLTg1Ljk3ODQgMTEuODYwNUwtMTAyLjE5IC00LjU4NzE2ZS0wNkwtMTIyLjM1NSAxNy4wMDAxTC0xMzIuMjQgNS45MzAyNUwtMTYxLjUgNS45NzkwMWUtMDdMLTEwMi4xOSAtNC41ODcxNmUtMDZMLTcuMjkzNTggLTEuMjg4MzNlLTA1TDI0MC42MjMgLTMuNDU1NjhlLTA1TDU0My41IC02LjEwMzUyZS0wNUw1NDMuNSAyLjM3MjA0WiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==")',

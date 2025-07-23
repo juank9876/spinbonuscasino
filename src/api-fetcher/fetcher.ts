@@ -19,14 +19,8 @@ export async function fetcher<T>({ method, id, type }: FetcherParams): Promise<T
   const baseUrl = `https://intercms.dev/api/v2/data.php`
   const url = baseUrl + `?method=${method}` + `&api_key=${process.env.API_KEY}` + `&project_id=${process.env.PROJECT_ID}` + (id ? `&id=${id}` : ``) + (type ? `&type=${type}` : ``)
 
-  debugLog(debug.fetcher, '[+] fetcher url:' + url)
+  debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
 
-  if (method === "page" && id == undefined) {
-    console.log("ID is required for method 'page'");
-  }
-  if (method === "article" && id == undefined) {
-    console.log("ID is required for method 'article'");
-  }
 
   try {
     const res = await fetch(url, {
