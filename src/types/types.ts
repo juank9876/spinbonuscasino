@@ -75,8 +75,8 @@ export type Category = {
   description: string
   level: string
   path: string
-  meta_title: string | null
-  meta_description: string | null
+  meta_title: string | undefined
+  meta_description: string | undefined
   schema_data: unknown // puedes refinar esto si sabes su estructura
   created_at: string
   updated_at: string
@@ -106,8 +106,8 @@ export interface Post {
   html_content: string
   css_content: string | null
   featured_image: string
-  meta_title: string | null
-  meta_description: string | null
+  meta_title: string | undefined
+  meta_description: string | undefined
   meta_keywords: string
   schema_data: unknown[] // Ajusta si sabes su estructura
   custom_fields: unknown[] // Igual aquí

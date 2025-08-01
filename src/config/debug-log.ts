@@ -2,6 +2,7 @@
 
 
 
+
 export const debug = {
     brandlisty: {
         url: false,
@@ -9,10 +10,16 @@ export const debug = {
         html: false,
     },
     fetcher: false,
+    fetchPages: false,
+    fetchPosts: false,
+    fetchCategories: false,
+
     pages: false,
+    htmlContent: false,
     cssContent: false,
     postOrCategoryPermalink: false,
     currentPostOrCategoryUrl: false,
+    createMetadata: false,
 }
 
 

@@ -84,9 +84,17 @@ export function fixAttribs(attribs: Record<string, any>) {
   return newAttribs;
 }
 
-export async function createPageTitle(pageTitle: string) {
+export async function createPageTitle(pageMetaTitle: string | undefined, pageTitle: string | undefined) {
   const settings = await contextSiteSettings()
-  const title = capitalize(settings.site_title) + " | " + capitalize(pageTitle)
-  console.log(title)
-  return title
+
+  if (!pageMetaTitle && pageTitle) {
+    return capitalize(settings.site_title) + " | " + capitalize(pageTitle);
+  }
+
+  else if (!pageMetaTitle && !pageTitle) {
+    return capitalize(settings.site_title);
+  }
+
+  else if (pageMetaTitle) return capitalize(settings.site_title) + " | " + capitalize(pageMetaTitle)
+
 }
