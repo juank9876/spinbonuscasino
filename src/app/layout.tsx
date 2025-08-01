@@ -1,4 +1,3 @@
-import { Onest, Poppins } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer";
@@ -7,19 +6,54 @@ import { ViewTransitions } from 'next-view-transitions'
 import { hexToOklch } from "@/utils/hex-to-oklch";
 import { Providers } from "./providers";
 import Head from "next/head";
+import { generateFonts } from "@/utils/fonts";
+import { Metadata } from "next";
 
-const onest = Onest({
-  variable: "--font-onest",
-  subsets: ["latin"],
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await fetchSiteSettings()
 
-const poppins = Poppins({
-  weight: "400", // o ["400", "700"], según necesites
-  subsets: ["latin"],
-  variable: "--font-poppins"
-});
+  return {
+    title: settings.site_title,
+    description: settings.site_description,
+    keywords: settings.meta_keywords,
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://your-domain.com'),
+
+    // OpenGraph metadata
+    openGraph: {
+      title: settings.meta_title || settings.site_title,
+      description: settings.meta_description || settings.site_description,
+      type: 'website',
+      siteName: settings.site_title,
+    },
+
+    // Twitter metadata
+    twitter: {
+      card: 'summary_large_image',
+      title: settings.meta_title || settings.site_title,
+      description: settings.meta_description || settings.site_description,
+    },
+
+    icons: [
+      {
+        rel: "icon",
+        url: settings.favicon || "/favicon.svg",
+        sizes: "32x32",
+        type: "image/png"
+      }
+    ],
+
+    // Additional metadata
+    other: {
+      'google-analytics': settings.ga_tracking_id || '',
+      'facebook-pixel': settings.facebook_pixel || '',
+      'custom-css': settings.custom_css || '',
+      'custom-js': settings.custom_js || '',
+    }
+  }
+}
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const font = await generateFonts();
   const settings = await fetchSiteSettings()
   //cambiar el valor para distinta tonalidad
   const primaryLightColor = hexToOklch(settings.primary_color, 0.90)
@@ -36,7 +70,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <ViewTransitions>
-      <html lang="en" suppressHydrationWarning className={`${onest.variable} ${poppins.variable}`}>
+      <html lang="en" suppressHydrationWarning className={`${font.variable} font-sans`}>
         <Head>
           <title>{settings.site_title || "Welcome to our site"}</title>
           <meta name="description" content={settings.meta_description} />

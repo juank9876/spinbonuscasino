@@ -5,6 +5,7 @@ import { fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
 import { createPageTitle, getPageSlugToIdMap } from '@/lib/utils'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import NotFound from '@/app/not-found'
+import { createMetadata } from '@/app/seo/createMetadata'
 
 async function getHomePageFromParams() {
 
@@ -37,15 +38,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }) {
   const page = await getPageFromParams({ params })
-  try {
-    return {
-      title: await createPageTitle(page.title),
-      description: capitalize(page.meta_description || ''),
-    }
-  } catch (error) {
 
-    return <NotFound />
-  }
+  return await createMetadata(page);
 }
 
 export default async function Page({

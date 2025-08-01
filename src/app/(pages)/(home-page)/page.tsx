@@ -2,13 +2,18 @@
 
 import { fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
 import NotFound from '@/app/not-found'
+import { createMetadata } from '@/app/seo/createMetadata'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import DynamicStyle from '@/components/juankui/css-content'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import { createPageTitle, getPageSlugToIdMap } from '@/lib/utils'
 import { capitalize } from '@/utils/capitalize'
-//parse, 
+import { Metadata } from 'next'
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getHomePageFromParams();
+  return await createMetadata(page);
+}
 
 async function getHomePageFromParams() {
 
@@ -30,19 +35,6 @@ async function getHomePageFromParams() {
   }
 */
   return homePage
-}
-
-export async function generateMetadata() {
-  const page = await getHomePageFromParams()
-  try {
-    return {
-      title: await createPageTitle(page.title || ''),
-      description: capitalize(page.meta_description || ''),
-    }
-  } catch (error) {
-    console.error('Error generating metadata:', error)
-    return <NotFound />
-  }
 }
 
 export default async function Home() {
