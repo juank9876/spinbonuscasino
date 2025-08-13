@@ -128,7 +128,7 @@ export default async function Page({
                     </span>
                 </PreCategory>
             ) : (
-                <PreCategory category={category} className='flex w-[90vw] grid-cols-4 flex-col justify-center space-y-5 rounded-lg lg:grid lg:w-[70vw] lg:gap-5'>
+                <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
 
                     {posts.map((post) => (
                         <CardPostCategory key={post.id} post={post} category={category} />

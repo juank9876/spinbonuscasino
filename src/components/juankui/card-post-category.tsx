@@ -1,9 +1,10 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { ShineBorder } from '@/components/magicui/shine-border'
 import Image from 'next/image'
-import { formatDate } from '@/lib/utils'
+import { formatDate, limitCharacters } from '@/lib/utils'
 import { Link } from '@/components/juankui/optionals/link'
 import { Category, Post } from '@/types/types'
+import { cn } from '@/lib/utils'
 
 export function CardPostCategory({ post, category }: { post: Post, category: Category }) {
   //const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
@@ -11,91 +12,125 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
   return (
     <>
       {/*Card para PC*/}
-      <Card className="duration-400 hover:to-[var(--color-primary-semi-dark)] relative hidden h-full overflow-hidden border-none p-0 shadow-none transition bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] hover:bg-[var(--color-primary-light)] lg:flex">
-        <Link href={`${categoryUrl}/${post.slug}`} className="h-full w-full">
-          <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
-          <CardContent className="p-5 h-full">
-            <div className="itju-center flex h-full flex-row overflow-hidden rounded">
-              {/* Imagen izquierda con altura completa */}
-              <div className="relative mb-0 h-[200px] w-[200px] overflow-hidden rounded-lg">
+      <Link
+        href={`${categoryUrl}/${post.slug}`}
+        className="
+    group relative hidden lg:flex 
+    w-[300px] h-[500px] overflow-hidden rounded-2xl border border-[var(--color-accent-light)]
+    bg-gradient-to-b from-blue-900 via-[var(--color-primary-dark)] to-blue-900
+    shadow-xl transition-all duration-500 
+    hover:shadow-2xl hover:shadow-[var(--color-accent-dark)]/30
+    hover:scale-[1.02]
+  "
+      >
+        <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+
+        <div className="flex flex-col w-full h-full p-4 gap-4">
+
+          {/* Imagen fija */}
+          <div className="relative w-full h-[200px] flex items-center justify-center overflow-hidden rounded-xl shadow-md transition-transform duration-300 group-hover:scale-[1.03]">
+            <Image
+              src={
+                post.featured_image ||
+                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop"
+              }
+              alt={post.title}
+              fill
+              className="object-cover object-center"
+              priority
+            />
+            <p className="absolute top-0 right-0 bg-[var(--color-secondary-dark)] rounded-lg  px-2 py-1 text-slate-200 text-xs font-bold border border-[var(--color-secondary)]">
+              {formatDate(post.published_at)}
+            </p>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+          </div>
+
+          {/* Contenido */}
+          <div className="flex flex-1 flex-col justify-between">
+            <div className="space-y-2">
+              <h2 className="text-start text-lg font-bold text-white leading-tight tracking-tight">
+                {post.title}
+              </h2>
+
+              <p className="text-slate-200 text-sm leading-relaxed">
+                {limitCharacters(post.excerpt, 120)}
+              </p>
+            </div>
+
+            {/* Autor */}
+            <div className="mt-4 flex items-center gap-4 rounded-lg border border-[var(--color-accent-light)] bg-[var(--color-accent-dark)] py-1 px-2 shadow-inner">
+              <div className="relative size-12 flex-shrink-0 overflow-hidden rounded-full border-2 border-[var(--color-accent-light)] shadow-md">
                 <Image
                   src={
-                    post.featured_image ||
-                    "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop"
+                    post.author_avatar ||
+                    `https://api.dicebear.com/7.x/lorelei/svg?seed=${post.author_name || "default"}`
                   }
-                  alt={post.title}
+                  alt={post.author_name || "Author"}
                   fill
-                  className="aspect-square object-cover"
+                  className="object-cover"
                 />
               </div>
-
-              {/* Contenido derecho con altura igual */}
-              <div className="flex flex-1 flex-col justify-between px-6 py-3 h-full">
-                <h2 className="mb-0 text-start text-3xl font-bold text-white">{post.title}</h2>
-                <p className="text-slate-200 mb-0 pb-0 text-sm">{formatDate(post.published_at)}</p>
-                <p className="text-slate-200 text-base">{post.excerpt.length > 200 ? post.excerpt.slice(0, 200) + "..." : post.excerpt}</p>
-
-                <div className=" px-5 flex flex-row items-center justify-start space-x-3  py-3 bg-[var(--color-accent-dark)] border border-[var(--color-accent-light)] rounded-lg">
-                  <div className=" size-10 relative overflow-hidden rounded-full">
-                    <Image
-                      src={
-                        post.author_avatar ||
-                        `https://api.dicebear.com/7.x/lorelei/svg?seed=${post.author_name || "default"}`
-                      }
-                      alt={post.id}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-row items-center gap-2 text-xs text-white">
-                    <span className='text-sm'>{formatDate(post.published_at)}</span>
-                    <span>·</span>
-                    <span className='text-sm'>{post.author_name.toUpperCase()}</span>
-                  </div>
-                </div>
+              <div className="flex flex-wrap items-center gap-2 text-white text-sm">
+                <span className="text-xs font-medium">{formatDate(post.published_at)}</span>
+                <span className="text-[var(--color-accent-light)]">·</span>
+                <span className="text-xs font-semibold">{post.author_name.toUpperCase()}</span>
               </div>
             </div>
-          </CardContent>
-        </Link>
-      </Card>
+          </div>
+        </div>
+      </Link>
+
+
 
       {/*Card para movil*/}
-      <Card className="duration-400 scale-custom relative w-full overflow-hidden border-none p-0 shadow-none transition hover:bg-[var(--color-primary-dark)] lg:hidden">
-        <Link href={`/categories/${category.slug}/${post.slug}`} className="block w-full">
+      <Card className="duration-500 relative w-full overflow-hidden border-none p-0 shadow-lg transition hover:shadow-xl hover:shadow-[var(--color-accent-dark)]/20 lg:hidden">
+        <Link href={`${categoryUrl}/${post.slug}`} className="block w-full">
           <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
 
-          {/* Imagen como background */}
-          <div
-            className="h-ful relative w-full bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${post.featured_image || "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop"})`,
-            }}
-          >
-            {/* Overlay oscuro con filtro */}
-            <div className="backdrop-blur-xs absolute inset-0 h-full bg-black/70"></div>
+          {/* Imagen como background con altura fija para mejor proporción */}
+          <div className="relative h-[420px] w-full">
+            <Image
+              src={post.featured_image || "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop"}
+              alt={post.title}
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+
+            {/* Overlay con gradiente para mejor legibilidad */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
 
             {/* Contenido centrado */}
-            <CardContent className="relative z-10 flex h-full flex-col justify-between p-5 text-white">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold">{post.title}</h2>
-                <p className="text-sm text-white opacity-80">{formatDate(post.published_at)}</p>
-                <p className="text-base text-white opacity-90">{post.excerpt}</p>
+            <CardContent className="absolute inset-0 z-10 flex h-full flex-col justify-between p-6 text-white">
+              <div className="mt-4 space-y-3 max-w-[90%]">
+                <div className="inline-block rounded-full bg-[var(--color-accent)] px-3 py-1 text-xs font-medium text-white shadow-md">
+                  {category.name}
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight">{post.title}</h2>
+                <p className="text-sm text-white/90 font-medium">{formatDate(post.published_at)}</p>
+                <p className="text-base text-white/80 line-clamp-3 leading-relaxed">
+                  {post.excerpt}
+                </p>
               </div>
 
-              {/* Autor */}
-              <div className="flex flex-row items-center space-x-3">
-                <div className="size-10 relative mb-0 overflow-hidden rounded-full">
+              {/* Autor con mejor diseño */}
+              <div className="flex flex-row items-center space-x-3 bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-white/10 shadow-lg">
+                <div className="size-12 relative overflow-hidden rounded-full border-2 border-[var(--color-accent-light)] shadow-md">
                   <Image
                     src={
                       post.author_avatar ||
                       `https://api.dicebear.com/7.x/lorelei/svg?seed=${post.author_name || "default"}`
                     }
-                    alt={post.id}
+                    alt={post.author_name || "Author"}
                     fill
                     className="object-cover"
                   />
                 </div>
-                <p className="text-muted text-sm">{post.author_name}</p>
+                <div className="flex flex-col">
+                  <p className="text-sm font-semibold text-white">{post.author_name}</p>
+                  <p className="text-xs text-white/70">{formatDate(post.published_at)}</p>
+                </div>
               </div>
             </CardContent>
           </div>

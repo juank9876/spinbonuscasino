@@ -2,6 +2,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  /*
   safelist: [
     // Spacing utilities
     ...Array.from({ length: 32 }, (_, i) => `p-${i}`),
@@ -636,6 +637,7 @@ module.exports = {
     "hover:bg-emerald-900",
     "hover:text-emerald-900"
   ],
+  */
   theme: {
     extend: {},
   },

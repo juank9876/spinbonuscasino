@@ -98,3 +98,10 @@ export async function createPageTitle(pageMetaTitle: string | undefined, pageTit
   else if (pageMetaTitle) return capitalize(settings.site_title) + " | " + capitalize(pageMetaTitle)
 
 }
+
+export function limitCharacters(text: string, limit: number): string {
+  if (!text) return '';
+  if (text.length <= limit) return text;
+
+  return text.slice(0, limit) + '...';
+}
