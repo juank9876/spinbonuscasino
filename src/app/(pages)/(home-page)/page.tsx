@@ -1,13 +1,8 @@
-//import data from '@/lib/data.json'
-
 import { fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
-import NotFound from '@/app/not-found'
 import { createMetadata } from '@/app/seo/createMetadata'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
-import DynamicStyle from '@/components/juankui/css-content'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
-import { createPageTitle, getPageSlugToIdMap } from '@/lib/utils'
-import { capitalize } from '@/utils/capitalize'
+import { getPageSlugToIdMap } from '@/lib/utils'
 import { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -16,10 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getHomePageFromParams() {
-
   const map = await getPageSlugToIdMap();
-
-  let slug = "/";
+  let slug = "";
   let id = map[slug];
 
   if (!id) {
@@ -28,14 +21,9 @@ async function getHomePageFromParams() {
   }
 
   const homePage = await fetchPageById(id)
-
-  /*
-  if (homePage.is_home === "1") {
-    return homePage
-  }
-*/
   return homePage
 }
+
 
 export default async function Home() {
   const page = await getHomePageFromParams()
@@ -47,10 +35,16 @@ export default async function Home() {
       settings={settings}
       pageProps={page}
     >
-
-      <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
+      <HtmlRenderer cssContent={page.css_content} html={page.html_content} />
     </PreHomePage>
 
   )
-  return <NotFound />
+  return (
+    <PreHomePage
+      settings={settings}
+      pageProps={page}
+    >
+      <></>
+    </PreHomePage>
+  )
 }

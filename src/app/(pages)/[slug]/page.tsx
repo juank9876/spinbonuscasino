@@ -1,8 +1,9 @@
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PrePage } from '@/components/juankui/pre-rendered/pre-page'
-import { fetchPageById, fetchSlugToId } from '@/api-fetcher/fetcher'
+import { fetchArticleById, fetchPageById, fetchSlugToId } from '@/api-fetcher/fetcher'
 import NotFound from '@/app/not-found'
 import { createMetadata } from '@/app/seo/createMetadata'
+import { PrePost } from '@/components/juankui/pre-rendered/pre-post'
 /*
 async function getHomePageFromParams() {
 
@@ -22,10 +23,22 @@ async function getPageFromParams({
 }) {
 
   const { slug } = await params
-  const id = await fetchSlugToId(slug)
+  const id = await fetchSlugToId(slug, "page")
 
   const page = await fetchPageById(id)
   return page
+}
+
+async function getPostFromParams({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const id = await fetchSlugToId(slug, "post")
+
+  const post = await fetchArticleById(id)
+  return post
 }
 
 export async function generateMetadata({
@@ -43,19 +56,22 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>
 }) {
+  const page = await getPageFromParams({ params })
 
-  try {
-    const page = await getPageFromParams({ params })
+  if (page) return (
+    <PrePage page={page}>
+      <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
+    </PrePage>
+  )
 
-    if (!page || page.status !== 'published') return <NotFound />
-    return (
-      <PrePage page={page}>
-        <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
-      </PrePage>
+  if (!page) {
+    const post = await getPostFromParams({ params })
+
+    if (post) return (
+      <PrePost post={post.post}>
+        <HtmlRenderer html={post.post.html_content} cssContent={post.post.css_content} />
+      </PrePost>
     )
-  } catch (error) {
-    console.log('404 Not found')
-    return <NotFound />
+    else return <NotFound />
   }
-
 }

@@ -36,14 +36,12 @@ export function NavLink({ href, children, className }: NavLinkProps) {
             (baseParsedUrl.origin?.startsWith('http://') || baseParsedUrl.origin?.startsWith('https://'));
 
         if (isExternalDomain) {
-            console.log('External link detected:', parsedHref.toString());
             return (
                 <a className={className} href={parsedHref.toString()} target="_blank" rel="noopener noreferrer">
                     {children}
                 </a>
             );
         } else if (isLocalDomain) {
-            console.log('Internal link detected:', parsedHref.pathname.toString());
             return (
                 <Link className={className} href={parsedHref.pathname}>
                     {children}
@@ -53,7 +51,6 @@ export function NavLink({ href, children, className }: NavLinkProps) {
     }
 
     else {
-        console.log('Normal link detected:', href);
         return (
             <Link className={className} href={href}>
                 {children}

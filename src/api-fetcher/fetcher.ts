@@ -1,13 +1,14 @@
 import { debug, debugLog } from "@/config/debug-log";
 import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
-type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink" | "all-slugs" | "slug-to-id";
+type MethodType = "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink" | "all-slugs" | "slug-to-id";
 
 interface FetcherParams {
   method: MethodType;
   id?: string
   type?: string
   slug?: string
+  category_id?: string
 }
 
 export interface ResponseInterface<T = unknown> {
@@ -16,7 +17,7 @@ export interface ResponseInterface<T = unknown> {
   data: T // Puedes ajustar el tipo según lo que esperes
 }
 
-export async function fetcher<T>({ method, id, type, slug }: FetcherParams): Promise<T> {
+export async function fetcher<T>({ method, id, type, slug, category_id }: FetcherParams): Promise<T> {
   const baseUrl = `https://intercms.dev/api/v2/data.php`
   const url = baseUrl +
     `?method=${method}` +
@@ -24,10 +25,10 @@ export async function fetcher<T>({ method, id, type, slug }: FetcherParams): Pro
     `&project_id=${process.env.PROJECT_ID}` +
     (id ? `&id=${id}` : ``) +
     (type ? `&type=${type}` : ``) +
-    (slug ? `&slug=${slug}` : ``)
+    (slug ? `&slug=${slug}` : ``) +
+    (category_id ? `&category_id=${category_id}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
-
 
   try {
     const res = await fetch(url, {
@@ -41,6 +42,7 @@ export async function fetcher<T>({ method, id, type, slug }: FetcherParams): Pro
     }
 
   } catch (error) {
+    console.error(url, method)
     console.error("Error fetching data:", error);
     return undefined as T;
   }
@@ -72,7 +74,6 @@ export async function fetchMenu(): Promise<NavItemType[]> {
 export async function fetchSiteSettings() {
   return fetcher<SiteSettings>({ method: "site-settings" });
 }
-
 export async function fetchAuthors() {
   return fetcher<Author[]>({ method: "authors" });
 }
@@ -84,6 +85,14 @@ export async function fetchAuthorById(id: string): Promise<Author> {
 type PermalinkType = "category" | "post"
 export async function fetchPermalink(id: string, type: PermalinkType): Promise<PermalinkData> {
   return fetcher<PermalinkData>({ method: "permalink", id, type });
+}
+
+interface CategoryPosts {
+  category: Category
+  posts: Post[]
+}
+export async function fetchCategoryPosts(id: string): Promise<CategoryPosts> {
+  return fetcher<CategoryPosts>({ method: "category-posts", category_id: id });
 }
 
 interface Slug {
@@ -105,8 +114,12 @@ interface SlugToId {
   type: string
   slug: string
 }
-export async function fetchSlugToId(slug: string) {
-  const slugRes = await fetcher<SlugToId>({ method: "slug-to-id", slug });
+export async function fetchSlugToId(slug: string, type: "page" | "post") {
+  const slugRes = await fetcher<SlugToId>({ method: "slug-to-id", slug, type });
+  console.log(slugRes)
+  if (!slugRes) {
+    return null
+  }
   debugLog(debug.fetchSlugToId, "fetchSlugToId", slugRes)
 
   return slugRes.id

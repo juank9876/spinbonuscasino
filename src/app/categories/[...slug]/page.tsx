@@ -1,6 +1,6 @@
 // app/[...slug]/page.tsx
 import { notFound } from 'next/navigation'
-import { fetchArticleById, fetchCategoryById, fetchPermalink } from '@/api-fetcher/fetcher'
+import { fetchArticleById, fetchCategoryById, fetchPermalink, fetchSlugToId } from '@/api-fetcher/fetcher'
 import { getPostSlugToIdMap, getCategorySlugToIdMap, cleanSlug, createPageTitle } from '@/lib/utils'
 import { capitalize } from '@/utils/capitalize'
 import { PrePost } from '@/components/juankui/pre-rendered/pre-post'
@@ -41,14 +41,13 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
         slugArray = slugArray.slice(1)
     }
 
-    const postMap = await getPostSlugToIdMap()
     const categoryMap = await getCategorySlugToIdMap()
 
     const categorySlug = slugArray[slugArray.length - 1]
     const postSlug = slugArray[slugArray.length - 1]
 
     const categoryId = categoryMap[categorySlug]
-    const postId = postMap[postSlug]
+
 
     const urlSegments = slugArray[0] === "categories" ? slugArray.slice(1) : slugArray;
     let url = "/" + urlSegments.join("/");
@@ -72,10 +71,11 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
         return { type: 'category', category }
     } else {
         console.log('Category not found', categoryId, categorySlug)
-    }
+        const postId = await fetchSlugToId(postSlug, "post")
 
-
-    if (postId) {
+        if (!postId) {
+            notFound()
+        }
 
         const post = (await fetchArticleById(postId)).post
 
@@ -90,11 +90,7 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
         }
         return { type: 'post', post }
     }
-    else {
-        console.error('Post not found', postId, postSlug)
-    }
 
-    notFound()
 }
 
 export default async function Page({

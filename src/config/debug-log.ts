@@ -20,8 +20,10 @@ export const debug = {
     postOrCategoryPermalink: false,
     currentPostOrCategoryUrl: false,
     createMetadata: false,
-    fetchAllSlugs: true,
+
+    fetchAllSlugs: false,
     fetchSlugToId: false,
+
 }
 
 
