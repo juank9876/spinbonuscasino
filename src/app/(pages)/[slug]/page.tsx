@@ -25,7 +25,7 @@ async function getPageFromParams({
   const { slug } = await params
   const id = await fetchSlugToId(slug, "page")
 
-  const page = await fetchPageById(id)
+  const page = await fetchPageById(id || "")
   return page
 }
 
@@ -37,7 +37,7 @@ async function getPostFromParams({
   const { slug } = await params
   const id = await fetchSlugToId(slug, "post")
 
-  const post = await fetchArticleById(id)
+  const post = await fetchArticleById(id || "")
   return post
 }
 
