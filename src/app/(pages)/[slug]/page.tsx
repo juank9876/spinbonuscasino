@@ -1,12 +1,9 @@
-import { capitalize } from '@/utils/capitalize'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PrePage } from '@/components/juankui/pre-rendered/pre-page'
-import { fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
-import { createPageTitle, getPageSlugToIdMap } from '@/lib/utils'
-import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
+import { fetchPageById, fetchSlugToId } from '@/api-fetcher/fetcher'
 import NotFound from '@/app/not-found'
 import { createMetadata } from '@/app/seo/createMetadata'
-
+/*
 async function getHomePageFromParams() {
 
   const map = await getPageSlugToIdMap();
@@ -17,19 +14,18 @@ async function getHomePageFromParams() {
   const homePage = await fetchPageById(id)
   return homePage
 }
-
+*/
 async function getPageFromParams({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const map = await getPageSlugToIdMap()
+
   const { slug } = await params
-  const id = map[slug]
+  const id = await fetchSlugToId(slug)
 
-
-  const category = await fetchPageById(id)
-  return category
+  const page = await fetchPageById(id)
+  return page
 }
 
 export async function generateMetadata({
@@ -48,36 +44,18 @@ export default async function Page({
   params: Promise<{ slug: string }>
 }) {
 
-  if ((await params).slug === "home") {
+  try {
+    const page = await getPageFromParams({ params })
 
-    const page = await getHomePageFromParams()
-    const settings = await fetchSiteSettings()
-
-    if (page) return (
-
-      <PreHomePage
-        settings={settings}
-        pageProps={page}
-      >
-
+    if (!page || page.status !== 'published') return <NotFound />
+    return (
+      <PrePage page={page}>
         <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
-      </PreHomePage>
+      </PrePage>
     )
-  } else {
-
-    try {
-      const page = await getPageFromParams({ params })
-
-      if (!page || page.status !== 'published') return <NotFound />
-      return (
-        <PrePage page={page}>
-          <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
-        </PrePage>
-      )
-    } catch (error) {
-      console.log('404 Not found')
-      return <NotFound />
-    }
+  } catch (error) {
+    console.log('404 Not found')
+    return <NotFound />
   }
 
 }

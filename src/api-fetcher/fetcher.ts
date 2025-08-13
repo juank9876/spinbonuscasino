@@ -1,12 +1,13 @@
 import { debug, debugLog } from "@/config/debug-log";
 import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
-type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink";
+type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink" | "all-slugs" | "slug-to-id";
 
 interface FetcherParams {
   method: MethodType;
   id?: string
   type?: string
+  slug?: string
 }
 
 export interface ResponseInterface<T = unknown> {
@@ -15,9 +16,15 @@ export interface ResponseInterface<T = unknown> {
   data: T // Puedes ajustar el tipo según lo que esperes
 }
 
-export async function fetcher<T>({ method, id, type }: FetcherParams): Promise<T> {
+export async function fetcher<T>({ method, id, type, slug }: FetcherParams): Promise<T> {
   const baseUrl = `https://intercms.dev/api/v2/data.php`
-  const url = baseUrl + `?method=${method}` + `&api_key=${process.env.API_KEY}` + `&project_id=${process.env.PROJECT_ID}` + (id ? `&id=${id}` : ``) + (type ? `&type=${type}` : ``)
+  const url = baseUrl +
+    `?method=${method}` +
+    `&api_key=${process.env.API_KEY}` +
+    `&project_id=${process.env.PROJECT_ID}` +
+    (id ? `&id=${id}` : ``) +
+    (type ? `&type=${type}` : ``) +
+    (slug ? `&slug=${slug}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
 
@@ -79,3 +86,28 @@ export async function fetchPermalink(id: string, type: PermalinkType): Promise<P
   return fetcher<PermalinkData>({ method: "permalink", id, type });
 }
 
+interface Slug {
+  slug: {
+    id: string,
+    title: string,
+    type: string
+  }
+}
+export async function fetchAllSlugs() {
+  const slugs = await fetcher<Slug[]>({ method: "all-slugs" });
+  debugLog(debug.fetchAllSlugs, "fetchAllSlugs", slugs)
+  return slugs
+}
+
+interface SlugToId {
+  id: string,
+  title: string,
+  type: string
+  slug: string
+}
+export async function fetchSlugToId(slug: string) {
+  const slugRes = await fetcher<SlugToId>({ method: "slug-to-id", slug });
+  debugLog(debug.fetchSlugToId, "fetchSlugToId", slugRes)
+
+  return slugRes.id
+}
