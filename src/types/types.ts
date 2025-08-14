@@ -95,6 +95,14 @@ export interface PostResponse {
   sidebar: Sidebar // definilo si lo vas a usar, o poné `any`
 }
 
+export interface Slug {
+  slug: {
+    id: string,
+    title: string,
+    type: string
+  }
+}
+
 export interface Post {
   id: string
   project_id: string

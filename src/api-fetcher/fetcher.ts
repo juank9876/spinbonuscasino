@@ -102,8 +102,8 @@ interface Slug {
     type: string
   }
 }
-export async function fetchAllSlugs() {
-  const slugs = await fetcher<Slug[]>({ method: "all-slugs" });
+export async function fetchAllSlugs(type: "page" | "post" | "category"): Promise<Slug[]> {
+  const slugs = await fetcher<Slug[]>({ method: "all-slugs", type });
   debugLog(debug.fetchAllSlugs, "fetchAllSlugs", slugs)
   return slugs
 }
