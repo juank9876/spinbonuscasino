@@ -37,7 +37,6 @@ export async function fetcher<T>({ method, id, type, slug, category_id }: Fetche
     const data: ResponseInterface<T> = await res.json();
 
     if (data.status === "success") {
-      //console.log(data)
       return data.data
     }
 
@@ -116,7 +115,6 @@ interface SlugToId {
 }
 export async function fetchSlugToId(slug: string, type: "page" | "post" | "category"): Promise<string | null> {
   const slugRes = await fetcher<SlugToId>({ method: "slug-to-id", slug, type });
-  console.log(slugRes)
   if (!slugRes) {
     return null
   }
