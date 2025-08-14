@@ -114,7 +114,7 @@ interface SlugToId {
   type: string
   slug: string
 }
-export async function fetchSlugToId(slug: string, type: "page" | "post") {
+export async function fetchSlugToId(slug: string, type: "page" | "post" | "category"): Promise<string | null> {
   const slugRes = await fetcher<SlugToId>({ method: "slug-to-id", slug, type });
   console.log(slugRes)
   if (!slugRes) {

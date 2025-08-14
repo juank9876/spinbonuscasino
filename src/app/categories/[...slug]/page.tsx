@@ -34,20 +34,11 @@ type RouteData =
     | { type: 'category'; category: Category }
 
 async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
-    if (slugArray.length === 0) notFound()
 
-    // 🚨 Eliminar el prefijo "categories" si existe
-    if (slugArray[0] === "categories") {
-        slugArray = slugArray.slice(1)
-    }
 
     const categoryMap = await getCategorySlugToIdMap()
 
     const categorySlug = slugArray[slugArray.length - 1]
-    const postSlug = slugArray[slugArray.length - 1]
-
-    const categoryId = categoryMap[categorySlug]
-
 
     const urlSegments = slugArray[0] === "categories" ? slugArray.slice(1) : slugArray;
     let url = "/" + urlSegments.join("/");
@@ -55,6 +46,16 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
         url += "/";
     }
 
+    //const categoryId = categoryMap[categorySlug]
+    const categoryId = await fetchSlugToId(categorySlug, "category")
+    console.log('categoryId', categoryId, 'categorySlug', categorySlug)
+    /*
+        const urlSegments = slugArray[0] === "categories" ? slugArray.slice(1) : slugArray;
+        let url = "/" + urlSegments.join("/");
+        if (!url.endsWith("/")) {
+            url += "/";
+        }
+    */
     if (categoryId) {
         const category = await fetchCategoryById(categoryId)
 
@@ -71,6 +72,8 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
         return { type: 'category', category }
     } else {
         console.log('Category not found', categoryId, categorySlug)
+
+        const postSlug = slugArray[slugArray.length - 1]
         const postId = await fetchSlugToId(postSlug, "post")
 
         if (!postId) {
@@ -101,6 +104,7 @@ export default async function Page({
     const slugArray = (await params).slug || []
     const data = await getDataFromParams(slugArray)
 
+    console.log('test')
     if (data.type === 'post') {
         const post = data.post
 
