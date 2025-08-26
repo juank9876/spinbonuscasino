@@ -1,9 +1,8 @@
-import { fetchHomePage, fetchPageById, fetchSiteSettings } from '@/api-fetcher/fetcher'
+import { fetchHomePage, fetchSiteSettings } from '@/api-fetcher/fetcher'
 import { createMetadata } from '@/app/seo/createMetadata'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import { Metadata } from 'next'
-import page from '../[slug]/page'
 
 export async function generateMetadata(): Promise<Metadata> {
   const homePage = await fetchHomePage()

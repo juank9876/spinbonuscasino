@@ -3,7 +3,7 @@ import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse,
 
 type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage";
+  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags";
 
 interface FetcherParams {
   method: MethodType;
@@ -128,4 +128,21 @@ export async function fetchSlugToId(slug: string, type: "page" | "post" | "categ
 
 export async function fetchHomePage() {
   return fetcher<Page>({ method: "homepage" });
+}
+
+export interface Tag {
+  id: string
+  project_id: string
+  name: string
+  slug: string
+  description: string
+  meta_title: string | undefined
+  meta_description: string | undefined
+  schema_data: unknown | undefined
+  created_at: string
+  updated_at: string
+  post_count: string
+}
+export async function fetchTags() {
+  return fetcher<Tag[]>({ method: "tags" });
 }

@@ -25,7 +25,8 @@ import {
   transformAccordion,
   transformAccordionItem,
   transformAccordionHeader,
-  transformAccordionContent
+  transformAccordionContent,
+  transformSvg
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -75,6 +76,8 @@ const rules: TransformerRule[] = [
   { tagName: 'blockquote', transformer: transformBlockquote },
   { tagName: 'input', transformer: transformInput },
   { tagName: 'textarea', transformer: transformTextarea },
+  { tagName: 'button', transformer: transformButton },
+  { tagName: 'svg', transformer: transformSvg },
 ]
 
 export function getTransformer(el: Element, options: HTMLReactParserOptions) {
