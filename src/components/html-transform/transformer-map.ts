@@ -21,7 +21,11 @@ import {
   transformBlockquote,
   transformInput,
   transformBtnSubmit,
-  transformTextarea
+  transformTextarea,
+  transformAccordion,
+  transformAccordionItem,
+  transformAccordionHeader,
+  transformAccordionContent
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -52,6 +56,11 @@ const rules: TransformerRule[] = [
   { className: 'testimonials', transformer: transformTestimonials },
 
   { className: 'btn-submit', transformer: transformBtnSubmit },
+
+  { className: 'accordion', transformer: transformAccordion },
+  { className: 'accordion-item', transformer: transformAccordionItem },
+  { className: 'accordion-header', transformer: transformAccordionHeader },
+  { className: 'accordion-body', transformer: transformAccordionContent },
 
   //Tags HTML
   { tagName: 'form', transformer: transformForm },

@@ -236,7 +236,7 @@ export function transformButton(el: Element, options: HTMLReactParserOptions) {
     <Button variant={'accent'} asChild>
       <a
         href={el.attribs.href || '#'}
-        className={`text-muted ${el.attribs?.class || ''}`}
+        className={`${el.attribs?.class || ''}`}
       >
         {domToReact(el.children as DOMNode[], options)}
       </a>
@@ -290,7 +290,7 @@ export function transformH3(el: Element, options: HTMLReactParserOptions) {
 
 export function transformLi(el: Element, options: HTMLReactParserOptions) {
   return (
-    <li id={el.attribs?.id} className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold list-inside list-disc pl-5  text-muted-foreground relative mt-2 ${el.attribs?.class || ''}`}>
+    <li id={el.attribs?.id} className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold list-inside list-disc pl-5 relative mt-2 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </li>
   )
