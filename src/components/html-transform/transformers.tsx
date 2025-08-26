@@ -7,17 +7,13 @@ import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle, Dice1, Dice3, Dice4, D
 import BrandlistyWidget from '../juankui/brandlisty/brandlisty-widget'
 import { MagicCard } from '../magicui/magic-card'
 import { fixAttribs } from '@/lib/utils'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion'
 
 export function transformBrandlisty(el: Element) {
   const { apikey, listid, boton, limit, id } = el.attribs
 
   return (
-    <div className={`flex h-full flex-col ${el.attribs?.class || ''}`}>
-      <div className='flex flex-row items-center justify-center gap-8'>
-        <span className='bg-gradient-to-br from-[var(--color-primary-semi-dark)] to-[var(--color-primary)]  px-2 py-1 rounded-full inline-flex items-center justify-end gap-1 text-end text-sm font-bold mb-2'>
-          <ShieldCheck className='size-4 mb-0.5' /> Verified
-        </span>
-      </div>
+    <div id={el.attribs?.id} className={`flex h-full flex-col ${el.attribs?.class || ''}`}>
       <BrandlistyWidget
         key={id}
         apiKey={apikey || el.attribs['data-apikey']}
@@ -38,13 +34,13 @@ export function transformRow(el: Element, options: HTMLReactParserOptions) {
   //Fix Bug de que se sale del main, ya que se aplica flex-row a todo
   if (el.children.length === 1) {
     return (
-      <div className={`flex flex-col items-center justify-center ${el.attribs?.class || ''}`}>
+      <div id={el.attribs?.id} className={`flex flex-col items-center justify-center ${el.attribs?.class || ''}`}>
         {domToReact(validChildren as DOMNode[], options)}
       </div>
     )
   }
   return (
-    <div className={`flex flex-col lg:flex-row lg:flex-wrap ${el.attribs?.class || ''}`}>
+    <div id={el.attribs?.id} className={`flex flex-col lg:flex-row lg:flex-wrap ${el.attribs?.class || ''}`}>
       {domToReact(validChildren as DOMNode[], options)}
     </div>
   )
@@ -77,6 +73,7 @@ export function transformCol(el: Element, options: HTMLReactParserOptions) {
   return (
     <>
       <div
+        id={el.attribs?.id}
         style={{ width: `${widthClass}%` }}
         className={`${widthClass} max-${widthClass} lg:flex lg:flex-col justify-center items-center h-full hidden ${el.attribs?.class || ''}`}
       >
@@ -84,6 +81,7 @@ export function transformCol(el: Element, options: HTMLReactParserOptions) {
       </div>
 
       <div
+        id={el.attribs?.id}
         className={`h-full w-full items-center justify-center lg:hidden ${el.attribs?.class || ''}`}
       >
         {domToReact(el.children as DOMNode[], options)}
@@ -113,29 +111,92 @@ export function transformCard(el: Element, options: HTMLReactParserOptions) {
   }
 
   return (
-    <div className='relative flex flex-col w-full'>
-      {badgeContent && (
-        <div className="absolute -top-2 -left-2 z-50">
-          <div className="size-12 bg-gradient-to-br from-green-500 to-green-600  flex items-center justify-center text-lg font-bold rounded-full shadow-lg border-2 border-white">
+    <div id={el.attribs?.id} className='relative flex flex-col mx-auto'>
+      {badgeContent &&
+        <div className="absolute top-0 left-0 z-50">
+          <div className="size-16 flex items-center justify-center text-3xl font-bold rounded-full shadow-lg">
             {badgeContent}
           </div>
         </div>
-      )}
-      <div className={`bg-gradient-to-br  hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-amber-400/20 ${el.attribs?.class || ''}`}>
+      }
+      <CardShine className={`mx-5 relative text-white my-5 flex w-full max-w-[350px] overflow-hidden transition duration-500 bg-[#171717] ${el.attribs?.class || ''}`}>
         {domToReact(contentChildren, options)}
-      </div>
+      </CardShine>
     </div>
   )
 }
 
 export function transformCardBody(el: Element, options: HTMLReactParserOptions) {
+  const children = el.children as Element[];
+
+  const hasH5 = children.some(child => child.type === 'tag' && child.name === 'h5');
+  const hasImg = children.some(child => child.type === 'tag' && child.name === 'img');
+
+  if (hasImg) {
+    // Renderiza algo especial si hay img
+    return (
+      <div id={el.attribs?.id} className={`flex flex-col space-y-3 border-2 border-green-500 ${el.attribs?.class || ''}`}>
+        <span className="text-green-600 font-bold">Contiene Imagen</span>
+        {domToReact(el.children as DOMNode[], options)}
+      </div>
+    );
+  }
+
   return (
-    <div className={`flex flex-col space-y-3 ${el.attribs?.class || ''}`}>
+    <div id={el.attribs?.id} className={`flex flex-col space-y-3 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )
 }
 
+export function transformFeatureItem(el: Element, options: HTMLReactParserOptions) {
+  // Extrae el badge si existe
+  const badge = el.attribs?.badge || '1';
+  // Busca la imagen y el resto del contenido
+  const imageElement = (el.children as Element[]).find(child => child.name === 'img');
+  const otherChildren = (el.children as Element[]).filter(child => child !== imageElement);
+  // El primer hijo no imagen es el título, el resto es el texto
+  const [titleNode, ...rest] = otherChildren;
+
+  return (
+    <div id={el.attribs?.id} className={`relative flex flex-col w-full max-w-[370px] h-[430px] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] hover:to-[var(--color-primary-semi-dark)] rounded-2xl shadow-2xl shadow-blue-200 overflow-hidden items-center justify-center mx-auto my-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-3xl ${el.attribs?.class || ''}`}>
+      {/* Badge/Número o Imagen */}
+      <div className=" z-10 flex items-center justify-center py-5">
+        {imageElement ? (
+          <div className="bg-gradient-to-b from-[#6a5cff] to-[#3b82f6] p-2 rounded-full shadow-lg ring-4 ring-white ring-offset-2 flex items-center justify-center">
+            <div className="w-24 h-24 rounded-full overflow-hidden flex items-center justify-center bg-white">
+              {domToReact([imageElement], options)}
+            </div>
+          </div>
+        ) : (
+          <div className="bg-gradient-to-b from-[#6a5cff] to-[#3b82f6] text-white text-4xl font-bold rounded-full shadow-lg ring-4 ring-white ring-offset-2 px-8 py-6">
+            {badge}
+          </div>
+        )}
+      </div>
+      {/* Contenido */}
+      <div className="flex flex-col flex-1 justify-start items-center text-center pt-10 px-5">
+        <div className="text-2xl font-semibold tracking-wide mb-2 text-white">
+          {domToReact([titleNode], options)}
+        </div>
+        <div className="w-12 h-1 bg-gradient-to-r from-[#6a5cff] to-[#3b82f6] rounded-full mb-4" />
+        <div className="text-base text-white font-normal">
+          {domToReact(rest as DOMNode[], options)}
+        </div>
+      </div>
+      {/* Onda inferior más notoria */}
+
+    </div>
+  )
+}
+
+export function transformFeatureList(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div id={el.attribs?.id} className={`flex flex-wrap items-center justify-center gap-4 ${el.attribs?.class || ''}`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
 
 export function transformTextElement(el: Element, options: HTMLReactParserOptions) {
   return (
@@ -147,7 +208,15 @@ export function transformTextElement(el: Element, options: HTMLReactParserOption
 
 export function transformContainer(el: Element, options: HTMLReactParserOptions) {
   return (
-    <div className={`container mx-auto px-6 max-w-7xl ${el.attribs?.class || ''}`}>
+    <div className={`border-primary shadow-lg flex flex-col justify-center items-center  rounded-lg p-3 sm:px-4 sm:py-4 md:px-6 md:py-4 lg:px-8 lg:py-4 ${el.attribs?.class || ''}`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
+
+export function transformDiv(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div className={`${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )
@@ -155,22 +224,13 @@ export function transformContainer(el: Element, options: HTMLReactParserOptions)
 
 export function transformSection(el: Element, options: HTMLReactParserOptions) {
   return (
-    <section className={`py-12 bg-gradient-to-b from-slate-900/50 to-slate-800/50 ${el.attribs?.class || ''}`}>
-      <div className="container mx-auto px-6 max-w-7xl">
-        {domToReact(el.children as DOMNode[], options)}
-      </div>
+    <section className={` rounded-lg px-5 py-5 ${el.attribs?.class || ''}`}>
+      {domToReact(el.children as DOMNode[], options)}
     </section>
   )
 }
 
-export function transformP(el: Element, options: HTMLReactParserOptions) {
-  return (
-    <p className={`text-base leading-relaxed mb-4 ${el.attribs?.class || ''}`}>
-      {domToReact(el.children as DOMNode[], options)}
-    </p>
-  )
-}
-
+//Elementos HTML
 export function transformButton(el: Element, options: HTMLReactParserOptions) {
   return (
     <Button variant={'accent'} asChild>
@@ -186,36 +246,34 @@ export function transformButton(el: Element, options: HTMLReactParserOptions) {
 
 export function transformImg(el: Element) {
   return (
-    <Image
+    <img
       alt={el.attribs.alt || 'sample image'}
-      src={el.attribs.src || 'https://via.placeholder.com/300'}
-      width={500}
-      height={300}
-      className="rounded-lg h-auto w-full"
+      src={el.attribs.src || 'https://imgs.search.brave.com/Q3KM87IGdN-WX5xySRtFxbsjUYGEvnHmDEKXdVYkBys/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9jYXNp/bm8tc2lnbi0zMjgy/MzU0LmpwZw'}
+
+      className={`${el.attribs?.class || ''}`}
     />
   )
 }
-
 export function transformH2(el: Element, options: HTMLReactParserOptions) {
-  const textContent = el.children
-    .filter(child => child.type === 'text')
-    .map(child => (child as any).data)
-    .join('')
+  // Check if element has any text content
+  const hasContent = el.children.some(child =>
+    (child.type === 'text' && child.data.trim() !== '') ||
+    (child.type === 'tag' && child.children?.length > 0)
+  );
 
-  const iconMap: { [key: string]: React.ComponentType<any> } = {
-    'star': Star,
-    'sparkles': Sparkles,
-    'flame': Flame,
-    'bolt': Bolt,
-    'circle': Circle,
-  }
+  // Return null if no content
+  if (!hasContent) return null;
 
-
+  const icons = [ArrowRight, Star, Sparkles, Flame, Bolt, Dice1Icon, Dice2Icon, Dice3Icon, Dice4Icon, Dice5Icon, Dice6Icon]
+  const RandomIcon = icons[Math.floor(Math.random() * icons.length)]
 
   return (
-    <h2 className={`flex flex-col text-3xl lg:text-4xl font-bold  mb-4   gap-3 ${el.attribs?.class || ''}`}>
+
+    <h2 id={el.attribs?.id} className={`${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </h2>
+
+
   )
 }
 
@@ -224,17 +282,15 @@ export function transformH3(el: Element, options: HTMLReactParserOptions) {
   const RandomIcon = icons[Math.floor(Math.random() * icons.length)]
 
   return (
-    <div className={`mt-8 flex flex-row items-center justify-start space-x-3 ${el.attribs?.class || ''}`}>
-      <h3 className='text-[var(--color-accent-dark)]'>
-        {domToReact(el.children as DOMNode[], options)}
-      </h3>
-    </div>
+    <h3 id={el.attribs?.id} className={`${el.attribs?.class || ''}`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </h3>
   )
 }
 
 export function transformLi(el: Element, options: HTMLReactParserOptions) {
   return (
-    <li className={`list-inside list-disc list-item ${el.attribs?.class || ''}`}>
+    <li id={el.attribs?.id} className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold list-inside list-disc pl-5  text-muted-foreground relative mt-2 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </li>
   )
@@ -277,10 +333,20 @@ export function transformStrong(el: Element, options: HTMLReactParserOptions) {
   )
 }
 
+export function transformP(el: Element, options: HTMLReactParserOptions) {
+  if (el.children.length === 0) return null;
+  return (
+
+    <p className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold ${el.attribs?.class || ''}`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </p>
+  )
+}
+
 export function transformPre(el: Element, options: HTMLReactParserOptions) {
 
   return (
-    <pre className={`overflow-x-auto rounded-md bg-zinc-900 p-4  ${el.attribs?.class || ''}`}>
+    <pre className={`overflow-x-auto rounded-md bg-zinc-900 p-4 text-white ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </pre>
   );
@@ -319,12 +385,11 @@ export function transformTextarea(el: Element, options: HTMLReactParserOptions) 
 
 export function transformBtnSubmit(el: Element, options: HTMLReactParserOptions) {
   return (
-    <Button variant={'accent'} className={` ${el.attribs?.class || ''}`}>
+    <Button variant={'accent'} className={`text-white ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </Button>
   )
 }
-
 
 
 export function transformTestimonials(el: Element, options: HTMLReactParserOptions) {
@@ -349,3 +414,59 @@ export function transformBlockquote(el: Element, options: HTMLReactParserOptions
     </blockquote>
   )
 }
+
+export function transformSvg(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs);
+
+  return (
+    <svg
+      {...attribs}
+      fill="#000"
+      stroke='#fff'
+      className={`relative rounded-lg ${attribs.className || ''} ${el.attribs?.class || ''}`}
+    >
+      {domToReact(el.children as DOMNode[], options)}
+
+    </svg>
+  )
+}
+
+export function transformAccordion(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <Accordion type="single" collapsible className="w-full">
+      {domToReact(el.children as DOMNode[], options)}
+    </Accordion>
+  )
+}
+export function transformAccordionItem(el: Element, options: HTMLReactParserOptions) {
+  const header = el.children.find(
+    (child) =>
+      child.type === "tag" &&
+      (child as Element).attribs?.class?.includes("accordion-header")
+  ) as Element | undefined;
+
+  const headerId = header?.attribs?.id ?? "99";
+
+  return (
+    <AccordionItem value={headerId} className="w-full">
+      {domToReact(el.children as DOMNode[], options)}
+    </AccordionItem>
+  );
+}
+export function transformAccordionHeader(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <AccordionTrigger className="w-full">
+      {domToReact(el.children as DOMNode[], options)}
+    </AccordionTrigger>
+  )
+}
+export function transformAccordionContent(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <AccordionContent className="w-full">
+      {domToReact(el.children as DOMNode[], options)}
+    </AccordionContent>
+  )
+}
+
+
+
