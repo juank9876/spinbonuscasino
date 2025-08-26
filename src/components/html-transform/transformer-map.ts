@@ -76,7 +76,7 @@ const rules: TransformerRule[] = [
   { tagName: 'blockquote', transformer: transformBlockquote },
   { tagName: 'input', transformer: transformInput },
   { tagName: 'textarea', transformer: transformTextarea },
-  { tagName: 'button', transformer: transformButton },
+  //{ tagName: 'button', transformer: transformButton },
   { tagName: 'svg', transformer: transformSvg },
 ]
 
