@@ -204,7 +204,6 @@ section {
 }
 
 
-
 h1 {
   @apply font-bold text-start lg:text-center lg:text-6xl text-3xl px-1
 }
@@ -218,8 +217,6 @@ h4, h5 {
 p {
   @apply text-base lg:text-lg leading-relaxed py-2 transition duration-500
 }
-
-
 
 
 .hero-text-description {
@@ -267,8 +264,6 @@ p {
 .style-navbar {
   @apply text-white
 }
-
-
 
 
 .bg-gradient-dark {
