@@ -193,83 +193,83 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
 
-
-  section {
-    @apply w-full flex flex-col space-y-5
-  }
-
-
-
-  h1 {
-    @apply font-bold text-start lg:text-center lg:text-6xl text-3xl px-1
-  }
-
-
-
-  h4, h5 {
-    @apply font-bold text-xl
-  }
-
-  p {
-    @apply text-base lg:text-lg leading-relaxed py-2 transition duration-500
-  }
-
+* {
+  @apply border-border outline-ring/50;
 }
 
-@layer utilities {
-  .hero-text-description {
-    @apply text-lg lg:text-2xl
-  }
 
-  .itju-center {
-    @apply items-center justify-center
-  }
-
-  .itju-start {
-    @apply items-center justify-start
-  }
-
-  .itju-end {
-    @apply items-center justify-end
-  }
-
-  .bg-gradient-top {
-    background: linear-gradient(to bottom,
-        hsla(0, 87%, 53%, 0.05),
-        transparent 20%);
-  }
-
-  .bg-gradient-middle {
-    background: linear-gradient(180deg,
-        transparent,
-        rgba(97, 106, 115, 0.85) 40%,
-        rgba(97, 106, 115, 0.50) 60%,
-        rgba(97, 106, 115, 0.65));
-  }
-
-  .scale-custom {
-    @apply hover:scale-105 transition duration-300 ease-in-out
-  }
-
-  .w-custom {
-    @apply w-[90vw] lg:w-[60vw]
-  }
-
-  .text-p-custom {
-    @apply lg:text-lg text-base
-  }
-
-  .style-navbar {
-    @apply text-white
-  }
-
-
+section {
+  @apply w-full flex flex-col space-y-5
 }
+
+
+
+h1 {
+  @apply font-bold text-start lg:text-center lg:text-6xl text-3xl px-1
+}
+
+
+
+h4, h5 {
+  @apply font-bold text-xl
+}
+
+p {
+  @apply text-base lg:text-lg leading-relaxed py-2 transition duration-500
+}
+
+
+
+
+.hero-text-description {
+  @apply text-lg lg:text-2xl
+}
+
+.itju-center {
+  @apply items-center justify-center
+}
+
+.itju-start {
+  @apply items-center justify-start
+}
+
+.itju-end {
+  @apply items-center justify-end
+}
+
+.bg-gradient-top {
+  background: linear-gradient(to bottom,
+      hsla(0, 87%, 53%, 0.05),
+      transparent 20%);
+}
+
+.bg-gradient-middle {
+  background: linear-gradient(180deg,
+      transparent,
+      rgba(97, 106, 115, 0.85) 40%,
+      rgba(97, 106, 115, 0.50) 60%,
+      rgba(97, 106, 115, 0.65));
+}
+
+.scale-custom {
+  @apply hover:scale-105 transition duration-300 ease-in-out
+}
+
+.w-custom {
+  @apply w-[90vw] lg:w-[60vw]
+}
+
+.text-p-custom {
+  @apply lg:text-lg text-base
+}
+
+.style-navbar {
+  @apply text-white
+}
+
+
+
 
 .bg-gradient-dark {
   background: linear-gradient(160deg,

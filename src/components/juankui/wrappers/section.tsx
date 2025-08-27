@@ -14,9 +14,7 @@ export function Section({ children }: SectionProps) {
   return (
     <section className={`relative flex w-[60vw] items-center justify-center overflow-hidden`}>
       {isParticles && <ParticlesFull />}
-      <div className="w-full flex flex-col justify-center items-center relative box-border">
-        {children}
-      </div>
+      {children}
     </section>
   )
 }
