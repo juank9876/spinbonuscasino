@@ -26,7 +26,8 @@ import {
   transformAccordionItem,
   transformAccordionHeader,
   transformAccordionContent,
-  transformSvg
+  transformSvg,
+  transformTakeaways
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -78,6 +79,11 @@ const rules: TransformerRule[] = [
   { tagName: 'textarea', transformer: transformTextarea },
   //{ tagName: 'button', transformer: transformButton },
   //{ tagName: 'svg', transformer: transformSvg },
+
+  {
+    matcher: (el) => el.attribs?.['data-type'] === 'key-takeaways',
+    transformer: transformTakeaways,
+  },
 ]
 
 export function getTransformer(el: Element, options: HTMLReactParserOptions) {

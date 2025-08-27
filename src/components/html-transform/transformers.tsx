@@ -269,7 +269,7 @@ export function transformH2(el: Element, options: HTMLReactParserOptions) {
 
   return (
 
-    <h2 id={el.attribs?.id} className={`${el.attribs?.class || ''}`}>
+    <h2 id={el.attribs?.id} className={`${el.attribs?.class || ''} font-bold text-3xl`}>
       {domToReact(el.children as DOMNode[], options)}
     </h2>
 
@@ -282,7 +282,7 @@ export function transformH3(el: Element, options: HTMLReactParserOptions) {
   const RandomIcon = icons[Math.floor(Math.random() * icons.length)]
 
   return (
-    <h3 id={el.attribs?.id} className={`${el.attribs?.class || ''}`}>
+    <h3 id={el.attribs?.id} className={`${el.attribs?.class || ''} font-bold text-2xl`}>
       {domToReact(el.children as DOMNode[], options)}
     </h3>
   )
@@ -426,19 +426,20 @@ export function transformSvg(el: Element, options: HTMLReactParserOptions) {
       className={`relative rounded-lg ${attribs.className || ''} ${el.attribs?.class || ''}`}
     >
       {domToReact(el.children as DOMNode[], options)}
-
     </svg>
   )
 }
 
 export function transformAccordion(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion type="single" collapsible className={`${attribs.className || ''} w-full ml-5`}>
       {domToReact(el.children as DOMNode[], options)}
     </Accordion>
   )
 }
 export function transformAccordionItem(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
   const header = el.children.find(
     (child) =>
       child.type === "tag" &&
@@ -448,25 +449,54 @@ export function transformAccordionItem(el: Element, options: HTMLReactParserOpti
   const headerId = header?.attribs?.id ?? "99";
 
   return (
-    <AccordionItem value={headerId} className="w-full">
+    <AccordionItem {...attribs} value={headerId} className="w-full">
       {domToReact(el.children as DOMNode[], options)}
     </AccordionItem>
   );
 }
 export function transformAccordionHeader(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+  const newOptions: HTMLReactParserOptions = {
+    ...options,
+    replace: (...args) => {
+      const [domNode] = args;
+      if (domNode instanceof Element && domNode.name === 'button') {
+        // Convert button to div, keeping attributes and children
+        return (
+          <div {...attribs}>
+            {domToReact(domNode.children as DOMNode[], options)}
+          </div>
+        );
+      }
+      // Return the original options.replace if it exists, for other nodes
+      if (options.replace) {
+        // @ts-ignore
+        return options.replace(...args);
+      }
+    },
+  };
+
   return (
-    <AccordionTrigger className="w-full">
-      {domToReact(el.children as DOMNode[], options)}
+    <AccordionTrigger role="div" className="w-full cursor-pointer">
+      {domToReact(el.children as DOMNode[], newOptions)}
     </AccordionTrigger>
-  )
+  );
 }
 export function transformAccordionContent(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
   return (
-    <AccordionContent className="w-full">
+    <AccordionContent {...attribs} className="w-full">
       {domToReact(el.children as DOMNode[], options)}
     </AccordionContent>
   )
 }
 
-
-
+export function transformTakeaways(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div className='max-w-full flex justify-center items-center w-full'>
+      <section {...el.attribs} className={`${el.attribs?.class || ''} w-full`}>
+        {domToReact(el.children as DOMNode[], options)}
+      </section>
+    </div>
+  )
+}

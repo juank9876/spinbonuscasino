@@ -13,9 +13,7 @@ export function PrePage({ children, page }: { children: ReactNode, page: Page })
 
       <HeroPage {...page} />
       <Section>
-        <div className='flex w-full flex-col space-y-5 lg:max-w-[60vw]'>
-          {children}
-        </div>
+        {children}
       </Section>
     </MainWrapper>
   )

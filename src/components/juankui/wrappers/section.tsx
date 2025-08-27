@@ -10,15 +10,13 @@ interface SectionProps {
   className?: string
 }
 
-export function Section({ children, className }: SectionProps) {
+export function Section({ children }: SectionProps) {
   return (
-    <section className={`relative flex w-full items-center justify-center`}>
+    <section className={`relative flex w-[60vw] items-center justify-center overflow-hidden`}>
       {isParticles && <ParticlesFull />}
-
-      <article className={`${className} flex w-[90vw] flex-col items-center justify-center space-y-3 rounded-lg lg:w-[60vw]`}>
+      <div className="w-full flex flex-col justify-center items-center relative box-border">
         {children}
-      </article>
-
+      </div>
     </section>
   )
 }

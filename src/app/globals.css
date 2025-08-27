@@ -203,17 +203,13 @@ body {
     @apply w-full flex flex-col space-y-5
   }
 
+
+
   h1 {
     @apply font-bold text-start lg:text-center lg:text-6xl text-3xl px-1
   }
 
-  h2 {
-    @apply font-bold text-start lg:text-center text-xl lg:text-4xl
-  }
 
-  h3 {
-    @apply font-bold text-start text-2xl
-  }
 
   h4, h5 {
     @apply font-bold text-xl
