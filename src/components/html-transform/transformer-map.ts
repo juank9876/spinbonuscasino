@@ -69,7 +69,7 @@ const rules: TransformerRule[] = [
   { tagName: 'h3', transformer: transformH3 },
   { tagName: 'li', transformer: transformLi },
   { tagName: 'p', transformer: transformP },
-  { tagName: 'img', transformer: transformImg },
+  //{ tagName: 'img', transformer: transformImg },
   { tagName: 'code', transformer: transformCode },
   { tagName: 'pre', transformer: transformPre },
   { tagName: 'strong', transformer: transformStrong },
@@ -77,7 +77,7 @@ const rules: TransformerRule[] = [
   { tagName: 'input', transformer: transformInput },
   { tagName: 'textarea', transformer: transformTextarea },
   //{ tagName: 'button', transformer: transformButton },
-  { tagName: 'svg', transformer: transformSvg },
+  //{ tagName: 'svg', transformer: transformSvg },
 ]
 
 export function getTransformer(el: Element, options: HTMLReactParserOptions) {

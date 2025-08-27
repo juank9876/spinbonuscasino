@@ -14,7 +14,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const homePage = await fetchHomePage()
   const settings = await fetchSiteSettings()
-  console.log("homePage", homePage)
 
 
 
