@@ -8,6 +8,9 @@ import { Providers } from "./providers";
 import Head from "next/head";
 import { generateFonts } from "@/utils/fonts";
 import { Metadata } from "next";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css"; // import CSS
+config.autoAddCss = false; // evitar duplicados de CSS
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await fetchSiteSettings()
@@ -71,12 +74,19 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning className={`${font.variable} font-sans`}>
-        <Head>
+        <head>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossOrigin="anonymous"
+            referrerPolicy="no-referrer"
+          />
           <title>{settings.site_title || "Welcome to our site"}</title>
           <meta name="description" content={settings.meta_description} />
           {/* puedes usar settings.favicon, site_logo, etc */}
           <link rel="icon" href={settings.favicon || "/vercel.svg"} />
-        </Head>
+        </head>
         <body
           style={{
             '--color-primary-light': primaryLightColor,
