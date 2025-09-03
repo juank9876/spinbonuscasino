@@ -149,6 +149,18 @@ section {
 }
 
 
+h1, h2, h3, h4, h5, h6 {
+  @apply pt-4 pb-2
+}
+
+table {
+  @apply w-full border border-border rounded-md
+}
+
+th, td {
+  @apply border border-border p-2 text-left
+}
+
 h1 {
   @apply font-bold text-start lg:text-center lg:text-6xl text-3xl px-1
 }
