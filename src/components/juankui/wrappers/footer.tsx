@@ -36,7 +36,7 @@ function FooterLinkList({ title, links }: { title: string, links: { href: string
   );
   return (
     <div>
-      <h4 className="text-sm font-semibold text-slate-100 uppercase tracking-wide mb-4">{title}</h4>
+      <h4 className="text-sm font-semibold text-slate-200 uppercase  tracking-wide mb-1">{title}</h4>
       <div className={`grid gap-x-6 ${numCols > 1 ? `grid-cols-${numCols}` : ''}`}>
         {columns.map((col, idx) => (
           <ul className="space-y-2" key={idx}>
@@ -44,7 +44,7 @@ function FooterLinkList({ title, links }: { title: string, links: { href: string
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-slate-100 hover:text-slate-100 transition-colors"
+                  className="text-sm text-slate-300 hover:text-slate-100 transition-colors font-semibold"
                 >
                   {link.label}
                 </Link>
@@ -139,108 +139,88 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="w-full bg-[var(--color-primary-dark)]">
       {/* Main Footer Content */}
-      <div className="mx-auto w-[70vw] px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-          {/* Brand Section */}
-          <div className="lg:col-span-2">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                {settings.site_logo && (
-                  <img
-                    src={settings.site_logo}
-                    alt={settings.site_title}
-                    className="h-8 w-auto"
-                  />
-                )}
-                <h3 className="text-xl font-bold text-slate-100">
-                  {settings.site_title}
-                </h3>
-              </div>
-              <p className="text-sm text-slate-100 leading-relaxed">
-                {settings.site_description}
-              </p>
-            </div>
-          </div>
+      <div className="py-10 w-[95vw] lg:w-[60vw] mx-auto flex flex-wrap flex-col lg:flex-row gap-5 justify-between">
 
-          {/* Navigation Links dinámicos */}
-          <div className="lg:col-span-2">
-            <FooterLinkList
-              title="Navegación"
-              links={menuItems.filter(item => item.status === 'active').map(item => ({
-                href: item.url,
-                label: item.title
-              }))}
+        {/* Brand Section */}
+        <div className="lg:col-span-2">
+          {settings.site_logo && (
+            <img
+              src={settings.site_logo}
+              alt={settings.site_title}
+              className="h-8 w-auto"
             />
-          </div>
+          )}
+          <h3 className="text-xl font-bold text-slate-200">
+            {settings.site_title}
+          </h3>
 
-          {/* Categorías dinámicas */}
-          <div className="lg:col-span-2">
-            <FooterLinkList
-              title="Categorías"
-              links={categoriesItems.map(cat => ({
-                href: `/categories/${cat.slug}`,
-                label: cat.name
-              }))}
-            />
-          </div>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            {settings.site_description}
+          </p>
 
-          {/* Legal & Support */}
-          <div className="lg:col-span-2">
-            <FooterLinkList title="Soporte" links={SUPPORT_LINKS} />
-          </div>
+          <FooterSocialIcons />
 
-          {/* Social & Newsletter */}
-          <div className="lg:col-span-2">
-            <h4 className="text-sm font-semibold text-slate-100 uppercase tracking-wide mb-4">
-              Síguenos
-            </h4>
-            <div className="space-y-4 flex flex-col">
-              <FooterSocialIcons />
-              <FooterNewsletter />
-            </div>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h4 className="text-sm font-semibold text-slate-100 uppercase tracking-wide mb-4">
-              Juego Responsable
-            </h4>
-            <div className="space-x-4 flex flex-wrap flex-row">
-              {RESPONSIBLE_GAMING_LINKS.map(link => (
-                <img
-                  key={link.href}
-                  src={link.href}
-                  alt={link.label}
-                  className="w-fit h-10"
-                />
-              ))}
-            </div>
+          <div className="space-x-4 flex flex-wrap flex-row pt-4">
+            {RESPONSIBLE_GAMING_LINKS.map(link => (
+              <img
+                key={link.href}
+                src={link.href}
+                alt={link.label}
+                className="w-fit h-10"
+              />
+            ))}
           </div>
 
         </div>
+
+        {/* Navigation Links dinámicos */}
+
+        <FooterLinkList
+          title="Navegación"
+          links={menuItems.filter(item => item.status === 'active').map(item => ({
+            href: item.url,
+            label: item.title
+          }))}
+        />
+
+
+        {/* Categorías dinámicas */}
+        <FooterLinkList
+          title="Categorías"
+          links={categoriesItems.map(cat => ({
+            href: `/categories/${cat.slug}`,
+            label: cat.name
+          }))}
+        />
+
+
+        {/* Legal & Support */}
+        <div className="lg:col-span-2">
+          <FooterLinkList title="Soporte" links={SUPPORT_LINKS} />
+        </div>
+
+
+
+
+
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-slate-300 ">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between sm:flex-row">
-            <div className="flex items-center space-x-4 text-slate-100">
-              <span className=" text-sm">
-                © {currentYear} {settings.site_title}. Todos los derechos
-                reservados.
-              </span>
-            </div>
-            <div className="mt-4 items-center space-x-6 sm:mt-0">
-              {LEGAL_LINKS.map(link => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-slate-100 hover:text-slate-100 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
+      <div className="border-t border-slate-300 flex flex-col items-center justify-center  gap-4 py-3 text-slate-300 hover:text-slate-100 font-light">
+        <span className=" text-sm  ">
+          © {currentYear} {settings.site_title}. Todos los derechos
+          reservados.
+        </span>
+        <div className="flex justify-center flex-wrap">
+          {LEGAL_LINKS.map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm font-light transition-colors px-4 py-1 "
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
     </footer>
