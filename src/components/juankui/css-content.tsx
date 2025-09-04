@@ -10,6 +10,9 @@ const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
     if (!cssContent) return null;
     debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
 
+    if (cssContent.includes('* {')) {
+        cssContent.replace('* {', '.fixed-global-styles-from-builder {');
+    }
     useEffect(() => {
 
         const styleTag = document.createElement('style');

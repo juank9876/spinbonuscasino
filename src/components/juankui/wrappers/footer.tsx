@@ -36,7 +36,7 @@ function FooterLinkList({ title, links }: { title: string, links: { href: string
   );
   return (
     <div>
-      <h4 className="text-sm font-semibold text-slate-200 uppercase  tracking-wide mb-1">{title}</h4>
+      <h4 className=" text-slate-200 uppercase  tracking-wide mb-1">{title}</h4>
       <div className={`grid gap-x-6 ${numCols > 1 ? `grid-cols-${numCols}` : ''}`}>
         {columns.map((col, idx) => (
           <ul className="space-y-2" key={idx}>
@@ -139,7 +139,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="w-full bg-[var(--color-primary-dark)]">
       {/* Main Footer Content */}
-      <div className="py-10 w-[95vw] lg:w-[60vw] mx-auto flex flex-wrap flex-col lg:flex-row gap-5 justify-between">
+      <div className="py-10 w-[90vw] lg:w-[60vw] mx-auto flex flex-wrap  lg:flex-row gap-5 justify-between">
 
         {/* Brand Section */}
         <div className="lg:col-span-2">
