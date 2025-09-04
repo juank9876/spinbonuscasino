@@ -160,16 +160,6 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
 
           <FooterSocialIcons />
 
-          <div className="space-x-4 flex flex-wrap flex-row pt-4">
-            {RESPONSIBLE_GAMING_LINKS.map(link => (
-              <img
-                key={link.href}
-                src={link.href}
-                alt={link.label}
-                className="w-fit h-10"
-              />
-            ))}
-          </div>
 
         </div>
 
@@ -184,7 +174,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
         />
 
 
-        {/* Categorías dinámicas */}
+        {/* Categorías dinámicas 
         <FooterLinkList
           title="Categorías"
           links={categoriesItems.map(cat => ({
@@ -192,15 +182,26 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
             label: cat.name
           }))}
         />
-
+*/}
 
         {/* Legal & Support */}
         <div className="lg:col-span-2">
           <FooterLinkList title="Soporte" links={SUPPORT_LINKS} />
         </div>
 
-
-
+        <div className="">
+          <h4 className="text-slate-200 uppercase">Juego Responsable</h4>
+          <div className="space-x-4 flex flex-wrap flex-row pt-4">
+            {RESPONSIBLE_GAMING_LINKS.map(link => (
+              <img
+                key={link.href}
+                src={link.href}
+                alt={link.label}
+                className="w-fit h-8"
+              />
+            ))}
+          </div>
+        </div>
 
 
       </div>
