@@ -22,7 +22,7 @@ export default async function Home() {
       settings={settings}
       pageProps={homePage}
     >
-      <HtmlRenderer cssContent={homePage.css_content} html={homePage.html_content} />
+      <HtmlRenderer cssContent={homePage.css_content || undefined} html={homePage.html_content} />
     </PreHomePage>
 
   )

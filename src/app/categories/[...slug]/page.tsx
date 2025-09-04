@@ -107,7 +107,7 @@ export default async function Page({
 
         return (
             <PrePost post={post} >
-                <HtmlRenderer html={post.html_content} cssContent={post.css_content} />
+                <HtmlRenderer html={post.html_content} cssContent={post.css_content || undefined} />
             </PrePost>
         )
     }

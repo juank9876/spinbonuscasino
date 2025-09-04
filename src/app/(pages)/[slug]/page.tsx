@@ -60,7 +60,7 @@ export default async function Page({
 
   if (page) return (
     <PrePage page={page}>
-      <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
+      <HtmlRenderer html={page.html_content} cssContent={page.css_content || undefined} />
     </PrePage>
   )
 
@@ -69,7 +69,7 @@ export default async function Page({
 
     if (post) return (
       <PrePost post={post.post}>
-        <HtmlRenderer html={post.post.html_content} cssContent={post.post.css_content} />
+        <HtmlRenderer html={post.post.html_content} cssContent={post.post.css_content || undefined} />
       </PrePost>
     )
     else return <NotFound />
