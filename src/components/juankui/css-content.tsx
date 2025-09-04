@@ -3,16 +3,17 @@ import { debug, debugLog } from '@/config/debug-log';
 import { useEffect } from 'react';
 
 type DynamicStyleProps = {
-    cssContent: string | null;
+    cssContent: string | undefined;
 };
 
 const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
-    if (!cssContent) return null;
-    debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
+    if (!cssContent) return undefined;
 
-    if (cssContent.includes('* {')) {
-        cssContent.replace('* {', '.fixed-global-styles-from-builder {');
-    }
+    cssContent = cssContent.replace(/\/\*.*?\*\//g, '');
+    // Replace all standalone * selectors with the fixed class
+    cssContent = cssContent.replace(/\*\s*{/g, '.fixed-global-styles-from-builder {');
+
+    debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
     useEffect(() => {
 
         const styleTag = document.createElement('style');
@@ -26,7 +27,7 @@ const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
         };
     }, [cssContent]);
 
-    return null; // No renderiza nada visual
+    return undefined; // No renderiza nada visual
 };
 
 export default DynamicStyle;

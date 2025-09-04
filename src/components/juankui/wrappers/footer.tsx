@@ -142,7 +142,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
       <div className="py-10 w-[90vw] lg:w-[60vw] mx-auto flex flex-wrap  lg:flex-row gap-5 justify-between">
 
         {/* Brand Section */}
-        <div className="lg:col-span-2">
+        <div className="flex flex-col">
           {settings.site_logo && (
             <img
               src={settings.site_logo}
@@ -150,9 +150,9 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
               className="h-8 w-auto"
             />
           )}
-          <h3 className="text-xl font-bold text-slate-200">
+          <h4 className="text-xl font-bold text-white">
             {settings.site_title}
-          </h3>
+          </h4>
 
           <p className="text-sm text-slate-300 leading-relaxed">
             {settings.site_description}
@@ -185,12 +185,12 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
 */}
 
         {/* Legal & Support */}
-        <div className="lg:col-span-2">
+        <div className="flex flex-col">
           <FooterLinkList title="Soporte" links={SUPPORT_LINKS} />
         </div>
 
         <div className="">
-          <h4 className="text-slate-200 uppercase">Juego Responsable</h4>
+          <h4 className="text-slate-200 uppercase ">Juego Responsable</h4>
           <div className="space-x-4 flex flex-wrap flex-row pt-4">
             {RESPONSIBLE_GAMING_LINKS.map(link => (
               <img
