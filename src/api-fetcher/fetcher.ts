@@ -34,8 +34,8 @@ export async function fetcher<T>({ method, id, type, slug, category_id }: Fetche
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 3 },
-      //cache: 'no-store'
+      //next: { revalidate: 3 },
+      cache: 'no-store'
     })
     const data: ResponseInterface<T> = await res.json();
 
