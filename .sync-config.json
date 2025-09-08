@@ -1,0 +1,13 @@
+{
+    "sync_patterns": [],
+    "exclude_patterns": [
+        "**/.git/**",
+        "**/node_modules/**",
+        "**/.next/**",
+        "**/dist/**",
+        "**/*.log",
+        ".env*"
+    ],
+    "last_sync": "",
+    "sync_history": []
+}

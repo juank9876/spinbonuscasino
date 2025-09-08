@@ -1,9 +1,10 @@
 import { debug, debugLog } from "@/config/debug-log";
+import { Footer } from "@/types/footer";
 import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
 type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags";
+  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer";
 
 interface FetcherParams {
   method: MethodType;
@@ -145,4 +146,8 @@ export interface Tag {
 }
 export async function fetchTags() {
   return fetcher<Tag[]>({ method: "tags" });
+}
+
+export async function fetchFooter(): Promise<Footer> {
+  return fetcher<Footer>({ method: "footer" });
 }

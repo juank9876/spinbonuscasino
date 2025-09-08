@@ -31,12 +31,12 @@ export async function Header() {
             {...settings}
           />
 
-          <NavigationMenu className='hidden lg:flex'>
+          <div className='hidden lg:flex'>
             <RenderMenu
               normalizedItems={normalizedItems}
               allSlugs={allSlugs}
             />
-          </NavigationMenu>
+          </div>
         </div>
 
         {/* VERSION MOVIL */}

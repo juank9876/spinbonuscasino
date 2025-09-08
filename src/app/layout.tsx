@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Header } from "@/components/juankui/wrappers/nav/header";
-import { Footer } from "@/components/juankui/wrappers/footer";
+import { Footer } from "@/components/juankui/wrappers/footer/footer";
 import { fetchSiteSettings } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
 import { hexToOklch } from "@/utils/hex-to-oklch";
@@ -8,9 +8,6 @@ import { Providers } from "./providers";
 import Head from "next/head";
 import { generateFonts } from "@/utils/fonts";
 import { Metadata } from "next";
-import { config } from "@fortawesome/fontawesome-svg-core";
-import "@fortawesome/fontawesome-svg-core/styles.css"; // import CSS
-config.autoAddCss = false; // evitar duplicados de CSS
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await fetchSiteSettings()
@@ -112,7 +109,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <div className="flex min-h-[100dvh] flex-col">
               <Header />
               {children}
-              <Footer settings={settings} />
+              <Footer />
             </div>
           </Providers>
         </body>

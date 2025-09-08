@@ -6,7 +6,7 @@ import { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
   const homePage = await fetchHomePage()
-  return await createMetadata(homePage);
+  return await createMetadata(homePage, false);
 }
 
 

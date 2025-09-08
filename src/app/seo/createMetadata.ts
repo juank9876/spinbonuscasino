@@ -4,7 +4,7 @@ import { createPageTitle } from "@/lib/utils";
 import { capitalize } from "@/utils/capitalize";
 import { Metadata } from "next";
 
-export async function createMetadata(page?: any | null): Promise<Metadata> {
+export async function createMetadata(page?: any | null, noTitle?: boolean): Promise<Metadata> {
     const settings = await fetchSiteSettings();
 
     debugLog(debug.createMetadata,
@@ -21,7 +21,8 @@ export async function createMetadata(page?: any | null): Promise<Metadata> {
         `
     );
     return {
-        title: await createPageTitle(page?.meta_title, page?.title) || settings.site_title,
+
+        title: noTitle ? settings.site_title : await createPageTitle(page?.meta_title, page?.title) || settings.site_title,
         description: capitalize(page?.meta_description) || settings.site_description,
 
         keywords: page?.meta_keywords || settings.meta_keywords,

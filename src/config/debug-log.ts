@@ -23,7 +23,7 @@ export const debug = {
 
     fetchAllSlugs: false,
     fetchSlugToId: false,
-
+    apiFooter: true,
 }
 
 
