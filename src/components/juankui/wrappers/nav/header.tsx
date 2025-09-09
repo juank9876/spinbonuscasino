@@ -37,10 +37,10 @@ export async function Header() {
               allSlugs={allSlugs}
             />
           </div>
+          {/* VERSION MOVIL */}
+          <NavMobile {...navProps} />
         </div>
 
-        {/* VERSION MOVIL */}
-        <NavMobile {...navProps} />
       </header>
     </>
   )

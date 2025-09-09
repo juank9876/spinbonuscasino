@@ -19,15 +19,24 @@ export const debug = {
     cssContent: false,
     postOrCategoryPermalink: false,
     currentPostOrCategoryUrl: false,
+    menu: false,
+
     createMetadata: false,
 
     fetchAllSlugs: false,
     fetchSlugToId: false,
-    apiFooter: true,
+    apiFooter: false,
 }
 
 
+export const settings = {       //manejar opciones de config del proyecto. No afecta al codigo, solo logs
+    styles: {
+        //loadTailwindFromApi: false,
+        applyStylesheet: false,             //Aplicar / no aplicar hoja de estilos del proyeto
+        applyTemplateStyles: false,         //AKA transformer rules ON/OFF --- DONE
 
+    }
+}
 
 
 export function debugLog(isActive: boolean, ...args: any[]) {

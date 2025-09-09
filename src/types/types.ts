@@ -17,6 +17,9 @@ export interface SiteSettings {
   primary_color: string
   secondary_color: string
   accent_color: string
+  burger_menu_bg_color: string,
+  burger_menu_font_color: string,
+  cookies_enabled: "0" | "1",
   font_family: string
   meta_title: string
   meta_description: string

@@ -15,8 +15,6 @@ export default async function Home() {
   const homePage = await fetchHomePage()
   const settings = await fetchSiteSettings()
 
-
-
   if (homePage) return (
     <PreHomePage
       settings={settings}
