@@ -9,6 +9,7 @@ import Head from "next/head";
 import { generateFonts } from "@/utils/fonts";
 import { Metadata } from "next";
 import { CookieConsent } from "@/components/juankui/cookies-consent";
+import { settings as cssSettings } from "@/config/debug-log";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await fetchSiteSettings()
@@ -73,8 +74,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <ViewTransitions>
-      <html lang="en" suppressHydrationWarning className={`${font.variable} font-sans`}>
+      <html lang="en" suppressHydrationWarning className={`${font.variable} font-sans ${cssSettings.styles.applyStylesheet ? 'globals-off' : 'globals-on'}`}> {/*esta invertido ahora mismo*/}
         <head>
+          {settings.schema_data && (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(settings.schema_data) }}
+            />
+          )}
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
