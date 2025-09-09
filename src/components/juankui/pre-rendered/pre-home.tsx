@@ -6,6 +6,7 @@ import { Section } from '../wrappers/section'
 import { isParticles } from '@/config/options'
 import { ParticlesFull } from '../hero/particles'
 import { Page, SiteSettings } from '@/types/types'
+import { settings as cssSettings } from "@/config/debug-log";
 
 interface HomePage {
   children: ReactNode
@@ -21,8 +22,8 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
   return (
     <MainWrapper>
       {isParticles && <ParticlesFull />}
+      {cssSettings.styles.applyTemplateStyles && <HeroHomePage {...props} />}
 
-      <HeroHomePage {...props} />
       <Section>
         <div className='flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
           {children}

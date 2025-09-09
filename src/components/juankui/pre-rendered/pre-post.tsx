@@ -7,6 +7,7 @@ import { isParticles } from '@/config/options'
 import { Section } from '../wrappers/section'
 import Image from 'next/image';
 import { fetchAuthorById } from '@/api-fetcher/fetcher'
+import { settings as cssSettings } from "@/config/debug-log";
 
 async function AuthorCard({ name, avatar, bio, author_id }: { name: string, avatar?: string, bio?: string, author_id: string }) {
   const author = await fetchAuthorById(author_id);
@@ -95,7 +96,7 @@ export async function PrePost({ children, post }: { children: ReactNode, post: P
   return (
     <MainWrapper>
       {isParticles && <ParticlesFull />}
-      <HeroPost {...post} />
+      {cssSettings.styles.applyTemplateStyles && <HeroPost {...post} />}
 
       <Section>
         {children}

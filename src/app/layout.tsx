@@ -1,11 +1,12 @@
 import "./globals.css";
+import './globals-on.css';
+
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer/footer";
 import { fetchCookies, fetchSiteSettings } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
 import { hexToOklch } from "@/utils/hex-to-oklch";
 import { Providers } from "./providers";
-import Head from "next/head";
 import { generateFonts } from "@/utils/fonts";
 import { Metadata } from "next";
 import { CookieConsent } from "@/components/juankui/cookies-consent";
@@ -74,7 +75,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <ViewTransitions>
-      <html lang="en" suppressHydrationWarning className={`${font.variable} font-sans ${cssSettings.styles.applyStylesheet ? 'globals-off' : 'globals-on'}`}> {/*esta invertido ahora mismo*/}
+      {/*esta invertido ahora mismo*/}
+      <html lang="en" suppressHydrationWarning className={`${font.variable} font-sans ${cssSettings.styles.applyStylesheet ? 'globals-on' : 'globals-off'}`}>
         <head>
           {settings.schema_data && (
             <script
