@@ -7,6 +7,7 @@ import { ChevronUp } from 'lucide-react';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink } from './nav-link';
+import { cn } from '@/lib/utils';
 
 type ListItemProps = {
   title: string;
@@ -25,22 +26,51 @@ function ListItem({ title, href, className, isChild = false, childCategories, pa
 
   return (
     <li
-      className={hasSubcategories ? 'relative' : ''}
+      className={cn(
+        "relative group/item",
+        hasSubcategories && "has-submenu"
+      )}
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
       <NavLink
         href={parentSlug ? `${parentSlug}${href}` : href}
-        className={`flex items-center px-4 py-3 text-md text-black hover:bg-[var(--color-secondary-light)] rounded-lg font-semibold transition-colors duration-150 ${isChild ? 'pl-8 text-sm' : ''}`}
+        className={cn(
+          "flex items-center gap-2 px-4 py-3",
+          "text-black relative",
+          "transition-all duration-200 ease-in-out",
+          "hover:text-[var(--color-accent)] text-white",
+          "before:absolute before:inset-0 before:bg-[var(--color-accent-light)]/10",
+          "before:scale-x-0 before:opacity-0 before:transition-all",
+          "hover:before:scale-x-100 hover:before:opacity-100",
+          "rounded-lg",
+          isChild ? "pl-8 text-sm" : "text-md font-semibold",
+        )}
       >
         {title}
         {hasSubcategories && (
-          <ChevronUp className={`text-black ml-2 h-4 w-4 transition-transform duration-200 ${open ? 'rotate-90' : ''}`} />
+          <ChevronUp
+            className={cn(
+              "text-current ml-auto h-4 w-4",
+              "transition-transform duration-300 ease-out",
+              open ? "rotate-90" : "rotate-0"
+            )}
+          />
         )}
       </NavLink>
+
       {/* Renderizar subcategorías si existen */}
       {hasSubcategories && (
-        <ul className={`absolute right-full top-0 mt-0 ml-0 w-[220px] bg-white rounded-lg shadow-lg z-30 ${open ? 'block' : 'hidden'}`}>
+        <ul className={cn(
+          "absolute right-full top-0 w-[220px]",
+          "bg-white/95 backdrop-blur-sm",
+          "rounded-lg shadow-lg shadow-black/5",
+          "border border-gray-100/20",
+          "transition-all duration-200 ease-out",
+          "transform origin-top-right",
+          open ? "scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none",
+          "z-30"
+        )}>
           {childCategories!.map((subcat) => (
             <ListItem
               key={subcat.id}
@@ -66,11 +96,39 @@ export function RenderMenu({ normalizedItems, allSlugs }: { normalizedItems: Nav
           <li key={item.id} className="relative group/menu">
             {item.children && item.children.length > 0 ? (
               <>
-                <span className="flex text-base hover:bg-[var(--color-accent-dark)] items-center gap-1 px-4 py-3 cursor-pointer font-bold tracking-wide text-white transition-colors duration-150 rounded-lg">
+                <span className={cn(
+                  "flex items-center gap-2 px-4 py-3",
+                  "text-base font-bold tracking-wide text-white",
+                  "cursor-pointer relative",
+                  "transition-all duration-200 ease-in-out",
+                  "hover:text-[var(--color-accent-light)]",
+                  "after:absolute after:bottom-0 after:left-0",
+                  "after:h-[2px] after:w-full",
+                  "after:bg-[var(--color-accent)]",
+                  "after:scale-x-0 after:origin-right",
+                  "after:transition-transform after:duration-300",
+                  "group-hover/menu:after:scale-x-100 group-hover/menu:after:origin-left",
+                  "rounded-lg"
+                )}>
                   {capitalize(item.title)}
-                  <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200 group-hover/menu:rotate-180" />
+                  <ChevronDown className={cn(
+                    "ml-1 h-4 w-4",
+                    "transition-transform duration-300 ease-out",
+                    "group-hover/menu:rotate-180"
+                  )} />
                 </span>
-                <div className="absolute left-0 top-full w-[250px] bg-white rounded-lg z-20 hidden group-hover/menu:block py-5">
+                <div className={cn(
+                  "absolute left-0 top-full w-[250px]",
+                  "bg-[var(--color-primary-dark)] backdrop-blur-sm",
+                  "rounded-lg shadow-lg shadow-black/5",
+                  "border border-gray-600/20",
+                  "transform origin-top-left",
+                  "transition-all duration-200 ease-out",
+                  "opacity-0 -translate-y-2",
+                  "group-hover/menu:opacity-100 group-hover/menu:translate-y-0",
+                  "z-20",
+                  "py-5"
+                )}>
                   <ul className="py-0">
                     {item.children.map((category) => {
 
@@ -95,7 +153,20 @@ export function RenderMenu({ normalizedItems, allSlugs }: { normalizedItems: Nav
             ) : (
               <NavLink
                 href={`${item.url}`}
-                className="px-4 py-3 text-base font-bold tracking-wide text-white transition-colors duration-150 hover:bg-[var(--color-accent-dark)] rounded-lg"
+                className={cn(
+                  "px-4 py-3 text-base font-bold",
+                  "tracking-wide text-white",
+                  "transition-all duration-200 ease-in-out",
+                  "hover:text-[var(--color-accent-light)]",
+                  "relative",
+                  "after:absolute after:bottom-0 after:left-0",
+                  "after:h-[2px] after:w-full",
+                  "after:bg-[var(--color-accent)]",
+                  "after:scale-x-0 after:origin-right",
+                  "after:transition-transform after:duration-300",
+                  "hover:after:scale-x-100 hover:after:origin-left",
+                  "rounded-lg"
+                )}
               >
                 {item.title}
               </NavLink>

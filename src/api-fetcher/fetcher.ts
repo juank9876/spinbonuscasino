@@ -4,7 +4,7 @@ import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse,
 
 type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer";
+  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies";
 
 interface FetcherParams {
   method: MethodType;
@@ -150,4 +150,17 @@ export async function fetchTags() {
 
 export async function fetchFooter(): Promise<Footer> {
   return fetcher<Footer>({ method: "footer" });
+}
+
+export interface Cookies {
+  cookies_enabled: 0 | 1;
+  cookies_text: string;
+  cookies_reject_text: string;
+  cookies_only_necessary_text: string;
+  cookies_configure_text: string;
+  cookies_accept_all_text: string;
+}
+
+export async function fetchCookies(): Promise<Cookies> {
+  return fetcher<Cookies>({ method: "cookies" });
 }

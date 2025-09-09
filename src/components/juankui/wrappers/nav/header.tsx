@@ -6,6 +6,7 @@ import { contextSiteSettings } from '@/app/context/getSiteSettings'
 import { Logo } from './logo'
 import { RenderMenu } from './render-menu'
 import { NavMobile } from './nav-mobile'
+import { ClientHeaderWrapper } from './client-header-wrapper'
 
 
 export async function Header() {
@@ -24,24 +25,23 @@ export async function Header() {
 
   const navProps = { categoriesItems, settings, normalizedItems }
   return (
-    <>
-      <header className="sticky top-0 z-50 flex w-full flex-row items-center justify-center bg-[var(--color-primary-dark)] px-5 py-3">
-        <div className="w-custom mx-auto flex h-full flex-row items-center justify-between">
-          <Logo
-            {...settings}
+    <ClientHeaderWrapper>
+
+      <div className="w-custom mx-auto flex h-full flex-row items-center justify-between">
+        <Logo
+          {...settings}
+        />
+
+        <div className='hidden lg:flex'>
+          <RenderMenu
+            normalizedItems={normalizedItems}
+            allSlugs={allSlugs}
           />
-
-          <div className='hidden lg:flex'>
-            <RenderMenu
-              normalizedItems={normalizedItems}
-              allSlugs={allSlugs}
-            />
-          </div>
-          {/* VERSION MOVIL */}
-          <NavMobile {...navProps} />
         </div>
+        {/* VERSION MOVIL */}
+        <NavMobile {...navProps} />
+      </div>
 
-      </header>
-    </>
+    </ClientHeaderWrapper>
   )
 }

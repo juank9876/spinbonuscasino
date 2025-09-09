@@ -1,13 +1,14 @@
 import "./globals.css";
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer/footer";
-import { fetchSiteSettings } from "@/api-fetcher/fetcher";
+import { fetchCookies, fetchSiteSettings } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
 import { hexToOklch } from "@/utils/hex-to-oklch";
 import { Providers } from "./providers";
 import Head from "next/head";
 import { generateFonts } from "@/utils/fonts";
 import { Metadata } from "next";
+import { CookieConsent } from "@/components/juankui/cookies-consent";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await fetchSiteSettings()
@@ -55,6 +56,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const font = await generateFonts();
   const settings = await fetchSiteSettings()
+  const cookies = await fetchCookies();
+
   //cambiar el valor para distinta tonalidad
   const primaryLightColor = hexToOklch(settings.primary_color, 0.90)
   const primarySemiLightColor = hexToOklch(settings.primary_color, 0.50)
@@ -100,6 +103,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             '--color-secondary-light': secondaryLightColor,
             '--color-secondary': settings.secondary_color,
             '--color-secondary-dark': secondaryDarkColor,
+
+            '--color-burger-menu-bg': settings.burger_menu_bg_color || '#ffffff',
+            '--color-burger-menu-font': settings.burger_menu_font_color || '#000000',
           } as React.CSSProperties
           }
           className={`bg-gradient-light max-w-screen antialiased`}
@@ -111,6 +117,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               {children}
               <Footer />
             </div>
+            <CookieConsent cookies={cookies} />
           </Providers>
         </body>
       </html>

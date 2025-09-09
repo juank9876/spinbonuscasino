@@ -3,9 +3,10 @@ import { ButtonRipple, LinkRipple } from "../legacy/ripple-components"
 import { VideoHero } from "../optionals/video-hero"
 import Image from "next/image"
 import { Post, Page, SiteSettings, Category } from '@/types/types'
-import { formatDate } from "@/lib/utils"
+import { cn, formatDate } from "@/lib/utils"
 import { Breadcrumbs } from "./breadcrumbs"
 import { ParticlesFull } from "./particles"
+import { Particles } from "@/components/magicui/particles"
 
 type HomeProps = SiteSettings & Page
 
@@ -53,18 +54,97 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
   )
 }
 
-export function HeroPage({ title, meta_description, breadcrumbs }: Page) {
+export function HeroPage({ title, meta_description, breadcrumbs, featured_image }: Page) {
+  function CasinoParticles({ className }: { className?: string }) {
+    return (
+      <>
+
+        {/* Capa de partículas doradas */}
+        <Particles
+          className="absolute inset-0 z-0 opacity-60"
+          quantity={30}
+          staticity={50}
+          ease={20}
+          color="#fff"
+          refresh={false}
+        />
+
+        {/* Overlay gradient */}
+        <div
+          className="h-full absolute inset-0 z-0 bg-gradient-radial from-transparent via-transparent to-[var(--color-primary-dark)] opacity-50"
+          style={{
+            backgroundImage: `
+            radial-gradient(
+              circle at center,
+              transparent 0%,
+              var(--color-primary-dark) 100%
+            )
+          `
+          }}
+        />
+      </>
+    )
+  }
   return (
-    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden pb-10">
-      <ParticlesFull />
-      <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
-        <div className="m-0 w-full flex items-center justify-center gap-5 p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
-          <div className="flex flex-col w-[70vw] items-center justify-center space-y-2">
-            <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
+    <section className="relative  pt-14 w-full overflow-hidden bg-[var(--color-primary-dark)]">
+      {/* Background con efecto parallax */}
+      <div className="absolute inset-0 z-0 h-full">
+        {featured_image ? (
+          <>
+            <Image
+              src={featured_image}
+              alt={title}
+              fill
+              className="object-cover "
+              quality={100}
+            />
+            <div className="h-full top-0 absolute inset-0 bg-gradient-to-b from-[var(--color-primary-dark)]/50 via-[var(--color-primary-dark)] to-[var(--color-primary)]" />
+          </>
+        ) : (
+          <div className="h-full absolute inset-0 bg-gradient-to-b from-[var(--color-primary-dark)]/20 via-[var(--color-primary-dark)] to-[var(--color-primary)]" />
+        )}
+      </div>
+
+      {/* Efectos de casino */}
+      <CasinoParticles className="opacity-70" />
+
+      {/* Contenido */}
+      <div className="relative z-10 container mx-auto px-4">
+        <div className="flex flex-col items-center justify-center py-10">
+          {/* Breadcrumbs */}
+          {breadcrumbs && (
+            <div className="w-full max-w-xl">
+              <Breadcrumbs
+                className="inline-flex items-center space-x-2 text-sm text-white/60"
+                breadcrumbs={breadcrumbs}
+              />
+            </div>
+          )}
+
+          {/* Contenido principal */}
+          <div className="w-full max-w-4xl mx-auto text-center space-y-6">
+            <h1 className={cn(
+              "font-bold text-4xl md:text-5xl lg:text-6xl",
+              "text-transparent bg-clip-text",
+              "bg-gradient-to-r from-white via-[var(--color-secondary)] to-white",
+              "leading-tight",
+              "animate-text-shine"
+            )}>
               {title}
             </h1>
-            <p className=" text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{meta_description}</p>
-            {breadcrumbs && <Breadcrumbs className="flex justify-center" breadcrumbs={breadcrumbs} />}
+
+            <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto text-left md:text-center leading-relaxed">
+              {meta_description}
+            </p>
+
+            {/* Elementos decorativos */}
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <div className="size-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
+              <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent" />
+              <Dice6 className="size-6 text-[var(--color-accent)] animate-spin-slow" />
+              <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent" />
+              <div className="size-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
+            </div>
           </div>
         </div>
       </div>

@@ -70,27 +70,29 @@ export interface NavItemType {
 export type Category = {
   id: string
   project_id: string
-  parent_id: string | null
-  parent_name: string | null
-  parent_slug: string | null
   name: string
   slug: string
   description: string
+  parent_id: string | null
+  sort_order: string
   level: string
   path: string
   meta_title: string | undefined
   meta_description: string | undefined
   schema_data: unknown // puedes refinar esto si sabes su estructura
+  status: string
   created_at: string
   updated_at: string
-  sort_order: string
-  status: string
+  post_count: string
+  child_categories_count: number
   seo_url: string
+  breadcrumbs: Breadcrumb[]
+
+  parent_name: string | null
+  parent_slug: string | null
   total_posts: string
   child_categories: Category[] // vacíos en tu caso, pero pueden tener datos
-  child_categories_count: number
   posts: Post[]
-  breadcrumbs: Breadcrumb[]
 }
 
 export interface PostResponse {

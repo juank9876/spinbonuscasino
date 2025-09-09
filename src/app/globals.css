@@ -95,6 +95,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --menu-transition-duration: 200ms;
+  --menu-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --menu-hover-opacity: 0.9;
+  --menu-blur-amount: 8px;
+
+  --color-accent-light: hsl(217.2 91.2% 69.8%);
+  --color-secondary-light: hsl(217.2 91.2% 59.8% / 0.1);
 }
 
 body {
@@ -178,7 +186,7 @@ h5 {
 }
 
 p {
-  @apply text-base lg:text-lg leading-relaxed py-2 transition duration-500
+  @apply leading-relaxed py-2 transition duration-500
 }
 
 
@@ -249,17 +257,29 @@ p {
       var(--color-primary-dark) 100%);
 }
 
-/* Custom scrollbar styles */
-*::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@layer utilities {
+  .animate-text-shine {
+    background-size: 200% auto;
+    animation: textShine 5s linear infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
 }
 
-*::-webkit-scrollbar-thumb {
-  background-color: var(--color-accent);
-  border-radius: 4px;
+@keyframes textShine {
+  to {
+    background-position: 200% center;
+  }
 }
 
-*::-webkit-scrollbar-track {
-  background-color: transparent;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
