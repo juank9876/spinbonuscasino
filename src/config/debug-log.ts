@@ -30,7 +30,6 @@ export const debug = {
     cookiesConsent: false,          //log cookies consent component info
 }
 
-
 export const settings = {       //manejar opciones de config del proyecto. No afecta al codigo, solo logs
     styles: {
         //loadTailwindFromApi: false,
