@@ -117,8 +117,9 @@ export function RenderMenu({ normalizedItems, allSlugs }: { normalizedItems: Nav
                     "group-hover/menu:rotate-180"
                   )} />
                 </span>
+
                 <div className={cn(
-                  "absolute left-0 top-full w-[250px]",
+                  "absolute left-0 top-full w-[250px] hidden group-hover/menu:block",
                   "bg-[var(--color-primary-dark)] backdrop-blur-sm",
                   "rounded-lg shadow-lg shadow-black/5",
                   "border border-gray-600/20",

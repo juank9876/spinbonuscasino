@@ -1,12 +1,11 @@
 import { fetchCategories, fetchFooter, fetchMenu, fetchSiteSettings } from "@/api-fetcher/fetcher";
 import { contextSiteSettings } from "@/app/context/getSiteSettings";
-import { SiteSettings } from "@/types/types";
 import Link from "next/link";
 import { DefaultFooter } from "./default-footer";
 import { debug, debugLog } from "@/config/debug-log";
-import { type Footer as FooterType } from "@/types/footer";
 import { MainFooterContent } from "./main-footer-content";
 import { CopyrightBar } from "./copyright-bar";
+import { Particles } from "@/components/magicui/particles";
 
 const exampleFooter = {
   "status": "success",
@@ -286,17 +285,33 @@ export async function Footer() {
 
   if (isFooter == false || footer === undefined) {
     return (
-      <DefaultFooter
-        settings={settings}
-        menuItems={menuItems}
-        categoriesItems={categoriesItems}
-      />
+      <footer className="relative w-full bg-[var(--color-primary-dark)]">
+        <Particles
+          className="absolute inset-0 z-0"
+          quantity={50}
+          ease={120}
+          color="#fff"
+          refresh
+        />
+        <DefaultFooter
+          settings={settings}
+          menuItems={menuItems}
+          categoriesItems={categoriesItems}
+        />
+      </footer>
     )
   }
 
 
   else return (
-    <footer className="w-full bg-[var(--color-primary-dark)]">
+    <footer className="relative w-full bg-[var(--color-primary-dark)]">
+      <Particles
+        className="absolute inset-0 z-0"
+        quantity={50}
+        ease={80}
+        color="#fff"
+        refresh
+      />
       <MainFooterContent footer={footer} settings={settings} />
       <CopyrightBar footer={footer} settings={settings} />
     </footer>

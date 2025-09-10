@@ -34,7 +34,7 @@ export function DefaultFooter({
 }) {
     const currentYear = new Date().getFullYear();
     return (
-        <footer className="w-full bg-[var(--color-primary-dark)]">
+        <>
             {/* Main Footer Content */}
             <div className="py-10 w-[90vw] lg:w-[60vw] mx-auto flex flex-wrap  lg:flex-row gap-5 justify-between">
 
@@ -121,6 +121,6 @@ export function DefaultFooter({
                     ))}
                 </div>
             </div>
-        </footer>
+        </>
     );
 }
