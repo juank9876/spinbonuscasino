@@ -169,9 +169,6 @@ th, td {
   @apply border border-border p-2 text-left
 }
 
-h1 {
-  @apply font-bold text-start lg:text-center lg:text-6xl text-3xl px-1
-}
 
 /* global.css o tailwind.css */
 .gjs-heading-icon::before {

@@ -75,39 +75,40 @@ export function NavMobile(navProps: NavProps) {
                         ))}
                     </div>
 
-                    {/* Categories Section */}
-                    <div className="mt-2 pb-6 px-3">
-                        <h3 className="py-3 px-4 text-sm font-medium text-[var(--color-accent)]">
-                            Browse Categories
-                        </h3>
-                        <div className="space-y-1">
-                            {categoriesItems.map((category) => {
-                                const url = category.parent_slug
-                                    ? `/categories/${category.parent_slug}/${category.slug}`
-                                    : `/categories/${category.slug}`
-                                return (
-                                    <Link
-                                        key={category.id}
-                                        href={url}
-                                        className={cn(
-                                            "flex items-center justify-between w-full p-3 rounded-lg",
-                                            "text-sm transition-colors",
-                                            "hover:bg-[var(--color-accent)]/10  text-[var(--color-burger-menu-font)]",
-                                            !category.parent_slug && "font-medium"
-                                        )}
-                                    >
-                                        <span className="flex items-center gap-2">
-                                            <span className="text-[var(--color-accent)]/60">•</span>
-                                            {capitalize(category.name)}
-                                        </span>
-                                        <span className="text-xs text-[var(--color-burger-menu-font)]">
-                                            {category.post_count}
-                                        </span>
-                                    </Link>
-                                )
-                            })}
+                    {categoriesItems.length > 0 && (
+                        <div className="mt-2 pb-6 px-3">
+                            <h3 className="py-3 px-4 text-sm font-medium text-[var(--color-accent)]">
+                                Browse Categories
+                            </h3>
+                            <div className="space-y-1">
+                                {categoriesItems.map((category) => {
+                                    const url = category.parent_slug
+                                        ? `/categories/${category.parent_slug}/${category.slug}`
+                                        : `/categories/${category.slug}`
+                                    return (
+                                        <Link
+                                            key={category.id}
+                                            href={url}
+                                            className={cn(
+                                                "flex items-center justify-between w-full p-3 rounded-lg",
+                                                "text-sm transition-colors",
+                                                "hover:bg-[var(--color-accent)]/10  text-[var(--color-burger-menu-font)]",
+                                                !category.parent_slug && "font-medium"
+                                            )}
+                                        >
+                                            <span className="flex items-center gap-2">
+                                                <span className="text-[var(--color-accent)]/60">•</span>
+                                                {capitalize(category.name)}
+                                            </span>
+                                            <span className="text-xs text-[var(--color-burger-menu-font)]">
+                                                {category.post_count}
+                                            </span>
+                                        </Link>
+                                    )
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </nav>
             </SheetContent>
         </Sheet>

@@ -3,13 +3,14 @@ import './globals-on.css';
 
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer/footer";
-import { fetchCookies, fetchSiteSettings } from "@/api-fetcher/fetcher";
+import { fetchCookies, fetchSiteSettings, fetchAgeVerification } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
 import { hexToOklch } from "@/utils/hex-to-oklch";
 import { Providers } from "./providers";
 import { generateFonts } from "@/utils/fonts";
 import { Metadata } from "next";
 import { CookieConsent } from "@/components/juankui/cookies-consent";
+import { AgeVerificationPopup } from "@/components/juankui/age-verification";
 import { settings as cssSettings } from "@/config/debug-log";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -59,6 +60,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const font = await generateFonts();
   const settings = await fetchSiteSettings()
   const cookies = await fetchCookies();
+  const ageVerification = await fetchAgeVerification();
 
   //cambiar el valor para distinta tonalidad
   const primaryLightColor = hexToOklch(settings.primary_color, 0.90)
@@ -127,6 +129,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               <Footer />
             </div>
             <CookieConsent cookies={cookies} />
+            <AgeVerificationPopup ageVerification={ageVerification} />
           </Providers>
         </body>
       </html>

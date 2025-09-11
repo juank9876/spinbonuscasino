@@ -88,14 +88,14 @@ export function Breadcrumbs({ breadcrumbs, className }: BreadcrumbsProps) {
   // console.log(nonCurrentBreadcrumbs)
   return (
     <Breadcrumb className={`${className}`}>
-      <BreadcrumbList>
+      <BreadcrumbList className="flex items-center justify-center">
 
         {nonCurrentBreadcrumbs.map((bread) => (
 
           <Fragment key={bread.fullUrl}>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link className="text-gray-200" href={bread.fullUrl}>{bread.title}</Link>
+                <Link className="text-gray-200 text-xs" href={bread.fullUrl}>{bread.title}</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
@@ -105,7 +105,7 @@ export function Breadcrumbs({ breadcrumbs, className }: BreadcrumbsProps) {
 
         {currentBreadcrumb && (
           <BreadcrumbItem>
-            <BreadcrumbPage>{currentBreadcrumb.title}</BreadcrumbPage>
+            <BreadcrumbPage className="text-xs">{currentBreadcrumb.title}</BreadcrumbPage>
           </BreadcrumbItem>
         )}
 

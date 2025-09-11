@@ -7,21 +7,42 @@ import type { Cookies } from '@/api-fetcher/fetcher'
 import { debug, debugLog } from '@/config/debug-log'
 
 interface CookieConsentProps {
-    cookies: Cookies
+    cookies?: Cookies
+}
+
+// Default cookies data as fallback
+const defaultCookiesData: Cookies = {
+    cookies_enabled: 1,
+    cookies_text: "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking 'Accept All', you consent to our use of cookies.",
+    cookies_reject_text: "Reject All",
+    cookies_only_necessary_text: "Only Necessary",
+    cookies_configure_text: "Configure",
+    cookies_accept_all_text: "Accept All"
 }
 
 export function CookieConsent({ cookies }: CookieConsentProps) {
     const [isVisible, setIsVisible] = useState(false)
     const [showConfiguration, setShowConfiguration] = useState(false)
-
     debugLog(debug.cookiesConsent, "CookieConsent", cookies)
+
+    // Apply field-level fallbacks for each property
+    const cookiesData: Cookies = {
+        cookies_enabled: cookies?.cookies_enabled ?? defaultCookiesData.cookies_enabled,
+        cookies_text: cookies?.cookies_text || defaultCookiesData.cookies_text,
+        cookies_reject_text: cookies?.cookies_reject_text || defaultCookiesData.cookies_reject_text,
+        cookies_only_necessary_text: cookies?.cookies_only_necessary_text || defaultCookiesData.cookies_only_necessary_text,
+        cookies_configure_text: cookies?.cookies_configure_text || defaultCookiesData.cookies_configure_text,
+        cookies_accept_all_text: cookies?.cookies_accept_all_text || defaultCookiesData.cookies_accept_all_text,
+    }
+
+    debugLog(debug.cookiesConsent, "CookieConsent", cookiesData)
     useEffect(() => {
         // Check if user has already made a choice
         const consent = localStorage.getItem('cookieConsent')
-        if (!consent && cookies.cookies_enabled === 1) {
+        if (!consent && cookiesData.cookies_enabled === 1) {
             setIsVisible(true)
         }
-    }, [cookies.cookies_enabled])
+    }, [cookiesData.cookies_enabled])
 
     const handleAcceptAll = () => {
         localStorage.setItem('cookieConsent', 'all')
@@ -52,7 +73,7 @@ export function CookieConsent({ cookies }: CookieConsentProps) {
                 <div className="flex flex-row justify-between items-center px-5">
                     {/* Main Message */}
                     <p className="text-white/90 text-xs max-w-5xl md:text-base ">
-                        {cookies.cookies_text}
+                        {cookiesData.cookies_text}
                     </p>
 
                     {/* Buttons */}
@@ -63,7 +84,7 @@ export function CookieConsent({ cookies }: CookieConsentProps) {
                             onClick={handleRejectAll}
                             className="text-white/70 hover:text-white"
                         >
-                            {cookies.cookies_reject_text}
+                            {cookiesData.cookies_reject_text}
                         </Button>
 
                         <Button
@@ -72,7 +93,7 @@ export function CookieConsent({ cookies }: CookieConsentProps) {
                             onClick={handleAcceptNecessary}
                             className="text-white/70 hover:text-white"
                         >
-                            {cookies.cookies_only_necessary_text}
+                            {cookiesData.cookies_only_necessary_text}
                         </Button>
 
                         <Button
@@ -81,7 +102,7 @@ export function CookieConsent({ cookies }: CookieConsentProps) {
                             onClick={() => setShowConfiguration(!showConfiguration)}
                             className="text-white/70 hover:text-white"
                         >
-                            {cookies.cookies_configure_text}
+                            {cookiesData.cookies_configure_text}
                         </Button>
 
                         <Button
@@ -89,7 +110,7 @@ export function CookieConsent({ cookies }: CookieConsentProps) {
                             onClick={handleAcceptAll}
                             className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-dark)] text-white"
                         >
-                            {cookies.cookies_accept_all_text}
+                            {cookiesData.cookies_accept_all_text}
                         </Button>
                     </div>
 

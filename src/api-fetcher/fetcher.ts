@@ -1,10 +1,10 @@
 import { debug, debugLog } from "@/config/debug-log";
 import { Footer } from "@/types/footer";
-import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
+import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
 type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies";
+  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification";
 
 interface FetcherParams {
   method: MethodType;
@@ -163,4 +163,8 @@ export interface Cookies {
 
 export async function fetchCookies(): Promise<Cookies> {
   return fetcher<Cookies>({ method: "cookies" });
+}
+
+export async function fetchAgeVerification(): Promise<AgeVerification> {
+  return fetcher<AgeVerification>({ method: "age-verification" });
 }

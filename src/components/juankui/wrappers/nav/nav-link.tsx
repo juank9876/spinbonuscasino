@@ -43,7 +43,7 @@ export function NavLink({ href, children, className }: NavLinkProps) {
             );
         } else if (isLocalDomain) {
             return (
-                <Link className={className} href={parsedHref.pathname}>
+                <Link className={`${className} inline-flex`} href={parsedHref.pathname}>
                     {children}
                 </Link>
             );
@@ -52,7 +52,7 @@ export function NavLink({ href, children, className }: NavLinkProps) {
 
     else {
         return (
-            <Link className={className} href={href}>
+            <Link className={`${className} inline-flex`} href={href}>
                 {children}
             </Link>
 

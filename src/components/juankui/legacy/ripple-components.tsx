@@ -32,7 +32,7 @@ export function ButtonRipple({ /*id,*/ children, className }: { children: React.
   return (
     <HoverBorderGradient
       as="button"
-      className={`${className} cursor-pointer bg-white h-full flex items-center justify-center font-semibold  px-5 py-3 min-w-max overflow-hidden relative transition-all duration-300 shadow-lg hover:shadow-xl`}
+      className={`${className} cursor-pointer bg-white h-full flex items-center justify-center font-semibold  px-3 py-2 min-w-max overflow-hidden relative transition-all duration-300 shadow-lg hover:shadow-xl`}
       duration={1}
     >
       <div className="relative">
@@ -53,7 +53,7 @@ export function LinkRipple({ href, children, className }: { href: string, childr
         <Link
           href={href}
           type="button"
-          className={`${className} flex text-white bg-transparent rounded-xl justify-center items-center font-bold px-3 py-1 lg:px-5 lg:py-3 overflow-hidden relative hover:bg-opacity-90 transition-all duration-300`}
+          className={`${className} flex text-white bg-transparent rounded-xl justify-center items-center font-bold px-3 py-2 overflow-hidden relative hover:bg-opacity-90 transition-all duration-300`}
           onClick={handleClick}
         >
           {children}

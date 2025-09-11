@@ -310,3 +310,11 @@ export interface PermalinkResponse {
   message: string;
   data: PermalinkData;
 }
+
+export interface AgeVerification {
+  enabled: 0 | 1;
+  modal_text: string;
+  yes_text: string;
+  no_text: string;
+  redirect_url: string;
+}

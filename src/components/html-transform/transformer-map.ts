@@ -1,36 +1,19 @@
 import { DOMNode, Element, HTMLReactParserOptions } from 'html-react-parser'
-import {
-  transformH2,
-  transformH3,
-  transformLi,
-  transformCard,
-  transformRow,
-  transformTextElement,
-  transformButton,
-  transformCol,
-  transformImg,
-  transformContainer,
-  transformBrandlisty,
-  transformCardBody,
-  transformCode,
-  transformStrong,
-  transformForm,
-  transformP,
-  transformPre,
-  transformTestimonials,
-  transformBlockquote,
-  transformInput,
-  transformBtnSubmit,
-  transformTextarea,
-  transformAccordion,
-  transformAccordionItem,
-  transformAccordionHeader,
-  transformAccordionContent,
-  transformSvg,
-  transformTakeaways
-} from './transformers'
+// Layout components
+import { transformRow, transformCol, transformContainer } from './transformLayout/layout'
+// Card components
+import { transformCard, transformCardBody } from './transformCards/cards'
+// Text components
+import { transformH2, transformH3, transformLi, transformCode, transformStrong, transformP, transformPre, transformTextElement } from './transformText/text'
+// Form components
+import { transformForm, transformInput, transformTextarea, transformBtnSubmit, transformButton } from './transformForms/forms'
+// Media components
+import { transformImg, transformSvg } from './transformMedia/media'
+// Special components
+import { transformBrandlisty, transformTestimonials, transformBlockquote, transformTakeaways } from './transformSpecial/special'
 import type { JSX } from 'react'
-import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
+import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse } from './transformAccordion/accordion'
+//import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
 type TransformerRule = {
   className?: string
@@ -65,6 +48,9 @@ const rules: TransformerRule[] = [
   { className: 'accordion-header', transformer: transformAccordionHeader },
   { className: 'accordion-body', transformer: transformAccordionContent },
 
+  //Fixes 
+  { className: 'accordion-collapse', transformer: fixCollapse },
+
   //Tags HTML
   { tagName: 'form', transformer: transformForm },
   { tagName: 'h2', transformer: transformH2 },
@@ -80,11 +66,13 @@ const rules: TransformerRule[] = [
   { tagName: 'textarea', transformer: transformTextarea },
 
   //Table fix
+  /*
   { tagName: 'table', transformer: transformTable },
   { tagName: 'thead', transformer: transformThead },
   { tagName: 'tr', transformer: transformTr },
   { tagName: 'td', transformer: transformTd },
   { tagName: 'tbody', transformer: transformTBody },
+   */
   //{ tagName: 'button', transformer: transformButton },
   //{ tagName: 'svg', transformer: transformSvg },
 

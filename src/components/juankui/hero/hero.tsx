@@ -11,31 +11,36 @@ import { Particles } from "@/components/magicui/particles"
 type HomeProps = SiteSettings & Page
 
 export function HeroHomePage({ title, meta_title, meta_description, site_title, site_description }: HomeProps) {
+  function Badge() {
+    return (
+      <div
+        className="hidden  group/badge duration-400 w-fit lg:flex flex-row items-center justify-center rounded-full bg-gradient-to-t from-[var(--color-accent)] to-[var(--color-accent)] px-5 opacity-90 transition hover:to-[var(--color-primary)]"
+      >
+        <Star size={18} className="mr-2 inline text-[var(--color-accent-light)]" />
+        <p className="text-lg text-muted font-bold group-hover/badge:text-white">{site_title}</p>
+      </div>
+    )
+  }
   return (
-    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden mb-10">
+    <section className="relative flex h-[50vh] lg:h-full w-full flex-col items-center justify-center overflow-hidden mb-10">
       <ParticlesFull />
       <VideoHero />
       <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
         <div className="m-0 w-full flex items-center justify-center  p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
 
           <div className="flex flex-col w-full items-center justify-center space-y-2">
-            <div
-              className=" group/badge duration-400 w-fit flex flex-row items-center justify-center rounded-full bg-gradient-to-t from-[var(--color-accent)] to-[var(--color-accent)] px-5 opacity-90 transition hover:to-[var(--color-primary)]"
-            >
-              <Star size={18} className="mr-2 inline text-[var(--color-accent-light)]" />
-              <p className="text-lg text-muted font-bold group-hover/badge:text-white">{site_title}</p>
-            </div>
-            <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
+            <Badge />
+            <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-0 md:mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
               {site_title}
             </h1>
             <p className="  text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{site_description || meta_description}</p>
 
             <div className="flex flex-row items-center justify-center space-x-5 lg:py-5">
               <ButtonRipple>
-                New Casinos <Dice6 size={20} className="ml-2 inline" />
+                <span className="text-xs md:text-sm">New Casinos</span> <Dice6 className="ml-0 md:ml-1 inline w-4 h-4 md:w-5 md:h-5" />
               </ButtonRipple>
               <LinkRipple href="#">
-                Bonus <Gift size={20} className="ml-2 inline" />
+                <span className="text-xs md:text-sm">Bonus</span> <Gift className="ml-1 md:ml-2 inline w-4 h-4 md:w-5 md:h-5" />
               </LinkRipple>
             </div>
           </div>
@@ -114,8 +119,7 @@ export function HeroPage({ title, meta_description, breadcrumbs, featured_image 
           {/* Breadcrumbs */}
           {breadcrumbs && (
             <div className="w-full max-w-xl">
-              <Breadcrumbs
-                className="inline-flex items-center space-x-2 text-sm text-white/60"
+              <Breadcrumbs className="flex justify-center items-center"
                 breadcrumbs={breadcrumbs}
               />
             </div>
@@ -154,53 +158,64 @@ export function HeroPage({ title, meta_description, breadcrumbs, featured_image 
 
 export function HeroPost({ title, excerpt, author_avatar, author_name, created_at, breadcrumbs }: Post) {
   return (
-    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden pb-10">
+    <section className="relative flex min-h-[40vh] w-full flex-col items-center justify-center overflow-hidden  bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)]">
       <ParticlesFull />
-      <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
-        <div className="m-0 w-full flex items-center justify-center gap-5 p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
-          <div className="flex flex-col w-[70vw] items-center justify-center space-y-2">
-            <div className="group-badge group mb-0 flex w-max flex-row items-center justify-between space-x-2 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] pl-2 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)] lg:space-x-3">
-              <div className="size-7 lg:size-10 relative mb-0 overflow-hidden rounded-full">
-                <Image
-                  src={author_avatar || `https://api.dicebear.com/7.x/lorelei/svg?seed=${author_name || "default"}`}
-                  alt={`Image of ${author_name}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <p className="text-gray-200 [.group-badge:hover_&]:text-white">{author_name}</p>
-            </div>
-            <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
-              {title}
-            </h1>
-            <p className=" text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{excerpt}</p>
-            <div className="flex w-max flex-row items-center justify-between space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-bl from-[var(--color-accent)] to-[var(--color-primary)] px-3 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)]">
-              <Calendar1 className="text-white" />
-              <p className="text-gray-200 hover:text-white">{formatDate(created_at)}</p>
-            </div>
-            <div className="flex flex-row items-center justify-center gap-3 mt-8">
-              {breadcrumbs && <Breadcrumbs className="flex justify-center" breadcrumbs={breadcrumbs} />}
-            </div>
-          </div>
+
+      {/* Main content container */}
+      <article className="relative z-10 w-[90vw] max-w-4xl mx-auto text-center ">
+        {/* Breadcrumbs */}
+        {breadcrumbs && (
+
+          <Breadcrumbs className="flex justify-center items-center pt-25" breadcrumbs={breadcrumbs} />
+        )}
+
+
+        {/* Title */}
+        <h1 className="text-white text-center text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight max-w-2xl mx-auto">
+          {title}
+        </h1>
+
+        {/* Excerpt */}
+        <p className="text-white/90 text-sm sm:text-base md:text-lg lg:text-lg leading-relaxed px-5 max-w-2xl mx-auto">
+          {excerpt}
+        </p>
+
+        <div className="flex items-center justify-center space-x-2 sm:space-x-3 pb-20 pt-5">
+          {/* Author badge */}
+          <header className="group inline-flex items-center justify-center h-10 space-x-2 sm:space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] pl-2 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)]">
+            <Image
+              src={author_avatar || `https://api.dicebear.com/7.x/lorelei/svg?seed=${author_name || "default"}`}
+              alt={`Image of ${author_name}`}
+              width={28}
+              height={28}
+              className="size-7 sm:size-8 lg:size-10 rounded-full object-cover"
+            />
+            <span className="text-sm sm:text-base text-gray-200 group-hover:text-white">{author_name}</span>
+          </header>
+          {/* Date badge - hidden on mobile, visible on larger screens */}
+          <time className="group inline-flex items-center justify-center h-10 space-x-2 sm:space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] pl-2 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)]">
+            <Calendar1 className="text-white size-4" />
+            <span className="text-gray-200 hover:text-white text-sm">{formatDate(created_at)}</span>
+          </time>
         </div>
-      </div>
-    </section>
+
+      </article>
+    </section >
   )
 }
 
 export function HeroCategory({ name, description, breadcrumbs }: Category) {
   return (
-    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden pb-10">
+    <section className="relative flex h-[60vh] lg:h-[60vh] w-full flex-col items-center justify-center overflow-hidden mb-10">
       <ParticlesFull />
       <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
-        <div className="m-0 w-full flex items-center justify-center gap-5 p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
-          <div className="flex flex-col w-[50vw] items-center justify-center space-y-2">
-            <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
-              {name}
-            </h1>
-            <p className=" text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{description}</p>
-            {breadcrumbs && <Breadcrumbs className="flex justify-center" breadcrumbs={breadcrumbs} />}
-          </div>
+        <div className="m-0 w-full lg:w-[60vw] flex flex-col items-center justify-center  p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
+
+          <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
+            {name}
+          </h1>
+          <p className=" text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{description}</p>
+          {breadcrumbs && <Breadcrumbs className="flex justify-center" breadcrumbs={breadcrumbs} />}
         </div>
       </div>
     </section>
