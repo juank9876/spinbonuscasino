@@ -49,11 +49,11 @@ export function LinkRipple({ href, children, className }: { href: string, childr
 
   return (
     <div className="flex h-full flex-row">
-      <BackgroundGradient>
+      <BackgroundGradient className="h-full">
         <Link
           href={href}
           type="button"
-          className={`${className} flex text-white bg-transparent rounded-xl justify-center items-center font-bold px-3 py-2 overflow-hidden relative hover:bg-opacity-90 transition-all duration-300`}
+          className={`${className} h-full flex text-white bg-transparent rounded-xl justify-center items-center font-bold px-3 py-2 overflow-hidden relative hover:bg-opacity-90 transition-all duration-300`}
           onClick={handleClick}
         >
           {children}

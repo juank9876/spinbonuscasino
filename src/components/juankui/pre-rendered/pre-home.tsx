@@ -8,6 +8,7 @@ import { ParticlesFull } from '../hero/particles'
 import { Page, SiteSettings } from '@/types/types'
 import { settings as cssSettings } from "@/config/debug-log";
 
+
 interface HomePage {
   children: ReactNode
   settings: SiteSettings

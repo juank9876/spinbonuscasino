@@ -200,7 +200,7 @@ export function transformFeatureList(el: Element, options: HTMLReactParserOption
 
 export function transformTextElement(el: Element, options: HTMLReactParserOptions) {
   return (
-    <div className={`text py-3 ${el.attribs?.class || ''}`}>
+    <div className={`text py-2 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )
