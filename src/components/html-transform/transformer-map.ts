@@ -4,7 +4,7 @@ import { transformRow, transformCol, transformContainer } from './transformLayou
 // Card components
 import { transformCard, transformCardBody } from './transformCards/cards'
 // Text components
-import { transformH2, transformH3, transformLi, transformCode, transformStrong, transformP, transformPre, transformTextElement } from './transformText/text'
+import { transformH2, transformH3, transformLi, transformCode, transformStrong, transformP, transformPre, transformTextElement, transformAnchor } from './transformText/text'
 // Form components
 import { transformForm, transformInput, transformTextarea, transformBtnSubmit, transformButton } from './transformForms/forms'
 // Media components
@@ -12,7 +12,8 @@ import { transformImg, transformSvg } from './transformMedia/media'
 // Special components
 import { transformBrandlisty, transformTestimonials, transformBlockquote, transformTakeaways } from './transformSpecial/special'
 import type { JSX } from 'react'
-import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse } from './transformAccordion/accordion'
+import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse, fixAccordionWidth } from './transformAccordion/accordion'
+
 //import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
 type TransformerRule = {
@@ -35,7 +36,7 @@ const rules: TransformerRule[] = [
     matcher: (el) => 'data-apikey' in el.attribs || 'apikey' in el.attribs,
     transformer: transformBrandlisty,
   },
-  { className: 'text-element', transformer: transformTextElement },
+
   { className: 'btn', transformer: transformButton },
   { className: 'card-img-top', transformer: transformImg },
   { className: 'container', transformer: transformContainer },
@@ -64,6 +65,9 @@ const rules: TransformerRule[] = [
   { tagName: 'blockquote', transformer: transformBlockquote },
   { tagName: 'input', transformer: transformInput },
   { tagName: 'textarea', transformer: transformTextarea },
+  { tagName: 'a', transformer: transformAnchor },
+
+  //Fixes
 
   //Table fix
   /*
@@ -79,6 +83,10 @@ const rules: TransformerRule[] = [
   {
     matcher: (el) => el.attribs?.['data-type'] === 'key-takeaways',
     transformer: transformTakeaways,
+  },
+  {
+    matcher: (el) => 'data-type' in el.attribs && el.attribs['data-type'] === 'faq-accordion',
+    transformer: fixAccordionWidth,
   },
 ]
 

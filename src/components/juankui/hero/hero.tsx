@@ -46,13 +46,13 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
   }
 
   return (
-    <section className="relative flex min-h-[60vh] lg:h-full w-full flex-col items-center justify-center overflow-hidden mb-10">
+    <section className="relative flex min-h-[60vh] lg:h-full w-full flex-col items-center justify-end overflow-hidden mb-10 bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)]">
       <ParticlesFull />
       <VideoHero />
       <FloatingElements />
 
-      <div className=" py-20 w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)]">
-        <div className="flex flex-col w-full items-center justify-center space-y-3">
+      <div className=" py-10 w-full flex h-full flex-col items-center justify-center ">
+        <div className="flex flex-col w-full items-center justify-center space-y-5">
           <CasinoBadge />
 
           <Highlighter action="highlight" color="#8200db" animationDuration={3000} >

@@ -63,6 +63,14 @@ export function transformAccordionContent(el: Element, options: HTMLReactParserO
         </AccordionContent>
     )
 }
+export function fixAccordionWidth(el: Element, options: HTMLReactParserOptions) {
+    const attribs = fixAttribs(el.attribs)
+    return (
+        <div {...attribs} className="w-full">
+            {domToReact(el.children as DOMNode[], options)}
+        </div>
+    )
+}
 
 export function fixCollapse(el: Element, options: HTMLReactParserOptions) {
     const attribs = fixAttribs(el.attribs)

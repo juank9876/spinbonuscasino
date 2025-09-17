@@ -1,3 +1,4 @@
+import { fixAttribs } from '@/lib/utils';
 import { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react-parser'
 import { ArrowRight, Star, Sparkles, Flame, Bolt, Dice1Icon, Dice3Icon, Dice4Icon, Dice2Icon, Dice6Icon, Dice5Icon } from 'lucide-react'
 
@@ -104,5 +105,14 @@ export function transformTextElement(el: Element, options: HTMLReactParserOption
     <div className={`text py-2 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
+  )
+}
+
+export function transformAnchor(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+  return (
+    <a {...attribs} className={`text-[#0a58ca] underline ${attribs.className || ''}`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </a>
   )
 }
