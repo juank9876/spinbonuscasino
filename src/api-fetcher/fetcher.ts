@@ -4,7 +4,7 @@ import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Po
 
 type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification";
+  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect";
 
 interface FetcherParams {
   method: MethodType;
@@ -12,6 +12,7 @@ interface FetcherParams {
   type?: string
   slug?: string
   category_id?: string
+  path?: string
 }
 
 export interface ResponseInterface<T = unknown> {
@@ -20,7 +21,7 @@ export interface ResponseInterface<T = unknown> {
   data: T // Puedes ajustar el tipo según lo que esperes
 }
 
-export async function fetcher<T>({ method, id, type, slug, category_id }: FetcherParams): Promise<T> {
+export async function fetcher<T>({ method, id, type, slug, category_id, path }: FetcherParams): Promise<T> {
   const baseUrl = `https://intercms.dev/api/v2/data.php`
   const url = baseUrl +
     `?method=${method}` +
@@ -29,7 +30,8 @@ export async function fetcher<T>({ method, id, type, slug, category_id }: Fetche
     (id ? `&id=${id}` : ``) +
     (type ? `&type=${type}` : ``) +
     (slug ? `&slug=${slug}` : ``) +
-    (category_id ? `&category_id=${category_id}` : ``)
+    (category_id ? `&category_id=${category_id}` : ``) +
+    (path ? `&path=${path}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
 
@@ -167,4 +169,16 @@ export async function fetchCookies(): Promise<Cookies> {
 
 export async function fetchAgeVerification(): Promise<AgeVerification> {
   return fetcher<AgeVerification>({ method: "age-verification" });
+}
+
+export interface CheckRedirect {
+  has_redirect: boolean,
+  redirect_type: string,
+  target_url: string,
+  reason: string,
+  is_gone: boolean,
+  status_code: number
+}
+export async function fetchCheckRedirect(path: string): Promise<CheckRedirect> {
+  return fetcher<CheckRedirect>({ method: "check-redirect", path });
 }

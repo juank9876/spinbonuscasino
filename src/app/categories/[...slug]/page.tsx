@@ -1,6 +1,6 @@
 // app/[...slug]/page.tsx
-import { notFound } from 'next/navigation'
-import { fetchArticleById, fetchCategoryById, fetchPermalink, fetchSlugToId } from '@/api-fetcher/fetcher'
+import { notFound, redirect } from 'next/navigation'
+import { fetchArticleById, fetchCategoryById, fetchCheckRedirect, fetchPermalink, fetchSlugToId } from '@/api-fetcher/fetcher'
 import { getPostSlugToIdMap, getCategorySlugToIdMap, cleanSlug, createPageTitle } from '@/lib/utils'
 import { capitalize } from '@/utils/capitalize'
 import { PrePost } from '@/components/juankui/pre-rendered/pre-post'
@@ -11,8 +11,23 @@ import { Category, Post } from '@/types/types'
 import { debug } from '@/config/debug-log'
 import { debugLog } from '@/config/debug-log'
 
-export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
+async function getRedirectFromParams({ slug }: { slug: string }) {
+    const redirectData = await fetchCheckRedirect(slug)
+    console.log("redirectData", redirectData)
+    console.log("slug", slug)
+    if (redirectData.has_redirect) {
+        redirect(redirectData.target_url) // ⚡ detiene la renderización y redirige
+    }
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
+
     const { slug = [] } = await params
+    const slugString = slug.join("/")
+    
+    // Check for redirects FIRST, before any data fetching
+    await getRedirectFromParams({ slug: "/categories/" + slugString })
+    
     const data = await getDataFromParams(slug)
 
     if (data.type === 'post') {
@@ -99,7 +114,10 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string[] }>
 }) {
+
     const slugArray = (await params).slug || []
+    const slugString = slugArray.join("/"); // "a/b/c"
+    await getRedirectFromParams({ slug: "/categories/" + slugString })
     const data = await getDataFromParams(slugArray)
 
     if (data.type === 'post') {
