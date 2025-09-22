@@ -4,7 +4,7 @@ import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Po
 
 type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect";
+  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots";
 
 interface FetcherParams {
   method: MethodType;
@@ -181,4 +181,14 @@ export interface CheckRedirect {
 }
 export async function fetchCheckRedirect(path: string): Promise<CheckRedirect> {
   return fetcher<CheckRedirect>({ method: "check-redirect", path });
+}
+
+export interface Robots {
+  content: string
+  content_type: string
+  raw_content: string
+}
+
+export async function fetchRobots() {
+  return fetcher<Robots>({ method: "robots" });
 }

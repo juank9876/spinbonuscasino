@@ -32,6 +32,7 @@ export default async function Home() {
       settings={settings}
       pageProps={homePage}
     >
+
       <HtmlRenderer cssContent={homePage.css_content || undefined} html={homePage.html_content} />
     </PreHomePage>
 
@@ -41,6 +42,7 @@ export default async function Home() {
       settings={settings}
       pageProps={homePage}
     >
+
       <div className="text-2xl py-20 lg:py-0 font-bold">404 - No home page found</div>
     </PreHomePage>
   )
