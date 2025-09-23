@@ -8,7 +8,7 @@ export async function GET() {
             status: 200,
             headers: {
                 "Content-Type": data.content_type || "text/plain",
-                "Cache-Control": "public, max-age=3600", // cache 1h
+                "Cache-Control": "public, max-age=300", // cache 1h
             },
         });
     } catch (error) {
