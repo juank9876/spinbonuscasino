@@ -8,8 +8,6 @@ import { redirect } from 'next/navigation'
 
 async function getRedirectFromParams({ slug }: { slug: string }) {
   const redirectData = await fetchCheckRedirect(slug)
-  console.log("redirectData", redirectData)
-  console.log("slug", slug)
   if (redirectData.has_redirect) {
     redirect(redirectData.target_url) // ⚡ detiene la renderización y redirige
   }
@@ -33,10 +31,10 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  
+
   // Check for redirects FIRST, before any data fetching
   await getRedirectFromParams({ slug })
-  
+
   // Only fetch data after redirect check passes
   const page = await getPageFromSlug(slug)
 
@@ -49,10 +47,10 @@ export default async function Page({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  
+
   // Check for redirects FIRST, before any data fetching
   await getRedirectFromParams({ slug })
-  
+
   // Only fetch data after redirect check passes
   const page = await getPageFromSlug(slug)
 

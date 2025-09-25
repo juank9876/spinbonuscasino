@@ -15,7 +15,7 @@ export const debug = {
     fetchCategories: false,
 
     pages: false,
-    htmlContent: false,
+    htmlContent: true,
     cssContent: false,
     postOrCategoryPermalink: false,
     currentPostOrCategoryUrl: false,

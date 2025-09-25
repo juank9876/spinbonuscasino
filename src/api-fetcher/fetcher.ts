@@ -18,7 +18,7 @@ interface FetcherParams {
 export interface ResponseInterface<T = unknown> {
   status: string
   message: string
-  data: T // Puedes ajustar el tipo según lo que esperes
+  data: T // Puedes ajustar el tipo según lo que esperesa
 }
 
 export async function fetcher<T>({ method, id, type, slug, category_id, path }: FetcherParams): Promise<T> {

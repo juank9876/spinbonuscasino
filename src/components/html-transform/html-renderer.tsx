@@ -22,7 +22,7 @@ function removeEmptyElements(html: string): string {
       /<div[^>]*class="[^"]*gjs-heading-container[^"]*"[^>]*>\s*<\/div>/g,
 
       // Generic empty div (but more careful)
-      /<div(?:\s+[^>]*)?>\s*<\/div>/g,
+      ///<div(?:\s+[^>]*)?>\s*<\/div>/g,
 
       // Empty sections, articles, spans that might be containers
       /<section(?:\s+[^>]*)?>\s*<\/section>/g,

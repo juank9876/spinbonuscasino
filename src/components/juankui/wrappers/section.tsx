@@ -14,10 +14,9 @@ export function Section({ children }: SectionProps) {
   return (
     <section className={`relative flex w-[60vw] items-center justify-center overflow-hidden`}>
       {isParticles && <ParticlesFull />}
-      <div className="w-[95vw] lg:w-[60vw] flex flex-col justify-center items-center relative box-border">
+      <div className=" w-[95vw] lg:w-[60vw] flex flex-col justify-center items-center relative box-border">
         {children}
       </div>
-      <i className="fa-solid fa-circle"></i>
     </section>
   )
 }

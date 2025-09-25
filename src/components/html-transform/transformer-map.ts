@@ -10,9 +10,10 @@ import { transformForm, transformInput, transformTextarea, transformBtnSubmit, t
 // Media components
 import { transformImg, transformSvg } from './transformMedia/media'
 // Special components
-import { transformBrandlisty, transformTestimonials, transformBlockquote, transformTakeaways } from './transformSpecial/special'
+import { transformTestimonials, transformBlockquote, transformTakeaways } from './transformSpecial/special'
 import type { JSX } from 'react'
 import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse, fixAccordionWidth } from './transformAccordion/accordion'
+import { transformBrandlisty } from './transformers'
 
 //import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
@@ -24,6 +25,7 @@ type TransformerRule = {
 }
 
 const rules: TransformerRule[] = [
+  // Brandlisty matcher - debe ir primero para tener prioridad
   //Clases CSS
   { className: 'card', transformer: transformCard },
   { className: 'card-body', transformer: transformCardBody },
@@ -33,7 +35,7 @@ const rules: TransformerRule[] = [
     transformer: transformCol
   },
   {
-    matcher: (el) => 'data-apikey' in el.attribs || 'apikey' in el.attribs,
+    matcher: (el) => el.attribs && ('data-apikey' in el.attribs || 'apikey' in el.attribs || el.attribs['data-gjs-type'] === 'brandlisty'),
     transformer: transformBrandlisty,
   },
 
