@@ -111,7 +111,7 @@ function LayoutBody({
       suppressHydrationWarning
     >
       <Providers>
-        <div className="flex min-h-[100dvh] flex-col">
+        <div className="flex max-w-screen min-h-[100dvh] flex-col">
           <Header {...headerData} />
           {children}
           <Footer />

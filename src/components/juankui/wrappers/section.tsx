@@ -12,9 +12,9 @@ interface SectionProps {
 
 export function Section({ children }: SectionProps) {
   return (
-    <section className={`relative flex w-[60vw] items-center justify-center overflow-hidden`}>
+    <section className={`relative flex w-full items-center justify-center `}>
       {isParticles && <ParticlesFull />}
-      <div className=" w-[95vw] lg:w-[60vw] flex flex-col justify-center items-center relative box-border">
+      <div className="w-[90vw] lg:w-[60vw] ">
         {children}
       </div>
     </section>
