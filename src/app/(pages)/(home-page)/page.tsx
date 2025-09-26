@@ -1,21 +1,15 @@
-import { fetchCheckRedirect, fetchHomePage, fetchSiteSettings } from '@/api-fetcher/fetcher'
+import { fetchHomePage, fetchSiteSettings } from '@/api-fetcher/fetcher'
 import { createMetadata } from '@/app/seo/createMetadata'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import { Metadata } from 'next'
-import { redirect } from 'next/navigation'
 
-async function getRedirectFromParams({ slug }: { slug: string }) {
-  const redirectData = await fetchCheckRedirect(slug)
-  console.log("redirectData", redirectData)
-  console.log("slug", slug)
-  if (redirectData.has_redirect) {
-    redirect(redirectData.target_url) // ⚡ detiene la renderización y redirige
-  }
-}
+import { handleRedirect } from '@/lib/handleRedirect'
+
+
 
 export async function generateMetadata(): Promise<Metadata> {
-
+  await handleRedirect('/')
   const homePage = await fetchHomePage()
   return await createMetadata(homePage, false);
 }
@@ -23,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 
 export default async function Home() {
-  await getRedirectFromParams({ slug: '/' })
+  await handleRedirect('/')
   const homePage = await fetchHomePage()
   const settings = await fetchSiteSettings()
 

@@ -38,7 +38,7 @@ export async function createMetadata(page?: any | null, noTitle?: boolean): Prom
         icons: [
             {
                 rel: "icon",
-                url: settings.favicon || "/favicon.svg",
+                url: settings.favicon || "/logo-1.png",
                 sizes: "32x32",
                 type: "image/png",
             },

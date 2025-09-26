@@ -5,13 +5,13 @@ import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer/footer";
 import { fetchCookies, fetchSiteSettings, fetchAgeVerification } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
-import { hexToOklch } from "@/utils/hex-to-oklch";
 import { Providers } from "./providers";
 import { generateFonts } from "@/utils/fonts";
 import { Metadata } from "next";
 import { CookieConsent } from "@/components/juankui/cookies-consent";
 import { AgeVerificationPopup } from "@/components/juankui/age-verification";
 import { settings as cssSettings } from "@/config/debug-log";
+import { generateCssVariables, generateThemeColors } from "@/utils/theme-colors";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await fetchSiteSettings()
@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: [
       {
         rel: "icon",
-        url: settings.favicon || "/favicon.svg",
+        url: settings.favicon || "/logo-1.png",
         sizes: "32x32",
         type: "image/png"
       }
@@ -55,26 +55,23 @@ export async function generateMetadata(): Promise<Metadata> {
     }
   }
 }
+export async function fetchLayoutData() {
+  const [settings, cookies, ageVerification] = await Promise.all([
+    fetchSiteSettings(),
+    fetchCookies(),
+    fetchAgeVerification(),
+  ]);
+
+  return { settings, cookies, ageVerification };
+}
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const font = await generateFonts();
-  const settings = await fetchSiteSettings()
-  const cookies = await fetchCookies();
-  const ageVerification = await fetchAgeVerification();
+  const { settings, cookies, ageVerification } = await fetchLayoutData();
 
-  //cambiar el valor para distinta tonalidad
-  const primaryLightColor = hexToOklch(settings.primary_color, 0.90)
-  const primarySemiLightColor = hexToOklch(settings.primary_color, 0.50)
-  const primarySemiDarkColor = hexToOklch(settings.primary_color, 0.5, 'darker')
-  const primaryDarkColor = hexToOklch(settings.primary_color, 0.6, 'darker')
+  const themeColors = generateThemeColors(settings);
 
-  const secondaryLightColor = hexToOklch(settings.secondary_color, 0.80);
-  const secondaryDarkColor = hexToOklch(settings.secondary_color, 0.2, 'darker');
-
-  const accentLightColor = hexToOklch(settings.accent_color, 0.80);
-  const accentSemiLightColor = hexToOklch(settings.accent_color, 0.60);
-  const accentDarkColor = hexToOklch(settings.accent_color, 0.2, 'darker');
-
+  console.log('favicon', settings.favicon)
   return (
     <ViewTransitions>
       {/*esta invertido ahora mismo*/}
@@ -96,29 +93,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <title>{settings.site_title || "Welcome to our site"}</title>
           <meta name="description" content={settings.meta_description} />
           {/* puedes usar settings.favicon, site_logo, etc */}
-          <link rel="icon" href={settings.favicon || "/vercel.svg"} />
+          <link rel="icon" href={settings.favicon || "/logo-1.svg"} />
         </head>
         <body
-          style={{
-            '--color-primary-light': primaryLightColor,
-            '--color-primary-semi-light': primarySemiLightColor,
-            '--color-primary': settings.primary_color,
-            '--color-primary-semi-dark': primarySemiDarkColor,
-            '--color-primary-dark': primaryDarkColor,
-
-            '--color-accent-light': accentLightColor,
-            '--color-accent-semi-light': accentSemiLightColor,
-            '--color-accent': settings.accent_color,
-            '--color-accent-dark': accentDarkColor,
-
-            '--color-secondary-light': secondaryLightColor,
-            '--color-secondary': settings.secondary_color,
-            '--color-secondary-dark': secondaryDarkColor,
-
-            '--color-burger-menu-bg': settings.burger_menu_bg_color || '#ffffff',
-            '--color-burger-menu-font': settings.burger_menu_font_color || '#000000',
-          } as React.CSSProperties
-          }
+          style={generateCssVariables(settings, themeColors)}
           className={`bg-gradient-light max-w-screen antialiased`}
           suppressHydrationWarning
         >

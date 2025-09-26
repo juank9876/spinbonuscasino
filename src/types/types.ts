@@ -1,4 +1,207 @@
+export interface Page {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  html_content: string
+  css_content: string | null
+  featured_image: string
+  meta_title: string
+  meta_description: string
+  meta_keywords: string
+  canonical_url?: string
+  robots_index?: string
+  robots_follow?: string
+  robots_noarchive?: number
+  robots_nosnippet?: number
+  robots_noimageindex?: number
+  og_title?: string
+  og_description?: string
+  og_image?: string
+  og_url?: string
+  twitter_card?: string
+  twitter_title?: string
+  twitter_description?: string
+  twitter_image?: string
+  schema_data: SchemaData | SchemaData[]
+  custom_fields: Record<string, unknown>
+  view_count: number | string
+  published_at: string
+  created_at: string
+  updated_at: string
+  type: string
+  status: string
+  template: string
+  is_home: number | string
+  show_in_menu: number | string
+  parent_id: string | null
+  parent_title: string | null
+  parent_slug: string | null
+  child_pages: ChildPages[]
+  seo_url: string
+  breadcrumbs: Breadcrumb[]
+  has_custom_css?: boolean
+  css_url?: string
+}
 
+//POST -> ARTICLE EN LA API
+export interface PostResponse {
+  post: Post
+  sidebar: Sidebar
+}
+
+export interface Sidebar {
+  recent_posts?: RecentPost[]
+  popular_categories?: CategoryArticle[]
+  tags?: any[]
+}
+export interface RecentPost {
+  id: string
+  title: string
+  slug: string
+  featured_image: string
+  published_at: string
+}
+export interface SidebarCategory {
+  id: string
+  project_id: string
+  name: string
+  slug: string
+  description: string
+  parent_id: string | null
+  sort_order: string
+  level: string
+  path: string
+  meta_title: string | null
+  meta_description: string | null
+  schema_data: unknown // poné un tipo más específico si sabés qué estructura tiene
+  status: string
+  created_at: string
+  updated_at: string
+  post_count: string
+}
+
+export interface Post {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  html_content: string
+  css_content: string | null
+  featured_image: string
+  meta_title?: string
+  meta_description?: string
+  meta_keywords: string
+  canonical_url?: string
+  robots_index?: string
+  robots_follow?: string
+  robots_noarchive?: number
+  robots_nosnippet?: number
+  robots_noimageindex?: number
+  og_title?: string
+  og_description?: string
+  og_image?: string
+  og_url?: string
+  twitter_card?: string
+  twitter_title?: string
+  twitter_description?: string
+  twitter_image?: string
+  schema_data: SchemaData
+  custom_fields: Record<string, unknown>
+  view_count: number | string
+  published_at: string
+  created_at: string
+  updated_at: string
+  author_id: string
+  author_name: string
+  author_bio: string
+  author_avatar: string
+  type: 'post'
+  status: 'published' | 'draft' | string
+  template: string
+  is_home: number | string
+  show_in_menu: number | string
+  parent_id: string | null
+  parent_title: string | null
+  parent_slug: string | null
+  tags: Tag[]
+  categories: CategoryWithPrimaryFlag[]
+  primary_category: CategoryArticle
+  category_id?: string
+  category_name?: string
+  category_slug?: string
+  seo_url: string
+  breadcrumbs: Breadcrumb[]
+  related_posts?: RelatedPost[]
+  has_custom_css?: boolean
+  css_url?: string
+}
+
+
+
+
+export type CategoryArticle = {
+  id: string
+  project_id: string
+  name: string
+  slug: string
+  description: string
+  parent_id: string | null
+  sort_order: string
+  level: string
+  path: string | null
+  meta_title?: string
+  meta_description?: string
+  schema_data: SchemaData | null
+  status: 'active' | 'inactive' | string
+  created_at: string
+  updated_at: string
+  post_count?: string
+}
+
+
+export type RelatedPost = {
+  id: string | number
+  title: string
+  slug: string
+  excerpt: string
+  featured_image: string
+  published_at: string
+}
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////TIPOS Y DEMAS COMPLEMENTOS/////////////////////////////////////////////////////////////////////////////////
+export type SchemaData = {
+  "@context": string
+  "@type": string
+  name?: string
+  headline?: string
+  author?: string
+}
+
+export type ChildPages = {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+}
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////
 interface SocialLinks {
   facebook?: string;
   twitter?: string;
@@ -95,10 +298,7 @@ export type Category = {
   posts: Post[]
 }
 
-export interface PostResponse {
-  post: Post
-  sidebar: Sidebar // definilo si lo vas a usar, o poné `any`
-}
+
 
 export interface Slug {
   slug: {
@@ -108,86 +308,17 @@ export interface Slug {
   }
 }
 
-export interface Post {
-  id: string
-  project_id: string
-  parent_id: string | null
-  author_id: string
-  title: string
-  slug: string
-  excerpt: string
-  html_content: string
-  css_content: string | null
-  featured_image: string
-  meta_title: string | undefined
-  meta_description: string | undefined
-  meta_keywords: string
-  schema_data: unknown[] // Ajusta si sabes su estructura
-  custom_fields: unknown[] // Igual aquí
-  view_count: string
-  comment_count: string
-  sort_order: string
-  allow_comments: string
-  type: 'post'
-  status: 'published' | 'draft' | string
-  created_at: string
-  updated_at: string
-  published_at: string
-  template: string
-  show_in_menu: string
-  is_home: string
-  author_name: string
-  author_bio: string
-  author_avatar: string
-  parent_title: string | null
-  parent_slug: string | null
-  tags: Tag[]
-  categories: CategoryWithPrimaryFlag[]
-  primary_category: Category
-  category_id: string
-  category_name: string
-  category_slug: string
-  seo_url: string
-  breadcrumbs: Breadcrumb[]
-}
 
-export interface Sidebar {
-  recent_posts: SidebarPost[]
-  popular_categories: SidebarCategory[]
-}
 
-export interface SidebarPost {
-  id: string
-  title: string
-  slug: string
-  featured_image: string
-  published_at: string
-}
 
-export interface SidebarCategory {
-  id: string
-  project_id: string
-  name: string
-  slug: string
-  description: string
-  parent_id: string | null
-  sort_order: string
-  level: string
-  path: string
-  meta_title: string | null
-  meta_description: string | null
-  schema_data: unknown // poné un tipo más específico si sabés qué estructura tiene
-  status: string
-  created_at: string
-  updated_at: string
-  post_count: string
-}
+
 
 export interface Tag {
   id: string
   project_id: string
   name: string
   slug: string
+  color: string
   description: string
   meta_title: string | null
   meta_description: string | null
@@ -243,40 +374,7 @@ export type PagePostSlugProps = {
   params: { postSlug: string }
 }
 
-export interface Page {
-  id: string
-  project_id: string
-  parent_id: string | null
-  author_id: string
-  title: string
-  slug: string
-  excerpt: string
-  html_content: string
-  css_content: string | null
-  featured_image: string
-  meta_title: string
-  meta_description: string
-  meta_keywords: string
-  schema_data: unknown[] // puedes reemplazar con un tipo más estricto si conoces la estructura
-  custom_fields: unknown[] // idem
-  view_count: string
-  comment_count: string
-  sort_order: string
-  allow_comments: string
-  type: string
-  status: string
-  created_at: string
-  updated_at: string
-  published_at: string
-  template: string
-  show_in_menu: string
-  is_home: string
-  parent_title: string | null
-  parent_slug: string | null
-  child_pages: unknown[] // podrías tiparlo como PageData[] si se anidan igual
-  seo_url: string
-  breadcrumbs: Breadcrumb[]
-}
+
 
 // TIPOS PARA RESPUESTA DE PERMALINK
 export interface PermalinkCategoryHierarchy {
