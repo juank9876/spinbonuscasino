@@ -234,7 +234,8 @@ export interface SiteSettings {
   custom_js: string | null
   created_at: string
   updated_at: string
-  schema_data: unknown[]
+  schema_data: SchemaData | SchemaData[]
+
 }
 
 export interface Author {

@@ -1,4 +1,5 @@
 import { fetchSiteSettings } from "@/api-fetcher/fetcher";
+import { SiteSettings } from "@/types/types";
 import { Inter, Lato, Merriweather, Montserrat, Onest, Open_Sans, Poppins, Roboto } from "next/font/google";
 
 
@@ -41,8 +42,7 @@ export const poppins = Poppins({
 })
 
 
-export async function generateFonts() {
-    const settings = await fetchSiteSettings()
+export function generateFontsFromSettings(settings: SiteSettings) {
     const fontName = settings.font_family as FontType || "Inter";
 
     const fontMap = {
@@ -51,7 +51,7 @@ export async function generateFonts() {
         Open_Sans: openSans,
         Lato: lato,
         Montserrat: montserrat,
-        Poppins: poppins // Note: You'll need to add the Poppins font configuration
+        Poppins: poppins
     };
 
     return fontMap[fontName];

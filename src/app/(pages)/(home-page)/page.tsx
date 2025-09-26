@@ -4,7 +4,7 @@ import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import { Metadata } from 'next'
 
-import { handleRedirect } from '@/lib/handleRedirect'
+import { handleRedirect } from '@/utils/handleRedirect'
 
 
 

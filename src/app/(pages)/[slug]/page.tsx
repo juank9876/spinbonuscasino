@@ -6,8 +6,8 @@ import { createMetadata } from '@/app/seo/createMetadata'
 import {
   getContentData,
   getPageFromSlug,
-} from '@/lib/fetchPagePost'
-import { handleRedirect } from '@/lib/handleRedirect'
+} from '@/lib/fetch-data/getPageOrPostData'
+import { handleRedirect } from '@/utils/handleRedirect'
 
 export async function generateMetadata({
   params,
