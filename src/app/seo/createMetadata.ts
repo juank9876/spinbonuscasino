@@ -2,11 +2,10 @@ import { fetchSiteSettings } from "@/api-fetcher/fetcher";
 import { debug, debugLog } from "@/config/debug-log";
 import { getContentData } from "@/lib/fetch-data/getPageOrPostData";
 import { createPageTitle } from "@/lib/utils";
-import { Page, Post } from "@/types/types";
 import { capitalize } from "@/utils/capitalize";
 import { Metadata } from "next";
 
-export async function createMetadata(slug: string, noTitle?: boolean): Promise<Metadata> {
+export async function createMetadata(slug: string): Promise<Metadata> {
     const settings = await fetchSiteSettings();
     const postOrPageOrCategory = await getContentData(slug)
 
@@ -27,7 +26,7 @@ export async function createMetadata(slug: string, noTitle?: boolean): Promise<M
         )
         return {
 
-            title: noTitle ? settings.site_title : await createPageTitle(page?.meta_title, page?.title) || settings.site_title,
+            title: await createPageTitle(page?.meta_title, page?.title) || settings.site_title,
             description: capitalize(page?.meta_description) || settings.site_description,
             keywords: page?.meta_keywords || settings.meta_keywords,
             metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://your-domain.com'),
@@ -84,7 +83,7 @@ export async function createMetadata(slug: string, noTitle?: boolean): Promise<M
     else if (postOrPageOrCategory?.type === 'category') {
         const category = postOrPageOrCategory.data
         return {
-            title: noTitle ? settings.site_title : await createPageTitle(category?.meta_title, settings?.site_title) || settings.site_title,
+            title: await createPageTitle(category?.meta_title, settings?.site_title) || settings.site_title,
             description: capitalize(category?.meta_description) || settings.site_description,
             other: {
 
@@ -96,7 +95,7 @@ export async function createMetadata(slug: string, noTitle?: boolean): Promise<M
     }
     else {
         return {
-            title: noTitle ? settings.site_title : settings.site_title,
+            title: settings.site_title,
             description: settings.site_description,
         }
     }

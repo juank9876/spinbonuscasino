@@ -5,6 +5,7 @@ import { RenderMenu } from './render-menu'
 import { NavMobile } from './nav-mobile'
 import { ClientHeaderWrapper } from './client-header-wrapper'
 import { Category, NavItemType, SiteSettings, Slug } from '@/types/types'
+import { getHeaderData } from '@/lib/fetch-data/getHeaderData'
 
 
 export interface HeaderData {
@@ -15,8 +16,8 @@ export interface HeaderData {
 }
 
 
-export async function Header({ normalizedItems, allSlugs, categoriesItems, settings }: HeaderData) {
-  const navProps = { categoriesItems, settings, normalizedItems };
+export async function Header() {
+  const { normalizedItems, allSlugs, categoriesItems, settings } = await getHeaderData()
 
   return (
     <ClientHeaderWrapper>
@@ -28,7 +29,7 @@ export async function Header({ normalizedItems, allSlugs, categoriesItems, setti
         </div>
 
         {/* VERSION MOVIL */}
-        <NavMobile {...navProps} />
+        <NavMobile settings={settings} normalizedItems={normalizedItems} categoriesItems={categoriesItems} />
       </div>
     </ClientHeaderWrapper>
   );

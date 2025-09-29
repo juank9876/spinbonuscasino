@@ -4,7 +4,6 @@ import { Section } from "@/components/juankui/wrappers/section"
 import { ShineBorder } from "@/components/magicui/shine-border"
 import { Card, CardContent } from "@/components/ui/card"
 import { formatDate } from "@/lib/utils"
-import { createMetadata } from "../seo/createMetadata"
 import { Metadata } from "next"
 
 
