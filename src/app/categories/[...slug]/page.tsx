@@ -1,127 +1,40 @@
-// app/[...slug]/page.tsx
-import { notFound, redirect } from 'next/navigation'
-import { fetchArticleById, fetchCategoryById, fetchCheckRedirect, fetchPermalink, fetchSlugToId } from '@/api-fetcher/fetcher'
-import { getPostSlugToIdMap, getCategorySlugToIdMap, cleanSlug, createPageTitle } from '@/lib/utils'
-import { capitalize } from '@/utils/capitalize'
+
 import { PrePost } from '@/components/juankui/pre-rendered/pre-post'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PreCategory } from '@/components/juankui/pre-rendered/pre-category'
 import { CardPostCategory } from '@/components/juankui/card-post-category'
-import { Category, Post } from '@/types/types'
-import { debug } from '@/config/debug-log'
-import { debugLog } from '@/config/debug-log'
 
-async function getRedirectFromParams({ slug }: { slug: string }) {
-    const redirectData = await fetchCheckRedirect(slug)
-    console.log("redirectData", redirectData)
-    console.log("slug", slug)
-    if (redirectData.has_redirect) {
-        redirect(redirectData.target_url) // ⚡ detiene la renderización y redirige
-    }
-}
+import { handleRedirect } from '@/utils/handleRedirect'
+import { createMetadata } from '@/app/seo/createMetadata'
+import NotFound from '@/app/not-found'
+import { getContentData, isCheckUrlPermalink } from '@/lib/fetch-data/getPageOrPostData'
+
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
-
-    const { slug = [] } = await params
+    const { slug } = await params
     const slugString = slug.join("/")
-    
-    // Check for redirects FIRST, before any data fetching
-    await getRedirectFromParams({ slug: "/categories/" + slugString })
-    
-    const data = await getDataFromParams(slug)
 
-    if (data.type === 'post') {
-        return {
-            title: await createPageTitle(data.post.meta_title, data.post.title),
-            description: capitalize(data.post.meta_description) || data.post.excerpt || '',
-        }
-    }
-
-    return {
-        title: await createPageTitle(data.category.meta_title, data.category.name),
-        description: capitalize(data.category.meta_description) || data.category.description || '',
-    }
+    await handleRedirect(slugString)
+    return await createMetadata(slug[slug.length - 1])
 }
 
-/** Decide si es un post o categoría y obtiene los datos */
-type RouteData =
-    | { type: 'post'; post: Post }
-    | { type: 'category'; category: Category }
 
-async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
+export default async function Page({ params, }: { params: Promise<{ slug: string[] }> }) {
+    const { slug } = await params
+    const slugString = '/' + slug.join("/") + '/'; // "a/b/c"
+    const content = await getContentData(slug[slug.length - 1])
+
+    if (!content) return <NotFound />
+
+    await handleRedirect(slugString)
 
 
-    const categoryMap = await getCategorySlugToIdMap()
+    const isValidUrl = await isCheckUrlPermalink(slug[slug.length - 1], slugString, content?.type)
 
-    const categorySlug = slugArray[slugArray.length - 1]
+    if (!isValidUrl) return <NotFound />
 
-    const urlSegments = slugArray[0] === "categories" ? slugArray.slice(1) : slugArray;
-    let url = "/" + urlSegments.join("/");
-    if (!url.endsWith("/")) {
-        url += "/";
-    }
-
-    //const categoryId = categoryMap[categorySlug]
-    const categoryId = await fetchSlugToId(categorySlug, "category")
-    /*
-        const urlSegments = slugArray[0] === "categories" ? slugArray.slice(1) : slugArray;
-        let url = "/" + urlSegments.join("/");
-        if (!url.endsWith("/")) {
-            url += "/";
-        }
-    */
-    if (categoryId) {
-        const category = await fetchCategoryById(categoryId)
-
-        const permalinkData = await fetchPermalink(categoryId, "category")
-        const permalink = permalinkData.permalink
-
-        debugLog(debug.postOrCategoryPermalink, '[+] Post or Category Permalink:' + permalink)
-        debugLog(debug.currentPostOrCategoryUrl, '[+] Current Post or Category URL:' + url)
-
-        if (permalink !== url) {
-            notFound()
-        }
-
-        return { type: 'category', category }
-    } else {
-
-        const postSlug = slugArray[slugArray.length - 1]
-        const postId = await fetchSlugToId(postSlug, "post")
-
-        if (!postId) {
-            notFound()
-        }
-
-        const post = (await fetchArticleById(postId)).post
-
-        const permalinkData = await fetchPermalink(postId, "post")
-        const permalink = permalinkData.permalink
-
-        debugLog(debug.postOrCategoryPermalink, '[+] Post or Category Permalink:' + permalink)
-        debugLog(debug.currentPostOrCategoryUrl, '[+] Current Post or Category URL:' + url)
-
-        if (permalink !== url) {
-            notFound()
-        }
-        return { type: 'post', post }
-    }
-
-}
-
-export default async function Page({
-    params,
-}: {
-    params: Promise<{ slug: string[] }>
-}) {
-
-    const slugArray = (await params).slug || []
-    const slugString = slugArray.join("/"); // "a/b/c"
-    await getRedirectFromParams({ slug: "/categories/" + slugString })
-    const data = await getDataFromParams(slugArray)
-
-    if (data.type === 'post') {
-        const post = data.post
+    if (content.type === 'post') {
+        const { post } = content.data
 
         return (
             <PrePost post={post} >
@@ -129,28 +42,32 @@ export default async function Page({
             </PrePost>
         )
     }
+    else if (content.type === 'category') {
+        const { data: category } = content
+        return (
+            <>
+                {category.posts.length === 0 ? (
+                    <PreCategory category={category} className='flex h-full flex-col items-center justify-center'>
 
-    const { category } = data
-    const posts = category?.posts || []
+                        <span className="text-muted rounded-lg bg-[var(--color-accent)] px-5 py-10 text-xl italic">
+                            Oops! No posts available in this category.
+                        </span>
+                    </PreCategory>
+                ) : (
+                    <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
 
-    return (
-        <>
-            {posts.length === 0 ? (
-                <PreCategory category={category} className='flex h-full flex-col items-center justify-center'>
+                        {category.posts.map((post) => (
+                            <CardPostCategory key={post.id} post={post} category={category} />
+                        ))}
+                    </PreCategory>
+                )}
 
-                    <span className="text-muted rounded-lg bg-[var(--color-accent)] px-5 py-10 text-xl italic">
-                        Oops! No posts available in this category.
-                    </span>
-                </PreCategory>
-            ) : (
-                <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
+            </>
+        )
+    }
 
-                    {posts.map((post) => (
-                        <CardPostCategory key={post.id} post={post} category={category} />
-                    ))}
-                </PreCategory>
-            )}
-
-        </>
-    )
+    else {
+        return <NotFound />
+    }
 }
+

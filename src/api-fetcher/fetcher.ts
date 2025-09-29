@@ -87,7 +87,7 @@ export async function fetchAuthorById(id: string): Promise<Author> {
   return fetcher<Author>({ method: "author", id });
 }
 
-type PermalinkType = "category" | "post"
+export type PermalinkType = "category" | "post" | "page"
 export async function fetchPermalink(id: string, type: PermalinkType): Promise<PermalinkData> {
   return fetcher<PermalinkData>({ method: "permalink", id, type });
 }

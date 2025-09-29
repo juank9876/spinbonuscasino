@@ -10,8 +10,7 @@ import { handleRedirect } from '@/utils/handleRedirect'
 
 export async function generateMetadata(): Promise<Metadata> {
   await handleRedirect('/')
-  const homePage = await fetchHomePage()
-  return await createMetadata(homePage, false);
+  return await createMetadata('/', false);
 }
 
 

@@ -9,23 +9,14 @@ import {
 } from '@/lib/fetch-data/getPageOrPostData'
 import { handleRedirect } from '@/utils/handleRedirect'
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
   await handleRedirect(slug)
-  const page = await getPageFromSlug(slug)
-  return page ? await createMetadata(page) : {}
+  return await createMetadata(slug)
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const content = await getContentData(slug)
   //por seguridad otro check, ya que el primero se ejecuta con delay
@@ -33,6 +24,7 @@ export default async function Page({
   if (!content) {
     return <NotFound />
   }
+
 
   // Renderizar según el tipo de contenido
   if (content.type === 'page') {
@@ -47,14 +39,16 @@ export default async function Page({
     )
   }
 
-  // content.type === 'post'
-  const { data: post } = content
-  return (
-    <PrePost post={post.post}>
-      <HtmlRenderer
-        html={post.post.html_content}
-        cssContent={post.post.css_content || undefined}
-      />
-    </PrePost>
-  )
+  else if (content.type === 'post') {
+    const { data: post } = content
+    return (
+      <PrePost post={post.post}>
+        <HtmlRenderer
+          html={post.post.html_content}
+          cssContent={post.post.css_content || undefined}
+        />
+      </PrePost>
+    )
+  }
+  else return <NotFound />
 }

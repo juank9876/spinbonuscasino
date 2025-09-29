@@ -24,7 +24,6 @@ export async function generateMetadata(): Promise<Metadata> {
     description: settings.site_description,
     keywords: settings.meta_keywords,
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://your-domain.com'),
-
     // OpenGraph metadata
     openGraph: {
       title: settings.meta_title || settings.site_title,

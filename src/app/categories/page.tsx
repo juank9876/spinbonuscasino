@@ -7,9 +7,7 @@ import { formatDate } from "@/lib/utils"
 import { createMetadata } from "../seo/createMetadata"
 import { Metadata } from "next"
 
-export async function generateMetadata(): Promise<Metadata> {
-  return await createMetadata();
-}
+
 
 export default async function CategoriesPage() {
   const categories = await fetchCategories()
