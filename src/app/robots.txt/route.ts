@@ -14,8 +14,8 @@ export async function GET() {
     } catch (error) {
         // fallback si la API falla
         const fallback = `User-agent: *
-Allow: /
-Sitemap: https://tu-dominio.com/sitemap.xml`;
+            Allow: /
+            Sitemap: https://tu-dominio.com/sitemap.xml`;
 
         return new Response(fallback, {
             status: 200,
