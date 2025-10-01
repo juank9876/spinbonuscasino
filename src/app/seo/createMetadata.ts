@@ -26,6 +26,10 @@ export async function createMetadata(slug: string): Promise<Metadata> {
                 metadataBase: ${process.env.NEXT_PUBLIC_SITE_URL},
         `
         )
+        function convertToBoolean(value: number | undefined): boolean {
+            return value === 1 || value === 1
+        }
+        console.log(convertToBoolean(page?.robots_noarchive))
         return {
 
             title: await createPageTitle(page?.meta_title, page?.title) || settings.site_title,
@@ -48,9 +52,9 @@ export async function createMetadata(slug: string): Promise<Metadata> {
             robots: {
                 index: page?.robots_index === "index",
                 follow: page?.robots_follow === "follow",
-                nocache: !!page?.robots_noarchive,
-                nosnippet: !!page?.robots_nosnippet,
-                noimageindex: !!page?.robots_noimageindex,
+                nocache: convertToBoolean(page?.robots_noarchive),
+                nosnippet: convertToBoolean(page?.robots_nosnippet),
+                noimageindex: convertToBoolean(page?.robots_noimageindex),
             },
 
             // --- Twitter ---
