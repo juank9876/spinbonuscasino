@@ -59,7 +59,7 @@ export async function getCategorySlugToIdMap(): Promise<SlugToIdMap> {
 }
 
 export async function getPostSlugToIdMap(): Promise<SlugToIdMap> {
-  const posts = await fetchArticles()
+  const posts = await fetchArticles({ with_meta: false })
   //console.log(categories)
   const slugIds: PageMeta[] = posts
 

@@ -38,19 +38,13 @@ export function MainFooterContent({ footer, settings }: { footer: Footer; settin
             {/* Legal Images Section */}
             <div className="space-x-4 flex flex-wrap flex-row pt-4">
                 {footer.legal_images.map(image => (
-                    <a
+                    <img
                         key={image.id}
-                        href={image.link_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <img
-                            src={image.image_url}
-                            alt={image.alt_text}
-                            title={image.title}
-                            className="w-fit h-8"
-                        />
-                    </a>
+                        src={image.image_url}
+                        alt={image.alt_text}
+                        title={image.title}
+                        className="w-fit h-8"
+                    />
                 ))}
             </div>
         </div>

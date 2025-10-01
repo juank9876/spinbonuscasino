@@ -3,24 +3,24 @@ import { ShineBorder } from '@/components/magicui/shine-border'
 import Image from 'next/image'
 import { formatDate, limitCharacters } from '@/lib/utils'
 import { Link } from '@/components/juankui/optionals/link'
-import { Category, Post } from '@/types/types'
-import { cn } from '@/lib/utils'
+import { Post } from '@/types/types'
 
-export function CardPostCategory({ post, category }: { post: Post, category: Category }) {
+export function CardPostCategory({ post }: { post: Post }) {
   //const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
-  const categoryUrl = category.slug
+  //const categoryUrl = category.slug
   return (
     <>
       {/*Card para PC*/}
       <Link
-        href={`${categoryUrl}/${post.slug}`}
+        //editado 30.09
+        //href={`${categoryUrl}/${post.slug}`}
+        href={post.seo_url}
         className="
     group relative hidden lg:flex 
     w-[300px] h-[500px] overflow-hidden rounded-2xl border border-[var(--color-accent-light)]
-    bg-gradient-to-b from-blue-900 via-[var(--color-primary-dark)] to-blue-900
+    bg-gradient-to-b from-[var(--color-primary-dark)] to-blue-950
     shadow-xl transition-all duration-500 
-    hover:shadow-2xl hover:shadow-[var(--color-accent-dark)]/30
-    hover:scale-[1.02]
+    hover:shadow-2xl hover:shadow-[var(--color-accent-dark)]/30 hover:bg-[var(--color-accent-dark)]
   "
       >
         <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
@@ -69,22 +69,24 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
                   fill
                   className="object-cover"
                 />
-              </div>
+              </div >
               <div className="flex flex-wrap items-center gap-2 text-white text-sm">
                 <span className="text-xs font-medium">{formatDate(post.published_at)}</span>
                 <span className="text-[var(--color-accent-light)]">·</span>
                 <span className="text-xs font-semibold">{post.author_name.toUpperCase()}</span>
               </div>
-            </div>
-          </div>
-        </div>
-      </Link>
+            </div >
+          </div >
+        </div >
+      </Link >
 
 
 
       {/*Card para movil*/}
-      <Card className="duration-500 relative w-full overflow-hidden border-none p-0 shadow-lg transition hover:shadow-xl hover:shadow-[var(--color-accent-dark)]/20 lg:hidden">
-        <Link href={`${categoryUrl}/${post.slug}`} className="block w-full">
+      < Card className="duration-500 relative w-full overflow-hidden border-none p-0 shadow-lg transition hover:shadow-xl hover:shadow-[var(--color-accent-dark)]/20 lg:hidden" >
+        <Link
+          href={`/categories${post.seo_url}`}
+          className="block w-full">
           <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
 
           {/* Imagen como background con altura fija para mejor proporción */}
@@ -105,7 +107,7 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
             <CardContent className="absolute inset-0 z-10 flex h-full flex-col justify-between p-6 text-white">
               <div className="mt-4 space-y-3 max-w-[90%]">
                 <div className="inline-block rounded-full bg-[var(--color-accent)] px-3 py-1 text-xs font-medium text-white shadow-md">
-                  {category.name}
+                  {post.category_name}
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight">{post.title}</h2>
                 <p className="text-sm text-white/90 font-medium">{formatDate(post.published_at)}</p>
@@ -115,7 +117,7 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
               </div>
 
               {/* Autor con mejor diseño */}
-              <div className="flex flex-row items-center space-x-3 bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-white/10 shadow-lg">
+              <div className="w-fit flex flex-row items-center space-x-3 bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-white/10 shadow-lg">
                 <div className="size-12 relative overflow-hidden rounded-full border-2 border-[var(--color-accent-light)] shadow-md">
                   <Image
                     src={
@@ -128,14 +130,14 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
                   />
                 </div>
                 <div className="flex flex-col">
-                  <p className="text-sm font-semibold text-white">{post.author_name}</p>
-                  <p className="text-xs text-white/70">{formatDate(post.published_at)}</p>
+                  <span className="text-sm font-semibold text-white">{post.author_name}</span>
+                  <span className=" text-xs text-white/70">{formatDate(post.published_at)}</span>
                 </div>
               </div>
             </CardContent>
           </div>
         </Link>
-      </Card>
+      </Card >
 
     </>
   )

@@ -3,6 +3,7 @@ import { debug, debugLog } from "@/config/debug-log";
 import { getContentData } from "@/lib/fetch-data/getPageOrPostData";
 import { createPageTitle } from "@/lib/utils";
 import { capitalize } from "@/utils/capitalize";
+import { fixSeoUrlSlash } from "@/utils/fixSeoUrlSlash";
 import { Metadata } from "next";
 
 export async function createMetadata(slug: string): Promise<Metadata> {

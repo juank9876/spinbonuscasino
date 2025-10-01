@@ -8,6 +8,9 @@ import { handleRedirect } from '@/utils/handleRedirect'
 import { createMetadata } from '@/app/seo/createMetadata'
 import NotFound from '@/app/not-found'
 import { getContentData, isCheckUrlPermalink } from '@/lib/fetch-data/getPageOrPostData'
+import { fetchArticles } from '@/api-fetcher/fetcher'
+import { PostsPagination } from '@/app/(reserved-pages)/blog/PostsPagination'
+
 
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
@@ -19,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 
-export default async function Page({ params, }: { params: Promise<{ slug: string[] }> }) {
+export default async function Page({ params, searchParams }: { params: Promise<{ slug: string[] }>, searchParams: Promise<{ page?: string }> }) {
     const { slug } = await params
     const slugString = '/' + slug.join("/") + '/'; // "a/b/c"
     const content = await getContentData(slug[slug.length - 1])
@@ -44,6 +47,16 @@ export default async function Page({ params, }: { params: Promise<{ slug: string
     }
     else if (content.type === 'category') {
         const { data: category } = content
+        const currentPage = Number((await searchParams)?.page || 1)
+        const POSTS_PER_PAGE = 3
+
+        const dataWithMeta = await fetchArticles({
+            pagination: currentPage,
+            per_page: POSTS_PER_PAGE,
+            with_meta: true,
+            category_id: category.id
+        })
+
         return (
             <>
                 {category.posts.length === 0 ? (
@@ -56,9 +69,15 @@ export default async function Page({ params, }: { params: Promise<{ slug: string
                 ) : (
                     <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
 
-                        {category.posts.map((post) => (
-                            <CardPostCategory key={post.id} post={post} category={category} />
+                        {/*category.posts DEPRECATED. AHORA SE FILTRA CON METODO POSTS&CATEGORY_ID=TAL*/}
+                        {/*
+                        {dataWithMeta.data.map((post) => (
+                            <CardPostCategory key={post.id} post={post}
+                            //category={category} 
+                            />
                         ))}
+                            */}
+                        <PostsPagination posts={dataWithMeta.data} meta={dataWithMeta.meta} />
                     </PreCategory>
                 )}
 

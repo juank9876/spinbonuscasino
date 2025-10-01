@@ -13,16 +13,41 @@ interface FetcherParams {
   slug?: string
   category_id?: string
   path?: string
+  pagination?: number
+  per_page?: number
+  with_meta?: boolean
 }
 
 export interface ResponseInterface<T = unknown> {
   status: string
   message: string
   data: T // Puedes ajustar el tipo según lo que esperesa
+  meta: MetaArticle;
 }
 
-export async function fetcher<T>({ method, id, type, slug, category_id, path }: FetcherParams): Promise<T> {
+export interface MetaArticle {
+  total: number;
+  per_page: number;
+  current_page: number;
+  total_pages: number;
+  has_next: boolean;
+  has_prev: boolean;
+  next_page: number;
+  prev_page: number;
+}
+export type PaginatedResponse<T> = {
+  data: T;
+  meta: MetaArticle;
+};
+
+// Sobrecargas
+export async function fetcher<T>(params: FetcherParams & { with_meta: true }): Promise<PaginatedResponse<T>>;
+export async function fetcher<T>(params: FetcherParams & { with_meta?: false }): Promise<T>;
+
+export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T>> {
+  const { method, id, type, slug, category_id, path, pagination, per_page, with_meta } = params
   const baseUrl = `https://intercms.dev/api/v2/data.php`
+
   const url = baseUrl +
     `?method=${method}` +
     `&api_key=${process.env.API_KEY}` +
@@ -31,7 +56,10 @@ export async function fetcher<T>({ method, id, type, slug, category_id, path }: 
     (type ? `&type=${type}` : ``) +
     (slug ? `&slug=${slug}` : ``) +
     (category_id ? `&category_id=${category_id}` : ``) +
-    (path ? `&path=${path}` : ``)
+    (path ? `&path=${path}` : ``) +
+    (pagination ? `&page=${pagination}` : ``) +
+    (per_page ? `&per_page=${per_page}` : ``) +
+    (category_id ? `&category_id=${category_id}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
 
@@ -43,7 +71,13 @@ export async function fetcher<T>({ method, id, type, slug, category_id, path }: 
     const data: ResponseInterface<T> = await res.json();
 
     if (data.status === "success") {
-      return data.data
+      if (with_meta && data.meta) {
+        return {
+          data: data.data,
+          meta: data.meta
+        } as PaginatedResponse<T>;
+      }
+      return data.data as T;
     }
 
   } catch (error) {
@@ -61,9 +95,16 @@ export async function fetchPages() {
 export async function fetchPageById(id: string): Promise<Page> {
   return fetcher<Page>({ method: "page", id });
 }
-export async function fetchArticles() {
-  return fetcher<Post[]>({ method: "articles" });
+// Helper functions con tipado correcto para POSTS
+export async function fetchArticles(params: { pagination?: number; per_page?: number; with_meta: true; category_id?: string }): Promise<PaginatedResponse<Post[]>>;
+export async function fetchArticles(params: { pagination?: number; per_page?: number; with_meta?: false; category_id?: string }): Promise<Post[]>;
+export async function fetchArticles({ pagination, per_page, with_meta, category_id }: { pagination?: number, per_page?: number, with_meta?: boolean, category_id?: string }): Promise<Post[] | PaginatedResponse<Post[]>> {
+  if (with_meta) {
+    return fetcher<Post[]>({ method: "articles", pagination, per_page, with_meta: true, category_id });
+  }
+  return fetcher<Post[]>({ method: "articles", pagination, per_page, category_id });
 }
+
 export async function fetchArticleById(id: string) {
   return fetcher<PostResponse>({ method: "article", id });
 }

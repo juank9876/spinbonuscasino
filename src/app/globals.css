@@ -151,6 +151,9 @@ body {
   @apply border-border outline-ring/50;
 }
 
+button {
+  @apply cursor-pointer
+}
 
 section {
   @apply w-full flex flex-col space-y-5
