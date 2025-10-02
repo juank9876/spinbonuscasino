@@ -4,7 +4,7 @@ import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Po
 
 type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots";
+  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots" | "sitemap";
 
 interface FetcherParams {
   method: MethodType;
@@ -233,3 +233,28 @@ export interface Robots {
 export async function fetchRobots() {
   return fetcher<Robots>({ method: "robots" });
 }
+export type SitemapUrl = {
+  loc: string
+  lastmod: string
+  changefreq:
+  | "always"
+  | "hourly"
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "yearly"
+  | "never"
+  priority: string // viene como "0.8" en string
+}
+
+export type SitemapResponse = {
+  xml_content: string
+  content_type: "application/xml"
+  urls_count: number
+  generated_at: string
+  urls: SitemapUrl[]
+}
+export async function fetchSitemap() {
+  return fetcher<SitemapResponse>({ method: "sitemap" });
+}
+

@@ -1,6 +1,7 @@
 import { fetchRobots, Robots } from "@/api-fetcher/fetcher";
 
 export async function GET() {
+    const domain = process.env.NEXT_PUBLIC_DOMAIN;
     try {
         const data: Robots = await fetchRobots();
 
@@ -15,7 +16,7 @@ export async function GET() {
         // fallback si la API falla
         const fallback = `User-agent: *
             Allow: /
-            Sitemap: https://tu-dominio.com/sitemap.xml`;
+            Sitemap: ${domain}/sitemap.xml`;
 
         return new Response(fallback, {
             status: 200,
