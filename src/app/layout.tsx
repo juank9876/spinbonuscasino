@@ -1,6 +1,5 @@
 import "./globals.css";
 import './globals-on.css';
-
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer/footer";
 import { fetchCookies, fetchSiteSettings, fetchAgeVerification, Cookies } from "@/api-fetcher/fetcher";
@@ -13,6 +12,7 @@ import { settings as cssSettings } from "@/config/debug-log";
 import { generateCssVariables, generateThemeColors, ThemeColors } from "@/utils/theme-colors";
 import { AgeVerification, SiteSettings } from "@/types/types";
 import { SchemaJson } from "./seo/schemaJson";
+
 
 export async function fetchLayoutData() {
   const [settings, cookies, ageVerification] = await Promise.all([
@@ -73,7 +73,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         suppressHydrationWarning
         className={`${font.variable} font-sans ${cssSettings.styles.applyStylesheet ? 'globals-on' : 'globals-off'}`}
       >
-
+        <head>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossOrigin="anonymous"
+            referrerPolicy="no-referrer"
+          />
+        </head>
         <LayoutBody
           settings={settings}
           themeColors={themeColors}
