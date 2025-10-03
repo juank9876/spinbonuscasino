@@ -51,7 +51,7 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
       <VideoHero />
       <FloatingElements />
 
-      <div className=" py-10 w-full flex h-full flex-col items-center justify-center ">
+      <div className=" py-20 w-full flex h-full flex-col items-center justify-center ">
         <div className="flex flex-col w-full items-center justify-center space-y-5">
           <CasinoBadge />
 
