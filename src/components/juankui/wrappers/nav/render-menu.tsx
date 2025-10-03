@@ -2,7 +2,7 @@
 
 import { capitalize } from '@/utils/capitalize'
 import { NavItemType, Slug } from '@/types/types'
-import { ChevronUp, ChevronDown } from 'lucide-react'
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { NavLink } from './nav-link'
 import { cn } from '@/lib/utils'
@@ -33,11 +33,10 @@ type ListItemProps = {
   parentSlug?: string
 }
 
-function ChevronIcon({ isOpen, isSubmenu }: { isOpen: boolean; isSubmenu?: boolean }) {
-  const Icon = isSubmenu ? ChevronUp : ChevronDown
-  const rotation = isSubmenu
-    ? (isOpen ? "rotate-90" : "rotate-0")
-    : (isOpen ? "rotate-180" : "rotate-0")
+type rotation = "rotate-90" | "rotate-0" | "rotate-180"
+
+function ChevronIcon({ isSubmenu, rotation }: { isSubmenu?: boolean; rotation: rotation }) {
+  const Icon = isSubmenu ? ChevronRight : ChevronUp
 
   return (
     <Icon
@@ -58,14 +57,14 @@ function ListItem({ title, href, isChild = false, childCategories, parentSlug }:
 
   return (
     <li
-      className={cn("relative group/item", hasSubcategories && "has-submenu")}
+      className={cn("relative group/item w-full flex", hasSubcategories && "has-submenu")}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
       <NavLink
         href={fullHref}
         className={cn(
-          "flex items-center gap-2 px-4 py-3 text-white relative transition-all duration-200 ease-in-out rounded-lg",
+          "flex w-full items-center gap-2 px-4 py-3 text-white relative transition-all duration-200 ease-in-out rounded-lg",
           "hover:text-[var(--color-accent)]",
           "before:absolute before:inset-0 before:bg-[var(--color-accent-light)]/10",
           "before:scale-x-0 before:opacity-0 before:transition-all",
@@ -74,14 +73,14 @@ function ListItem({ title, href, isChild = false, childCategories, parentSlug }:
         )}
       >
         {title}
-        {hasSubcategories && <ChevronIcon isOpen={isOpen} isSubmenu />}
+        {hasSubcategories && <ChevronIcon rotation={isOpen ? "rotate-180" : "rotate-0"} isSubmenu />}
       </NavLink>
 
       {hasSubcategories && (
         <ul
           className={cn(
             MENU_STYLES.submenu,
-            isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"
+            isOpen ? "bg-black scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"
           )}
         >
           {childCategories.map((subcat) => (
@@ -106,6 +105,7 @@ function MenuItemWithDropdown({
   item: NavItemType
   allSlugs: Slug[]
 }) {
+  const [isOpen, setIsOpen] = useState(false)
   const getCategoryPrefix = (categoryUrl: string) => {
     const foundCategory = Object.entries(allSlugs).find(
       ([slug]) => `/${slug}` === categoryUrl
@@ -116,6 +116,8 @@ function MenuItemWithDropdown({
   return (
     <>
       <Link
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
         href={item.url}
         className={cn(
           MENU_STYLES.base,
@@ -126,7 +128,7 @@ function MenuItemWithDropdown({
         )}
       >
         {capitalize(item.title)}
-        <ChevronIcon isOpen={false} />
+        <ChevronIcon rotation={isOpen ? "rotate-90" : "rotate-0"} isSubmenu />
       </Link>
 
       <div className={MENU_STYLES.dropdown}>

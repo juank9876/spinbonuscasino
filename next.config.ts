@@ -2,6 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: `/${process.env.API_KEY}`, // /apilokilla123
+        destination: "/apikey", // apunta a la página real
+      },
+    ];
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

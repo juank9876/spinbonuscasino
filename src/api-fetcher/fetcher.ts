@@ -44,7 +44,7 @@ export type PaginatedResponse<T> = {
 export async function fetcher<T>(params: FetcherParams & { with_meta: true }): Promise<PaginatedResponse<T>>;
 export async function fetcher<T>(params: FetcherParams & { with_meta?: false }): Promise<T>;
 
-export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T>> {
+export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T> | null> {
   const { method, id, type, slug, category_id, path, pagination, per_page, with_meta } = params
   const baseUrl = `https://intercms.dev/api/v2/data.php`
 
@@ -58,15 +58,14 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
     (category_id ? `&category_id=${category_id}` : ``) +
     (path ? `&path=${path}` : ``) +
     (pagination ? `&page=${pagination}` : ``) +
-    (per_page ? `&per_page=${per_page}` : ``) +
-    (category_id ? `&category_id=${category_id}` : ``)
+    (per_page ? `&per_page=${per_page}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 3 },
-      //cache: 'no-cache'
+      next: { revalidate: 0 },
+
     })
     const data: ResponseInterface<T> = await res.json();
 
@@ -78,15 +77,17 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
         } as PaginatedResponse<T>;
       }
       return data.data as T;
+    } else if (data.status === "error") {
+      console.error("Resource not found:", data.message);
+      return null
     }
 
   } catch (error) {
     console.error(url, method)
-    console.error("Error fetching data:", error);
-    return undefined as T;
+    console.error("Api not working:", error);
+    throw error;
   }
-
-  return undefined as T; // Retorna undefined si hay un error
+  return null // Retorna undefined si hay un error
 }
 
 export async function fetchPages() {
