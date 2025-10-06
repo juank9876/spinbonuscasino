@@ -17,6 +17,14 @@ export function removeEmptyElements(html: string): string {
 
             // Generic empty div (but more careful)
             ///<div(?:\s+[^>]*)?>\s*<\/div>/g,
+            /<h1(?:\s+[^>]*)?>\s*<\/h1>/g,
+            /<h2(?:\s+[^>]*)?>\s*<\/h2>/g,
+            /<h3(?:\s+[^>]*)?>\s*<\/h3>/g,
+            /<h4(?:\s+[^>]*)?>\s*<\/h4>/g,
+            /<h5(?:\s+[^>]*)?>\s*<\/h5>/g,
+            /<h6(?:\s+[^>]*)?>\s*<\/h6>/g,
+            /<p(?:\s+[^>]*)?>\s*<\/p>/g,
+            /<a(?:\s+[^>]*)?>\s*<\/a>/g,
 
             // Empty sections, articles, spans that might be containers
             /<section(?:\s+[^>]*)?>\s*<\/section>/g,

@@ -14,6 +14,7 @@ import { transformTestimonials, transformBlockquote, transformTakeaways } from '
 import type { JSX } from 'react'
 import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse, fixAccordionWidth } from './transformAccordion/accordion'
 import { transformBrandlisty } from './transformers'
+import { transformTermContentH3 } from './transformImportantTerms/transformTermItem'
 
 //import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
@@ -50,7 +51,7 @@ const rules: TransformerRule[] = [
   { className: 'accordion-item', transformer: transformAccordionItem },
   { className: 'accordion-header', transformer: transformAccordionHeader },
   { className: 'accordion-body', transformer: transformAccordionContent },
-
+  { className: 'gjs-comp-selected', transformer: transformTermContentH3 },
   //Fixes 
   { className: 'accordion-collapse', transformer: fixCollapse },
 
