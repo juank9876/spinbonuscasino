@@ -4,11 +4,35 @@ import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Po
 
 export type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots" | "sitemap";
+  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots" | "sitemap" |
+  "custom-scripts"
 
 export const methods: MethodType[] = [
-  "category-posts", "articles", "article", "pages", "page", "category", "categories", "menu", "site-settings", "authors", "author", "permalink", "all-slugs", "slug-to-id", "homepage", "tags", "footer", "cookies", "age-verification", "check-redirect", "robots", "sitemap"
+  "category-posts",
+  "articles",
+  "article",
+  "pages",
+  "page",
+  "category",
+  "categories",
+  "menu",
+  "site-settings",
+  "authors",
+  "author",
+  "permalink",
+  "all-slugs",
+  "slug-to-id",
+  "homepage",
+  "tags",
+  "footer",
+  "cookies",
+  "age-verification",
+  "check-redirect",
+  "robots",
+  "sitemap",
+  "custom-scripts"
 ]
+
 interface FetcherParams {
   method: MethodType;
   id?: string
@@ -262,3 +286,12 @@ export async function fetchSitemap() {
   return fetcher<SitemapResponse>({ method: "sitemap" });
 }
 
+export type CustomScript = {
+  custom_scripts: string
+  content_type: string
+  raw_content: string
+
+}
+export async function fetchCustomScript() {
+  return fetcher<CustomScript>({ method: "custom-scripts" });
+}

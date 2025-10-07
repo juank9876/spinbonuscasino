@@ -2,7 +2,7 @@ import "./globals.css";
 import './globals-on.css';
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer/footer";
-import { fetchCookies, fetchSiteSettings, fetchAgeVerification, Cookies } from "@/api-fetcher/fetcher";
+import { fetchCookies, fetchSiteSettings, fetchAgeVerification, Cookies, fetchCustomScript } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
 import { Providers } from "./providers";
 import { generateFontsFromSettings } from "@/utils/fonts";
@@ -12,6 +12,7 @@ import { settings as cssSettings } from "@/config/debug-log";
 import { generateCssVariables, generateThemeColors, ThemeColors } from "@/utils/theme-colors";
 import { AgeVerification, SiteSettings } from "@/types/types";
 import { SchemaJson } from "./seo/schemaJson";
+
 
 
 export async function fetchLayoutData() {
@@ -65,7 +66,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Generar fuente y colores a partir de settings
   const font = generateFontsFromSettings(settings);
   const themeColors = generateThemeColors(settings);
-
+  console.log(settings.schema_data)
   return (
     <ViewTransitions>
       <html

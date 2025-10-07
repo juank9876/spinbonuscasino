@@ -1,5 +1,4 @@
 // app/components/SEOJsonLD.tsx
-"use client";
 
 interface SchemaJsonProps {
     jsonLD?: string;
