@@ -12,12 +12,11 @@ type BlogPostsProps = {
 
 export function PostsPagination({ posts, meta }: BlogPostsProps) {
     const currentPage = Number(meta.current_page);
-    console.log(posts)
     return (
         <>
 
             {/* Posts */}
-            <div className="flex flex-wrap flex-row gap-6 mb-12">
+            <div className="flex flex-wrap justify-center flex-row gap-6 mb-12">
                 {posts.map((post) => (
                     <CardPostCategory key={post.id} post={post} />
                 ))}

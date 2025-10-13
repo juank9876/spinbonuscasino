@@ -1,3 +1,5 @@
+import { TagFromTags } from "@/api-fetcher/fetcher"
+
 export interface Page {
   id: string
   title: string
@@ -124,7 +126,7 @@ export interface Post {
   parent_id: string | null
   parent_title: string | null
   parent_slug: string | null
-  tags: Tag[]
+  tags: TagFromTags[]
   categories: CategoryWithPrimaryFlag[]
   primary_category: CategoryArticle
   category_id?: string
@@ -326,6 +328,15 @@ export interface Tag {
   schema_data: unknown | null
   created_at: string
   updated_at: string
+  posts: TagPost[]
+}
+type TagPost = {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  featured_image: string
+  published_at: string
 }
 
 

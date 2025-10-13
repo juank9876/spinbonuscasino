@@ -26,7 +26,7 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
       {cssSettings.styles.applyTemplateStyles && <HeroHomePage {...props} />}
 
       <Section>
-        <div className='flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
+        <div className='pt-20 flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
           {children}
         </div>
       </Section>

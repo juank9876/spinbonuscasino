@@ -3,6 +3,7 @@ import { createMetadata } from '@/app/seo/createMetadata'
 import NotFound from '@/app/not-found'
 import { getContentData, isCheckUrlPermalink } from '@/lib/fetch-data/getPageOrPostData'
 import { createCategory, createPage, createPost } from './page-post-category'
+import { PermalinkType } from '@/api-fetcher/fetcher'
 
 
 
@@ -29,7 +30,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
     await handleRedirect(slugString)
 
 
-    const isValidUrl = await isCheckUrlPermalink(slug[slug.length - 1], slugString, content?.type)
+    const isValidUrl = await isCheckUrlPermalink(slug[slug.length - 1], slugString, content?.type as PermalinkType)
     if (!isValidUrl) return <NotFound />
 
     //PASO 3. RENDERIZAR EL CONTENIDO

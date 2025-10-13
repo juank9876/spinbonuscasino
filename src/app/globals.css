@@ -190,6 +190,9 @@ h5 {
   @apply font-bold text-xl
 }
 
+.links-primary a.links-simple {
+  @apply text-[var(--color-primary)]
+}
 
 .hero-text-description {
   @apply text-lg lg:text-2xl

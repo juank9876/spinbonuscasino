@@ -25,9 +25,9 @@ export function ClientHeaderWrapper({ children }: ClientHeaderWrapperProps) {
 
   return (
     <ScrollContext.Provider value={isScrolled}>
-      <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${isScrolled
+      <header className={`fixed top-0 z-50 w-full transition-all duration-300  ${isScrolled
         ? 'bg-[var(--color-primary-dark)] backdrop-blur-md border-b border-gray-200/50 shadow-2xl'
-        : 'bg-transparent'
+        : 'bg-transparent links-primary '
         }`}>
         {children}
       </header>

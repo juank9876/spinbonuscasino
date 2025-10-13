@@ -4,6 +4,7 @@ import { PreCategory } from '@/components/juankui/pre-rendered/pre-category'
 import { fetchArticles } from '@/api-fetcher/fetcher'
 import { PostsPagination } from '@/app/(reserved-pages)/blog/PostsPagination'
 import { PrePage } from '@/components/juankui/pre-rendered/pre-page'
+import { PreTag } from '@/components/juankui/pre-rendered/pre-tag'
 
 
 export function createPage({ content }: { content: any }) {
@@ -63,6 +64,36 @@ export async function createCategory({ content, searchParams }: { content: any, 
                             */}
                     <PostsPagination posts={dataWithMeta.data} meta={dataWithMeta.meta} />
                 </PreCategory>
+            )}
+
+        </>
+    )
+}
+export async function createTag({ content, searchParams }: { content: any, searchParams: Promise<{ page?: string | undefined }> }) {
+    const { data: category } = content
+    const currentPage = Number((await searchParams)?.page || 1)
+    const POSTS_PER_PAGE = 10
+
+    const dataWithMeta = await fetchArticles({
+        pagination: currentPage,
+        per_page: POSTS_PER_PAGE,
+        with_meta: true,
+        category_id: category.id
+    })
+
+    return (
+        <>
+            {category.posts.length === 0 ? (
+                <PreTag className='flex h-full flex-col items-center justify-center'>
+
+                    <span className="text-muted rounded-lg bg-[var(--color-accent)] px-5 py-10 text-xl italic">
+                        Oops! No posts available in this category.
+                    </span>
+                </PreTag>
+            ) : (
+                <PreTag className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
+                    <PostsPagination posts={dataWithMeta.data} meta={dataWithMeta.meta} />
+                </PreTag>
             )}
 
         </>

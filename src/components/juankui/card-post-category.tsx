@@ -16,12 +16,12 @@ export function CardPostCategory({ post }: { post: Post }) {
         //href={`${categoryUrl}/${post.slug}`}
         href={post.seo_url}
         className="
-    group relative hidden lg:flex 
-    w-[300px] h-[500px] overflow-hidden rounded-2xl border border-[var(--color-accent-light)]
-    bg-gradient-to-b from-[var(--color-primary-dark)] to-blue-950
-    shadow-xl transition-all duration-500 
-    hover:shadow-2xl hover:shadow-[var(--color-accent-dark)]/30 hover:bg-[var(--color-accent-dark)]
-  "
+          group relative hidden lg:flex 
+          w-[300px] h-[500px] overflow-hidden rounded-2xl border border-[var(--color-accent-light)]
+          bg-gradient-to-b from-[var(--color-primary-dark)] to-blue-950
+          shadow-xl transition-all duration-500 
+          hover:shadow-2xl hover:shadow-[var(--color-accent-dark)]/30 hover:bg-[var(--color-accent-dark)]
+        "
       >
         <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
 
@@ -76,7 +76,7 @@ export function CardPostCategory({ post }: { post: Post }) {
                 <span className="text-xs font-semibold">{post.author_name.toUpperCase()}</span>
               </div>
             </div >
-          </div >
+          </div>
         </div >
       </Link >
 

@@ -123,7 +123,7 @@ function MenuItemWithDropdown({
           MENU_STYLES.base,
           MENU_STYLES.hover,
           MENU_STYLES.underline,
-          "text-base font-bold tracking-wide",
+          "text-base font-bold tracking-wide links-simple",
           "group-hover/menu:after:scale-x-100 group-hover/menu:after:origin-left"
         )}
       >
@@ -157,7 +157,7 @@ function MenuItemSimple({ item }: { item: NavItemType }) {
         MENU_STYLES.hover,
         MENU_STYLES.underline,
         MENU_STYLES.underlineHover,
-        "text-base font-bold tracking-wide"
+        "text-base font-bold tracking-wide links-simple"
       )}
     >
       {item.title}

@@ -14,7 +14,9 @@ export function PrePage({ children, page }: { children: ReactNode, page: Page })
       {cssSettings.styles.applyTemplateStyles && <HeroPage {...page} />}
 
       <Section>
-        {children}
+        <div className='pt-20 flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
+          {children}
+        </div>
       </Section>
     </MainWrapper>
   )
