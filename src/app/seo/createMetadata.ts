@@ -29,7 +29,6 @@ export async function createMetadata(slug: string): Promise<Metadata> {
         function convertToBoolean(value: number | undefined): boolean {
             return value === 1 || value === 1
         }
-        console.log(convertToBoolean(page?.robots_noarchive))
         return {
 
             title: await createPageTitle(page?.meta_title, page?.title) || settings.site_title,

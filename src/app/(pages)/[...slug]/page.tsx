@@ -2,7 +2,7 @@ import { handleRedirect } from '@/utils/handleRedirect'
 import { createMetadata } from '@/app/seo/createMetadata'
 import NotFound from '@/app/not-found'
 import { getContentData, isCheckUrlPermalink } from '@/lib/fetch-data/getPageOrPostData'
-import { createCategory, createPage, createPost } from './page-post-category'
+import { createCategory, createPage, createPost } from './components/page-post-category-tag'
 import { PermalinkType } from '@/api-fetcher/fetcher'
 
 
@@ -18,7 +18,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 
 export default async function Page({ params, searchParams }: { params: Promise<{ slug: string[] }>, searchParams: Promise<{ page?: string }> }) {
-    console.log("WORKING")
     //PASO 1. OBTENER EL SLUG Y LOS SEARCH PARAMS
     const { slug } = await params
     const slugString = '/' + slug.join("/") + '/'; // "a/b/c"
@@ -34,7 +33,6 @@ export default async function Page({ params, searchParams }: { params: Promise<{
     if (!isValidUrl) return <NotFound />
 
     //PASO 3. RENDERIZAR EL CONTENIDO
-    console.log(content.type)
 
     switch (content.type) {
         case "post": return createPost({ content })

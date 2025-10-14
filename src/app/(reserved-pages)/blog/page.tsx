@@ -1,6 +1,6 @@
 // app/blog/page.tsx
 import { fetchArticles } from "@/api-fetcher/fetcher";
-import { PostsPagination } from "./PostsPagination";
+import { PostsPagination } from "../../../components/juankui/posts-with-pagination";
 import { Post } from "@/types/types";
 
 type Props = {

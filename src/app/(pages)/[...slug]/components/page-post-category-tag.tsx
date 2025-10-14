@@ -2,7 +2,7 @@ import { PrePost } from '@/components/juankui/pre-rendered/pre-post'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PreCategory } from '@/components/juankui/pre-rendered/pre-category'
 import { fetchArticles } from '@/api-fetcher/fetcher'
-import { PostsPagination } from '@/app/(reserved-pages)/blog/PostsPagination'
+import { PostsPagination } from '@/components/juankui/posts-with-pagination'
 import { PrePage } from '@/components/juankui/pre-rendered/pre-page'
 import { PreTag } from '@/components/juankui/pre-rendered/pre-tag'
 

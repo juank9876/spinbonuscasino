@@ -66,7 +66,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Generar fuente y colores a partir de settings
   const font = generateFontsFromSettings(settings);
   const themeColors = generateThemeColors(settings);
-  console.log(settings.schema_data)
   return (
     <ViewTransitions>
       <html

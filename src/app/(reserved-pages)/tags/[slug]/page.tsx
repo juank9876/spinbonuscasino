@@ -3,7 +3,7 @@ import NotFound from "@/app/not-found";
 import { PreTag } from "@/components/juankui/pre-rendered/pre-tag";
 import { getContentData, getContentDataTag } from "@/lib/fetch-data/getPageOrPostData";
 import { handleRedirect } from "@/utils/handleRedirect";
-import { PostsPagination } from "../../blog/PostsPagination";
+import { PostsPagination } from "../../../../components/juankui/posts-with-pagination";
 import { Post } from "@/types/types";
 
 

@@ -46,6 +46,7 @@ interface FetcherParams {
   per_page?: number
   with_meta?: boolean
   tag_id?: string
+  author_id?: string
   silent?: boolean
 }
 
@@ -76,7 +77,7 @@ export async function fetcher<T>(params: FetcherParams & { with_meta: true }): P
 export async function fetcher<T>(params: FetcherParams & { with_meta?: false }): Promise<T>;
 
 export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T> | null> {
-  const { method, id, type, slug, category_id, path, pagination, per_page, with_meta, tag_id, silent = false } = params
+  const { method, id, type, slug, category_id, path, pagination, per_page, with_meta, tag_id, author_id, silent = false } = params
   const baseUrl = `https://intercms.dev/api/v2/data.php`
 
   const url = baseUrl +
@@ -90,10 +91,11 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
     (path ? `&path=${path}` : ``) +
     (pagination ? `&page=${pagination}` : ``) +
     (per_page ? `&per_page=${per_page}` : ``) +
-    (tag_id ? `&tag_id=${tag_id}` : ``)
+    (tag_id ? `&tag_id=${tag_id}` : ``) +
+    (author_id ? `&author_id=${author_id}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
-
+  { method === "articles" && console.log("fetchArticles", url) }
   try {
     const res = await fetch(url, {
       next: { revalidate: 0 },
@@ -131,13 +133,23 @@ export async function fetchPageById(id: string): Promise<Page> {
   return fetcher<Page>({ method: "page", id });
 }
 // Helper functions con tipado correcto para POSTS
-export async function fetchArticles(params: { pagination?: number; per_page?: number; with_meta: true; category_id?: string; tag_id?: string }): Promise<PaginatedResponse<Post[]>>;
-export async function fetchArticles(params: { pagination?: number; per_page?: number; with_meta?: false; category_id?: string; tag_id?: string }): Promise<Post[]>;
-export async function fetchArticles({ pagination, per_page, with_meta, category_id, tag_id }: { pagination?: number, per_page?: number, with_meta?: boolean, category_id?: string, tag_id?: string }): Promise<Post[] | PaginatedResponse<Post[]>> {
+export async function fetchArticles(params: { pagination?: number; per_page?: number; with_meta: true; category_id?: string; tag_id?: string; author_id?: string }): Promise<PaginatedResponse<Post[]>>;
+export async function fetchArticles(params: { pagination?: number; per_page?: number; with_meta?: false; category_id?: string; tag_id?: string; author_id?: string }): Promise<Post[]>;
+export async function fetchArticles({ pagination, per_page, with_meta, category_id, tag_id, author_id }: { pagination?: number, per_page?: number, with_meta?: boolean, category_id?: string, tag_id?: string, author_id?: string }): Promise<Post[] | PaginatedResponse<Post[]>> {
   if (with_meta) {
-    return fetcher<Post[]>({ method: "articles", pagination, per_page, with_meta: true, category_id, tag_id });
+    return fetcher<Post[]>({ method: "articles", pagination, per_page, with_meta: true, category_id, tag_id, author_id });
   }
   return fetcher<Post[]>({ method: "articles", pagination, per_page, category_id, tag_id });
+}
+
+export async function fetchArticlesByAuthorId(author_id: string) {
+  return fetcher<Post[]>({ method: "articles", author_id, per_page: 5 });
+}
+export async function fetchArticlesByCategoryId(category_id: string) {
+  return fetcher<Post[]>({ method: "articles", category_id, per_page: 5 });
+}
+export async function fetchArticlesByTagId(tag_id: string) {
+  return fetcher<Post[]>({ method: "articles", tag_id, per_page: 5 });
 }
 
 export async function fetchArticleById(id: string) {
