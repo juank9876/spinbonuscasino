@@ -33,7 +33,11 @@ interface PageTypeConfig {
 interface ProjectConfig {
     template: {
         particles: boolean;                  // Efecto de partículas en background
-        heroTransparent: boolean;           // Hero con navbar transparente
+        homeHeroWithNavbarTransparent: boolean;           // Hero con navbar transparente
+        pageHeroWithNavbarTransparent: boolean;
+        categoryHeroWithNavbarTransparent: boolean;
+        tagHeroWithNavbarTransparent: boolean;
+        postHeroWithNavbarTransparent: boolean;
         darkMode: boolean;                  // Modo oscuro habilitado
     };
     components: {
@@ -41,6 +45,13 @@ interface ProjectConfig {
             transparent: boolean;             // Navbar transparente al hacer scroll
             fixed: boolean;                   // Navbar fijo en top
             showSearch: boolean;              // Mostrar búsqueda
+        };
+        hero: {
+            homeHero: boolean;                  // Mostrar hero en la página
+            pageHero: boolean;
+            categoryHero: boolean;
+            tagHero: boolean;
+            postHero: boolean;
         };
         footer: {
             showOn: PageType[];               // En qué páginas mostrar footer
@@ -63,28 +74,41 @@ interface ProjectConfig {
  */
 export const config: ProjectConfig = {
     // ========================================
-    // CONFIGURACIÓN GENERAL DEL TEMPLATE
-    // ========================================
-    template: {
-        particles: true,
-        heroTransparent: true,
-        darkMode: false,
-    },
-
-    // ========================================
     // COMPONENTES GLOBALES
     // ========================================
     components: {
         navbar: {
-            transparent: true,
+            transparent: false,
             fixed: true,
             showSearch: true,
+        },
+        hero: {
+            homeHero: true,
+            pageHero: true,
+            categoryHero: true,
+            tagHero: true,
+            postHero: true,
         },
         footer: {
             showOn: ['home', 'posts', 'pages', 'categories', 'tags'],  // tags excluido
             showNewsletter: true,
             showSocialLinks: true,
         },
+    },
+
+    // ========================================
+    // CONFIGURACIÓN GENERAL DEL TEMPLATE
+    // ========================================
+    get template() {
+        return {
+            particles: true,
+            homeHeroWithNavbarTransparent: this.components.hero.homeHero && this.components.navbar.transparent,
+            pageHeroWithNavbarTransparent: this.components.hero.pageHero && this.components.navbar.transparent,
+            categoryHeroWithNavbarTransparent: this.components.hero.categoryHero && this.components.navbar.transparent,
+            tagHeroWithNavbarTransparent: this.components.hero.tagHero && this.components.navbar.transparent,
+            postHeroWithNavbarTransparent: this.components.hero.postHero && this.components.navbar.transparent,
+            darkMode: false,
+        };
     },
 
     // ========================================

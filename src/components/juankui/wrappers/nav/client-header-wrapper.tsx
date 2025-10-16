@@ -1,5 +1,6 @@
 'use client'
 
+import { config } from '@/config/config'
 import { useEffect, useState, createContext, useContext } from 'react'
 
 interface ClientHeaderWrapperProps {
@@ -26,8 +27,8 @@ export function ClientHeaderWrapper({ children }: ClientHeaderWrapperProps) {
   return (
     <ScrollContext.Provider value={isScrolled}>
       <header className={`fixed top-0 z-50 w-full transition-all duration-300  ${isScrolled
-        ? 'bg-[var(--color-primary-dark)] backdrop-blur-md border-b border-gray-200/50 shadow-2xl'
-        : 'bg-transparent links-primary '
+        ? 'bg-[var(--color-primary-dark)] backdrop-blur-md shadow-2xl'
+        : `${config.components.navbar.transparent ? 'bg-transparent' : 'bg-[var(--color-primary-dark)] backdrop-blur-md shadow-2xl'}`
         }`}>
         {children}
       </header>

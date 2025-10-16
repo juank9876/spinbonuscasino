@@ -43,15 +43,15 @@ export function PrePost({ children, post }: { children: ReactNode, post: Post })
   const tag = { id: post.tags[0]?.id, name: post.tags[0]?.name, slug: post.tags[0]?.slug }
 
   // Verificar si al menos un componente del sidebar está habilitado
-  const showSidebar = postConfig.sidebar.latest || postConfig.sidebar.author || 
-                      postConfig.sidebar.categories || postConfig.sidebar.tags;
+  const showSidebar = postConfig.sidebar.latest || postConfig.sidebar.author ||
+    postConfig.sidebar.categories || postConfig.sidebar.tags;
 
   return (
     <MainWrapper>
       {isParticles && <ParticlesFull />}
-      {cssSettings.styles.applyTemplateStyles && <HeroPost {...post} />}
+      {config.template.postHeroWithNavbarTransparent && <HeroPost {...post} />}
 
-      <Section className="w-[80vw] pt-20  flex justify-center items-center ">
+      <Section className="w-[80vw] pt-20 flex justify-center items-center ">
         <div className='w-[25vw]' />
         <div className="w-[90vw] pt-20 flex gap-5">
           <PostBody children={children} post={post} />
