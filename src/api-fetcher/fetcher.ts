@@ -316,7 +316,6 @@ export async function fetchCustomScript() {
 }
 
 export async function fetchTagById(id: string): Promise<Tag> {
-  debugLog(debug.fetchTagById, "fetchTagById", id)
   return fetcher<Tag>({ method: "tag", id });
 }
 

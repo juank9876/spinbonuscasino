@@ -35,8 +35,7 @@ export const settings = {       //manejar opciones de config del proyecto. No af
     styles: {
         //loadTailwindFromApi: false,
         applyStylesheet: true,             //Aplicar / no aplicar hoja de estilos del proyeto
-        applyTemplateStyles: false,         //AKA transformer rules ON/OFF --- DONE
-        applySidebarNews: true,
+        applyTemplateStyles: true,         //AKA transformer rules ON/OFF --- DONE
 
     }
 }

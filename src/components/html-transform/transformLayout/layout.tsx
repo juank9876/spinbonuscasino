@@ -1,3 +1,4 @@
+import { fixAttribs } from '@/lib/utils';
 import { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react-parser'
 
 export function transformRow(el: Element, options: HTMLReactParserOptions) {
@@ -6,23 +7,26 @@ export function transformRow(el: Element, options: HTMLReactParserOptions) {
     (child) => child.type === 'tag'
   ) as Element[]
 
+  const attribs = fixAttribs(el.attribs)
+
   //Fix Bug de que se sale del main, ya que se aplica flex-row a todo
   if (el.children.length === 1) {
     return (
-      <div id={el.attribs?.id} className={`flex flex-col items-center justify-center ${el.attribs?.class || ''}`}>
+      <div {...attribs} className={`flex flex-col items-center justify-center ${attribs.className || ''}`}>
         {domToReact(validChildren as DOMNode[], options)}
       </div>
     )
   }
   return (
-    <div id={el.attribs?.id} className={`flex flex-col lg:flex-row lg:flex-wrap ${el.attribs?.class || ''}`}>
+    <div {...attribs} className={`flex flex-col lg:flex-row lg:flex-wrap ${attribs.className || ''}`}>
       {domToReact(validChildren as DOMNode[], options)}
     </div>
   )
 }
 
 export function transformCol(el: Element, options: HTMLReactParserOptions) {
-  const classStr = el.attribs?.class || ''
+  const attribs = fixAttribs(el.attribs)
+  const classStr = attribs?.className || ''
 
   const getTailwindWidth = (classStr: string): string | number => {
     const match = classStr.match(/col-(?:xs|sm|md|lg|xl)-(\d+)/)
@@ -48,16 +52,16 @@ export function transformCol(el: Element, options: HTMLReactParserOptions) {
   return (
     <>
       <div
-        id={el.attribs?.id}
+        {...attribs}
         style={{ width: `${widthClass}%` }}
-        className={`${widthClass} max-${widthClass} lg:flex lg:flex-col justify-center items-center h-full hidden ${el.attribs?.class || ''}`}
+        className={`${widthClass} max-${widthClass} lg:flex lg:flex-col justify-center items-center h-full hidden ${attribs.className || ''}`}
       >
         {domToReact(el.children as DOMNode[], options)}
       </div>
 
       <div
-        id={el.attribs?.id}
-        className={`h-full w-full items-center justify-center lg:hidden ${el.attribs?.class || ''}`}
+        {...attribs}
+        className={`h-full w-full items-center justify-center lg:hidden ${attribs.className || ''}`}
       >
         {domToReact(el.children as DOMNode[], options)}
       </div>
@@ -66,24 +70,30 @@ export function transformCol(el: Element, options: HTMLReactParserOptions) {
 }
 
 export function transformContainer(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <div className={`flex flex-col ${el.attribs?.class || ''}`}>
+    <div {...attribs} className={`flex flex-col ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )
 }
 
 export function transformDiv(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <div className={`${el.attribs?.class || ''}`}>
+    <div {...attribs} className={`${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )
 }
 
 export function transformSection(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <section className={` rounded-lg px-5 py-5 ${el.attribs?.class || ''}`}>
+    <section {...attribs} className={`rounded-lg px-5 py-5 ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </section>
   )

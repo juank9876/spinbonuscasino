@@ -13,7 +13,7 @@ import { transformImg, transformSvg } from './transformMedia/media'
 import { transformTestimonials, transformBlockquote, transformTakeaways } from './transformSpecial/special'
 import type { JSX } from 'react'
 import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse, fixAccordionWidth } from './transformAccordion/accordion'
-import { transformBrandlisty } from './transformers'
+import { transformBrandlisty } from './transformBrandlisty/brandlisty'
 import { transformTermContentH3 } from './transformImportantTerms/transformTermItem'
 
 //import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'

@@ -1,0 +1,203 @@
+/**
+ * Tipos de página en el proyecto
+ */
+export type PageType = 'home' | 'posts' | 'pages' | 'categories' | 'tags';
+
+/**
+ * Configuración de componentes sidebar
+ */
+interface SidebarConfig {
+    latest: boolean;      // Últimos posts
+    author: boolean;      // Info del autor
+    categories: boolean;  // Categorías relacionadas
+    tags: boolean;        // Tags relacionados
+    related: boolean;     // Posts relacionados
+}
+
+/**
+ * Configuración por tipo de página
+ */
+interface PageTypeConfig {
+    sidebar: SidebarConfig;
+    author: boolean;      // Mostrar autor del post/page
+    tags: boolean;        // Mostrar tags
+    categories: boolean;  // Mostrar categorías
+    breadcrumbs: boolean; // Mostrar breadcrumbs
+    share: boolean;       // Botones de compartir
+    comments: boolean;    // Sistema de comentarios
+}
+
+/**
+ * Configuración global del proyecto
+ */
+interface ProjectConfig {
+    template: {
+        particles: boolean;                  // Efecto de partículas en background
+        heroTransparent: boolean;           // Hero con navbar transparente
+        darkMode: boolean;                  // Modo oscuro habilitado
+    };
+    components: {
+        navbar: {
+            transparent: boolean;             // Navbar transparente al hacer scroll
+            fixed: boolean;                   // Navbar fijo en top
+            showSearch: boolean;              // Mostrar búsqueda
+        };
+        footer: {
+            showOn: PageType[];               // En qué páginas mostrar footer
+            showNewsletter: boolean;          // Mostrar suscripción newsletter
+            showSocialLinks: boolean;         // Mostrar enlaces sociales
+        };
+    };
+    pageTypes: {
+        home: PageTypeConfig;
+        posts: PageTypeConfig;
+        pages: PageTypeConfig;
+        categories: PageTypeConfig;
+        tags: PageTypeConfig;
+    };
+}
+
+/**
+ * Configuración del proyecto
+ * Controla qué componentes se muestran en cada tipo de página
+ */
+export const config: ProjectConfig = {
+    // ========================================
+    // CONFIGURACIÓN GENERAL DEL TEMPLATE
+    // ========================================
+    template: {
+        particles: true,
+        heroTransparent: true,
+        darkMode: false,
+    },
+
+    // ========================================
+    // COMPONENTES GLOBALES
+    // ========================================
+    components: {
+        navbar: {
+            transparent: true,
+            fixed: true,
+            showSearch: true,
+        },
+        footer: {
+            showOn: ['home', 'posts', 'pages', 'categories', 'tags'],  // tags excluido
+            showNewsletter: true,
+            showSocialLinks: true,
+        },
+    },
+
+    // ========================================
+    // CONFIGURACIÓN POR TIPO DE PÁGINA
+    // ========================================
+    pageTypes: {
+        // HOME
+        home: {
+            sidebar: {
+                latest: true,
+                author: false,
+                categories: false,
+                tags: false,
+                related: false,
+            },
+            author: false,
+            tags: false,
+            categories: false,
+            breadcrumbs: false,
+            share: false,
+            comments: false,
+        },
+
+        // POSTS (artículos individuales)
+        posts: {
+            sidebar: {
+                latest: true,
+                author: false,
+                categories: false,
+                tags: false,      // Desactivado - no mostrar tags en sidebar
+                related: false,
+            },
+            author: true,
+            tags: true,
+            categories: true,
+            breadcrumbs: true,
+            share: true,
+            comments: true,
+        },
+
+        // PAGES (páginas estáticas)
+        pages: {
+            sidebar: {
+                latest: false,
+                author: false,
+                categories: false,
+                tags: false,
+                related: false,
+            },
+            author: false,
+            tags: false,
+            categories: false,
+            breadcrumbs: true,
+            share: false,
+            comments: false,
+        },
+
+        // CATEGORIES (listado de posts por categoría)
+        categories: {
+            sidebar: {
+                latest: true,
+                author: false,
+                categories: true,
+                tags: true,
+                related: false,
+            },
+            author: false,
+            tags: false,
+            categories: false,
+            breadcrumbs: true,
+            share: false,
+            comments: false,
+        },
+
+        // TAGS (listado de posts por tag)
+        tags: {
+            sidebar: {
+                latest: true,
+                author: false,
+                categories: true,
+                tags: true,
+                related: false,
+            },
+            author: false,
+            tags: false,
+            categories: false,
+            breadcrumbs: true,
+            share: false,
+            comments: false,
+        },
+    },
+};
+
+/**
+ * Helper function para obtener configuración de un tipo de página
+ */
+export function getPageConfig(pageType: PageType): PageTypeConfig {
+    return config.pageTypes[pageType];
+}
+
+/**
+ * Helper function para verificar si un componente debe mostrarse
+ */
+export function shouldShowComponent(
+    pageType: PageType,
+    component: keyof PageTypeConfig
+): boolean {
+    return config.pageTypes[pageType][component] as boolean;
+}
+
+/**
+ * Helper function para verificar si footer debe mostrarse
+ */
+export function shouldShowFooter(pageType: PageType): boolean {
+    return config.components.footer.showOn.includes(pageType);
+}

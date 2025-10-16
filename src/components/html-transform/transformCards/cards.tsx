@@ -1,3 +1,4 @@
+import { fixAttribs } from '@/lib/utils';
 import { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react-parser'
 import { CardShine } from '../../juankui/legacy/card-shine'
 
@@ -21,8 +22,10 @@ export function transformCard(el: Element, options: HTMLReactParserOptions) {
     contentChildren = restChildren;
   }
 
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <div id={el.attribs?.id} className='relative flex flex-col mx-auto'>
+    <div {...attribs} className={`relative flex flex-col mx-auto ${attribs.className || ''}`}>
       {badgeContent &&
         <div className="absolute top-0 left-0 z-50">
           <div className="size-16 flex items-center justify-center text-3xl font-bold rounded-full shadow-lg">
@@ -30,7 +33,7 @@ export function transformCard(el: Element, options: HTMLReactParserOptions) {
           </div>
         </div>
       }
-      <CardShine className={`mx-5 relative text-white my-5 flex w-full max-w-[350px] overflow-hidden transition duration-500 bg-[#171717] ${el.attribs?.class || ''}`}>
+      <CardShine className={`mx-5 relative text-white my-5 flex w-full max-w-[350px] overflow-hidden transition duration-500 bg-[#171717]`}>
         {domToReact(contentChildren, options)}
       </CardShine>
     </div>
@@ -43,10 +46,12 @@ export function transformCardBody(el: Element, options: HTMLReactParserOptions) 
   const hasH5 = children.some(child => child.type === 'tag' && child.name === 'h5');
   const hasImg = children.some(child => child.type === 'tag' && child.name === 'img');
 
+  const attribs = fixAttribs(el.attribs)
+
   if (hasImg) {
     // Renderiza algo especial si hay img
     return (
-      <div id={el.attribs?.id} className={`flex flex-col space-y-3 border-2 border-green-500 ${el.attribs?.class || ''}`}>
+      <div {...attribs} className={`flex flex-col space-y-3 border-2 border-green-500 ${attribs.className || ''}`}>
         <span className="text-green-600 font-bold">Contiene Imagen</span>
         {domToReact(el.children as DOMNode[], options)}
       </div>
@@ -54,15 +59,16 @@ export function transformCardBody(el: Element, options: HTMLReactParserOptions) 
   }
 
   return (
-    <div id={el.attribs?.id} className={`flex flex-col space-y-3 ${el.attribs?.class || ''}`}>
+    <div {...attribs} className={`flex flex-col space-y-3 ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )
 }
 
 export function transformFeatureItem(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
   // Extrae el badge si existe
-  const badge = el.attribs?.badge || '1';
+  const badge = attribs?.badge || '1';
   // Busca la imagen y el resto del contenido
   const imageElement = (el.children as Element[]).find(child => child.name === 'img');
   const otherChildren = (el.children as Element[]).filter(child => child !== imageElement);
@@ -70,7 +76,7 @@ export function transformFeatureItem(el: Element, options: HTMLReactParserOption
   const [titleNode, ...rest] = otherChildren;
 
   return (
-    <div id={el.attribs?.id} className={`relative flex flex-col w-full max-w-[370px] h-[430px] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] hover:to-[var(--color-primary-semi-dark)] rounded-2xl shadow-2xl shadow-blue-200 overflow-hidden items-center justify-center mx-auto my-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-3xl ${el.attribs?.class || ''}`}>
+    <div {...attribs} className={`relative flex flex-col w-full max-w-[370px] h-[430px] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] hover:to-[var(--color-primary-semi-dark)] rounded-2xl shadow-2xl shadow-blue-200 overflow-hidden items-center justify-center mx-auto my-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-3xl ${attribs.className || ''}`}>
       {/* Badge/Número o Imagen */}
       <div className=" z-10 flex items-center justify-center py-5">
         {imageElement ? (
@@ -102,8 +108,10 @@ export function transformFeatureItem(el: Element, options: HTMLReactParserOption
 }
 
 export function transformFeatureList(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <div id={el.attribs?.id} className={`flex flex-wrap items-center justify-center gap-4 ${el.attribs?.class || ''}`}>
+    <div {...attribs} className={`flex flex-wrap items-center justify-center gap-4 ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )

@@ -15,9 +15,11 @@ export function transformH2(el: Element, options: HTMLReactParserOptions) {
   const icons = [ArrowRight, Star, Sparkles, Flame, Bolt, Dice1Icon, Dice2Icon, Dice3Icon, Dice4Icon, Dice5Icon, Dice6Icon]
   const RandomIcon = icons[Math.floor(Math.random() * icons.length)]
 
+  const attribs = fixAttribs(el.attribs)
+
   return (
 
-    <h2 id={el.attribs?.id} className={`${el.attribs?.class || ''} font-bold text-3xl`}>
+    <h2 {...attribs} className={`font-bold text-3xl ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </h2>
 
@@ -29,16 +31,20 @@ export function transformH3(el: Element, options: HTMLReactParserOptions) {
   const icons = [ArrowRight, Star, Sparkles, Flame, Bolt]
   const RandomIcon = icons[Math.floor(Math.random() * icons.length)]
 
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <h3 id={el.attribs?.id} className={`${el.attribs?.class || ''} font-bold text-2xl`}>
+    <h3 {...attribs} className={`font-bold text-2xl ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </h3>
   )
 }
 
 export function transformLi(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <li id={el.attribs?.id} className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold list-inside list-disc relative w-fit ${el.attribs?.class || ''}`}>
+    <li {...attribs} className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold list-inside list-disc relative w-fit ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </li>
   )
@@ -66,16 +72,20 @@ export function transformCode(el: Element) {
 
   if (!codeContent) return null; // ⛔ No renderizar si está vacío
 
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <code className={`block items-end justify-start whitespace-pre px-2 ${el.attribs?.class || ''}`}>
+    <code {...attribs} className={`block items-end justify-start whitespace-pre px-2 ${attribs.className || ''}`}>
       {getText(el.children as DOMNode[])}
     </code>
   );
 }
 
 export function transformStrong(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <strong className={`flex font-bold ${el.attribs?.class || ''}`}>
+    <strong {...attribs} className={`flex font-bold ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </strong>
   )
@@ -83,26 +93,32 @@ export function transformStrong(el: Element, options: HTMLReactParserOptions) {
 
 export function transformP(el: Element, options: HTMLReactParserOptions) {
   if (el.children.length === 0) return null;
+
+  const attribs = fixAttribs(el.attribs)
+  console.log(attribs)
   return (
 
-    <p className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold ${el.attribs?.class || ''}`}>
+    <p {...attribs} className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </p>
   )
 }
 
 export function transformPre(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
 
   return (
-    <pre className={`overflow-x-auto rounded-md bg-zinc-900 p-4 text-white ${el.attribs?.class || ''}`}>
+    <pre {...attribs} className={`overflow-x-auto rounded-md bg-zinc-900 p-4 text-white ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </pre>
   );
 }
 
 export function transformTextElement(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+
   return (
-    <div className={`text py-2 ${el.attribs?.class || ''}`}>
+    <div {...attribs} className={`text py-2 ${attribs.className || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )

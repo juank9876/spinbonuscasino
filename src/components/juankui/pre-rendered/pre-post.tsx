@@ -12,13 +12,16 @@ import { LatestPosts } from '../sidebar-with-posts/latest-posts'
 import { AuthorPosts } from '../sidebar-with-posts/author-posts'
 import { CategoryPosts } from '../sidebar-with-posts/category-posts'
 import { TagPosts } from '../sidebar-with-posts/tag-posts'
+import { config } from '@/config/config'
 
 function PostBody({ children, post }: { children: ReactNode, post: Post }) {
+  const postConfig = config.pageTypes.posts;
+
   return (
     <div className='flex flex-col'>
       {children}
-      {/* Card de autor MeriStation */}
-      {post.author_name && (
+      {/* Card de autor */}
+      {postConfig.author && post.author_name && (
         <AuthorCard
           author_id={post.author_id}
           name={post.author_name}
@@ -26,7 +29,7 @@ function PostBody({ children, post }: { children: ReactNode, post: Post }) {
           bio={post.author_bio}
         />
       )}
-      {post.tags && (
+      {postConfig.tags && post.tags && (
         <TagsList tags={post.tags} />
       )}
     </div>
@@ -34,9 +37,14 @@ function PostBody({ children, post }: { children: ReactNode, post: Post }) {
 }
 
 export function PrePost({ children, post }: { children: ReactNode, post: Post }) {
+  const postConfig = config.pageTypes.posts;
   const author = { id: post.author_id, name: post.author_name, avatar: post.author_avatar, bio: post.author_bio }
   const category = { id: post.category_id, name: post.category_name, slug: post.category_slug }
   const tag = { id: post.tags[0]?.id, name: post.tags[0]?.name, slug: post.tags[0]?.slug }
+
+  // Verificar si al menos un componente del sidebar está habilitado
+  const showSidebar = postConfig.sidebar.latest || postConfig.sidebar.author || 
+                      postConfig.sidebar.categories || postConfig.sidebar.tags;
 
   return (
     <MainWrapper>
@@ -48,12 +56,12 @@ export function PrePost({ children, post }: { children: ReactNode, post: Post })
         <div className="w-[90vw] pt-20 flex gap-5">
           <PostBody children={children} post={post} />
 
-          {cssSettings.styles.applySidebarNews && (
+          {showSidebar && (
             <div className="w-[800px] flex-col gap-5 lg:flex hidden">
-              <LatestPosts />
-              <AuthorPosts author={author} />
-              <CategoryPosts category={category} />
-              {tag && <TagPosts tag={tag} />}
+              {postConfig.sidebar.latest && <LatestPosts />}
+              {postConfig.sidebar.author && <AuthorPosts author={author} />}
+              {postConfig.sidebar.categories && <CategoryPosts category={category} />}
+              {postConfig.sidebar.tags && tag && <TagPosts tag={tag} />}
             </div>
           )}
         </div>
