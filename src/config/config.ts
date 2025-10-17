@@ -161,6 +161,7 @@ export const config: ProjectConfig = {
         // HOME
         home: {
             sidebar: {
+                brandlistyLite: false,
                 latest: true,
                 author: true,
                 categories: true,
