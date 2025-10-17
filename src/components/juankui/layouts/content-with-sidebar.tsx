@@ -5,6 +5,7 @@ import { AuthorPosts } from '../sidebar-with-posts/author-posts';
 import { CategoryPosts } from '../sidebar-with-posts/category-posts';
 import { TagPosts } from '../sidebar-with-posts/tag-posts';
 import { config } from '@/config/config';
+import { BrandlistyLite } from '../sidebar-with-posts/brandlisty-lite';
 
 interface SidebarConfig {
     latest?: boolean;
@@ -12,6 +13,7 @@ interface SidebarConfig {
     categories?: boolean;
     tags?: boolean;
     related?: boolean;
+    brandlistyLite?: boolean;
 }
 
 interface SidebarData {
@@ -65,6 +67,7 @@ export function ContentWithSidebar({
                 {/* Sidebar */}
                 {showSidebar && (
                     <div className={`flex-col ${containerGap} lg:flex hidden ${sidebarWidth}`}>
+                        {sidebarConfig.brandlistyLite && <BrandlistyLite />}
                         {sidebarConfig.latest && <LatestPosts postId={sidebarData?.postId} />}
                         {sidebarConfig.author && sidebarData?.author && (
                             <AuthorPosts author={sidebarData.author} postId={sidebarData?.postId} />

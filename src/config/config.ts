@@ -7,6 +7,7 @@ export type PageType = 'home' | 'posts' | 'pages' | 'categories' | 'tags';
  * Configuración de componentes sidebar
  */
 interface SidebarConfig {
+    brandlistyLite: boolean;
     latest: boolean;      // Últimos posts
     author: boolean;      // Info del autor
     categories: boolean;  // Categorías relacionadas
@@ -177,6 +178,7 @@ export const config: ProjectConfig = {
         // POSTS (artículos individuales)
         posts: {
             sidebar: {
+                brandlistyLite: true,
                 latest: true,
                 author: true,
                 categories: true,
@@ -194,6 +196,7 @@ export const config: ProjectConfig = {
         // PAGES (páginas estáticas)
         pages: {
             sidebar: {
+                brandlistyLite: false,
                 latest: false,
                 author: false,
                 categories: false,
@@ -211,6 +214,7 @@ export const config: ProjectConfig = {
         // CATEGORIES (listado de posts por categoría)
         categories: {
             sidebar: {
+                brandlistyLite: false,
                 latest: true,
                 author: false,
                 categories: true,
@@ -228,6 +232,7 @@ export const config: ProjectConfig = {
         // TAGS (listado de posts por tag)
         tags: {
             sidebar: {
+                brandlistyLite: false,
                 latest: true,
                 author: false,
                 categories: true,
