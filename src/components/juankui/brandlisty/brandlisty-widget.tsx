@@ -24,7 +24,7 @@ export default function BrandlistyWidget({
     listId,
     boton = "Visit now",
     limit = "10",
-    sidebarMode = false
+    sidebarMode
 }: Props) {
     const [html, setHtml] = useState<string>("")
     const [error, setError] = useState<string | null>(null)
@@ -57,6 +57,7 @@ export default function BrandlistyWidget({
 
                 // Si está en modo sidebar, aplicar transformaciones CSS
                 if (sidebarMode) {
+                    console.log("[+] Aplicando transformaciones CSS para sidebar")
                     cleanedHtml = transformHtmlForSidebar(cleanedHtml)
                 }
 
