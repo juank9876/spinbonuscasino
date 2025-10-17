@@ -49,7 +49,7 @@ export async function CategoryPosts({ category, className, postId }: { category:
                         href={'/blog'}
                         className="flex items-center justify-center gap-2 w-full py-3 px-4 text-sm font-semibold text-white bg-[var(--color-accent)] hover:bg-[var(--color-accent-dark)] hover:text-white rounded-lg transition-all duration-200 group"
                     >
-                        <span>View all news</span>
+                        <span>View all</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
