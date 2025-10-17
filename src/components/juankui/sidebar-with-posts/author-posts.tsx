@@ -4,11 +4,12 @@ import { Smile } from "lucide-react";
 
 
 
-export async function AuthorPosts({ author, className }: { author: { id: string, name: string, avatar: string, bio: string }, className?: string }) {
+export async function AuthorPosts({ author, className, postId }: { author: { id: string, name: string, avatar: string, bio: string }, className?: string, postId?: string }) {
     if (!author.id) return null;
 
-    const posts = await fetchArticlesByAuthorId(author.id)
-    console.log(posts)
+    let posts = await fetchArticlesByAuthorId(author.id)
+    posts = posts.filter((post) => post.id !== postId)
+
 
     if (!posts || posts.length === 0) {
         return null;

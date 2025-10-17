@@ -95,7 +95,6 @@ export function transformP(el: Element, options: HTMLReactParserOptions) {
   if (el.children.length === 0) return null;
 
   const attribs = fixAttribs(el.attribs)
-  console.log(attribs)
   return (
 
     <p {...attribs} className={`[&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold ${attribs.className || ''}`}>

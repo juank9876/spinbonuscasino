@@ -46,6 +46,13 @@ interface ProjectConfig {
             fixed: boolean;                   // Navbar fijo en top
             showSearch: boolean;              // Mostrar búsqueda
         };
+        layout: {
+            width: {
+                base: string;
+                lg: string;
+                xl: string;
+            };
+        };
         hero: {
             homeHero: boolean;                  // Mostrar hero en la página
             pageHero: boolean;
@@ -58,6 +65,18 @@ interface ProjectConfig {
             showNewsletter: boolean;          // Mostrar suscripción newsletter
             showSocialLinks: boolean;         // Mostrar enlaces sociales
         };
+        sidebar: {
+            width: {
+                base: string;
+                lg: string;
+                xl: string;
+            };
+            spacer: {
+                enabled: boolean;
+                width: string;
+            };
+            gap: string;
+        };
     };
     pageTypes: {
         home: PageTypeConfig;
@@ -66,6 +85,7 @@ interface ProjectConfig {
         categories: PageTypeConfig;
         tags: PageTypeConfig;
     };
+
 }
 
 /**
@@ -77,6 +97,13 @@ export const config: ProjectConfig = {
     // COMPONENTES GLOBALES
     // ========================================
     components: {
+        layout: {
+            width: {
+                base: 'w-[90vw]',
+                lg: 'lg:w-[60vw]',
+                xl: 'xl:w-[60vw]',
+            }
+        },
         navbar: {
             transparent: false,
             fixed: true,
@@ -94,6 +121,21 @@ export const config: ProjectConfig = {
             showNewsletter: true,
             showSocialLinks: true,
         },
+        sidebar: {
+            // Ancho del sidebar en diferentes breakpoints
+            width: {
+                base: 'hidden',           // Mobile: ancho completo (aunque esté oculto)
+                lg: 'lg:w-[600px]',       // Desktop: ancho fijo
+                xl: 'xl:w-[600px]',       // Desktop grande: más ancho
+            },
+            // Espaciador izquierdo (para balance visual)
+            spacer: {
+                enabled: true,
+                width: 'w-[0vw]',
+            },
+            // Gap entre contenido y sidebar
+            gap: 'gap-5',
+        }
     },
 
     // ========================================
@@ -119,10 +161,10 @@ export const config: ProjectConfig = {
         home: {
             sidebar: {
                 latest: true,
-                author: false,
-                categories: false,
-                tags: false,
-                related: false,
+                author: true,
+                categories: true,
+                tags: true,
+                related: true,
             },
             author: false,
             tags: false,
@@ -136,10 +178,10 @@ export const config: ProjectConfig = {
         posts: {
             sidebar: {
                 latest: true,
-                author: false,
-                categories: false,
-                tags: false,      // Desactivado - no mostrar tags en sidebar
-                related: false,
+                author: true,
+                categories: true,
+                tags: true,      // Desactivado - no mostrar tags en sidebar
+                related: true,
             },
             author: true,
             tags: true,

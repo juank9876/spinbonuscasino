@@ -6,10 +6,11 @@ import { Link } from "../optionals/link";
 
 
 
-export async function LatestPosts({ className }: { className?: string }) {
-    const posts = await fetchArticles({
+export async function LatestPosts({ className, postId }: { className?: string, postId?: string }) {
+    let posts = await fetchArticles({
         per_page: 7
     });
+    posts = posts.filter((post) => post.id !== postId)
 
     if (!posts || posts.length === 0) {
         return null;

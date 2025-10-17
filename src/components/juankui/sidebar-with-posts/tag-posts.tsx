@@ -1,13 +1,14 @@
 import { fetchArticlesByTagId } from "@/api-fetcher/fetcher";
-import { ArrowRight, Newspaper, Tag } from "lucide-react";
+import { ArrowRight, Tag } from "lucide-react";
 import { Link } from "../optionals/link";
 import { NewsCard } from "./card-post";
 import { capitalize } from "@/utils/capitalize";
 
-export async function TagPosts({ tag, className }: { tag: { id: string | undefined, name: string | undefined, slug: string | undefined }, className?: string }) {
+export async function TagPosts({ tag, className, postId }: { tag: { id: string | undefined, name: string | undefined, slug: string | undefined }, className?: string, postId?: string }) {
     if (!tag.id) return null;
 
-    const posts = await fetchArticlesByTagId(tag.id);
+    let posts = await fetchArticlesByTagId(tag.id);
+    posts = posts.filter((post) => post.id !== postId)
 
     if (!posts || posts.length === 0) {
         return null;

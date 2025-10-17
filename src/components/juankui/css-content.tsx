@@ -6,12 +6,33 @@ type DynamicStyleProps = {
     cssContent: string | undefined;
 };
 
+/**
+ * Elimina la propiedad max-width de una clase CSS específica
+ */
+const removeMaxWidthFromClass = (cssContent: string, className: string): string => {
+    // Buscar la clase específica con su bloque de estilos
+    const classRegex = new RegExp(`\\.${className}\\s*\\{([^}]*)\\}`, 'g');
+    
+    return cssContent.replace(classRegex, (match, styles) => {
+        // Eliminar todas las variantes de max-width
+        const cleanedStyles = styles
+            .replace(/max-width\s*:\s*[^;]*;?/gi, '')  // max-width: valor;
+            .replace(/\s+/g, ' ')  // Limpiar espacios múltiples
+            .trim();
+        
+        return `.${className} { ${cleanedStyles} }`;
+    });
+};
+
 const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
     if (!cssContent) return undefined;
 
     cssContent = cssContent.replace(/\/\*.*?\*\//g, '');
     // Replace all standalone * selectors with the fixed class
     cssContent = cssContent.replace(/\*\s*{/g, '.fixed-global-styles-from-builder {');
+
+    // Eliminar max-width de .info-cards-container
+    cssContent = removeMaxWidthFromClass(cssContent, 'info-cards-container');
 
     debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
     useEffect(() => {

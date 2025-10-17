@@ -11,7 +11,6 @@ export async function createMetadata(slug: string): Promise<Metadata> {
     const postOrPageOrCategory = await getContentData(slug)
 
     if (postOrPageOrCategory?.type === 'page' || postOrPageOrCategory?.type === 'post') {
-        console.log('ESTO ES UNA PAGE')
         const page = postOrPageOrCategory.type === 'page' ? postOrPageOrCategory.data : postOrPageOrCategory.data.post
         debugLog(debug.createMetadata,
             `[+] createMetadata: 
@@ -99,7 +98,6 @@ export async function createMetadata(slug: string): Promise<Metadata> {
         }
     }
     else {
-        console.log('ESTO NO ES UNA PAGE, RENDERIZANDO', settings.site_title, settings.site_description)
         return {
             title: settings.site_title,
             description: settings.site_description,

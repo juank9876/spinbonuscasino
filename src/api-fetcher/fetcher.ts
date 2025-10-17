@@ -95,7 +95,6 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
     (author_id ? `&author_id=${author_id}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
-  { method === "articles" && console.log("fetchArticles", url) }
   try {
     const res = await fetch(url, {
       next: { revalidate: 0 },
