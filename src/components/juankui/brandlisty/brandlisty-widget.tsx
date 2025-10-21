@@ -2691,6 +2691,9 @@ export default function BrandlistyWidget ({
         * {
         }
       `}</style>
+            <div>
+                {html}
+            </div>
         </div>
     )
 }
