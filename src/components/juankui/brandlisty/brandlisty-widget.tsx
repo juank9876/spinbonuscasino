@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import { toggleMoreInfo } from "./toggleMoreInfo"
 import { debug, debugLog } from "@/config/debug-log"
 import { transformHtmlForSidebar } from "@/components/juankui/css-content"
+import { BrandlistyScript } from "./brandlisty-script"
 
 interface Props {
     apiKey: string
@@ -2667,7 +2668,92 @@ export default function BrandlistyWidget ({
         };
     }, [html, apiKey, listId, boton, limit]);
 
-    console.log(html)
+
+    return (
+        <div className="relative flex w-full flex-col overflow-auto rounded border bg-white shadow"
+        //style={{ height: 800 }}
+        >
+
+            {error && <p className="text-sm text-red-600">{error}</p>}
+
+            {!error && (
+                <>
+                    <div
+                        ref={contenedorRef}
+                        className="external-casino-list-container max-w-full overflow-auto break-words"
+                        dangerouslySetInnerHTML={{ __html: html }}
+                        data-widget="1"
+                    />
+                    <BrandlistyScript />
+                </>
+            )}
+            <style >{`
+        body {
+          padding: 0px !important
+        }
+        * {
+        }
+      `}</style>
+        </div>
+    )
+}
+
+export function BrandlistyWidgetNative ({
+    apiKey,
+    listId,
+    boton = "Visit now",
+    limit = "10",
+    isDataWidget,
+    sidebarMode
+}: Props) {
+    const [html, setHtml] = useState<string>("")
+    const [error, setError] = useState<string | null>(null)
+    const contenedorRef = useRef<HTMLDivElement>(null);
+    const dataWidget = isDataWidget ? "1" : "0";
+
+    useEffect(() => {
+        const fetchHtml = async () => {
+            try {
+                const params = new URLSearchParams({
+                    apikey: apiKey,
+                    hash: listId,
+                    boton,
+                    limit,
+                    widget: dataWidget
+                })
+
+                //const url = `https://app.brandlisty.com/nowpcms.php?${params.toString()}`
+                const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}&category=all`
+                const res = await fetch(url)
+
+                debugLog(debug.brandlisty.url, '[+] Brandlisty URL:' + url)
+                debugLog(debug.brandlisty.response, '[+] Brandlisty Response:' + res)
+
+                if (!res.ok) throw new Error(`Error ${res.status}`)
+                let htmlString = await res.text()
+
+                debugLog(debug.brandlisty.html, '[+] Brandlisty HTML:' + htmlString)
+
+                // Aplicar transformaciones
+                let cleanedHtml = removeUniversalReset(htmlString)
+
+                // Si está en modo sidebar, aplicar transformaciones CSS
+                if (sidebarMode) {
+                    console.log("[+] Aplicando transformaciones CSS para sidebar")
+                    cleanedHtml = transformHtmlForSidebar(cleanedHtml)
+                }
+
+                setHtml(cleanedHtml)
+            } catch (err) {
+                console.error("Error al cargar Brandlisty:", err)
+                setError("Error al cargar contenido de Brandlisty.")
+            }
+        }
+
+        fetchHtml()
+    }, [apiKey, listId, boton, limit, isDataWidget, sidebarMode])
+
+
 
     return (
         <div className="relative flex w-full flex-col overflow-auto rounded border bg-white shadow"
@@ -2684,16 +2770,14 @@ export default function BrandlistyWidget ({
                     data-widget="1"
                 />
             )}
+            <BrandlistyScript />
             <style >{`
         body {
-          padding: 0px !important
+            padding: 0px !important
         }
         * {
         }
-      `}</style>
-            <div>
-                {html}
-            </div>
+        `}</style>
         </div>
     )
 }

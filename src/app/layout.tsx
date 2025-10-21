@@ -2,7 +2,7 @@ import "./globals.css";
 import './globals-on.css';
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer/footer";
-import { fetchCookies, fetchSiteSettings, fetchAgeVerification, Cookies, fetchCustomScript } from "@/api-fetcher/fetcher";
+import { fetchCookies, fetchSiteSettings, fetchAgeVerification, Cookies } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
 import { Providers } from "./providers";
 import { generateFontsFromSettings } from "@/utils/fonts";
@@ -15,7 +15,7 @@ import { SchemaJson } from "./seo/schemaJson";
 
 
 
-export async function fetchLayoutData() {
+export async function fetchLayoutData () {
   const [settings, cookies, ageVerification] = await Promise.all([
     fetchSiteSettings(),
     fetchCookies(),
@@ -25,7 +25,7 @@ export async function fetchLayoutData() {
   return { settings, cookies, ageVerification };
 }
 
-function LayoutBody({
+function LayoutBody ({
   children,
   settings,
   themeColors,
@@ -45,7 +45,7 @@ function LayoutBody({
       suppressHydrationWarning
     >
       <Providers>
-        <div className="flex max-w-screen min-h-[100dvh] flex-col">
+        <div className="max-w-screen flex min-h-[100dvh] flex-col">
           <Header />
           {children}
           <Footer />
@@ -57,7 +57,7 @@ function LayoutBody({
   );
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout ({ children }: { children: React.ReactNode }) {
   // Fetch de datos en paralelo
   const layoutData = await fetchLayoutData();
 
