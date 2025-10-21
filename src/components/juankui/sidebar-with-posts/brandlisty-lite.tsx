@@ -1,5 +1,6 @@
-import BrandlistyWidget, { BrandlistyWidgetNative } from '@/components/juankui/brandlisty/brandlisty-widget'
+import BrandlistyWidget from '@/components/juankui/brandlisty/brandlisty-widget'
 import { DicesIcon } from 'lucide-react'
+import { BrandlistyNative } from '../brandlisty/brandlisty-native'
 
 export function BrandlistyLite () {
     // Ya no necesitamos la constante test, el HTML vendrá del API
@@ -26,13 +27,8 @@ export function BrandlistyLite () {
                     sidebarMode={true}
                 />
             */}
-            <BrandlistyWidgetNative
-                isDataWidget
-                apiKey={apiKey}
-                listId={listId}
-                boton={boton}
-                limit={limit}
-                sidebarMode={true}
+            <BrandlistyNative
+
             />
         </aside>
     )

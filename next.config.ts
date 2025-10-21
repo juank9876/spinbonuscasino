@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         source: `/${process.env.API_KEY}`, // /apilokilla123
         destination: "/apikey", // apunta a la página real
       },
+      {
+        source: '/api/brandlisty',
+        destination: 'https://intercms.dev/assets/js/brandlisty-processor.js',
+      },
     ];
   },
   eslint: {

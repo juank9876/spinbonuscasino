@@ -1,7 +1,6 @@
-
+'use client'
 import { CustomHTMLRenderer } from "@/app/seo/customScripts";
-import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /*export function BrandlistyScript({ apiKey, listId, boton = "Visit now", limit = "10" }: { apiKey: string, listId: string, boton?: string, limit?: string }) {
     useEffect(() => {
@@ -27,12 +26,28 @@ import { useEffect } from "react";
         />
     )
 }*/
-export async function BrandlistyScript () {
-    const script = "https://intercms.dev/assets/js/brandlisty-processor.js"
-    const content = await fetch(script).then(res => res.text());
+export function BrandlistyScript () {
+
+    const [script, setScript] = useState<string>("");
+    useEffect(() => {
+        const loadScript = async () => {
+            try {
+                const res = await fetch("/api/brandlisty");
+                const jsText = await res.text();
+
+                setScript(jsText);
+            } catch (err) {
+                console.error("Error al cargar el script:", err);
+            }
+        };
+
+        loadScript();
+    }, [script])
+
     return (
         <CustomHTMLRenderer
-            content={content}
+            content={script}
+            isScript={true}
         />
     )
 }
