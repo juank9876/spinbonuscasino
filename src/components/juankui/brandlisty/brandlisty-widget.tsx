@@ -2677,15 +2677,12 @@ export default function BrandlistyWidget ({
             {error && <p className="text-sm text-red-600">{error}</p>}
 
             {!error && (
-                <>
-                    <div
-                        ref={contenedorRef}
-                        className="external-casino-list-container max-w-full overflow-auto break-words"
-                        dangerouslySetInnerHTML={{ __html: html }}
-                        data-widget="1"
-                    />
-                    <BrandlistyScript />
-                </>
+                <div
+                    ref={contenedorRef}
+                    className="external-casino-list-container max-w-full overflow-auto break-words"
+                    dangerouslySetInnerHTML={{ __html: html }}
+                    data-widget="1"
+                />
             )}
             <style >{`
         body {
@@ -2763,12 +2760,15 @@ export function BrandlistyWidgetNative ({
             {error && <p className="text-sm text-red-600">{error}</p>}
 
             {!error && (
-                <div
-                    ref={contenedorRef}
-                    className="external-casino-list-container max-w-full overflow-auto break-words"
-                    dangerouslySetInnerHTML={{ __html: html }}
-                    data-widget="1"
-                />
+                <>
+                    <div
+                        ref={contenedorRef}
+                        className="external-casino-list-container max-w-full overflow-auto break-words"
+                        dangerouslySetInnerHTML={{ __html: html }}
+                        data-widget="1"
+                    />
+                    <BrandlistyScript />
+                </>
             )}
             <BrandlistyScript />
             <style >{`
