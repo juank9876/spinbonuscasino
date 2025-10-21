@@ -1,7 +1,7 @@
 import BrandlistyWidget from '@/components/juankui/brandlisty/brandlisty-widget'
 import { DicesIcon } from 'lucide-react'
 
-export function BrandlistyLite() {
+export function BrandlistyLite () {
     // Ya no necesitamos la constante test, el HTML vendrá del API
 
     const apiKey = process.env.BRANDLISTY_API_KEY || ''
@@ -11,12 +11,13 @@ export function BrandlistyLite() {
 
     // max-h-[900px] max-w-[400px] overflow-x-auto
     return (
-        <aside className={`bg-white rounded-xl h-fit border border-gray-200 shadow-sm relative flex flex-col`}>
-            <div className="rounded-t-xl relative flex items-center gap-2 bg-gradient-to-r from-[var(--color-primary-semi-dark)] to-[var(--color-primary-dark)] px-5 py-2">
-                <DicesIcon className="w-5 h-5 text-white" />
-                <h2 className="text-lg font-bold text-white padding-none">Brandlisty</h2>
+        <aside className={`relative flex h-fit flex-col rounded-xl border border-gray-200 bg-white shadow-sm`}>
+            <div className="relative flex items-center gap-2 rounded-t-xl bg-gradient-to-r from-[var(--color-primary-semi-dark)] to-[var(--color-primary-dark)] px-5 py-2">
+                <DicesIcon className="h-5 w-5 text-white" />
+                <h2 className="padding-none text-lg font-bold text-white">Brandlisty</h2>
             </div>
             <BrandlistyWidget
+                dataWidget="1"
                 apiKey={apiKey}
                 listId={listId}
                 boton={boton}

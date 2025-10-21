@@ -10,7 +10,7 @@ interface Props {
     listId: string
     boton?: string
     limit?: string
-    dataWidget?: string
+    dataWidget: string
     sidebarMode?: boolean // Nuevo prop para indicar si está en sidebar
 }
 function removeUniversalReset (cssString: string) {
@@ -25,14 +25,14 @@ export default function BrandlistyWidget ({
     listId,
     boton = "Visit now",
     limit = "10",
-    dataWidget = "1",
+    dataWidget,
     sidebarMode
 }: Props) {
     const [html, setHtml] = useState<string>("")
     const [error, setError] = useState<string | null>(null)
     const contenedorRef = useRef<HTMLDivElement>(null);
 
-    const test = `<div class=" relative flex w-full flex-col overflow-auto rounded border bg-white shadow">
+    const test = `<div class="relative flex w-full flex-col overflow-auto rounded border bg-white shadow">
     <div class="external-casino-list-container max-w-full overflow-auto break-words">
 
 
@@ -1516,31 +1516,31 @@ export default function BrandlistyWidget ({
                                     <div class="payment-icons">
                                         <div class="payment-icon">
                                             <i
-                                                class="bi bi-credit-card-fill me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                                class="bi bi-credit-card-fill me-2"></i>
                                             Visa
                                         </div>
                                         <div class="payment-icon">
                                             <i
-                                                class="bi bi-credit-card-fill me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                                class="bi bi-credit-card-fill me-2"></i>
                                             Mastercard
                                         </div>
                                         <div class="payment-icon">
                                             <i
-                                                class="bi bi-paypal me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                                class="bi bi-paypal me-2"></i>
                                             PayPal
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-bank me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-bank me-2"></i>
                                             Bank Transfer
                                         </div>
                                         <div class="payment-icon">
                                             <i
-                                                class="bi bi-google me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                                class="bi bi-google me-2"></i>
                                             Google Pay
                                         </div>
                                         <div class="payment-icon">
                                             <i
-                                                class="bi bi-apple me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                                class="bi bi-apple me-2"></i>
                                             Apple Pay
                                         </div>
                                     </div>
@@ -1683,27 +1683,27 @@ export default function BrandlistyWidget ({
                                     <h4>Payment Methods</h4>
                                     <div class="payment-icons">
                                         <div class="payment-icon">
-                                            <i class="bi bi-credit-card-fill me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-credit-card-fill me-2"></i>
                                             Visa
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-credit-card-fill me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-credit-card-fill me-2"></i>
                                             Mastercard
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-paypal me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-paypal me-2"></i>
                                             PayPal
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-wallet2 me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-wallet2 me-2"></i>
                                             Neteller
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-wallet-fill me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-wallet-fill me-2"></i>
                                             Skrill
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-bank me-2 me-2 me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-bank me-2"></i>
                                             Bank Transfer
                                         </div>
                                     </div>
@@ -1846,35 +1846,35 @@ export default function BrandlistyWidget ({
                                     <h4>Payment Methods</h4>
                                     <div class="payment-icons">
                                         <div class="payment-icon">
-                                            <i class="bi bi-credit-card-fill me-2 me-2"></i>
+                                            <i class="bi bi-credit-card-fill me-2"></i>
                                             Visa
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-credit-card-fill me-2 me-2"></i>
+                                            <i class="bi bi-credit-card-fill me-2"></i>
                                             Mastercard
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-paypal me-2 me-2"></i>
+                                            <i class="bi bi-paypal me-2"></i>
                                             PayPal
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-wallet-fill me-2 me-2"></i>
+                                            <i class="bi bi-wallet-fill me-2"></i>
                                             Skrill
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-wallet2 me-2 me-2"></i>
+                                            <i class="bi bi-wallet2 me-2"></i>
                                             Neteller
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-bank me-2 me-2"></i>
+                                            <i class="bi bi-bank me-2"></i>
                                             Bank Transfer
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-safe-fill me-2 me-2"></i>
+                                            <i class="bi bi-safe-fill me-2"></i>
                                             Paysafecard
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-apple me-2 me-2"></i>
+                                            <i class="bi bi-apple me-2"></i>
                                             Apple Pay
                                         </div>
                                     </div>
@@ -2023,23 +2023,23 @@ export default function BrandlistyWidget ({
                                     <h4>Payment Methods</h4>
                                     <div class="payment-icons">
                                         <div class="payment-icon">
-                                            <i class="bi bi-credit-card-fill me-2 me-2"></i>
+                                            <i class="bi bi-credit-card-fill me-2"></i>
                                             Visa
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-credit-card-fill me-2 me-2"></i>
+                                            <i class="bi bi-credit-card-fill me-2"></i>
                                             Mastercard
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-paypal me-2 me-2"></i>
+                                            <i class="bi bi-paypal me-2"></i>
                                             PayPal
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-wallet-fill me-2 me-2"></i>
+                                            <i class="bi bi-wallet-fill me-2"></i>
                                             Skrill
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-wallet2 me-2 me-2"></i>
+                                            <i class="bi bi-wallet2 me-2"></i>
                                             Neteller
                                         </div>
                                     </div>
@@ -2337,23 +2337,23 @@ export default function BrandlistyWidget ({
                                     <h4>Payment Methods</h4>
                                     <div class="payment-icons">
                                         <div class="payment-icon">
-                                            <i class="bi bi-credit-card-fill me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-credit-card-fill me-2"></i>
                                             Visa
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-credit-card-fill me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-credit-card-fill me-2"></i>
                                             Mastercard
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-paypal me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-paypal me-2"></i>
                                             PayPal
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-wallet-fill me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-wallet-fill me-2"></i>
                                             Skrill
                                         </div>
                                         <div class="payment-icon">
-                                            <i class="bi bi-wallet2 me-2 me-2 me-2 me-2"></i>
+                                            <i class="bi bi-wallet2 me-2"></i>
                                             Neteller
                                         </div>
                                     </div>
@@ -2581,7 +2581,7 @@ export default function BrandlistyWidget ({
                     hash: listId,
                     boton,
                     limit,
-                    data_widget: dataWidget || "1"
+                    widget: dataWidget
                 })
 
                 //const url = `https://app.brandlisty.com/nowpcms.php?${params.toString()}`
@@ -2616,7 +2616,7 @@ export default function BrandlistyWidget ({
     }, [apiKey, listId, boton, limit, sidebarMode])
 
 
-
+    //MORE INFO BUTTON
     useEffect(() => {
         const contenedor = contenedorRef.current;
         if (!contenedor) return;
@@ -2634,31 +2634,9 @@ export default function BrandlistyWidget ({
             if (filterLink) {
                 e.preventDefault();
 
-                // Determinar el índice del enlace clickeado
-                // Se agrega verificación para evitar posible error si 'contenedor' es null
                 const filterLinks = contenedor ? Array.from(contenedor.querySelectorAll('a.filter-btn')) : [];
                 const parsedLink = new URL(filterLink.href);
-                //const index = filterLinks.indexOf(filterLink);
-                //console.log(parsedLink.searchParams.get('category'))
 
-                // Asignar categoría según el índice
-                /*
-                        let category = "all";
-                        if (index === 1) category = "crypto";
-                        else if (index === 2) category = "low-deposit";
-                        else if (index === 3) category = "premium";
-                
-                        // Hacer fetch con la nueva categoría
-                        const params = new URLSearchParams({
-                          apikey: apiKey,
-                          hash: listId,
-                          boton,
-                          limit,
-                          category,
-                        });
-                
-                        const url = `https://pro.brandlisty.com/nowph.php?${params.toString()}`;
-                */
                 const url = `https://pro.brandlisty.com/nowph.php${parsedLink.search}`;
                 //console.log(url)
                 fetch(url)
@@ -2684,12 +2662,6 @@ export default function BrandlistyWidget ({
 
         contenedor.addEventListener('click', handleClick);
 
-        // Modificar los href de los filtros (opcional, para evitar navegación)
-        /*const filterLinks = contenedor.querySelectorAll('a.filter-btn');
-        filterLinks.forEach((link) => {
-          link.setAttribute('href', '#');
-        });
-    */
         return () => {
             contenedor.removeEventListener('click', handleClick);
         };
@@ -2697,7 +2669,7 @@ export default function BrandlistyWidget ({
 
 
     return (
-        <div className=" relative flex w-full flex-col overflow-auto rounded border bg-white shadow"
+        <div className="relative flex w-full flex-col overflow-auto rounded border bg-white shadow"
         //style={{ height: 800 }}
         >
 
