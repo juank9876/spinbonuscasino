@@ -1,4 +1,4 @@
-import BrandlistyWidget from '@/components/juankui/brandlisty/brandlisty-widget'
+import BrandlistyWidget, { BrandlistyWidgetNative } from '@/components/juankui/brandlisty/brandlisty-widget'
 import { DicesIcon } from 'lucide-react'
 
 export function BrandlistyLite () {
@@ -16,7 +16,17 @@ export function BrandlistyLite () {
                 <DicesIcon className="h-5 w-5 text-white" />
                 <h2 className="padding-none text-lg font-bold text-white">Brandlisty</h2>
             </div>
-            <BrandlistyWidget
+            {/*
+                <BrandlistyWidget
+                    isDataWidget
+                    apiKey={apiKey}
+                    listId={listId}
+                    boton={boton}
+                    limit={limit}
+                    sidebarMode={true}
+                />
+            */}
+            <BrandlistyWidgetNative
                 isDataWidget
                 apiKey={apiKey}
                 listId={listId}
