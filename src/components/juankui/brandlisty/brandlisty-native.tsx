@@ -8,9 +8,7 @@ export function BrandlistyNative () {
 
 
   return (
-    <div className="relative flex w-full flex-col overflow-auto rounded border bg-white shadow"
-    //style={{ height: 800 }}
-    >
+    <>
       <div
         className="brandlisty-component"
         data-apikey={apiKey}
@@ -22,13 +20,6 @@ export function BrandlistyNative () {
         data-widget="1"
       ></div>
       <BrandlistyScript />
-      <style >{`
-        body {
-            padding: 0px !important
-        }
-        * {
-        }
-        `}</style>
-    </div>
+    </>
   )
 }
