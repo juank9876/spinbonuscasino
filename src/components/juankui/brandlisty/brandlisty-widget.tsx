@@ -10,20 +10,22 @@ interface Props {
     listId: string
     boton?: string
     limit?: string
+    dataWidget?: string
     sidebarMode?: boolean // Nuevo prop para indicar si está en sidebar
 }
-function removeUniversalReset(cssString: string) {
+function removeUniversalReset (cssString: string) {
     let exactRuleRegex = cssString.replace(/\*\s*{[^}]*}/g, '');
     exactRuleRegex = exactRuleRegex.replace(/onclick="[^"]*"/g, '');
 
     return exactRuleRegex
 }
 
-export default function BrandlistyWidget({
+export default function BrandlistyWidget ({
     apiKey,
     listId,
     boton = "Visit now",
     limit = "10",
+    dataWidget = "1",
     sidebarMode
 }: Props) {
     const [html, setHtml] = useState<string>("")
@@ -2579,6 +2581,7 @@ export default function BrandlistyWidget({
                     hash: listId,
                     boton,
                     limit,
+                    data_widget: dataWidget || "1"
                 })
 
                 //const url = `https://app.brandlisty.com/nowpcms.php?${params.toString()}`
@@ -2618,7 +2621,7 @@ export default function BrandlistyWidget({
         const contenedor = contenedorRef.current;
         if (!contenedor) return;
 
-        function handleClick(e: MouseEvent) {
+        function handleClick (e: MouseEvent) {
             const target = e.target as HTMLElement;
             const button = target.closest('.more-info-toggle') as HTMLElement | null;
             if (button) {
@@ -2704,7 +2707,8 @@ export default function BrandlistyWidget({
                 <div
                     ref={contenedorRef}
                     className="external-casino-list-container max-w-full overflow-auto break-words"
-                    dangerouslySetInnerHTML={{ __html: test }}
+                    dangerouslySetInnerHTML={{ __html: html }}
+                    data-widget="1"
                 />
             )}
             <style >{`
