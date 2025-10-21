@@ -17,7 +17,7 @@ export function BrandlistyLite () {
                 <h2 className="padding-none text-lg font-bold text-white">Brandlisty</h2>
             </div>
             <BrandlistyWidget
-                dataWidget="1"
+                isDataWidget
                 apiKey={apiKey}
                 listId={listId}
                 boton={boton}

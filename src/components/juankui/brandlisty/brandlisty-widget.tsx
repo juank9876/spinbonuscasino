@@ -10,7 +10,7 @@ interface Props {
     listId: string
     boton?: string
     limit?: string
-    dataWidget: string
+    isDataWidget?: boolean
     sidebarMode?: boolean // Nuevo prop para indicar si está en sidebar
 }
 function removeUniversalReset (cssString: string) {
@@ -25,13 +25,13 @@ export default function BrandlistyWidget ({
     listId,
     boton = "Visit now",
     limit = "10",
-    dataWidget,
+    isDataWidget,
     sidebarMode
 }: Props) {
     const [html, setHtml] = useState<string>("")
     const [error, setError] = useState<string | null>(null)
     const contenedorRef = useRef<HTMLDivElement>(null);
-
+    const dataWidget = isDataWidget ? "1" : "0";
     const test = `<div class="relative flex w-full flex-col overflow-auto rounded border bg-white shadow">
     <div class="external-casino-list-container max-w-full overflow-auto break-words">
 
