@@ -2667,6 +2667,7 @@ export default function BrandlistyWidget ({
         };
     }, [html, apiKey, listId, boton, limit]);
 
+    console.log(html)
 
     return (
         <div className="relative flex w-full flex-col overflow-auto rounded border bg-white shadow"
