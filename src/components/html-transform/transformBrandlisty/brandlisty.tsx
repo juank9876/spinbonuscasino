@@ -1,4 +1,3 @@
-import { BrandlistyOriginal } from '@/components/juankui/brandlisty/.legacy/brandlisty-original'
 import { BrandlistyOriginalSsr } from '@/components/juankui/brandlisty/brandlisty-ssr'
 import { Element } from 'html-react-parser'
 
