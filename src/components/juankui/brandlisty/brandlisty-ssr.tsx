@@ -1,6 +1,6 @@
 
 import { headers } from 'next/headers';
-import { BrandlistyCard } from './brandlisty-card';
+import { BrandlistyCardOriginal, BrandlistyCardSidebar } from './brandlisty-card';
 import { fetchBrandlistyApi } from '@/api-fetcher/fetcher';
 
 export async function BrandlistySidebarSsr () {
@@ -13,7 +13,7 @@ export async function BrandlistySidebarSsr () {
   return (
     <div className="flex w-full max-w-sm flex-col gap-4 bg-gray-50 p-4">
       {brandlistyList.map((operator, index) => (
-        <BrandlistyCard key={operator.id} operator={operator} index={index} />
+        <BrandlistyCardSidebar key={operator.id} operator={operator} index={index} />
       ))}
     </div>
   );
@@ -29,7 +29,7 @@ export async function BrandlistyOriginalSsr () {
   return (
     <div className="flex w-full max-w-sm flex-col gap-4 bg-gray-50 p-4">
       {brandlistyList.map((operator, index) => (
-        <BrandlistyCard key={operator.id} operator={operator} index={index} />
+        <BrandlistyCardOriginal key={operator.id} operator={operator} index={index} />
       ))}
     </div>
   );
