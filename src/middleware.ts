@@ -11,7 +11,6 @@ export async function middleware(req: NextRequest) {
   const headersList = await headers();
 
   let ip = 
-    // Vercel
     headersList.get("cf-connecting-ip") ||
     headersList.get("true-client-ip") ||
     headersList.get("x-forwarded-for")?.split(',')[0].trim() ||
