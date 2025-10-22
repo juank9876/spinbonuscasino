@@ -6,12 +6,10 @@ import { fetchBrandlistyApi } from '@/api-fetcher/fetcher';
 export async function BrandlistySidebarSsr () {
   const headerslist = await headers();
   const countryCode = headerslist.get('x-user-country') || 'WW'
-  console.log('Country Code:', countryCode);
   const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode });
 
-
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4 bg-gray-50 p-4">
+    <div className="flex w-full max-w-full flex-col gap-4 bg-gray-50 p-4 lg:max-w-sm">
       {brandlistyList.map((operator, index) => (
         <BrandlistyCardSidebar key={operator.id} operator={operator} index={index} />
       ))}
@@ -19,15 +17,13 @@ export async function BrandlistySidebarSsr () {
   );
 }
 
-export async function BrandlistyOriginalSsr () {
+export async function BrandlistyOriginalSsr ({ apiKey, listId }: { apiKey: string; listId: string }) {
   const headerslist = await headers();
   const countryCode = headerslist.get('x-user-country') || 'WW'
-  console.log('Country Code:', countryCode);
-  const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode });
-
+  const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode, apiKey: apiKey, listId: listId });
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4 bg-gray-50 p-4">
+    <div className="flex w-full flex-col bg-gray-50">
       {brandlistyList.map((operator, index) => (
         <BrandlistyCardOriginal key={operator.id} operator={operator} index={index} />
       ))}

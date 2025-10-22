@@ -125,7 +125,7 @@ export const config: ProjectConfig = {
         sidebar: {
             // Ancho del sidebar en diferentes breakpoints
             width: {
-                base: 'hidden',           // Mobile: ancho completo (aunque esté oculto)
+                base: 'w-full',           // Mobile: ancho completo (aunque esté oculto)
                 lg: 'lg:w-[500px]',       // Desktop: ancho fijo
                 xl: 'xl:w-[500px]',       // Desktop grande: más ancho
             },

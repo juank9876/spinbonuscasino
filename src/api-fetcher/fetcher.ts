@@ -330,13 +330,18 @@ function filterByCountryCode(brands: BrandlistyCardType[], countryCode: string):
   });
 }
 
-export async function fetchBrandlistyApi({ countryCode } : { countryCode: string }) : Promise<BrandlistyCardType[]> {
-  const apiKey = process.env.BRANDLISTY_API_KEY || ''
-  const listId = process.env.BRANDLISTY_LIST_ID || ''
-  const boton = "Visit now"
-  const limit = "5"
-  const brandlistyApiKey = process.env.BRANDLISTY_API_KEY || ''
-  const brandlistyListId = process.env.BRANDLISTY_LIST_ID || ''
+export async function fetchBrandlistyApi({ countryCode, apiKey, listId } : { countryCode: string, apiKey?: string, listId?: string }) : Promise<BrandlistyCardType[]> {
+  //const apiKey = process.env.BRANDLISTY_API_KEY || ''
+  //const listId = process.env.BRANDLISTY_LIST_ID || ''
+  //const boton = "Visit now"
+  //const limit = "5"
+  let brandlistyApiKey = process.env.BRANDLISTY_API_KEY
+  let brandlistyListId = process.env.BRANDLISTY_LIST_ID
+
+  if (apiKey !== undefined && listId !== undefined) {
+    brandlistyApiKey = apiKey
+    brandlistyListId = listId 
+  }
 
 
   const response = await fetch(
@@ -349,8 +354,7 @@ export async function fetchBrandlistyApi({ countryCode } : { countryCode: string
     }
   )
   const data = await response.json();
-  let brands = data.data.brands as BrandlistyCardType[]
-
+  let brands = data?.data?.brands as BrandlistyCardType[] || [];
   // Filtramos por país o WW
   brands = filterByCountryCode(brands, countryCode);
 
