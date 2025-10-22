@@ -12,24 +12,14 @@ export async function middleware(req: NextRequest) {
 
   let ip = 
     // Vercel
-    headersList.get("x-real-ip") ||
-    headersList.get("x-forwarded-for")?.split(',')[0].trim() ||
-    // Cloudflare
     headersList.get("cf-connecting-ip") ||
-    // Otros proxies/CDNs
-    headersList.get("x-client-ip") ||
-    headersList.get("forwarded")?.split(';')[0].split('=')[1] ||
-    // Fastly
-    headersList.get("fastly-client-ip") ||
-    // Fallback usando NextRequest (desarrollo local)
-    req.headers.get("x-real-ip") ||
-    req.headers.get("x-forwarded-for")?.split(',')[0].trim() ||
-    // Último recurso
+    headersList.get("true-client-ip") ||
+    headersList.get("x-forwarded-for")?.split(',')[0].trim() ||
     "unknown";
 
   if (ip === '::1' || ip === '127.0.0.1' || ip === 'unknown') {
     console.log('⚠️  Localhost detected, using test IP');
-    ip = '89.29.161.148'; // IP de prueba (USA)
+    ip = '8.8.8.8'; // IP de prueba (USA)
     // ip = '185.94.188.1'; // IP de prueba España
   }
   //console.log('LA IP ES ' , ip)
