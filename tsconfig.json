@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".legacy/page-backup.tsx"
-  ],
+, "src/components/juankui/brandlisty/.legacy/brandlisty-original.tsx", "src/components/juankui/brandlisty/.legacy/brandlisty-script.tsx", "src/components/juankui/brandlisty/.legacy/brandlisty-sidebar.tsx", "src/components/juankui/brandlisty/.legacy/route.ts"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,14 +1,11 @@
-import BrandlistyWidget from '@/components/juankui/brandlisty/brandlisty-widget'
 import { DicesIcon } from 'lucide-react'
-import { BrandlistyNative } from '../brandlisty/brandlisty-native'
+import { fetchBrandlistyApi } from '@/api-fetcher/fetcher';
+import { BrandlistySidebarSsr } from '../brandlisty/brandlisty-ssr';
 
-export function BrandlistyLite () {
+export async function BrandlistyLite () {
     // Ya no necesitamos la constante test, el HTML vendrá del API
+    const res = await fetchBrandlistyApi({ countryCode: '' });
 
-    const apiKey = process.env.BRANDLISTY_API_KEY || ''
-    const listId = process.env.BRANDLISTY_LIST_ID || ''
-    const boton = "Visit now"
-    const limit = "5"
 
     // max-h-[900px] max-w-[400px] overflow-x-auto
     return (
@@ -27,9 +24,7 @@ export function BrandlistyLite () {
                     sidebarMode={true}
                 />
             */}
-            <BrandlistyNative
-
-            />
+            <BrandlistySidebarSsr />
         </aside>
     )
 }

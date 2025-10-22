@@ -1,8 +1,8 @@
 import { fixAttribs } from '@/lib/utils';
 import { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react-parser'
-import BrandlistyWidget from '../../juankui/brandlisty/brandlisty-widget'
+import BrandlistyWidget from '../../juankui/brandlisty/.legacy/brandlisty-original'
 
-export function transformBrandlisty(el: Element) {
+export function transformBrandlisty (el: Element) {
   const attribs = fixAttribs(el.attribs)
   const { apikey, listid, boton, limit, id } = attribs
   console.log("Brandlisty detectado")
@@ -19,7 +19,7 @@ export function transformBrandlisty(el: Element) {
   )
 }
 
-export function transformTestimonials(el: Element, options: HTMLReactParserOptions) {
+export function transformTestimonials (el: Element, options: HTMLReactParserOptions) {
   const attribs = fixAttribs(el.attribs)
 
   return (
@@ -29,7 +29,7 @@ export function transformTestimonials(el: Element, options: HTMLReactParserOptio
   )
 }
 
-export function transformBlockquote(el: Element, options: HTMLReactParserOptions) {
+export function transformBlockquote (el: Element, options: HTMLReactParserOptions) {
   const attribs = fixAttribs(el.attribs)
   // Busca el span (nombre usuario)
   const userSpan = (el.children as Element[]).find(child => child.name === 'span');
@@ -45,7 +45,7 @@ export function transformBlockquote(el: Element, options: HTMLReactParserOptions
   )
 }
 
-export function transformTakeaways(el: Element, options: HTMLReactParserOptions) {
+export function transformTakeaways (el: Element, options: HTMLReactParserOptions) {
   const attribs = fixAttribs(el.attribs)
 
   return (

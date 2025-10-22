@@ -1,0 +1,599 @@
+{
+   "success":true,
+   "data":{
+      "list":{
+         "id":"28",
+         "name":"Spin Bonus Casino Full",
+         "description":"",
+         "hash":"list_687999e49c0643.39460375",
+         "updated_at":"2025-09-16 15:53:50",
+         "show_category_filter":"0",
+         "categories":[
+            
+         ]
+      },
+      "brands":[
+         {
+            "id":"95",
+            "name":"Codere",
+            "logo_url":"https://pro.brandlisty.com/uploads/logos/logo_1752785016_FDjur7Cy.png",
+            "position":"1",
+            "stars_rating":"4",
+            "cantidad":"",
+            "frase_oferta":"",
+            "frase2":"",
+            "affiliate_link":"https://clctracker.com/go/QDCGkghUenlIoY2m8n0EcAK5j",
+            "review_link":"https://estoesreview.com/1344",
+            "custom_fields":{
+               "badge_text":"Mejor bono",
+               "badge_style":"pill",
+               "badge_color":"primary",
+               "badge_position":"top-right",
+               "badge_custom_color":"",
+               "button_text":"Visitar sitio",
+               "review_button_text":"Review",
+               "button_color":"success",
+               "button_custom_color":""
+            },
+            "pros":[
+               "Seguridad y confianza.",
+               "Amplia variedad de mercados.",
+               "Facilidad de uso.",
+               "Promociones regulares.",
+               "Atención al cliente eficiente."
+            ],
+            "cons":[
+               "Velocidad en retiros lenta",
+               "Faltan promociones personalizadas",
+               "Algunos fallos en app móvil"
+            ],
+            "features":[
+               "Amplia variedad de deportes",
+               "Diversos métodos de pago",
+               "Atención al cliente en español"
+            ],
+            "extra_features":[
+               
+            ],
+            "payment_methods":[
+               {
+                  "method":"visa",
+                  "text":"Visa",
+                  "icon":"bi bi-credit-card-fill me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"mastercard",
+                  "text":"Mastercard",
+                  "icon":"bi bi-credit-card-fill me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"paypal",
+                  "text":"PayPal",
+                  "icon":"bi bi-paypal me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"bank-transfer",
+                  "text":"Bank Transfer",
+                  "icon":"bi bi-bank me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"google-pay",
+                  "text":"Google Pay",
+                  "icon":"bi bi-google me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"apple-pay",
+                  "text":"Apple Pay",
+                  "icon":"bi bi-apple me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2 me-2"
+               }
+            ],
+            "description":"Codere es uno de los pioneros del juego en nuestro país. Nos permite depositar y cobrar en sus locales, y es un operador de referencia en España y América Latina.",
+            "valuation":"Codere ofrece una plataforma fiable y segura, donde las promociones se construyen sobre la lealtad y la transparencia, más que sobre una primera impresión \"deslumbrante\" que la ley ya no permite. Es una opción sólida para quienes buscan una experiencia de juego sostenida y regulada.",
+            "review_header":"",
+            "min_deposit":null,
+            "legal_disclaimer":"Para recibir el bono, se deberán realizar apuestas (con una cuota mínima de 2.00) por un valor equivalente al del depósito realizado. Codere opera legalmente en España bajo la licencia de la Dirección General de Ordenación del Juego (DGOJ). Codere ofrece herramientas como límites de depósito, autoexclusión y pausas temporales para promover prácticas de juego responsable.",
+            "badge":{
+               "text":"Mejor bono",
+               "style":"pill",
+               "color":"primary",
+               "custom_color":"",
+               "position":"top-right"
+            },
+            "geo":"WW",
+            "tracking_url":"https://clctracker.com/go/0oLpsGWJNHP2f0wzeBnBR7ePN",
+            "button":{
+               "text":"Visit Site",
+               "color":"primary",
+               "custom_color":""
+            },
+            "review_button":{
+               "text":"Review",
+               "color":"secondary"
+            },
+            "custom_bonus_text":"",
+            "category":null
+         },
+         {
+            "id":"99",
+            "name":"Leovegas",
+            "logo_url":"https://pro.brandlisty.com/uploads/logos/logo_1752785549_vetCLnWf.png",
+            "position":"2",
+            "stars_rating":"4",
+            "cantidad":"",
+            "frase_oferta":"",
+            "frase2":"",
+            "affiliate_link":"https://clctracker.com/go/Dq24sn7vCv9taOSuha8NCz64x",
+            "review_link":"https://estoesreview.com/1344",
+            "custom_fields":{
+               "badge_text":"Mejor bono",
+               "badge_style":"pill",
+               "badge_color":"primary",
+               "badge_position":"top-right",
+               "badge_custom_color":"",
+               "button_text":"Visit Site",
+               "review_button_text":"Review",
+               "button_color":"success",
+               "button_custom_color":""
+            },
+            "pros":[
+               "Interfaz amigable.",
+               "Variedad de mercados.",
+               "Seguridad avanzada.",
+               "Atención al cliente 24/7.",
+               "Bonificaciones atractivas."
+            ],
+            "cons":[
+               
+            ],
+            "features":[
+               
+            ],
+            "extra_features":[
+               
+            ],
+            "payment_methods":[
+               {
+                  "method":"visa",
+                  "text":"Visa",
+                  "icon":"bi bi-credit-card-fill me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"mastercard",
+                  "text":"Mastercard",
+                  "icon":"bi bi-credit-card-fill me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"paypal",
+                  "text":"PayPal",
+                  "icon":"bi bi-paypal me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"neteller",
+                  "text":"Neteller",
+                  "icon":"bi bi-wallet2 me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"skrill",
+                  "text":"Skrill",
+                  "icon":"bi bi-wallet-fill me-2 me-2 me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"bank-transfer",
+                  "text":"Bank Transfer",
+                  "icon":"bi bi-bank me-2 me-2 me-2 me-2 me-2 me-2"
+               }
+            ],
+            "description":"La casa de apuestas que mejor se adapta a los dispositivos móviles, con una excelente oferta de mercados y cuotas siempre competitivas. Un operador de referencia.",
+            "valuation":"LeoVegas es un operador muy recomendable en España, especialmente para aquellos que buscan una experiencia de juego de casino de primer nivel en dispositivos móviles y una sección de apuestas deportivas robusta y con buenas cuotas. Su compromiso con la regulación y la experiencia del usuario la convierten en una elección fiable y gratificante para el jugador español.",
+            "review_header":"",
+            "min_deposit":null,
+            "legal_disclaimer":"Al registrarte en LeoVegas.es, estás aceptando un contrato legal con LeoVegas Gaming Group, que opera bajo las licencias de la Dirección General de Ordenación del Juego (DGOJ) en España. Debes ser mayor de 18 años y residir en España para usar el servicio. Toda la información personal que facilites (DNI/NIE, fecha de nacimiento, dirección) debe ser real y verificable. Debido a la normativa española (Real Decreto 958/2020), no hay bonos de bienvenida iniciales para nuevos usuarios. Las promociones solo se ofrecen a clientes con más de 30 días de antigüedad y cuenta verificada.",
+            "badge":{
+               "text":"Mejor bono",
+               "style":"pill",
+               "color":"primary",
+               "custom_color":"",
+               "position":"top-right"
+            },
+            "geo":"WW",
+            "tracking_url":"https://clctracker.com/go/8d409adwmpvqIBrGbW0RxCChm",
+            "button":{
+               "text":"Visit Site",
+               "color":"primary",
+               "custom_color":""
+            },
+            "review_button":{
+               "text":"Review",
+               "color":"secondary"
+            },
+            "custom_bonus_text":"",
+            "category":null
+         },
+         {
+            "id":"101",
+            "name":"Tonybet",
+            "logo_url":"https://pro.brandlisty.com/uploads/logos/logo_1752785702_i6RczKML.png",
+            "position":"3",
+            "stars_rating":"4",
+            "cantidad":"",
+            "frase_oferta":"",
+            "frase2":"",
+            "affiliate_link":"https://clctracker.com/go/XAeDLKJi6XuKKq2JYYYf63rao",
+            "review_link":"https://estoesreview.com/1344",
+            "custom_fields":{
+               "badge_text":"Mejor bono",
+               "badge_style":"pill",
+               "badge_color":"primary",
+               "badge_position":"top-right",
+               "badge_custom_color":"",
+               "button_text":"Visitar sitio",
+               "review_button_text":"Review",
+               "button_color":"success",
+               "button_custom_color":""
+            },
+            "pros":[
+               "Gran variedad de deportes y mercados.",
+               "Programa VIP con beneficios exclusivos.",
+               "Apuestas en vivo y cash out."
+            ],
+            "cons":[
+               
+            ],
+            "features":[
+               
+            ],
+            "extra_features":[
+               
+            ],
+            "payment_methods":[
+               {
+                  "method":"visa",
+                  "text":"Visa",
+                  "icon":"bi bi-credit-card-fill me-2 me-2"
+               },
+               {
+                  "method":"mastercard",
+                  "text":"Mastercard",
+                  "icon":"bi bi-credit-card-fill me-2 me-2"
+               },
+               {
+                  "method":"paypal",
+                  "text":"PayPal",
+                  "icon":"bi bi-paypal me-2 me-2"
+               },
+               {
+                  "method":"skrill",
+                  "text":"Skrill",
+                  "icon":"bi bi-wallet-fill me-2 me-2"
+               },
+               {
+                  "method":"neteller",
+                  "text":"Neteller",
+                  "icon":"bi bi-wallet2 me-2 me-2"
+               },
+               {
+                  "method":"bank-transfer",
+                  "text":"Bank Transfer",
+                  "icon":"bi bi-bank me-2 me-2"
+               },
+               {
+                  "method":"paysafecard",
+                  "text":"Paysafecard",
+                  "icon":"bi bi-safe-fill me-2 me-2"
+               },
+               {
+                  "method":"apple-pay",
+                  "text":"Apple Pay",
+                  "icon":"bi bi-apple me-2 me-2"
+               }
+            ],
+            "description":"Ahora Circus es Tonybet, un operador con un gran potencial y cuotas de lo más competitivas cuando queremos apostar al favorito en cualquier evento.",
+            "valuation":"TonyBet es una opción muy competente y segura para el jugador español que busca una experiencia completa con un catálogo amplio tanto en apuestas deportivas como en casino. Es una plataforma en la que se puede confiar, respaldada por la licencia de la DGOJ. Si bien podría pulir aspectos como la visibilidad de sus promociones para clientes fieles o la atención al cliente, su oferta principal y la solidez de su plataforma la convierten en un jugador a tener en cuenta en el mercado español.",
+            "review_header":"Header text for the review section (TEXTO PRUEBA)",
+            "min_deposit":null,
+            "legal_disclaimer":"Debes ser mayor de 18 años (la edad legal en España) y residir en el territorio español. Toda la información personal que facilites (nombre completo, DNI/NIE, fecha de nacimiento, dirección) debe ser real y exacta. La normativa española establece un límite de depósito de 150€ hasta que tu identidad principal (DNI/NIE, nombre y fecha de nacimiento) haya sido verificada por el operador. Debido al Real Decreto 958/2020, los operadores NO pueden ofrecer bonos de bienvenida a nuevos usuarios.",
+            "badge":{
+               "text":"Mejor bono",
+               "style":"pill",
+               "color":"primary",
+               "custom_color":"",
+               "position":"top-right"
+            },
+            "geo":"WW",
+            "tracking_url":"https://clctracker.com/go/XpLgpUZc7mi7IVwtCRl8MoIwH",
+            "button":{
+               "text":"Visit Site",
+               "color":"primary",
+               "custom_color":""
+            },
+            "review_button":{
+               "text":"Review",
+               "color":"secondary"
+            },
+            "custom_bonus_text":"",
+            "category":null
+         },
+         {
+            "id":"94",
+            "name":"Bwin",
+            "logo_url":"https://pro.brandlisty.com/uploads/logos/logo_1752784984_od2BAMXq.png",
+            "position":"4",
+            "stars_rating":"4",
+            "cantidad":"",
+            "frase_oferta":"",
+            "frase2":"",
+            "affiliate_link":"https://clctracker.com/go/GFeTFxOM0yY4NqGm507It3pHq",
+            "review_link":"https://estoesreview.com/1344",
+            "custom_fields":{
+               "badge_text":"Mejor bono Bwin",
+               "badge_style":"pill",
+               "badge_color":"danger",
+               "badge_position":"top-right",
+               "badge_custom_color":"",
+               "button_text":"Visitar sitio",
+               "review_button_text":"Review",
+               "button_color":"success",
+               "button_custom_color":""
+            },
+            "pros":[
+               "Amplia variedad de mercados y deportes.",
+               "Streaming en vivo de alta calidad.",
+               "Interfaz intuitiva y app móvil eficiente."
+            ],
+            "cons":[
+               "Términos de bonos algo restrictivos.",
+               "Demoras ocasionales en los retiros.",
+               "Atención al cliente mejorable en ciertos horarios."
+            ],
+            "features":[
+               
+            ],
+            "extra_features":[
+               
+            ],
+            "payment_methods":[
+               {
+                  "method":"visa",
+                  "text":"Visa",
+                  "icon":"bi bi-credit-card-fill me-2 me-2"
+               },
+               {
+                  "method":"mastercard",
+                  "text":"Mastercard",
+                  "icon":"bi bi-credit-card-fill me-2 me-2"
+               },
+               {
+                  "method":"paypal",
+                  "text":"PayPal",
+                  "icon":"bi bi-paypal me-2 me-2"
+               },
+               {
+                  "method":"skrill",
+                  "text":"Skrill",
+                  "icon":"bi bi-wallet-fill me-2 me-2"
+               },
+               {
+                  "method":"neteller",
+                  "text":"Neteller",
+                  "icon":"bi bi-wallet2 me-2 me-2"
+               }
+            ],
+            "description":"Se hizo un nombre gracias a los patrocinios deportivos, pero es una de las casas más grandes de Europa con una gran cobertura de eventos. Abre mercados con mucha antelación.",
+            "valuation":"Bwin España es una opción altamente recomendable y de confianza para el jugador español. Si eres un aficionado a las apuestas deportivas, te beneficiarás de su vasta oferta de mercados, cuotas competitivas y la calidad de su streaming en vivo. Para los entusiastas del casino, su sección también es robusta y variada. Su solidez como marca y su estricto cumplimiento de la regulación DGOJ garantizan un entorno de juego seguro y fiable.",
+            "review_header":"Header text for the review section (TEXTO PRUEBA)",
+            "min_deposit":null,
+            "legal_disclaimer":"En España, Bwin opera bajo estricta licencia de la DGOJ, garantizando un marco legal y seguro. Esto implica la verificación obligatoria de identidad (KYC) para todos los usuarios, la implementación de herramientas de juego responsable (límites de depósito, autoexclusión) y la restricción de bonos de bienvenida a nuevos registros. Solo los clientes con cuenta verificada y 30+ días de antigüedad pueden acceder a promociones. Cumple con la normativa de protección de datos y asegura la transparencia en todos sus Términos y Condiciones.",
+            "badge":{
+               "text":"Mejor bono Bwin",
+               "style":"pill",
+               "color":"danger",
+               "custom_color":"",
+               "position":"top-right"
+            },
+            "geo":"WW",
+            "tracking_url":"https://clctracker.com/go/k6sqMfZXZcmkFGe4sxkxYVrJS",
+            "button":{
+               "text":"Visit Site",
+               "color":"primary",
+               "custom_color":""
+            },
+            "review_button":{
+               "text":"Review",
+               "color":"secondary"
+            },
+            "custom_bonus_text":"",
+            "category":null
+         },
+         {
+            "id":"93",
+            "name":"Betway",
+            "logo_url":"https://pro.brandlisty.com/uploads/logos/logo_1752784885_yc5PuYm4.png",
+            "position":"5",
+            "stars_rating":"4",
+            "cantidad":"",
+            "frase_oferta":"",
+            "frase2":"",
+            "affiliate_link":"https://clctracker.com/go/8iRlR155Z9xHrlx4JjAqGKxVZ",
+            "review_link":"https://estoesreview.com/1344",
+            "custom_fields":{
+               "badge_text":"Mejor bono",
+               "badge_style":"pill",
+               "badge_color":"primary",
+               "badge_position":"top-right",
+               "badge_custom_color":"",
+               "button_text":"Visitar sitio",
+               "review_button_text":"Review",
+               "button_color":"success",
+               "button_custom_color":""
+            },
+            "pros":[
+               "Variedad de mercados de apuestas.",
+               "Interfaz fácil de usar.",
+               "Grandes promociones y bonos."
+            ],
+            "cons":[
+               
+            ],
+            "features":[
+               
+            ],
+            "extra_features":[
+               
+            ],
+            "payment_methods":[
+               {
+                  "method":"visa",
+                  "text":"Visa",
+                  "icon":"bi bi-credit-card-fill me-2"
+               },
+               {
+                  "method":"mastercard",
+                  "text":"Mastercard",
+                  "icon":"bi bi-credit-card-fill me-2"
+               },
+               {
+                  "method":"paypal",
+                  "text":"PayPal",
+                  "icon":"bi bi-paypal me-2"
+               },
+               {
+                  "method":"paysafecard",
+                  "text":"Paysafecard",
+                  "icon":"bi bi-safe-fill me-2"
+               },
+               {
+                  "method":"skrill",
+                  "text":"Skrill",
+                  "icon":"bi bi-wallet-fill me-2"
+               },
+               {
+                  "method":"neteller",
+                  "text":"Neteller",
+                  "icon":"bi bi-wallet2 me-2"
+               },
+               {
+                  "method":"bank-transfer",
+                  "text":"Bank Transfer",
+                  "icon":"bi bi-bank me-2"
+               }
+            ],
+            "description":"Una casa de apuestas ideal para los aficionados a los eSports, también con una excelente oferta de apuestas en baloncesto o tenis... y, como no, en fútbol.",
+            "valuation":"",
+            "review_header":"",
+            "min_deposit":null,
+            "legal_disclaimer":"",
+            "badge":{
+               "text":"Mejor bono",
+               "style":"pill",
+               "color":"primary",
+               "custom_color":"",
+               "position":"top-right"
+            },
+            "geo":"WW",
+            "tracking_url":"https://clctracker.com/go/eF5t51J3ZdQRGUWyYemRGHkm8",
+            "button":{
+               "text":"Visit Site",
+               "color":"primary",
+               "custom_color":""
+            },
+            "review_button":{
+               "text":"Review",
+               "color":"secondary"
+            },
+            "custom_bonus_text":"",
+            "category":null
+         },
+         {
+            "id":"100",
+            "name":"Luckia",
+            "logo_url":"https://pro.brandlisty.com/uploads/logos/logo_1752785608_wYgeHWsy.png",
+            "position":"6",
+            "stars_rating":"4",
+            "cantidad":"",
+            "frase_oferta":"",
+            "frase2":"",
+            "affiliate_link":"https://clctracker.com/go/oS2HNnlr13uaCntr0XFrdO4hE",
+            "review_link":"https://estoesreview.com/1344",
+            "custom_fields":{
+               "badge_text":"Mejor bono",
+               "badge_style":"pill",
+               "badge_color":"primary",
+               "badge_position":"top-right",
+               "badge_custom_color":"",
+               "button_text":"Visitar sitio",
+               "review_button_text":"Review",
+               "button_color":"success",
+               "button_custom_color":""
+            },
+            "pros":[
+               "Interfaz fácil de usar y diseño responsivo.",
+               "Amplia variedad de mercados y deportes emergentes.",
+               "Métodos de pago modernos como Bizum y criptos."
+            ],
+            "cons":[
+               "Promociones limitadas para ciertos mercados.",
+               "Requisitos exigentes en algunos bonos.",
+               "Tiempos de retiro variables según el método."
+            ],
+            "features":[
+               
+            ],
+            "extra_features":[
+               
+            ],
+            "payment_methods":[
+               {
+                  "method":"visa",
+                  "text":"Visa",
+                  "icon":"bi bi-credit-card-fill me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"mastercard",
+                  "text":"Mastercard",
+                  "icon":"bi bi-credit-card-fill me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"paypal",
+                  "text":"PayPal",
+                  "icon":"bi bi-paypal me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"skrill",
+                  "text":"Skrill",
+                  "icon":"bi bi-wallet-fill me-2 me-2 me-2 me-2"
+               },
+               {
+                  "method":"neteller",
+                  "text":"Neteller",
+                  "icon":"bi bi-wallet2 me-2 me-2 me-2 me-2"
+               }
+            ],
+            "description":"La casa de apuestas gallega dispone de una amplia red de locales en toda España y una web con excelentes cuotas en los deportes más populares entre los apostantes.",
+            "valuation":"Como experto, considero a Luckia España una opción muy sólida y fiable. Su gran ventaja es la integración omnicanal, combinando una robusta plataforma online con una extensa red de locales físicos, algo valorado por muchos usuarios. Ofrece una amplia variedad de mercados de apuestas deportivas y un casino completo con diversos juegos. Cumple estrictamente la regulación DGOJ, garantizando seguridad, transparencia y herramientas de juego responsable. Su enfoque en el mercado español y la familiaridad de su marca la convierten en una elección muy competitiva y confiable.",
+            "review_header":"Header text for the review section (TEXTO PRUEBA)",
+            "min_deposit":"5.00",
+            "legal_disclaimer":"Luckia opera en España bajo el estricto marco legal de la Dirección General de Ordenación del Juego (DGOJ). Esto implica total cumplimiento con la normativa de juego responsable, ofreciendo herramientas como límites de depósito y autoexclusión. Exige la verificación de identidad (KYC) para todos sus usuarios, un paso crucial para la seguridad y para permitir retiros. Las promociones y bonos, conforme a la ley, solo están disponibles para clientes con cuenta verificada y más de 30 días de antigüedad, eliminando bonos de bienvenida para nuevos registros.",
+            "badge":{
+               "text":"Mejor bono",
+               "style":"pill",
+               "color":"primary",
+               "custom_color":"",
+               "position":"top-right"
+            },
+            "geo":"WW",
+            "tracking_url":"https://clctracker.com/go/Q8DCkzTRCFBERz4mdEq0bbMag",
+            "button":{
+               "text":"Visit Site",
+               "color":"primary",
+               "custom_color":""
+            },
+            "review_button":{
+               "text":"Review",
+               "color":"secondary"
+            },
+            "custom_bonus_text":"",
+            "category":null
+         }
+      ]
+   }
+}
