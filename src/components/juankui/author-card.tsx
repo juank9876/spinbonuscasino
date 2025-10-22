@@ -1,8 +1,9 @@
-import { fetchAuthorById } from "@/api-fetcher/fetcher";
+import { Author } from "@/types/types";
 import Image from "next/image";
+import { Link } from "./optionals/link";
 
-export async function AuthorCard({ name, avatar, bio, author_id }: { name: string, avatar?: string, bio?: string, author_id: string }) {
-    const author = await fetchAuthorById(author_id);
+export function AuthorCard ({ author }: { author: Author }) {
+
     let socialLinks: Record<string, string> = {};
     if (typeof author.social_links === 'string') {
         try {
@@ -49,37 +50,45 @@ export async function AuthorCard({ name, avatar, bio, author_id }: { name: strin
     const validLinks = SOCIAL_LINKS.filter(link => !!link.href);
 
     // Si no hay enlaces válidos, no renderices la fila de iconos
+
     return (
-        <div className="border-t border-b py-6 px-10 flex items-center gap-4 my-6 rounded-lg hover:to-[var(--color-primary-semi-dark)] transition-colors">
-            <div className="flex-shrink-0">
-                <Image
-                    src={avatar || 'https://api.dicebear.com/7.x/lorelei/svg?seed=default'}
-                    alt={name}
-                    width={56}
-                    height={56}
-                    className="rounded-full border object-cover"
-                />
-            </div>
-            <div className="flex-1 space-y-2">
-                <h3 className="font-bold text-xl text-slate-600 pl-1">{name}</h3>
-                {bio && <div className=" text-sm text-slate-600 pl-1">{bio}</div>}
-                {validLinks.length > 0 && (
-                    <div className="flex space-x-4 justify-start items-center">
-                        {validLinks.map(social => (
-                            <a
-                                key={social.label}
-                                href={social.href}
-                                className="transition-colors text-slate-600"
-                                aria-label={social.label}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {social.icon}
-                            </a>
-                        ))}
-                    </div>
-                )}
-            </div>
+        <div className="my-6 flex flex-col border-y border-gray-200 transition hover:bg-gray-50">
+            <Link
+                href={`/authors/${author.slug}`}
+                className="flex w-full items-center gap-4 px-10 py-6"
+            >
+                <div className="flex-shrink-0">
+                    <Image
+                        src={author.avatar || 'https://api.dicebear.com/7.x/lorelei/svg?seed=default'}
+                        alt={author.name}
+                        width={56}
+                        height={56}
+                        className="rounded-full border object-cover"
+                    />
+                </div>
+
+                <div className="flex-1 space-y-2">
+                    <h3 className="text-xl font-bold text-slate-700">{author.name}</h3>
+                    {author.bio && <p className="text-sm text-slate-600">{author.bio}</p>}
+                </div>
+            </Link>
+
+            {validLinks.length > 0 && (
+                <div className="flex justify-start gap-4 border-t border-gray-100 px-10 py-3">
+                    {validLinks.map((social) => (
+                        <a
+                            key={social.label}
+                            href={social.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={social.label}
+                            className="text-slate-600 transition hover:text-blue-600"
+                        >
+                            {social.icon}
+                        </a>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

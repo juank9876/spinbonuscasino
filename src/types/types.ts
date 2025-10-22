@@ -253,6 +253,7 @@ export interface Author {
   meta_description: string;
   schema_data: unknown | null;
   status: string;
+  robots_index: "index" | "noindex"
   created_at: string;
   updated_at: string;
   post_count: string;

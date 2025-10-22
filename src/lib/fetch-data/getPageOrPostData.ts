@@ -6,13 +6,14 @@ import {
     fetchSlugToId,
     fetchPermalink,
     PermalinkType,
-    fetchTagById
+    fetchTagById,
+    fetchAuthorById
 } from '@/api-fetcher/fetcher'
-import { Category, Page, PostResponse, Tag } from '@/types/types'
+import { Author, Category, Page, PostResponse, Tag } from '@/types/types'
 import { fixSeoUrlSlash } from '@/utils/fixSeoUrlSlash'
 
 
-export type ContentType = 'page' | 'post' | 'category' | 'tag'
+export type ContentType = 'page' | 'post' | 'category' | 'tag' | 'author'
 
 export interface ContentData {
     html_content: string
@@ -85,6 +86,17 @@ export const getTagFromSlug = async (slug: string): Promise<Tag | undefined> => 
     }
 }
 
+export const getAuthorFromSlug = async (author: string): Promise<Author | undefined> => {
+    const tag = await getContentBySlug(author, 'author', fetchAuthorById)
+
+    if (!tag) return undefined
+
+    return {
+        ...tag,
+        //seo_url: fixSeoUrlSlash(tag.seo_url || '')
+    }
+}
+
 
 // FUNCION MULTIHERRAMIENTA PARA OBTENER PAGINA, POST O CATEGORIA
 export async function getContentData(slug: string) {
@@ -131,6 +143,12 @@ export async function getContentDataTag(slug: string) {
     const tag = await getTagFromSlug(slug)
     if (!tag) return undefined
     return { type: 'tag' as const, data: tag }
+}
+
+export async function getContentAuthor(slug: string) {
+    const author = await getAuthorFromSlug(slug)
+    if (!author) return undefined
+    return { type: 'author' as const, data: author }
 }
 
 //BOOLEANO PARA COMPARAR URL ACTUAL (SEO_URL POR DEFECTO) CON PERMALINK

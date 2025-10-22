@@ -8,20 +8,19 @@ import { AuthorCard } from '../author-card'
 import { TagsList } from '../tags-list'
 import { ContentWithSidebar } from '../layouts/content-with-sidebar'
 import { config } from '@/config/config'
+import { fetchAuthorById } from '@/api-fetcher/fetcher'
 
-function PostBody({ children, post }: { children: ReactNode, post: Post }) {
+async function PostBody ({ children, post }: { children: ReactNode, post: Post }) {
   const postConfig = config.pageTypes.posts;
-
+  const author = await fetchAuthorById(post.author_id)
   return (
     <div className='flex flex-col'>
       {children}
       {/* Card de autor */}
       {postConfig.author && post.author_name && (
         <AuthorCard
-          author_id={post.author_id}
-          name={post.author_name}
-          avatar={post.author_avatar}
-          bio={post.author_bio}
+          author={author}
+
         />
       )}
       {postConfig.tags && post.tags && (
@@ -31,7 +30,7 @@ function PostBody({ children, post }: { children: ReactNode, post: Post }) {
   )
 }
 
-export function PrePost({ children, post }: { children: ReactNode, post: Post }) {
+export function PrePost ({ children, post }: { children: ReactNode, post: Post }) {
   const postConfig = config.pageTypes.posts;
   const author = { id: post.author_id, name: post.author_name, avatar: post.author_avatar, bio: post.author_bio }
   const category = { id: post.category_id, name: post.category_name, slug: post.category_slug }
