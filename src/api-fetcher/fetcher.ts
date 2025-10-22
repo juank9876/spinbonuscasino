@@ -363,8 +363,10 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId } : { cou
 }
 
 export async function getUserCountry({ ip } : { ip: string }): Promise<string> {
+  
+  const baseUrl = "https://api.ipinfo.io/lite/"
   try {
-    const res = await fetch(`https://ip.guide/${ip}`);
+    const res = await fetch(baseUrl + `${ip}` + `?token=${process.env.IPINFO_TOKEN}` );
     if (!res.ok) throw new Error('Error al obtener IP');
 
     const data = await res.json();
