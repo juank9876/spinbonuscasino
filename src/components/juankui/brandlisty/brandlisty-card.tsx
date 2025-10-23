@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { Star, ChevronDown, ChevronUp, Check, X, StarIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface PaymentMethod {
   method: string;
@@ -86,7 +87,7 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
   const stars = parseFloat(operator.stars_rating) || 0;
 
   return (
-    <div className="mb-1 overflow-hidden rounded-lg border bg-white shadow-xl transition duration-500 hover:scale-105 hover:bg-gray-100">
+    <div className="mb-1 overflow-hidden rounded-lg border bg-white shadow-xl transition duration-500 hover:bg-gray-100">
       {/* Sección Principal - Siempre Visible */}
       <div className="p-2">
         {/* Header con número de posición y badge */}
@@ -143,12 +144,12 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
         {/* Botón desplegable */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-200"
+          className={cn(`mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 
+              py-2 text-xs font-medium text-gray-700 transition-all duration-200 `, isExpanded ? `${getButtonColor(operator.review_button.color)} text-white hover:bg-gray-500` : 'hover:bg-gray-50')}
         >
-          <span>More information</span>
+          <span className='text-sm'>{isExpanded ? 'Less information' : 'More information'}</span>
           <ChevronDown
-            className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'
-              }`}
+            className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
           />
         </button>
       </div>
@@ -164,7 +165,7 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
           {/* Features */}
           {operator.features.length > 0 && (
             <div>
-              <h4 className="mb-2 text-sm font-semibold text-gray-800">Características:</h4>
+              <h4 className="mb-2 text-sm font-semibold text-gray-800">Features</h4>
               <div className="space-y-1">
                 {operator.features.map((feature, idx) => (
                   <div key={idx} className="flex items-start text-xs text-gray-700">
@@ -181,7 +182,7 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
             <div className="rounded-lg border border-green-200 bg-green-50 p-3">
               <h4 className="mb-2 flex items-center text-sm font-semibold text-green-800">
                 <Check className="mr-1 h-4 w-4" />
-                Ventajas
+                Pros
               </h4>
               <ul className="space-y-1">
                 {operator.pros.map((pro, idx) => (
@@ -199,7 +200,7 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
             <div className="rounded-lg border border-red-200 bg-red-50 p-3">
               <h4 className="mb-2 flex items-center text-sm font-semibold text-red-800">
                 <X className="mr-1 h-4 w-4" />
-                Desventajas
+                Cons
               </h4>
               <ul className="space-y-1">
                 {operator.cons.map((con, idx) => (
@@ -215,7 +216,7 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
           {/* Valoración */}
           {operator.valuation && (
             <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
-              <h4 className="mb-2 text-sm font-semibold text-blue-800">Valoración:</h4>
+              <h4 className="mb-2 text-sm font-semibold text-blue-800">Expert Valuation</h4>
               <p className="text-xs leading-relaxed text-blue-700">{operator.valuation}</p>
             </div>
           )}
@@ -223,7 +224,7 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
           {/* Métodos de Pago */}
           {operator.payment_methods.length > 0 && (
             <div>
-              <h4 className="mb-2 text-sm font-semibold text-gray-800">Métodos de pago:</h4>
+              <h4 className="mb-2 text-sm font-semibold text-gray-800">Payment Methods</h4>
               <div className="flex flex-wrap gap-2">
                 {operator.payment_methods.slice(0, 6).map((method, idx) => (
                   <div key={idx} className="rounded border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 shadow-sm">
@@ -243,12 +244,21 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
 
           {/* Botón Review */}
           <a
+            href={operator.affiliate_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex mx-auto w-1/2 justify-center items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 ${getButtonColor(operator.button.color)}`}
+          >
+            {operator.button.text}
+          </a>
+          {/* Botón Review */}
+          <a
             href={operator.review_link}
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-100"
+            className={`flex mx-auto w-1/2 justify-center items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-100 ${getButtonColor(operator.review_button.color)}`}
           >
-            Review
+            {operator.review_button.text}
           </a>
         </div>
       )}
@@ -340,9 +350,10 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
           {/* Botón desplegable */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-xs font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50"
+            className={cn(`mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 
+              py-2 text-xs font-medium text-gray-700 transition-all duration-200 `, isExpanded ? `${getButtonColor(operator.review_button.color)} text-white hover:bg-gray-500` : 'hover:bg-gray-50')}
           >
-            <span>More information</span>
+            <span className='text-sm'>{isExpanded ? 'Less information' : 'More information'}</span>
             <ChevronDown
               className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
             />
@@ -367,13 +378,13 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
             </div>
           )}
 
-          <div className='flex w-full flex-row items-center justify-center gap-5 lg:flex-col lg:gap-0'>
+          <div className='flex w-full flex-col items-center justify-center gap-2 px-5 lg:w-[200px]'>
             {/* Botón principal */}
             <a
               href={operator.affiliate_link}
               target="_blank"
               rel="noopener noreferrer"
-              className={`mb-0 lg:mb-2 w-full max-w-[80px] rounded-lg py-2 text-center text-xs font-semibold transition-all duration-200 ${getButtonColor(operator.button.color)}`}
+              className={`mb-0 w-full rounded-lg py-2 text-center text-xs font-semibold transition-all duration-200 ${getButtonColor(operator.button.color)}`}
             >
               {operator.button.text}
             </a>
@@ -383,9 +394,9 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
               href={operator.review_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full max-w-[80px] rounded-lg border-2 border-gray-300 bg-white py-2 text-center text-xs font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50"
+              className="w-full rounded-lg border-2 border-gray-300 bg-white py-2 text-center text-xs font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50"
             >
-              Review
+              {operator.review_button.text}
             </a>
           </div>
         </div>
@@ -404,7 +415,7 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
               {/* Features */}
               {operator.features.length > 0 && (
                 <div>
-                  <h4 className="mb-3 text-sm font-semibold text-gray-800">Características:</h4>
+                  <h4 className="mb-3 text-sm font-semibold text-gray-800">Features</h4>
                   <div className="space-y-2">
                     {operator.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start text-sm text-gray-700">
@@ -421,7 +432,7 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
                 <div className="rounded-lg border border-green-200 bg-green-50 p-4">
                   <h4 className="mb-3 flex items-center text-sm font-semibold text-green-800">
                     <Check className="mr-2 h-4 w-4" />
-                    Ventajas
+                    Pros
                   </h4>
                   <ul className="space-y-2">
                     {operator.pros.map((pro, idx) => (
@@ -439,7 +450,7 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
                 <div className="rounded-lg border border-red-200 bg-red-50 p-4">
                   <h4 className="mb-3 flex items-center text-sm font-semibold text-red-800">
                     <X className="mr-2 h-4 w-4" />
-                    Desventajas
+                    Cons
                   </h4>
                   <ul className="space-y-2">
                     {operator.cons.map((con, idx) => (
@@ -455,7 +466,7 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
               {/* Valoración */}
               {operator.valuation && (
                 <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
-                  <h4 className="mb-3 text-sm font-semibold text-blue-800">Valoración:</h4>
+                  <h4 className="mb-3 text-sm font-semibold text-blue-800">Expert Valuation</h4>
                   <p className="text-sm leading-relaxed text-blue-700">{operator.valuation}</p>
                 </div>
               )}
@@ -464,7 +475,7 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
             {/* Métodos de Pago Expandidos */}
             {operator.payment_methods.length > 0 && (
               <div className="mt-6">
-                <h4 className="mb-3 text-sm font-semibold text-gray-800">Métodos de pago:</h4>
+                <h4 className="mb-3 text-sm font-semibold text-gray-800">Payment Methods</h4>
                 <div className="flex flex-wrap gap-2">
                   {operator.payment_methods.map((method, idx) => (
                     <div key={idx} className="rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-700 shadow-sm">
@@ -481,6 +492,26 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
                 <p className="text-xs leading-relaxed text-gray-600">{operator.legal_disclaimer}</p>
               </div>
             )}
+            <div className='flex flex-col gap-1 pt-4 lg:hidden'>
+              {/* Botón Review */}
+              <a
+                href={operator.affiliate_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex mx-auto w-1/2 justify-center items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 ${getButtonColor(operator.button.color)}`}
+              >
+                {operator.button.text}
+              </a>
+              {/* Botón Review */}
+              <a
+                href={operator.review_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex mx-auto w-1/2 justify-center items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-100 ${getButtonColor(operator.review_button.color)}`}
+              >
+                {operator.review_button.text}
+              </a>
+            </div>
           </div>
         </div>
       </div>
