@@ -353,6 +353,7 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId } : { cou
         }
     }
   )
+
   const data = await response.json();
   let brands = data?.data?.brands as BrandlistyCardType[] || [];
   // Filtramos por país o WW

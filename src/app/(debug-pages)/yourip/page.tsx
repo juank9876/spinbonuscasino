@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { BrandlistyOriginal } from "./brandlisty-original";
 
 export default async function Page () {
   const headerslist = await headers();
@@ -10,6 +11,11 @@ export default async function Page () {
     <div className="flex flex-1 flex-col items-center justify-center">
       <p>Country Code: {countryCode}</p>
       <p>YourIP: {ip1}</p>
+
+      <BrandlistyOriginal
+        apiKey={process.env.BRANDLISTY_API_KEY || ''}
+        listId={process.env.BRANDLISTY_LIST_ID || ''}
+      />
     </div>
   )
 }
