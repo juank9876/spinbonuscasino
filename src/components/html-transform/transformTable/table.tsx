@@ -53,7 +53,7 @@ export function transformTable(el: Element, options: HTMLReactParserOptions) {
 
     return (
         <div className={`${attribs.className || ''} w-full m-0 p-0 width-none`}>
-            <table {...attribs} className={`w-fit m-0 p-0 `}>
+            <table {...attribs} className={`w-full m-0 p-0 `}>
                 {domToReact(el.children as DOMNode[], options)}
             </table>
         </div>
@@ -74,7 +74,7 @@ export function transformTBody(el: Element, options: HTMLReactParserOptions) {
     const attribs = fixAttribs(el.attribs)
 
     return (
-        <tbody {...attribs} className={`w-full flex flex-col ${attribs.className || ''}`}>
+        <tbody {...attribs} className={`${attribs.className || ''}`}>
             {domToReact(el.children as DOMNode[], options)}
         </tbody>
     )
@@ -94,7 +94,7 @@ export function transformTr(el: Element, options: HTMLReactParserOptions) {
                 {domToReact(el.children as DOMNode[], options)}
             </tr>
         )
-    } ``
+    }
 
     return (
         <tr {...attribs} className={`p-row w-full max-md:block  max-md:p-2.5 ${attribs.className || ''}`}>
