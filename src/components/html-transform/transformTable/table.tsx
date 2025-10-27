@@ -52,7 +52,7 @@ export function transformTable(el: Element, options: HTMLReactParserOptions) {
     }
 
     return (
-        <div className={` w-full m-0 p-0 width-none`}>
+        <div className={`${attribs.className || ''} w-full m-0 p-0 width-none`}>
             <table {...attribs} className={`w-fit m-0 p-0 `}>
                 {domToReact(el.children as DOMNode[], options)}
             </table>
