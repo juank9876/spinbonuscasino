@@ -16,7 +16,7 @@ import { transformAccordion, transformAccordionItem, transformAccordionHeader, t
 import { transformBrandlisty } from './transformBrandlisty/brandlisty'
 import { transformTermContentH3 } from './transformImportantTerms/transformTermItem'
 import { transformInfoCardsContainer } from './transformCards/info-cards-containter'
-//import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
+import { transformTable, transformTBody, transformTd, transformTh, transformThead, transformTr } from './transformTable/table'
 
 type TransformerRule = {
   className?: string
@@ -76,14 +76,13 @@ const rules: TransformerRule[] = [
 
   //Fixes
 
-  //Table fix
-  /*
+  //Table transformers
   { tagName: 'table', transformer: transformTable },
   { tagName: 'thead', transformer: transformThead },
-  { tagName: 'tr', transformer: transformTr },
-  { tagName: 'td', transformer: transformTd },
   { tagName: 'tbody', transformer: transformTBody },
-   */
+  { tagName: 'tr', transformer: transformTr },
+  { tagName: 'th', transformer: transformTh },
+  { tagName: 'td', transformer: transformTd },
   //{ tagName: 'button', transformer: transformButton },
   //{ tagName: 'svg', transformer: transformSvg },
 

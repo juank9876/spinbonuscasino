@@ -287,3 +287,7 @@ h5 {
     transform: rotate(360deg);
   }
 }
+
+.width-none {
+  min-width: 0px !important;
+}

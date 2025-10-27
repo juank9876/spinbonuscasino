@@ -18,7 +18,7 @@ const MENU_STYLES = {
   underline: "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-[var(--color-accent)] after:scale-x-0 after:origin-right after:transition-transform after:duration-300",
   underlineHover: "hover:after:scale-x-100 hover:after:origin-left",
   dropdown: "absolute left-0 top-full w-[250px] hidden group-hover/menu:block bg-[var(--color-primary-dark)] backdrop-blur-sm rounded-lg shadow-lg shadow-black/5 border border-gray-600/20 transform origin-top-left transition-all duration-200 ease-out opacity-0 -translate-y-2 group-hover/menu:opacity-100 group-hover/menu:translate-y-0 z-20 py-5",
-  submenu: "absolute right-full top-0 w-[220px] bg-white/95 backdrop-blur-sm rounded-lg shadow-lg shadow-black/5 border border-gray-100/20 transition-all duration-200 ease-out transform origin-top-right z-30"
+  submenu: "absolute left-full top-0 w-[220px] bg-white/95 backdrop-blur-sm rounded-lg shadow-lg shadow-black/5 border border-gray-100/20 transition-all duration-200 ease-out transform origin-top-left z-30 ml-1"
 } as const
 
 // ============================================================================
@@ -33,7 +33,7 @@ type ListItemProps = {
   parentSlug?: string
 }
 
-type rotation = "rotate-90" | "rotate-0" | "rotate-180"
+type rotation = "rotate-90" | "rotate-0" | "rotate-180" | "rotate-270"
 
 function ChevronIcon({ isSubmenu, rotation }: { isSubmenu?: boolean; rotation: rotation }) {
   const Icon = isSubmenu ? ChevronRight : ChevronUp
@@ -73,7 +73,7 @@ function ListItem({ title, href, isChild = false, childCategories, parentSlug }:
         )}
       >
         {title}
-        {hasSubcategories && <ChevronIcon rotation={isOpen ? "rotate-180" : "rotate-0"} isSubmenu />}
+        {hasSubcategories && <ChevronIcon rotation={isOpen ? "rotate-0" : "rotate-90"} isSubmenu />}
       </NavLink>
 
       {hasSubcategories && (

@@ -15,7 +15,7 @@ import { SchemaJson } from "./seo/schemaJson";
 
 
 
-export async function fetchLayoutData () {
+export async function fetchLayoutData() {
   const [settings, cookies, ageVerification] = await Promise.all([
     fetchSiteSettings(),
     fetchCookies(),
@@ -25,7 +25,7 @@ export async function fetchLayoutData () {
   return { settings, cookies, ageVerification };
 }
 
-function LayoutBody ({
+function LayoutBody({
   children,
   settings,
   themeColors,
@@ -45,9 +45,11 @@ function LayoutBody ({
       suppressHydrationWarning
     >
       <Providers>
-        <div className="max-w-screen flex min-h-[100dvh] flex-col">
+        <div className="max-w-screen flex min-h-[100dvh] h-full flex-col">
           <Header />
-          {children}
+          <div className="flex-1 flex flex-col">
+            {children}
+          </div>
           <Footer />
         </div>
         <CookieConsent cookies={cookies} />
@@ -57,7 +59,7 @@ function LayoutBody ({
   );
 }
 
-export default async function RootLayout ({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Fetch de datos en paralelo
   const layoutData = await fetchLayoutData();
 

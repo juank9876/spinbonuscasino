@@ -31,7 +31,7 @@ interface ContentWithSidebarProps {
     className?: string;
 }
 
-export function ContentWithSidebar ({
+export function ContentWithSidebar({
     children,
     sidebarConfig,
     sidebarData,
@@ -60,7 +60,7 @@ export function ContentWithSidebar ({
                 {/*showSidebar && spacerEnabled && <div className={`${spacerWidth} hidden lg:block`} />*/}
 
                 {/* Contenido principal */}
-                <div className={showSidebar ? ' w-full' : 'w-full'}>
+                <div className={showSidebar ? 'h-full w-full' : 'h-full w-full'}>
                     {children}
                 </div>
 

@@ -157,7 +157,7 @@ export async function Footer() {
 
 
   else return (
-    <footer className="relative w-full bg-[var(--color-primary-dark)]">
+    <footer className=" w-full bg-[var(--color-primary-dark)]">
       <Particles
         className="absolute inset-0 z-0"
         quantity={50}
