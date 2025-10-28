@@ -144,7 +144,7 @@ export const config: ProjectConfig = {
         },
         sidebar: {
             // Ancho del sidebar en diferentes breakpoints
-            width: 'hidden lg:w-[600px] xl:w-[600px]',       // Desktop grande: más ancho
+            width: 'w-full lg:w-[600px] xl:w-[600px]',       // Desktop grande: más ancho
 
             // Espaciador izquierdo (para balance visual)
             spacer: {

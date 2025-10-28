@@ -2,7 +2,7 @@ import { DicesIcon } from 'lucide-react'
 import { fetchBrandlistyApi } from '@/api-fetcher/fetcher';
 import { BrandlistySidebarSsr } from '../brandlisty/brandlisty-ssr';
 
-export async function BrandlistyLite () {
+export async function BrandlistyLite() {
     // Ya no necesitamos la constante test, el HTML vendrá del API
     const res = await fetchBrandlistyApi({ countryCode: '' });
 
@@ -14,16 +14,6 @@ export async function BrandlistyLite () {
                 <DicesIcon className="h-5 w-5 text-white" />
                 <h2 className="padding-none text-lg font-bold text-white">Brandlisty</h2>
             </div>
-            {/*
-                <BrandlistyWidget
-                    isDataWidget
-                    apiKey={apiKey}
-                    listId={listId}
-                    boton={boton}
-                    limit={limit}
-                    sidebarMode={true}
-                />
-            */}
             <BrandlistySidebarSsr />
         </aside>
     )

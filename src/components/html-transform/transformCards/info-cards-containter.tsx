@@ -7,7 +7,6 @@ import { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react
 export function transformInfoCardsContainer(el: Element, options: HTMLReactParserOptions) {
 
     const attribs = fixAttribs(el.attribs)
-    console.log(attribs.className)
     return (
         <div {...attribs} className={`${attribs.className || ''}`}>
             {domToReact(el.children as DOMNode[], options)}

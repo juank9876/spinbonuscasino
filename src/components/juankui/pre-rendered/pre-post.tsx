@@ -9,6 +9,7 @@ import { TagsList } from '../tags-list'
 import { ContentWithSidebar } from '../layouts/content-with-sidebar'
 import { config } from '@/config/config'
 import { fetchAuthorById } from '@/api-fetcher/fetcher'
+import { BrandlistyLite } from '../sidebar-with-posts/brandlisty-lite'
 
 async function PostBody({ children, post }: { children: ReactNode, post: Post }) {
   const postConfig = config.pageTypes.posts;

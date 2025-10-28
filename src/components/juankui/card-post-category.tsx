@@ -85,7 +85,7 @@ export function CardPostCategory({ post }: { post: Post }) {
       {/*Card para movil*/}
       < Card className="duration-500 relative w-full overflow-hidden border-none p-0 shadow-lg transition hover:shadow-xl hover:shadow-[var(--color-accent-dark)]/20 lg:hidden" >
         <Link
-          href={`/categories${post.seo_url}`}
+          href={post.seo_url}
           className="block w-full">
           <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
 

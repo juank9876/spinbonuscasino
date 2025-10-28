@@ -154,12 +154,11 @@ export async function getContentAuthor(slug: string) {
 //BOOLEANO PARA COMPARAR URL ACTUAL (SEO_URL POR DEFECTO) CON PERMALINK
 export async function isCheckUrlPermalink(slug: string, slugString: string, type: PermalinkType) {
     const id = await fetchSlugToId(slug, type)
-    if (!id) return console.log("No id found to fetch Permalink")
+    if (!id) return false
 
     const { permalink } = await fetchPermalink(id, type)
 
     if (permalink !== slugString) {
-        console.log("permalink no match", permalink, slugString)
         return false
     }
     else return true

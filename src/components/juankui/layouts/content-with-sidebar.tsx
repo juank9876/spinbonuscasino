@@ -43,7 +43,8 @@ export function ContentWithSidebar({
         sidebarConfig.latest ||
         sidebarConfig.author ||
         sidebarConfig.categories ||
-        sidebarConfig.tags
+        sidebarConfig.tags ||
+        sidebarConfig.brandlistyLite
     );
 
     // Obtener configuración del sidebar desde config
