@@ -178,12 +178,12 @@ export const config: ProjectConfig = {
         // HOME
         home: {
             sidebar: {
-                brandlistyLite: false,
-                latest: false,
-                author: false,
-                categories: false,
-                tags: false,
-                related: false,
+                brandlistyLite: true,
+                latest: true,
+                author: true,
+                categories: true,
+                tags: true,
+                related: true,
             },
             author: false,
             tags: false,
@@ -196,12 +196,12 @@ export const config: ProjectConfig = {
         // POSTS (artículos individuales)
         posts: {
             sidebar: {
-                brandlistyLite: false,
-                latest: false,
-                author: false,
-                categories: false,
-                tags: false,      // Desactivado - no mostrar tags en sidebar
-                related: false,
+                brandlistyLite: true,
+                latest: true,
+                author: true,
+                categories: true,
+                tags: true,
+                related: true,
             },
             author: true,
             tags: true,
@@ -214,12 +214,12 @@ export const config: ProjectConfig = {
         // PAGES (páginas estáticas)
         pages: {
             sidebar: {
-                brandlistyLite: false,
-                latest: false,
-                author: false,
-                categories: false,
-                tags: false,
-                related: false,
+                brandlistyLite: true,
+                latest: true,
+                author: true,
+                categories: true,
+                tags: true,
+                related: true,
             },
             author: false,
             tags: false,
