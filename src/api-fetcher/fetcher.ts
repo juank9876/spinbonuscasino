@@ -98,7 +98,7 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
   try {
     const res = await fetch(url, {
-      next: { revalidate: 0 },
+      next: { revalidate: 60 },
 
     })
     const data: ResponseInterface<T> = await res.json();
