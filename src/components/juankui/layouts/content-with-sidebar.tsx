@@ -47,8 +47,8 @@ export function ContentWithSidebar({
     );
 
     // Obtener configuración del sidebar desde config
-    const layoutWidth = `${config.components.layout.width.base} ${config.components.layout.width.lg} ${config.components.layout.width.xl}`;
-    const sidebarWidth = `${config.components.sidebar.width.base} ${config.components.sidebar.width.lg} ${config.components.sidebar.width.xl}`;
+    const layoutWidth = `${config.components.layout.width}`;
+    const sidebarWidth = `${config.components.sidebar.width}`;
     const containerGap = config.components.sidebar.gap;
     const spacerEnabled = config.components.sidebar.spacer.enabled;
     const spacerWidth = config.components.sidebar.spacer.width;
