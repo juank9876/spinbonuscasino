@@ -12,7 +12,7 @@ export function PrePage({ children, page }: { children: ReactNode, page: Page })
 
   return (
     <MainWrapper>
-      {isParticles && <ParticlesFull />}
+
 
       {config.template.pageHeroWithNavbarTransparent && <HeroPage {...page} />}
 

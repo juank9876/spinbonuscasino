@@ -23,7 +23,7 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
   }
   return (
     <MainWrapper>
-      {isParticles && <ParticlesFull />}
+
       {config.template.homeHeroWithNavbarTransparent && <HeroHomePage {...props} />}
 
       <Section>

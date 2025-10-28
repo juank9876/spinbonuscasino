@@ -14,10 +14,9 @@ export function PreCategory({ children, category, className }: { children: React
 
   return (
     <MainWrapper>
-      {isParticles && <ParticlesFull />}
 
       {cssSettings.styles.applyTemplateStyles && <HeroCategory {...category} />}
-      
+
       <ContentWithSidebar
         sidebarConfig={categoryConfig.sidebar}
         sidebarData={{ category: categoryData }}

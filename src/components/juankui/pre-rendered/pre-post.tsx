@@ -10,7 +10,7 @@ import { ContentWithSidebar } from '../layouts/content-with-sidebar'
 import { config } from '@/config/config'
 import { fetchAuthorById } from '@/api-fetcher/fetcher'
 
-async function PostBody ({ children, post }: { children: ReactNode, post: Post }) {
+async function PostBody({ children, post }: { children: ReactNode, post: Post }) {
   const postConfig = config.pageTypes.posts;
   const author = await fetchAuthorById(post.author_id)
   return (
@@ -30,7 +30,7 @@ async function PostBody ({ children, post }: { children: ReactNode, post: Post }
   )
 }
 
-export function PrePost ({ children, post }: { children: ReactNode, post: Post }) {
+export function PrePost({ children, post }: { children: ReactNode, post: Post }) {
   const postConfig = config.pageTypes.posts;
   const author = { id: post.author_id, name: post.author_name, avatar: post.author_avatar, bio: post.author_bio }
   const category = { id: post.category_id, name: post.category_name, slug: post.category_slug }
@@ -38,7 +38,7 @@ export function PrePost ({ children, post }: { children: ReactNode, post: Post }
 
   return (
     <MainWrapper>
-      {isParticles && <ParticlesFull />}
+
       {config.template.postHeroWithNavbarTransparent && <HeroPost {...post} />}
 
       <ContentWithSidebar
