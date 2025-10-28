@@ -59,6 +59,8 @@ const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
     // Eliminar max-width de .info-cards-container
     cssContent = removeMaxWidthFromClass(cssContent, 'info-cards-container');
 
+    // Eliminar todas las ocurrencias de min-width
+    cssContent = cssContent.replace(/min-width\s*:\s*[^;]*;?/gi, '');
 
     debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
     useEffect(() => {
