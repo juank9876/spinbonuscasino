@@ -13,7 +13,7 @@ interface SectionProps {
 export function Section({ children, className }: SectionProps) {
   return (
     <section className={`relative h-full flex w-full flex-1 items-center justify-center `}>
-      {isParticles && <ParticlesFull />}
+
       <div className={className}>
         {children}
       </div>

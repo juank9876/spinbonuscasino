@@ -1,14 +1,15 @@
-import { fetchAllSlugs, fetchCategories, fetchMenu } from '@/api-fetcher/fetcher'
+import { fetchAllSlugs, fetchCategories, fetchMenu, fetchTags } from '@/api-fetcher/fetcher'
 import { normalizeUrl } from '@/lib/utils'
 import { contextSiteSettings } from '@/app/context/getSiteSettings'
 import { NavItemType } from '@/types/types';
 
 export async function getHeaderData() {
-    const [rawNavItems, allSlugs, categoriesItems, settings] = await Promise.all([
+    const [rawNavItems, allSlugs, categoriesItems, settings, tagsItems] = await Promise.all([
         fetchMenu(),
         fetchAllSlugs("category"),
         fetchCategories(),
         contextSiteSettings(),
+        fetchTags(),
     ]);
 
     // Filtrar y ordenar nav items activos
@@ -20,5 +21,5 @@ export async function getHeaderData() {
             url: normalizeUrl(item.url),
         }));
 
-    return { normalizedItems, allSlugs, categoriesItems, settings };
+    return { normalizedItems, allSlugs, categoriesItems, settings, tagsItems };
 }

@@ -46,13 +46,21 @@ interface ProjectConfig {
             transparent: boolean;             // Navbar transparente al hacer scroll
             fixed: boolean;                   // Navbar fijo en top
             showSearch: boolean;              // Mostrar búsqueda
+            bgColor: string;                  // Color de fondo
+            links: {
+                styles: string;
+                bgColor: string;
+                dropdown: {
+                    styles: string;
+                    bgColor: string;
+                }
+            },
+            tags: {
+                styles: string;
+            }
         };
         layout: {
-            width: {
-                base: string;
-                lg: string;
-                xl: string;
-            };
+            width: string
         };
         hero: {
             homeHero: boolean;                  // Mostrar hero en la página
@@ -60,18 +68,17 @@ interface ProjectConfig {
             categoryHero: boolean;
             tagHero: boolean;
             postHero: boolean;
+            bgColor: string;
         };
         footer: {
             showOn: PageType[];               // En qué páginas mostrar footer
             showNewsletter: boolean;          // Mostrar suscripción newsletter
             showSocialLinks: boolean;         // Mostrar enlaces sociales
+            width: string
+            bgColor: string
         };
         sidebar: {
-            width: {
-                base: string;
-                lg: string;
-                xl: string;
-            };
+            width: string;
             spacer: {
                 enabled: boolean;
                 width: string;
@@ -99,16 +106,25 @@ export const config: ProjectConfig = {
     // ========================================
     components: {
         layout: {
-            width: {
-                base: 'w-[90vw]',
-                lg: 'lg:w-[60vw]',
-                xl: 'xl:w-[60vw]',
-            }
+            width: 'w-[90vw] lg:w-[70vw] xl:w-[70vw]',
         },
         navbar: {
             transparent: false,
-            fixed: true,
-            showSearch: true,
+            fixed: false,
+            showSearch: false, //NOT IMPLEMENTED
+            bgColor: 'bg-gradient-to-br from-slate-700 via-indigo-600 to-slate-800',
+
+            links: {
+                styles: 'text-white hover:text-[var(--color-accent-light)] hover:bg-white/10',
+                bgColor: '',
+                dropdown: {
+                    styles: 'text-white hover:text-[var(--color-accent-light)]',
+                    bgColor: 'bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900',
+                }
+            },
+            tags: {
+                styles: 'px-2 py-1 rounded text-xs hover:text-white text-gray-200 bg-[var(--color-accent-dark)]',
+            }
         },
         hero: {
             homeHero: true,
@@ -116,19 +132,20 @@ export const config: ProjectConfig = {
             categoryHero: true,
             tagHero: true,
             postHero: true,
+            bgColor: 'bg-gradient-to-br from-slate-900 via-indigo-800 to-slate-900',
         },
         footer: {
             showOn: ['home', 'posts', 'pages', 'categories', 'tags'],  // tags excluido
             showNewsletter: true,
             showSocialLinks: true,
+            width: 'w-[60vw]',
+            bgColor: 'bg-gradient-to-br from-slate-900 via-indigo-800 to-slate-900',
+
         },
         sidebar: {
             // Ancho del sidebar en diferentes breakpoints
-            width: {
-                base: 'w-full',           // Mobile: ancho completo (aunque esté oculto)
-                lg: 'lg:w-[500px]',       // Desktop: ancho fijo
-                xl: 'xl:w-[500px]',       // Desktop grande: más ancho
-            },
+            width: 'hidden lg:w-[600px] xl:w-[600px]',       // Desktop grande: más ancho
+
             // Espaciador izquierdo (para balance visual)
             spacer: {
                 enabled: true,
@@ -162,11 +179,11 @@ export const config: ProjectConfig = {
         home: {
             sidebar: {
                 brandlistyLite: false,
-                latest: true,
-                author: true,
-                categories: true,
-                tags: true,
-                related: true,
+                latest: false,
+                author: false,
+                categories: false,
+                tags: false,
+                related: false,
             },
             author: false,
             tags: false,
@@ -179,12 +196,12 @@ export const config: ProjectConfig = {
         // POSTS (artículos individuales)
         posts: {
             sidebar: {
-                brandlistyLite: true,
-                latest: true,
-                author: true,
-                categories: true,
-                tags: true,      // Desactivado - no mostrar tags en sidebar
-                related: true,
+                brandlistyLite: false,
+                latest: false,
+                author: false,
+                categories: false,
+                tags: false,      // Desactivado - no mostrar tags en sidebar
+                related: false,
             },
             author: true,
             tags: true,
@@ -216,10 +233,10 @@ export const config: ProjectConfig = {
         categories: {
             sidebar: {
                 brandlistyLite: false,
-                latest: true,
+                latest: false,
                 author: false,
-                categories: true,
-                tags: true,
+                categories: false,
+                tags: false,
                 related: false,
             },
             author: false,
@@ -234,10 +251,10 @@ export const config: ProjectConfig = {
         tags: {
             sidebar: {
                 brandlistyLite: false,
-                latest: true,
+                latest: false,
                 author: false,
-                categories: true,
-                tags: true,
+                categories: false,
+                tags: false,
                 related: false,
             },
             author: false,

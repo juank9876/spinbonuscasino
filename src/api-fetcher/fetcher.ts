@@ -330,7 +330,7 @@ function filterByCountryCode(brands: BrandlistyCardType[], countryCode: string):
   });
 }
 
-export async function fetchBrandlistyApi({ countryCode, apiKey, listId } : { countryCode: string, apiKey?: string, listId?: string }) : Promise<BrandlistyCardType[]> {
+export async function fetchBrandlistyApi({ countryCode, apiKey, listId }: { countryCode: string, apiKey?: string, listId?: string }): Promise<BrandlistyCardType[]> {
   //const apiKey = process.env.BRANDLISTY_API_KEY || ''
   //const listId = process.env.BRANDLISTY_LIST_ID || ''
   //const boton = "Visit now"
@@ -340,17 +340,18 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId } : { cou
 
   if (apiKey !== undefined && listId !== undefined) {
     brandlistyApiKey = apiKey
-    brandlistyListId = listId 
+    brandlistyListId = listId
   }
 
 
   const response = await fetch(
     `https://pro.brandlisty.com/api/v1/list.php?token=${brandlistyApiKey}&hash=${brandlistyListId}`,
     {
-        method: 'GET',
-        headers: {
-            'User-Agent': 'MyApp/1.0; https://spinbonuscasino.com'
-        }
+      method: 'GET',
+      headers: {
+        'User-Agent': 'MyApp/1.0; https://spinbonuscasino.com'
+      },
+      next: { revalidate: 3600 }
     }
   )
 
@@ -363,11 +364,11 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId } : { cou
   return brands.sort((a, b) => Number(a.position) - Number(b.position));
 }
 
-export async function getUserCountry({ ip } : { ip: string }): Promise<string> {
-  
+export async function getUserCountry({ ip }: { ip: string }): Promise<string> {
+
   const baseUrl = "https://api.ipinfo.io/lite/"
   try {
-    const res = await fetch(baseUrl + `${ip}` + `?token=${process.env.IPINFO_TOKEN}` );
+    const res = await fetch(baseUrl + `${ip}` + `?token=${process.env.IPINFO_TOKEN}`);
     if (!res.ok) throw new Error('Error al obtener IP');
 
     const data = await res.json();

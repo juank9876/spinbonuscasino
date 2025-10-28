@@ -25,31 +25,10 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
   }
 
 
-  function FloatingElements() {
-    return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Floating Casino Chips */}
-        <div className="absolute top-20 left-10 w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-full animate-bounce opacity-70" style={{ animationDelay: '0s', animationDuration: '3s' }} />
-        <div className="absolute top-32 right-16 w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full animate-bounce opacity-70" style={{ animationDelay: '1s', animationDuration: '4s' }} />
-        <div className="absolute bottom-40 left-20 w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-full animate-bounce opacity-70" style={{ animationDelay: '2s', animationDuration: '3.5s' }} />
-        <div className="absolute bottom-60 right-10 w-7 h-7 bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-full animate-bounce opacity-70" style={{ animationDelay: '0.5s', animationDuration: '4.5s' }} />
-
-        {/* Floating Sparkles */}
-        <div className="absolute top-1/4 left-1/4 text-yellow-400 animate-ping opacity-60">
-          <Sparkles size={24} />
-        </div>
-        <div className="absolute top-3/4 right-1/4 text-yellow-400 animate-ping opacity-60" style={{ animationDelay: '1.5s' }}>
-          <Sparkles size={20} />
-        </div>
-      </div>
-    )
-  }
 
   return (
     <section className="relative flex min-h-[60vh] lg:h-full w-full flex-col items-center justify-end overflow-hidden mb-10 bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)]">
-      <ParticlesFull />
-      <VideoHero />
-      <FloatingElements />
+
 
       <div className=" py-20 w-full flex h-full flex-col items-center justify-center ">
         <div className="flex flex-col w-full items-center justify-center space-y-5">
