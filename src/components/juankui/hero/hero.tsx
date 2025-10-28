@@ -89,36 +89,6 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
 }
 
 export function HeroPage({ title, meta_description, breadcrumbs, featured_image }: Page) {
-  function CasinoParticles({ className }: { className?: string }) {
-    return (
-      <>
-
-        {/* Capa de partículas doradas */}
-        <Particles
-          className="absolute inset-0 z-0 opacity-60 "
-          quantity={30}
-          staticity={50}
-          ease={20}
-          color="#fff"
-          refresh={false}
-        />
-
-        {/* Overlay gradient */}
-        <div
-          className="h-full absolute inset-0 z-0 bg-gradient-radial from-transparent via-transparent to-[var(--color-primary-dark)] opacity-50"
-          style={{
-            backgroundImage: `
-            radial-gradient(
-              circle at center,
-              transparent 0%,
-              var(--color-primary-dark) 100%
-            )
-          `
-          }}
-        />
-      </>
-    )
-  }
   return (
     <section className="relative  pt-14 w-full overflow-hidden bg-[var(--color-primary-dark)] min-h-[40vh] flex justify-center items-center">
       {/* Background con efecto parallax */}
@@ -138,9 +108,6 @@ export function HeroPage({ title, meta_description, breadcrumbs, featured_image 
           <div className="h-full absolute inset-0 bg-gradient-to-b from-[var(--color-primary-dark)]/20 via-[var(--color-primary-dark)] to-[var(--color-primary)]" />
         )}
       </div>
-
-      {/* Efectos de casino */}
-      <CasinoParticles className="opacity-70" />
 
       {/* Contenido */}
       <div className="relative z-10 container mx-auto px-4 lg:py-0">

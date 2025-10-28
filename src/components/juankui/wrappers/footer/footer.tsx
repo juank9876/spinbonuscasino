@@ -5,7 +5,6 @@ import { DefaultFooter } from "./default-footer";
 import { debug, debugLog } from "@/config/debug-log";
 import { MainFooterContent } from "./main-footer-content";
 import { CopyrightBar } from "./copyright-bar";
-import { Particles } from "@/components/magicui/particles";
 
 
 export function FooterLinkList({ title, links }: { title: string, links: { href: string, label: string }[] }) {
@@ -139,13 +138,6 @@ export async function Footer() {
   if (isFooter == false || footer === undefined) {
     return (
       <footer className="relative w-full bg-[var(--color-primary-dark)]">
-        <Particles
-          className="absolute inset-0 z-0"
-          quantity={50}
-          ease={120}
-          color="#fff"
-          refresh
-        />
         <DefaultFooter
           settings={settings}
           menuItems={menuItems}
@@ -158,13 +150,6 @@ export async function Footer() {
 
   else return (
     <footer className=" w-full bg-[var(--color-primary-dark)]">
-      <Particles
-        className="absolute inset-0 z-0"
-        quantity={50}
-        ease={80}
-        color="#fff"
-        refresh
-      />
       <MainFooterContent footer={footer} settings={settings} />
       <CopyrightBar footer={footer} settings={settings} />
     </footer>
