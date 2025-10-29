@@ -9,7 +9,7 @@ export async function BrandlistySidebarSsr() {
   const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode });
 
   return (
-    <div className="flex w-full max-w-full flex-col gap-4 bg-gray-50 p-4 lg:max-w-sm">
+    <div className="flex w-full max-w-full flex-col gap-4 bg-gray-50 p-4 lg:max-w-sm mx-auto">
       {brandlistyList.map((operator, index) => (
         <BrandlistyCardSidebar key={operator.id} operator={operator} index={index} />
       ))}
