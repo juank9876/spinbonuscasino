@@ -40,7 +40,7 @@ export function CardPostCategory({ post }: { post: Post }) {
               priority
             />
             <p className="absolute top-0 right-0 bg-[var(--color-secondary-dark)] rounded-lg  px-2 py-1 text-slate-200 text-xs font-bold border border-[var(--color-secondary)]">
-              {formatDate(post.published_at)}
+              {formatDate(post.published_at || post.created_at)}
             </p>
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
           </div>
@@ -71,7 +71,7 @@ export function CardPostCategory({ post }: { post: Post }) {
                 />
               </div >
               <div className="flex flex-wrap items-center gap-2 text-white text-sm">
-                <span className="text-xs font-medium">{formatDate(post.published_at)}</span>
+                <span className="text-xs font-medium">{formatDate(post.published_at || post.created_at)}</span>
                 <span className="text-[var(--color-accent-light)]">·</span>
                 <span className="text-xs font-semibold">{post.author_name.toUpperCase()}</span>
               </div>
@@ -110,7 +110,7 @@ export function CardPostCategory({ post }: { post: Post }) {
                   {post.category_name}
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight">{post.title}</h2>
-                <p className="text-sm text-white/90 font-medium">{formatDate(post.published_at)}</p>
+                <p className="text-sm text-white/90 font-medium">{formatDate(post.published_at || post.created_at)}</p>
                 <p className="text-base text-white/80 line-clamp-3 leading-relaxed">
                   {post.excerpt}
                 </p>
@@ -131,7 +131,7 @@ export function CardPostCategory({ post }: { post: Post }) {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-sm font-semibold text-white">{post.author_name}</span>
-                  <span className=" text-xs text-white/70">{formatDate(post.published_at)}</span>
+                  <span className=" text-xs text-white/70">{formatDate(post.published_at || post.created_at)}</span>
                 </div>
               </div>
             </CardContent>

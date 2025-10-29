@@ -42,6 +42,8 @@ function extractHeaders(el: Element): string[] {
     return headers
 }
 
+
+//SE PUEDE QUITAR SIN PROBLEMA
 export function transformTable(el: Element, options: HTMLReactParserOptions) {
     const attribs = fixAttribs(el.attribs)
     const headers = extractHeaders(el)

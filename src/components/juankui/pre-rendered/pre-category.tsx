@@ -2,7 +2,6 @@ import { MainWrapper } from '@/components/juankui/wrappers/main-wrapper'
 import { ReactNode } from 'react'
 import { HeroCategory } from '@/components/juankui/hero/hero'
 import { Category } from '@/types/types'
-import { ParticlesFull } from '../hero/particles'
 import { isParticles } from '@/config/options'
 import { settings as cssSettings } from "@/config/debug-log";
 import { ContentWithSidebar } from '../layouts/content-with-sidebar'
@@ -20,12 +19,10 @@ export function PreCategory({ children, category, className }: { children: React
       <ContentWithSidebar
         sidebarConfig={categoryConfig.sidebar}
         sidebarData={{ category: categoryData }}
-        contentMaxWidth="max-w-[90vw] lg:max-w-[60vw]"
+        contentMaxWidth="w-[90vw] max-w-[90vw] lg:w-[60vw] lg:max-w-[60vw]"
         className={className}
       >
-        <div className='flex flex-col space-y-5'>
-          {children}
-        </div>
+        {children}
       </ContentWithSidebar>
     </MainWrapper>
   )
