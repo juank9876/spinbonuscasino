@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import { BrandlistyCardOriginal, BrandlistyCardSidebar } from './brandlisty-card';
 import { fetchBrandlistyApi } from '@/api-fetcher/fetcher';
 
-export async function BrandlistySidebarSsr () {
+export async function BrandlistySidebarSsr() {
   const headerslist = await headers();
   const countryCode = headerslist.get('x-user-country') || 'WW'
   const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode });
@@ -17,7 +17,7 @@ export async function BrandlistySidebarSsr () {
   );
 }
 
-export async function BrandlistyOriginalSsr ({ apiKey, listId }: { apiKey: string; listId: string }) {
+export async function BrandlistyOriginalSsr({ apiKey, listId }: { apiKey: string; listId: string }) {
   const headerslist = await headers();
   const countryCode = headerslist.get('x-user-country') || 'WW'
   const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode, apiKey: apiKey, listId: listId });

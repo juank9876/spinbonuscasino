@@ -7,7 +7,7 @@ import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Po
 export type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
   "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots" | "sitemap" |
-  "custom-scripts" | "tag"
+  "custom-scripts" | "tag" | "featured-content"
 
 export const methods: MethodType[] = [
   "category-posts",
@@ -33,7 +33,8 @@ export const methods: MethodType[] = [
   "robots",
   "sitemap",
   "custom-scripts",
-  "tag"
+  "tag",
+  "featured-content"
 ]
 
 interface FetcherParams {
@@ -96,9 +97,10 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
     (author_id ? `&author_id=${author_id}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
+  { method === "featured-content" && console.log(url) }
   try {
     const res = await fetch(url, {
-      next: { revalidate: 60 },
+      next: { revalidate: 5 },
 
     })
     const data: ResponseInterface<T> = await res.json();
@@ -351,7 +353,7 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId }: { coun
       headers: {
         'User-Agent': 'MyApp/1.0; https://spinbonuscasino.com'
       },
-      next: { revalidate: 3600 }
+      next: { revalidate: 60 },
     }
   )
 
@@ -385,6 +387,18 @@ export async function getUserCountry({ ip }: { ip: string }): Promise<string> {
     console.error('Error en getUserCountry:', err);
     return 'WW'; // fallback a "Worldwide" si falla
   }
+}
+
+export interface FeaturedContent {
+  id: string;
+  type: "page" | "post" | "tag" | "category";
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+}
+export async function fetchFeaturedContent() {
+  return fetcher<FeaturedContent[]>({ method: "featured-content" });
 }
 
 // Example URL:

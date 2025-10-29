@@ -105,3 +105,28 @@ export function limitCharacters(text: string, limit: number): string {
 
   return text.slice(0, limit) + '...';
 }
+
+export function decodeHtmlEntities(text: string): string {
+  if (!text) return '';
+
+  // Verificar si estamos en el navegador
+  if (typeof window === 'undefined') {
+    // SSR: Decodificar entidades HTML manualmente
+    return text
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#039;/g, "'")
+      .replace(/&#x27;/g, "'")
+      .replace(/&apos;/g, "'")
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec))
+      .replace(/&#x([0-9a-fA-F]+);/g, (match, hex) => String.fromCharCode(parseInt(hex, 16)));
+  }
+
+  // Cliente: Usar el método del navegador
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = text;
+  return textarea.value;
+}

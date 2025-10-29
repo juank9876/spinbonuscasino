@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Star, ChevronDown, ChevronUp, Check, X, StarIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from '../optionals/link';
+import Image from 'next/image';
 
 interface PaymentMethod {
   method: string;
@@ -59,7 +61,7 @@ interface BrandlistyIndex {
   index: number;
 }
 
-export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
+export function BrandlistyCardSidebar({ operator, index }: BrandlistyIndex) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const getBadgeColor = (color: string) => {
@@ -103,15 +105,18 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
         </div>
 
         {/* Logo y nombre */}
-        <div className="mb-1 flex justify-center">
-          <div className="rounded-lg border border-gray-100 bg-white p-3">
-            <img
+        <Link href={operator.affiliate_link} target="_blank" rel="noopener noreferrer" className="mb-1 flex justify-center">
+          <div className="relative flex justify-center h-16 w-full max-w-[112px] rounded-lg border border-gray-100 bg-white p-2">
+            <Image
+              fill
               src={operator.logo_url}
               alt={operator.name}
-              className="h-10 w-auto object-contain"
+              className="object-contain"
+              sizes="(max-width: 640px) 100px, 112px"
+              loading="lazy"
             />
           </div>
-        </div>
+        </Link>
 
         <h3 className="padding-none mb-1 text-center text-lg font-bold text-gray-800">{operator.name}</h3>
 
@@ -132,14 +137,14 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
         </p>
 
         {/* Botón principal */}
-        <a
+        <Link
           href={operator.affiliate_link}
           target="_blank"
           rel="noopener noreferrer"
           className={`block w-full py-2.5 px-4 rounded-lg font-semibold text-center text-sm transition-colors duration-200 mb-2 ${getButtonColor(operator.button.color)}`}
         >
           {operator.button.text}
-        </a>
+        </Link>
 
         {/* Botón desplegable */}
         <button
@@ -243,30 +248,30 @@ export function BrandlistyCardSidebar ({ operator, index }: BrandlistyIndex) {
           )}
 
           {/* Botón Review */}
-          <a
+          <Link
             href={operator.affiliate_link}
             target="_blank"
             rel="noopener noreferrer"
             className={`flex mx-auto w-1/2 justify-center items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 ${getButtonColor(operator.button.color)}`}
           >
             {operator.button.text}
-          </a>
+          </Link>
           {/* Botón Review */}
-          <a
+          <Link
             href={operator.review_link}
             target="_blank"
             rel="noopener noreferrer"
             className={`flex mx-auto w-1/2 justify-center items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-100 ${getButtonColor(operator.review_button.color)}`}
           >
             {operator.review_button.text}
-          </a>
+          </Link>
         </div>
       )}
     </div>
   );
 }
 
-export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
+export function BrandlistyCardOriginal({ operator, index }: BrandlistyIndex) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const getBadgeColor = (color: string) => {
@@ -316,13 +321,16 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
           </div>
 
           {/* Logo */}
-          <div className="flex h-24 w-full items-center justify-center rounded-lg">
-            <img
+          <Link href={operator.affiliate_link} target="_blank" rel="noopener noreferrer" className="relative h-24 w-full max-w-[200px] mx-auto rounded-lg">
+            <Image
+              fill
               src={operator.logo_url}
               alt={operator.name}
-              className="h-full w-full object-contain"
+              className="object-contain"
+              sizes="(max-width: 1024px) 150px, 200px"
+              loading="lazy"
             />
-          </div>
+          </Link>
 
           {/* Nombre */}
           <h3 className="text-center text-base font-bold text-gray-900">{operator.name}</h3>
@@ -380,24 +388,24 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
 
           <div className='flex w-full flex-col items-center justify-center gap-2 px-5 lg:w-[200px]'>
             {/* Botón principal */}
-            <a
+            <Link
               href={operator.affiliate_link}
               target="_blank"
               rel="noopener noreferrer"
               className={`mb-0 w-full rounded-lg py-2 text-center text-xs font-semibold transition-all duration-200 ${getButtonColor(operator.button.color)}`}
             >
               {operator.button.text}
-            </a>
+            </Link>
 
             {/* Botón Review */}
-            <a
+            <Link
               href={operator.review_link}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full rounded-lg border-2 border-gray-300 bg-white py-2 text-center text-xs font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50"
             >
               {operator.review_button.text}
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -494,23 +502,23 @@ export function BrandlistyCardOriginal ({ operator, index }: BrandlistyIndex) {
             )}
             <div className='flex flex-col gap-1 pt-4 lg:hidden'>
               {/* Botón Review */}
-              <a
+              <Link
                 href={operator.affiliate_link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex mx-auto w-1/2 justify-center items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 ${getButtonColor(operator.button.color)}`}
               >
                 {operator.button.text}
-              </a>
+              </Link>
               {/* Botón Review */}
-              <a
+              <Link
                 href={operator.review_link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex mx-auto w-1/2 justify-center items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-100 ${getButtonColor(operator.review_button.color)}`}
               >
                 {operator.review_button.text}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
