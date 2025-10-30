@@ -52,9 +52,6 @@ export async function ImportantCategories() {
                                     <p className="text-xs text-gray-600 line-clamp-3 mb-3 padding-none">
                                         {post.description}
                                     </p>
-                                    <p className="text-xs text-gray-400 mt-auto padding-none my-3">
-                                        1 day ago
-                                    </p>
                                 </div>
                             </Link>
                         ))}
@@ -64,9 +61,9 @@ export async function ImportantCategories() {
                     <div className="flex justify-end">
                         <Link
                             href={category.url}
-                            className="group flex items-center gap-1 text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200"
+                            className="group flex items-center gap-1 text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-semibold transition-colors duration-200"
                         >
-                            {category.name}
+                            More
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>

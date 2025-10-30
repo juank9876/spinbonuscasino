@@ -70,7 +70,7 @@ export function ContentWithSidebar({
         comparison: showWidget === 1
     })
     return (
-        <Section className={` flex justify-center items-center ${className}`}>
+        <Section className={`pt-8 flex justify-center items-center ${className}`}>
             <div className={showSidebar ? `flex lg:flex-row flex-col justify-center lg:items-start items-center ${containerGap} ${layoutWidth}` : `flex justify-center ${contentMaxWidth}`}>
                 {/* Spacer izquierdo solo si hay sidebar y está habilitado */}
                 {/*showSidebar && spacerEnabled && <div className={`${spacerWidth} hidden lg:block`} />*/}

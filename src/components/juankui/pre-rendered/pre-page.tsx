@@ -18,7 +18,7 @@ export function PrePage({ children, page }: { children: ReactNode, page: Page })
         contentMaxWidth="max-w-[90vw] lg:max-w-[60vw]"
         showWidget={page.show_widget}
       >
-        <div className='flex flex-col space-y-5'>
+        <div className='flex flex-col space-y-5 pt-8'>
           {children}
         </div>
 

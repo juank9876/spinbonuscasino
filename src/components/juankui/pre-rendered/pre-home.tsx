@@ -22,12 +22,12 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
   return (
     <MainWrapper>
 
-      {config.template.homeHeroWithNavbarTransparent && <HeroHomePage {...props} />}
+      {config.components.hero.homeHero && <HeroHomePage {...props} />}
 
       <Section>
-        <div className='flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
-          <ImportantCategories />
+        <div className='flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw] pt-8'>
           {children}
+          <ImportantCategories />
         </div>
       </Section>
     </MainWrapper>

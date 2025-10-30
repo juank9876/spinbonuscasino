@@ -50,7 +50,7 @@ function LayoutBody({
       <Providers>
         <div className="max-w-screen flex min-h-[100dvh] h-full flex-col">
           {hasHomepage && <Header />}
-          <div className="flex-1 flex flex-col pt-8">
+          <div className="flex-1 flex flex-col">
             {children}
           </div>
           {hasHomepage && <Footer />}
