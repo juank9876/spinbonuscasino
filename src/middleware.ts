@@ -1,10 +1,18 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { getUserCountry } from "@/api-fetcher/fetcher";
+import { getUserCountry, fetchHomePage } from "@/api-fetcher/fetcher";
+import type { NextRequest } from "next/server";
 
 
-export async function middleware() {
+export async function middleware(request: NextRequest) {
 
+  // Verificar si existe homepage
+  const homePage = await fetchHomePage();
+  
+  // Si no hay homepage y no estamos ya en la home, redirigir a home
+  if (!homePage && request.nextUrl.pathname !== '/') {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
 
   const headersList = await headers();
 
