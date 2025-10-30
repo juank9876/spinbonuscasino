@@ -31,6 +31,7 @@ export async function middleware(request: NextRequest) {
   // 3. Continuar con la request y agregar el país como header
   const res = NextResponse.next()
   res.headers.set('x-user-country', userCountry)
+  res.headers.set('x-has-homepage', homePage ? 'true' : 'false')
 
   return res
 }

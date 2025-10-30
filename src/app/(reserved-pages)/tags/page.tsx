@@ -16,7 +16,7 @@ export default async function TagPage() {
 
     if (tags.length === 0) {
         return (
-            <main className="pt-20 flex flex-1 bg-[var(--color-primary-dark)]">
+            <main className="flex flex-1 bg-[var(--color-primary-dark)]">
                 <div className="relative overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600 py-24">
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -42,7 +42,7 @@ export default async function TagPage() {
     }
 
     return (
-        <main className="pt-20 flex flex-1 flex-col bg-[var(--color-primary-dark)]">
+        <main className=" flex flex-1 flex-col bg-[var(--color-primary-dark)]">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 text-center ">
                 Tags
             </h1>

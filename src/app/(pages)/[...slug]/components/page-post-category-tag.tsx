@@ -53,7 +53,7 @@ export async function createCategory({ content, searchParams }: { content: { typ
                     </span>
                 </PreCategory>
             ) : (
-                <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
+                <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[90vw] lg:gap-5'>
 
                     {/*category.posts DEPRECATED. AHORA SE FILTRA CON METODO POSTS&CATEGORY_ID=TAL*/}
                     {/*

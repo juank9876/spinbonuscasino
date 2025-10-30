@@ -37,6 +37,7 @@ export function PrePost({ children, post }: { children: ReactNode, post: Post })
   const category = { id: post.category_id, name: post.category_name, slug: post.category_slug }
   const tag = { id: post.tags[0]?.id, name: post.tags[0]?.name, slug: post.tags[0]?.slug }
 
+
   return (
     <MainWrapper>
 
@@ -50,6 +51,7 @@ export function PrePost({ children, post }: { children: ReactNode, post: Post })
           tag,
           postId: post.id
         }}
+        showWidget={post.show_widget}
       >
         <PostBody children={children} post={post} />
       </ContentWithSidebar>

@@ -16,14 +16,9 @@ export function PostsPagination({ posts, meta }: BlogPostsProps) {
         <>
 
             {/* Posts */}
-            <div className="flex flex-wrap flex-col lg:flex-row justify-center mb-12 gap-5 lg:gap-0">
-                {posts.map((post, index) => (
-                    <div key={post.id} className="flex">
-                        <CardPostCategory key={post.id} post={post} />
-                        {index < posts.length - 1 && (
-                            <div className="w-px bg-gray-300 mx-4 self-stretch hidden lg:flex" />
-                        )}
-                    </div>
+            <div className="flex flex-wrap justify-center gap-6 mb-12 w-full">
+                {posts.map((post) => (
+                    <CardPostCategory key={post.id} post={post} />
                 ))}
             </div>
 
@@ -48,7 +43,7 @@ export function PostsPagination({ posts, meta }: BlogPostsProps) {
                         href={`?page=${page}`}
                         className={`px-6 py-3 rounded-lg font-bold shadow-lg transition-all duration-300 ${page === currentPage
                             ? "bg-gradient-to-br from-slate-400 to-slate-500 text-white underline shadow-blue-500/20"
-                            : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-400 hover:to-purple-400"
+                            : "bg-gradient-to-r from-slate-600 to-slate-800 text-white hover:from-slate-600 hover:to-slate-800"
                             }`}
                     >
                         {page}

@@ -7,14 +7,13 @@ import { Post } from '@/types/types'
 
 export function CardPostCategory({ post }: { post: Post }) {
 
-  const categoryPath = post.category_hierarchy?.map(cat => cat.slug).join('/') || '';
-  const postUrl = `/${categoryPath}/${post.slug}`;
+
   // Resultado: /tips/premier-league/article-slug
   return (
     <>
       {/*Card para PC*/}
       <Link
-        href={postUrl}
+        href={post.seo_url || "#"}
         className="
           group relative hidden lg:flex 
           w-[300px] h-[550px] to-blue-950
@@ -68,7 +67,7 @@ export function CardPostCategory({ post }: { post: Post }) {
               </div >
 
               <div className="flex flex-col items-start gap-1">
-                <span className="text-xs font-semibold text-gray-600">{post.author_name.toUpperCase()}</span>
+                <span className="text-xs font-semibold text-gray-600">{post.author_name?.toUpperCase()}</span>
                 <span className="text-xs font-normal text-gray-600">
                   {formatDate(post.updated_at)}
                 </span>

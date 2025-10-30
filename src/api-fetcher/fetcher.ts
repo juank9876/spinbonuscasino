@@ -7,7 +7,7 @@ import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Po
 export type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
   "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots" | "sitemap" |
-  "custom-scripts" | "tag" | "featured-content"
+  "custom-scripts" | "tag" | "featured-content" | "important-categories"
 
 export const methods: MethodType[] = [
   "category-posts",
@@ -34,7 +34,8 @@ export const methods: MethodType[] = [
   "sitemap",
   "custom-scripts",
   "tag",
-  "featured-content"
+  "featured-content",
+  "important-categories"
 ]
 
 interface FetcherParams {
@@ -49,6 +50,8 @@ interface FetcherParams {
   with_meta?: boolean
   tag_id?: string
   author_id?: string
+  limit?: number
+  posts_per_category?: number
   silent?: boolean
 }
 
@@ -79,7 +82,7 @@ export async function fetcher<T>(params: FetcherParams & { with_meta: true }): P
 export async function fetcher<T>(params: FetcherParams & { with_meta?: false }): Promise<T>;
 
 export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T> | null> {
-  const { method, id, type, slug, category_id, path, pagination, per_page, with_meta, tag_id, author_id, silent = false } = params
+  const { method, id, type, slug, category_id, path, pagination, per_page, with_meta, tag_id, author_id, limit, posts_per_category, silent = false } = params
   const apiDomain = process.env.API_DOMAIN || "https://intercms.dev"
   const domain = process.env.NEXT_PUBLIC_SITE_URL || "https://spinbonuscasino.com"
   const baseUrl = `${apiDomain}/api/v2/data.php`
@@ -96,10 +99,11 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
     (pagination ? `&page=${pagination}` : ``) +
     (per_page ? `&per_page=${per_page}` : ``) +
     (tag_id ? `&tag_id=${tag_id}` : ``) +
-    (author_id ? `&author_id=${author_id}` : ``)
+    (author_id ? `&author_id=${author_id}` : ``) +
+    (limit ? `&limit=${limit}` : ``) +
+    (posts_per_category ? `&posts_per_category=${posts_per_category}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
-  { method === "featured-content" && console.log(url) }
   try {
     const res = await fetch(url, {
       next: { revalidate: 5 },
@@ -402,6 +406,28 @@ export interface FeaturedContent {
 }
 export async function fetchFeaturedContent() {
   return fetcher<FeaturedContent[]>({ method: "featured-content" });
+}
+
+export interface ImportantCategoryPost {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+}
+
+export interface ImportantCategory {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  url: string;
+  posts_count: number;
+  posts: ImportantCategoryPost[];
+}
+
+export async function fetchImportantCategories({ limit, posts_per_category }: { limit?: number, posts_per_category?: number }) {
+  return fetcher<ImportantCategory[]>({ method: "important-categories", limit, posts_per_category });
 }
 
 // Example URL:

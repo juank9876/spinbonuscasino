@@ -29,6 +29,7 @@ interface ContentWithSidebarProps {
     sidebarData?: SidebarData;
     contentMaxWidth?: string;
     className?: string;
+    showWidget?: number; // 0 = hide sidebar, 1 = show sidebar
 }
 
 export function ContentWithSidebar({
@@ -36,16 +37,22 @@ export function ContentWithSidebar({
     sidebarConfig,
     sidebarData,
     contentMaxWidth = 'max-w-[90vw] lg:max-w-[60vw]',
-    className = ''
+    className = '',
+    showWidget
 }: ContentWithSidebarProps) {
-    // Verificar si al menos un componente del sidebar está habilitado
-    const showSidebar = sidebarConfig && (
+    // Si showWidget está definido, usarlo para controlar el sidebar
+    // Si no está definido, usar la configuración del sidebarConfig
+    const hasSidebarComponents = sidebarConfig && (
         sidebarConfig.latest ||
         sidebarConfig.author ||
         sidebarConfig.categories ||
         sidebarConfig.tags ||
         sidebarConfig.brandlistyLite
     );
+
+    const showSidebar = showWidget !== undefined
+        ? Number(showWidget) === 1 && hasSidebarComponents
+        : hasSidebarComponents;
 
     // Obtener configuración del sidebar desde config
     const layoutWidth = `${config.components.layout.width}`;
@@ -54,6 +61,14 @@ export function ContentWithSidebar({
     const spacerEnabled = config.components.sidebar.spacer.enabled;
     const spacerWidth = config.components.sidebar.spacer.width;
 
+    console.log('DEBUG SIDEBAR:', {
+        showWidget,
+        showWidgetType: typeof showWidget,
+        hasSidebarComponents,
+        sidebarConfig,
+        showSidebar,
+        comparison: showWidget === 1
+    })
     return (
         <Section className={` flex justify-center items-center ${className}`}>
             <div className={showSidebar ? `flex lg:flex-row flex-col justify-center lg:items-start items-center ${containerGap} ${layoutWidth}` : `flex justify-center ${contentMaxWidth}`}>
@@ -66,7 +81,7 @@ export function ContentWithSidebar({
                 </div>
 
                 {/* Sidebar */}
-                {showSidebar && (
+                {showSidebar && sidebarConfig && (
                     <div className={`flex-col ${containerGap} flex ${sidebarWidth}`}>
                         {sidebarConfig.brandlistyLite && <BrandlistyLite />}
                         {sidebarConfig.latest && <LatestPosts postId={sidebarData?.postId} />}

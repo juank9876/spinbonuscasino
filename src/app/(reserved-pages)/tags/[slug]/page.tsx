@@ -28,12 +28,9 @@ export default async function TagsPage({ params, searchParams }: { params: Promi
     const meta = dataWithMeta.meta;
 
     return (
-        <main className="bg-[var(--color-primary-dark)] w-full flex flex-1 justify-center items-center flex-col h-full">
+        <main className="w-full flex flex-1 justify-center items-center flex-col h-full">
 
             <div className="max-w-7xl">
-                <h2 className="text-2xl text-center mb-10 text-slate-200 font-bold">
-                    All posts of {NEXT_PUBLIC_SITE_URL}
-                </h2>
                 <PostsPagination posts={posts} meta={meta} />
             </div>
 

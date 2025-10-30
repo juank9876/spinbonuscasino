@@ -8,6 +8,7 @@ import { ParticlesFull } from '../hero/particles'
 import { Page, SiteSettings } from '@/types/types'
 import { settings as cssSettings } from "@/config/debug-log";
 import { config } from '@/config/config'
+import { ImportantCategories } from '../important-categories'
 
 
 interface HomePage {
@@ -27,7 +28,8 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
       {config.template.homeHeroWithNavbarTransparent && <HeroHomePage {...props} />}
 
       <Section>
-        <div className='pt-20 flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
+        <div className='flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
+          <ImportantCategories />
           {children}
         </div>
       </Section>

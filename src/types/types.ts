@@ -44,6 +44,7 @@ export interface Page {
   breadcrumbs: Breadcrumb[]
   has_custom_css?: boolean
   css_url?: string
+  show_widget?: number // 0 = hide sidebar, 1 = show sidebar
 }
 
 //POST -> ARTICLE EN LA API
@@ -138,6 +139,7 @@ export interface Post {
   related_posts?: RelatedPost[]
   has_custom_css?: boolean
   css_url?: string
+  show_widget?: number // 0 = hide sidebar, 1 = show sidebar
 }
 
 

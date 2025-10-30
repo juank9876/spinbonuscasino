@@ -5,7 +5,7 @@ import { Metadata } from "next"
 
 export async function generateMetadata(): Promise<Metadata> {
     const settings = await fetchSiteSettings()
-    
+
     return {
         title: `Categorías | ${settings.site_title}`,
         description: `Explora todas las categorías de ${settings.site_title}. Encuentra contenido organizado por temas de tu interés.`,
@@ -28,7 +28,7 @@ export default async function CategoriesPage() {
 
     return (
         <main className="bg-[var(--color-primary)] flex w-full flex-1 flex-col items-center justify-center pb-10">
-            <div className="container mx-auto px-4 pt-20">
+            <div className="container mx-auto px-4 ">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {categories?.map((category) => (
                         <Link

@@ -12,6 +12,7 @@ import { settings as cssSettings } from "@/config/debug-log";
 import { generateCssVariables, generateThemeColors, ThemeColors } from "@/utils/theme-colors";
 import { AgeVerification, SiteSettings } from "@/types/types";
 import { SchemaJson } from "./seo/schemaJson";
+import { headers } from "next/headers";
 
 
 
@@ -31,12 +32,14 @@ function LayoutBody({
   themeColors,
   cookies,
   ageVerification,
+  hasHomepage,
 }: {
   children: React.ReactNode;
   settings: SiteSettings;
   themeColors: ThemeColors;
   cookies: Cookies;
   ageVerification: AgeVerification;
+  hasHomepage: boolean;
 }) {
   return (
     <body
@@ -46,11 +49,11 @@ function LayoutBody({
     >
       <Providers>
         <div className="max-w-screen flex min-h-[100dvh] h-full flex-col">
-          <Header />
-          <div className="flex-1 flex flex-col">
+          {hasHomepage && <Header />}
+          <div className="flex-1 flex flex-col pt-8">
             {children}
           </div>
-          <Footer />
+          {hasHomepage && <Footer />}
         </div>
         <CookieConsent cookies={cookies} />
         <AgeVerificationPopup ageVerification={ageVerification} />
@@ -64,6 +67,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const layoutData = await fetchLayoutData();
 
   const { settings, cookies, ageVerification } = layoutData;
+
+  // Leer header para verificar si hay homepage
+  const headersList = await headers();
+  const hasHomepage = headersList.get('x-has-homepage') === 'true';
 
   // Generar fuente y colores a partir de settings
   const font = generateFontsFromSettings(settings);
@@ -89,6 +96,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           themeColors={themeColors}
           cookies={cookies}
           ageVerification={ageVerification}
+          hasHomepage={hasHomepage}
         >
           {children}
           <SchemaJson jsonLD={JSON.stringify(settings.schema_data)} />

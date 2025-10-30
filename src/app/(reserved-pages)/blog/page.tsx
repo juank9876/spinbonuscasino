@@ -23,13 +23,8 @@ export default async function BlogWithPostsPage({ searchParams }: Props) {
     const meta = dataWithMeta.meta;
 
     return (
-        <main className="min-h-screen w-full bg-[var(--color-primary-dark)] py-20 px-4">
-            <div className="max-w-7xl mx-auto">
-                <h2 className="text-2xl text-center mb-10 text-slate-200 font-bold">
-                    All posts of {NEXT_PUBLIC_SITE_URL}
-                </h2>
-
-
+        <main className="min-h-screen w-full py-20 px-4">
+            <div className="max-w-[90vw] mx-auto">
                 <PostsPagination posts={posts} meta={meta} />
             </div>
         </main>

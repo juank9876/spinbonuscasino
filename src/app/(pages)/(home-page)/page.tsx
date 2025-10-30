@@ -2,7 +2,6 @@ import { fetchCustomScript, fetchHomePage, fetchSiteSettings } from '@/api-fetch
 import { createMetadata } from '@/app/seo/createMetadata'
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
-import { UnderConstruction } from '@/components/juankui/under-construction'
 import { Metadata } from 'next'
 import { CustomHTMLRenderer } from "../../seo/customScripts";
 import { handleRedirect } from '@/utils/handleRedirect'

@@ -26,7 +26,7 @@ export function ClientHeaderWrapper({ children }: ClientHeaderWrapperProps) {
 
   return (
     <ScrollContext.Provider value={isScrolled}>
-      <header className={`fixed top-0 z-50 w-full transition-all duration-300  ${isScrolled
+      <header className={`flex z-50 w-full transition-all duration-300  ${isScrolled
         ? 'bg-[var(--color-primary-dark)] backdrop-blur-md shadow-2xl'
         : `${config.components.navbar.transparent ? 'bg-transparent' : 'bg-[var(--color-primary-dark)] backdrop-blur-md shadow-2xl'}`
         }`}>
