@@ -70,7 +70,7 @@ export function CardPostCategory({ post }: { post: Post }) {
               <div className="flex flex-col items-start gap-1">
                 <span className="text-xs font-semibold text-gray-600">{post.author_name.toUpperCase()}</span>
                 <span className="text-xs font-normal text-gray-600">
-                  {formatDate(post.published_at || post.created_at)}
+                  {formatDate(post.updated_at)}
                 </span>
               </div>
             </div>
@@ -108,7 +108,7 @@ export function CardPostCategory({ post }: { post: Post }) {
                   {post.category_name}
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight">{post.title}</h2>
-                <p className="text-sm text-white/90 font-medium">{formatDate(post.published_at || post.created_at)}</p>
+                <p className="text-sm text-white/90 font-medium">{formatDate(post.updated_at)}</p>
                 <p className="text-base text-white/80 line-clamp-3 leading-relaxed">
                   {post.excerpt}
                 </p>
@@ -129,7 +129,7 @@ export function CardPostCategory({ post }: { post: Post }) {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-sm font-semibold text-white">{post.author_name}</span>
-                  <span className=" text-xs text-white/70">{formatDate(post.published_at || post.created_at)}</span>
+                  <span className=" text-xs text-white/70">{formatDate(post.updated_at)}</span>
                 </div>
               </div>
             </CardContent>

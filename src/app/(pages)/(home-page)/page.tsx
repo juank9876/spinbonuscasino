@@ -59,18 +59,6 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Link
-              href="/categories"
-              className="group flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-blue-500 hover:to-purple-500 transition-all duration-300"
-            >
-              <HomeIcon className="w-5 h-5" />
-              View Categories
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-
           {/* Footer note */}
           <p className="text-sm text-gray-400 pt-8">
             Have any questions? Contact us and we'll be happy to help.

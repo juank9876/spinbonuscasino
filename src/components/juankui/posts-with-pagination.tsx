@@ -16,12 +16,12 @@ export function PostsPagination({ posts, meta }: BlogPostsProps) {
         <>
 
             {/* Posts */}
-            <div className="flex flex-wrap justify-center flex-row mb-12 ">
+            <div className="flex flex-wrap flex-col lg:flex-row justify-center mb-12 gap-5 lg:gap-0">
                 {posts.map((post, index) => (
                     <div key={post.id} className="flex">
                         <CardPostCategory key={post.id} post={post} />
                         {index < posts.length - 1 && (
-                            <div className="w-px bg-gray-300 mx-4 self-stretch" />
+                            <div className="w-px bg-gray-300 mx-4 self-stretch hidden lg:flex" />
                         )}
                     </div>
                 ))}
