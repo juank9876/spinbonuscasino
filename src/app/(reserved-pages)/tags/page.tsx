@@ -16,7 +16,7 @@ export default async function TagPage() {
 
     if (tags.length === 0) {
         return (
-            <main className="flex flex-1 bg-[var(--color-primary-dark)]">
+            <main className="pt-20 flex flex-1 bg-[var(--color-primary-dark)]">
                 <div className="relative overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600 py-24">
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -42,10 +42,10 @@ export default async function TagPage() {
     }
 
     return (
-        <main className=" flex flex-1 flex-col bg-[var(--color-primary-dark)]">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 text-center ">
+        <main className="flex flex-1 flex-col ">
+            <h2 className="text-4xl md:text-5xl font-bold  mb-6 text-center ">
                 Tags
-            </h1>
+            </h2>
 
             {/* Tags Grid */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -54,7 +54,7 @@ export default async function TagPage() {
                         <Link
                             href={`/tags/${tag.slug}`}
                             key={tag.id}
-                            className="group relative justify-between flex flex-col bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-3 hover:bg-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
+                            className="group relative justify-between flex flex-col bg-slate-800 backdrop-blur-sm border border-white/20 rounded-2xl p-3 hover:bg-slate-700 hover:border-white/30 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
                         >
                             {/* Tag Header */}
                             <div className="flex items-start justify-between mb-4">

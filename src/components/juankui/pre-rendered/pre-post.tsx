@@ -2,14 +2,11 @@ import { HeroPost } from '@/components/juankui/hero/hero'
 import { MainWrapper } from '@/components/juankui/wrappers/main-wrapper'
 import { Post } from '@/types/types'
 import { ReactNode } from 'react'
-import { ParticlesFull } from '../hero/particles'
-import { isParticles } from '@/config/options'
 import { AuthorCard } from '../author-card'
 import { TagsList } from '../tags-list'
 import { ContentWithSidebar } from '../layouts/content-with-sidebar'
 import { config } from '@/config/config'
 import { fetchAuthorById } from '@/api-fetcher/fetcher'
-import { BrandlistyLite } from '../sidebar-with-posts/brandlisty-lite'
 
 async function PostBody({ children, post }: { children: ReactNode, post: Post }) {
   const postConfig = config.pageTypes.posts;

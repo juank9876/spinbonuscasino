@@ -3,10 +3,7 @@ import { MainWrapper } from '@/components/juankui/wrappers/main-wrapper'
 //import { capitalize } from '@/utils/capitalize'
 import { ReactNode } from 'react'
 import { Section } from '../wrappers/section'
-import { isParticles } from '@/config/options'
-import { ParticlesFull } from '../hero/particles'
 import { Page, SiteSettings } from '@/types/types'
-import { settings as cssSettings } from "@/config/debug-log";
 import { config } from '@/config/config'
 import { ImportantCategories } from '../important-categories'
 
