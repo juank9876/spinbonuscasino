@@ -19,14 +19,14 @@ export async function ImportantCategories() {
                             {category.name}
                         </h2>
                         {category.description && (
-                            <p className="text-gray-600 text-lg">
+                            <p className="text-gray-600 text-base ">
                                 {category.description}
                             </p>
                         )}
                     </div>
 
                     {/* Posts de la categoría */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {category.posts.map((post) => (
                             <Link
                                 key={post.id}
@@ -52,7 +52,7 @@ export async function ImportantCategories() {
                                     <p className="text-xs text-gray-600 line-clamp-3 mb-3 padding-none">
                                         {post.description}
                                     </p>
-                                    <p className="text-xs text-gray-400 mt-auto">
+                                    <p className="text-xs text-gray-400 mt-auto padding-none my-3">
                                         1 day ago
                                     </p>
                                 </div>
