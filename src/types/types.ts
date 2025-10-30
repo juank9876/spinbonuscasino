@@ -112,6 +112,7 @@ export interface Post {
   custom_fields: Record<string, unknown>
   view_count: number | string
   published_at: string
+  category_hierarchy: CategoryWithPrimaryFlag[]
   created_at: string
   updated_at: string
   author_id: string

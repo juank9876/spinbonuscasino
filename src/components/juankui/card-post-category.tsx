@@ -8,13 +8,16 @@ import { Post } from '@/types/types'
 export function CardPostCategory({ post }: { post: Post }) {
   //const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
   //const categoryUrl = category.slug
+  const categoryPath = post.category_hierarchy?.map(cat => cat.slug).join('/') || '';
+  const postUrl = `/${categoryPath}/${post.slug}`;
+  // Resultado: /tips/premier-league/article-slug
   return (
     <>
       {/*Card para PC*/}
       <Link
         //editado 30.09
         //href={`${categoryUrl}/${post.slug}`}
-        href={post.seo_url}
+        href={postUrl}
         className="
           group relative hidden lg:flex 
           w-[300px] h-[500px] overflow-hidden rounded-2xl border border-[var(--color-accent-light)]

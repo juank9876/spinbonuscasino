@@ -1,11 +1,15 @@
 import { BrandlistyOriginalSsr } from '@/components/juankui/brandlisty/brandlisty-ssr'
+import { fixAttribs } from '@/lib/utils'
 import { Element } from 'html-react-parser'
 
 
-export function transformBrandlisty (el: Element) {
+export function transformBrandlisty(el: Element) {
     const { apikey, listid, boton, limit, id } = el.attribs
+    const attribs = fixAttribs(el.attribs)
+
+
     return (
-        <div id={el.attribs?.id} className={`flex h-full flex-col ${el.attribs?.class || ''}`}>
+        <div {...attribs} id={attribs.id} className={`flex h-full flex-col ${attribs.class || ''}`}>
             <BrandlistyOriginalSsr
                 //key={id}
                 apiKey={apikey || el.attribs['data-apikey']}
