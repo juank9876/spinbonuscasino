@@ -11,9 +11,18 @@ interface ApiButtonsProps {
 
 export function ApiButtons({ baseUrl, query, methodTypes }: ApiButtonsProps) {
     const [data, setData] = useState<any>(null);
+    const domain = process.env.NEXT_PUBLIC_SITE_URL || "https://spinbonuscasino.com"
 
     const fetchApi = async (method: MethodType) => {
-        const res = await fetch(`${baseUrl}${query}&method=${method}`, { next: { revalidate: 3 }, cache: 'no-store' });
+        const res = await fetch(
+            `${baseUrl}${query}&method=${method}`,
+            {
+                next: { revalidate: 3 },
+                headers: {
+                    'User-Agent': `MyApp/1.0; https://${domain}`
+                },
+                cache: 'no-store'
+            });
         const json = await res.json();
         setData(json);
     };

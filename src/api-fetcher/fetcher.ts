@@ -81,6 +81,7 @@ export async function fetcher<T>(params: FetcherParams & { with_meta?: false }):
 export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T> | null> {
   const { method, id, type, slug, category_id, path, pagination, per_page, with_meta, tag_id, author_id, silent = false } = params
   const apiDomain = process.env.API_DOMAIN || "https://intercms.dev"
+  const domain = process.env.NEXT_PUBLIC_SITE_URL || "https://spinbonuscasino.com"
   const baseUrl = `${apiDomain}/api/v2/data.php`
 
   const url = baseUrl +
@@ -102,7 +103,9 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
   try {
     const res = await fetch(url, {
       next: { revalidate: 5 },
-
+      headers: {
+        'User-Agent': `MyApp/1.0; ${domain}`
+      },
     })
     const data: ResponseInterface<T> = await res.json();
 

@@ -13,7 +13,6 @@ export function PreCategory({ children, category, className }: { children: React
 
   return (
     <MainWrapper>
-
       {cssSettings.styles.applyTemplateStyles && <HeroCategory {...category} />}
 
       <ContentWithSidebar
