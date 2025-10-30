@@ -332,7 +332,7 @@ function filterByCountryCode(brands: BrandlistyCardType[], countryCode: string):
   });
 }
 
-export async function fetchBrandlistyApi({ countryCode, apiKey, listId }: { countryCode: string, apiKey?: string, listId?: string }): Promise<BrandlistyCardType[]> {
+export async function fetchBrandlistyApi({ countryCode, apiKey, listId, domain }: { countryCode: string, apiKey?: string, listId?: string, domain?: string }): Promise<BrandlistyCardType[]> {
   //const apiKey = process.env.BRANDLISTY_API_KEY || ''
   //const listId = process.env.BRANDLISTY_LIST_ID || ''
   //const boton = "Visit now"
@@ -345,15 +345,14 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId }: { coun
     brandlistyListId = listId
   }
 
-
+  domain = domain || 'spinbonuscasino.com'
   const response = await fetch(
     `https://pro.brandlisty.com/api/v1/list.php?token=${brandlistyApiKey}&hash=${brandlistyListId}`,
     {
       method: 'GET',
       headers: {
-        'User-Agent': 'MyApp/1.0; https://spinbonuscasino.com'
+        'User-Agent': `MyApp/1.0; https://${domain}`
       },
-      next: { revalidate: 60 },
     }
   )
 

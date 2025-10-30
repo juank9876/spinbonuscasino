@@ -20,7 +20,7 @@ export async function BrandlistySidebarSsr() {
 export async function BrandlistyOriginalSsr({ apiKey, listId }: { apiKey: string; listId: string }) {
   const headerslist = await headers();
   const countryCode = headerslist.get('x-user-country') || 'WW'
-  const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode, apiKey: apiKey, listId: listId });
+  const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode, apiKey: apiKey, listId: listId, domain: 'spinbonuscasino.com' });
 
   return (
     <div className="flex w-full flex-col bg-gray-50">

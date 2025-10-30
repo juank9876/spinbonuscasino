@@ -9,7 +9,7 @@ export function transformBrandlisty(el: Element) {
 
 
     return (
-        <div {...attribs} id={attribs.id} className={`flex h-full flex-col ${attribs.class || ''}`}>
+        <div id={attribs.id} className={`flex h-full flex-col`}>
             <BrandlistyOriginalSsr
                 //key={id}
                 apiKey={apikey || el.attribs['data-apikey']}
