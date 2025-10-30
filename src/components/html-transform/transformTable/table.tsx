@@ -45,9 +45,12 @@ function extractHeaders(el: Element): string[] {
 
 //SE PUEDE QUITAR SIN PROBLEMA
 export function transformTable(el: Element, options: HTMLReactParserOptions) {
-    const attribs = fixAttribs(el.attribs)
+    let attribs = fixAttribs(el.attribs)
     const headers = extractHeaders(el)
-
+    attribs.cellPadding = attribs.cellpadding
+    attribs.cellSpacing = attribs.cellspacing
+    delete attribs.cellpadding
+    delete attribs.cellspacing
     // Store headers in a way children can access them
     if (headers.length > 0) {
         (el as any)._headers = headers

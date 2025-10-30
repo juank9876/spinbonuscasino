@@ -4,12 +4,12 @@ import { methods, MethodType } from "@/api-fetcher/fetcher";
 import { ApiButtons } from "./ApiButtons";
 import NotFound from "@/app/not-found";
 
-export default function Page () {
+export default function Page() {
     if (process.env.DEVMODE) {
         const apiKey = process.env.API_KEY;
         const projectId = process.env.PROJECT_ID;
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-        const cms = "https://intercms.dev/api/v2/data.php?";
+        const apiDomain = process.env.API_DOMAIN || "https://intercms.dev"
+        const cms = `${apiDomain}/api/v2/data.php?`;
         const query = `api_key=${apiKey}&project_id=${projectId}`;
         const methodTypes = methods as unknown as MethodType[];
         return (

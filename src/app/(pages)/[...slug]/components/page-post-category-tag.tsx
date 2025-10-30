@@ -63,6 +63,7 @@ export async function createCategory({ content, searchParams }: { content: { typ
                             />
                         ))}
                             */}
+                    <h2 className="text-4xl font-bold text-center mb-10">{category.name}</h2>
                     <PostsPagination posts={dataWithMeta.data} meta={dataWithMeta.meta} />
                 </PreCategory>
             )}

@@ -1,6 +1,27 @@
-import { fetchCategories } from "@/api-fetcher/fetcher"
+import { fetchCategories, fetchSiteSettings } from "@/api-fetcher/fetcher"
 import { Link } from "@/components/juankui/optionals/link"
 import { formatDate, limitCharacters } from "@/lib/utils"
+import { Metadata } from "next"
+
+export async function generateMetadata(): Promise<Metadata> {
+    const settings = await fetchSiteSettings()
+    
+    return {
+        title: `Categorías | ${settings.site_title}`,
+        description: `Explora todas las categorías de ${settings.site_title}. Encuentra contenido organizado por temas de tu interés.`,
+        openGraph: {
+            title: `Categorías | ${settings.site_title}`,
+            description: `Explora todas las categorías de ${settings.site_title}. Encuentra contenido organizado por temas de tu interés.`,
+            url: `${process.env.NEXT_PUBLIC_SITE_URL}/categories`,
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary',
+            title: `Categorías | ${settings.site_title}`,
+            description: `Explora todas las categorías de ${settings.site_title}. Encuentra contenido organizado por temas de tu interés.`,
+        },
+    }
+}
 
 export default async function CategoriesPage() {
     const categories = await fetchCategories()

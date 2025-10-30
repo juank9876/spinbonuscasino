@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'app.xphantom.io', // Allows all hostnames
+      },
+      {
+        protocol: 'https',
         hostname: 'via.placeholder.com', // Allows all hostnames
       },
 

@@ -106,7 +106,7 @@ export const config: ProjectConfig = {
     // ========================================
     components: {
         layout: {
-            width: 'w-[90vw] lg:w-[70vw] xl:w-[70vw]',
+            width: 'w-[90vw] lg:w-[70vw]',
         },
         navbar: {
             transparent: false,
@@ -127,11 +127,11 @@ export const config: ProjectConfig = {
             }
         },
         hero: {
-            homeHero: true,
-            pageHero: true,
-            categoryHero: true,
-            tagHero: true,
-            postHero: true,
+            homeHero: false,
+            pageHero: false,
+            categoryHero: false,
+            tagHero: false,
+            postHero: false,
             bgColor: 'bg-gradient-to-br from-slate-900 via-indigo-800 to-slate-900',
         },
         footer: {
@@ -144,7 +144,7 @@ export const config: ProjectConfig = {
         },
         sidebar: {
             // Ancho del sidebar en diferentes breakpoints
-            width: 'w-full lg:w-[600px] xl:w-[600px]',       // Desktop grande: más ancho
+            width: 'w-full lg:w-[500px]',       // Desktop grande: más ancho
 
             // Espaciador izquierdo (para balance visual)
             spacer: {

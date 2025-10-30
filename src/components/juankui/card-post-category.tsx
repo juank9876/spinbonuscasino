@@ -6,8 +6,7 @@ import { Link } from '@/components/juankui/optionals/link'
 import { Post } from '@/types/types'
 
 export function CardPostCategory({ post }: { post: Post }) {
-  //const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
-  //const categoryUrl = category.slug
+
   const categoryPath = post.category_hierarchy?.map(cat => cat.slug).join('/') || '';
   const postUrl = `/${categoryPath}/${post.slug}`;
   // Resultado: /tips/premier-league/article-slug
@@ -15,54 +14,48 @@ export function CardPostCategory({ post }: { post: Post }) {
     <>
       {/*Card para PC*/}
       <Link
-        //editado 30.09
-        //href={`${categoryUrl}/${post.slug}`}
         href={postUrl}
         className="
           group relative hidden lg:flex 
-          w-[300px] h-[500px] overflow-hidden rounded-2xl border border-[var(--color-accent-light)]
-          bg-gradient-to-b from-[var(--color-primary-dark)] to-blue-950
-          shadow-xl transition-all duration-500 
-          hover:shadow-2xl hover:shadow-[var(--color-accent-dark)]/30 hover:bg-[var(--color-accent-dark)]
+          w-[300px] h-[550px] to-blue-950
+           transition-all duration-500 
+           p-5 flex-col
         "
       >
-        <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
 
-        <div className="flex flex-col w-full h-full p-4 gap-4">
+        {/* Imagen fija */}
+        <div className="relative w-full h-[200px] min-h-[200px] overflow-hidden rounded-md shadow-md transition-transform duration-300">
+          <Image
+            src={
+              post.featured_image ||
+              "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop"
+            }
+            alt={post.title}
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="300px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-60 group-hover:opacity-0 transition-all duration-300"></div>
+        </div>
 
-          {/* Imagen fija */}
-          <div className="relative w-full h-[200px] flex items-center justify-center overflow-hidden rounded-xl shadow-md transition-transform duration-300 group-hover:scale-[1.03]">
-            <Image
-              src={
-                post.featured_image ||
-                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop"
-              }
-              alt={post.title}
-              fill
-              className="object-cover object-center"
-              priority
-            />
-            <p className="absolute top-0 right-0 bg-[var(--color-secondary-dark)] rounded-lg  px-2 py-1 text-slate-200 text-xs font-bold border border-[var(--color-secondary)]">
-              {formatDate(post.published_at || post.created_at)}
+        {/* Contenido */}
+        <div className="flex flex-1 flex-col justify-between">
+          <div className="space-y-1">
+            <h2 className="text-start text-xl font-semibold leading-tight tracking-tight hover:underline mt-4">
+              {post.title}
+            </h2>
+
+            <p className="text-sm leading-relaxed text-gray-600 padding-none">
+              {limitCharacters(post.excerpt, 120)}
             </p>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
           </div>
 
-          {/* Contenido */}
-          <div className="flex flex-1 flex-col justify-between">
-            <div className="space-y-2">
-              <h2 className="text-start text-lg font-bold text-white leading-tight tracking-tight">
-                {post.title}
-              </h2>
-
-              <p className="text-slate-200 text-sm leading-relaxed">
-                {limitCharacters(post.excerpt, 120)}
-              </p>
-            </div>
-
-            {/* Autor */}
-            <div className="mt-4 flex items-center gap-4 rounded-lg border border-[var(--color-accent-light)] bg-[var(--color-accent-dark)] py-1 px-2 shadow-inner">
-              <div className="relative size-12 flex-shrink-0 overflow-hidden rounded-full border-2 border-[var(--color-accent-light)] shadow-md">
+          {/* Autor */}
+          <div className="mt-2 flex flex-col items-start gap-4 px-2 ">
+            <div className=" bg-gray-300 w-full h-px my-4" />
+            <div className="flex flex-row items-center gap-2">
+              <div className="relative size-12 flex-shrink-0 overflow-hidden rounded-full  shadow-md">
                 <Image
                   src={
                     post.author_avatar ||
@@ -73,15 +66,17 @@ export function CardPostCategory({ post }: { post: Post }) {
                   className="object-cover"
                 />
               </div >
-              <div className="flex flex-wrap items-center gap-2 text-white text-sm">
-                <span className="text-xs font-medium">{formatDate(post.published_at || post.created_at)}</span>
-                <span className="text-[var(--color-accent-light)]">·</span>
-                <span className="text-xs font-semibold">{post.author_name.toUpperCase()}</span>
+
+              <div className="flex flex-col items-start gap-1">
+                <span className="text-xs font-semibold text-gray-600">{post.author_name.toUpperCase()}</span>
+                <span className="text-xs font-normal text-gray-600">
+                  {formatDate(post.published_at || post.created_at)}
+                </span>
               </div>
-            </div >
-          </div>
-        </div >
-      </Link >
+            </div>
+          </div >
+        </div>
+      </Link>
 
 
 

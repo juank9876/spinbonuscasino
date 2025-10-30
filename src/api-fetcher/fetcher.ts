@@ -80,7 +80,8 @@ export async function fetcher<T>(params: FetcherParams & { with_meta?: false }):
 
 export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T> | null> {
   const { method, id, type, slug, category_id, path, pagination, per_page, with_meta, tag_id, author_id, silent = false } = params
-  const baseUrl = `https://intercms.dev/api/v2/data.php`
+  const apiDomain = process.env.API_DOMAIN || "https://intercms.dev"
+  const baseUrl = `${apiDomain}/api/v2/data.php`
 
   const url = baseUrl +
     `?method=${method}` +

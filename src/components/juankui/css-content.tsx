@@ -52,19 +52,19 @@ export const transformHtmlForSidebar = (htmlContent: string): string => {
 const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
     if (!cssContent) return undefined;
 
-    cssContent = cssContent.replace(/\/\*.*?\*\//g, '');
+    //cssContent = cssContent.replace(/\/\*.*?\*\//g, '');
     // Replace all standalone * selectors with the fixed class
-    cssContent = cssContent.replace(/\*\s*{/g, '.fixed-global-styles-from-builder {');
+    //cssContent = cssContent.replace(/\*\s*{/g, '.fixed-global-styles-from-builder {');
 
     // Eliminar max-width de .info-cards-container
-    cssContent = removeMaxWidthFromClass(cssContent, 'info-cards-container');
+    //cssContent = removeMaxWidthFromClass(cssContent, 'info-cards-container');
 
     // Eliminar todas las ocurrencias de min-width
-    cssContent = cssContent.replace(/min-width\s*:\s*[^;]*;?/gi, '');
+    //cssContent = cssContent.replace(/min-width\s*:\s*[^;]*;?/gi, '');
 
     debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
-    useEffect(() => {
 
+    useEffect(() => {
         const styleTag = document.createElement('style');
         styleTag.setAttribute('id', 'dynamic-style');
         styleTag.innerHTML = cssContent;

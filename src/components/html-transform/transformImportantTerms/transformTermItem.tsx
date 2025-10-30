@@ -6,11 +6,11 @@ import { Element, HTMLReactParserOptions } from "html-react-parser";
 export function transformTermContentH3(el: Element, options: HTMLReactParserOptions) {
     const attribs = fixAttribs(el.attribs)
     return (
-        <h3
+        <span
             {...attribs}
             className={`padding-none ${attribs.className || ''}`}
         >
             {domToReact(el.children as DOMNode[], options)}
-        </h3>
+        </span>
     )
 }
