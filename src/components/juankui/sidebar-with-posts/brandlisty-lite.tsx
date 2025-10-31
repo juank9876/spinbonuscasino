@@ -4,7 +4,7 @@ import { BrandlistySidebarSsr } from '../brandlisty/brandlisty-ssr';
 
 export async function BrandlistyLite() {
     // Ya no necesitamos la constante test, el HTML vendrá del API
-    const res = await fetchBrandlistyApi({ countryCode: '' });
+    //const res = await fetchBrandlistyApi({ countryCode: '' });
 
 
     // max-h-[900px] max-w-[400px] overflow-x-auto

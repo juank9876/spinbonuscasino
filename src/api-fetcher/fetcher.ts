@@ -345,8 +345,8 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId, domain }
   //const listId = process.env.BRANDLISTY_LIST_ID || ''
   //const boton = "Visit now"
   //const limit = "5"
-  let brandlistyApiKey = process.env.BRANDLISTY_API_KEY
-  let brandlistyListId = process.env.BRANDLISTY_LIST_ID
+  let brandlistyApiKey = process.env.SIDEBAR_BRANDLISTY_API_KEY
+  let brandlistyListId = process.env.SIDEBAR_BRANDLISTY_LIST_ID
 
   if (apiKey !== undefined && listId !== undefined) {
     brandlistyApiKey = apiKey
@@ -358,9 +358,6 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId, domain }
     `https://pro.brandlisty.com/api/v1/list.php?token=${brandlistyApiKey}&hash=${brandlistyListId}`,
     {
       method: 'GET',
-      headers: {
-        'User-Agent': `MyApp/1.0; https://${domain}`
-      },
     }
   )
 

@@ -19,10 +19,11 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
     ...settings,
     ...pageProps
   }
+  const homeHero = process.env.HOME_HERO === 'true' || false
   return (
     <MainWrapper>
 
-      {config.components.hero.homeHero && <HeroHomePage {...props} />}
+      {homeHero && <HeroHomePage {...props} />}
 
       <Section>
         <div className='flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw] pt-8'>
