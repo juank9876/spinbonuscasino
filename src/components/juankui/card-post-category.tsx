@@ -1,9 +1,10 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { ShineBorder } from '@/components/magicui/shine-border'
 import Image from 'next/image'
-import { formatDate, limitCharacters } from '@/lib/utils'
+import { limitCharacters } from '@/utils/limitCharacters'
 import { Link } from '@/components/juankui/optionals/link'
 import { Post } from '@/types/types'
+import { formatDate } from '@/utils/formatDate'
 
 export function CardPostCategory({ post }: { post: Post }) {
 

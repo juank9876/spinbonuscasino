@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
 
   // Verificar si existe homepage
   const homePage = await fetchHomePage();
-  
+
   // Si no hay homepage y no estamos ya en la home, redirigir a home
   if (!homePage && request.nextUrl.pathname !== '/') {
     return NextResponse.redirect(new URL('/', request.url));

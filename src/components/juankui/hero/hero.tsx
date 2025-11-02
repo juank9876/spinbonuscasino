@@ -3,11 +3,12 @@ import { ButtonRipple, LinkRipple } from "../legacy/ripple-components"
 import { VideoHero } from "../optionals/video-hero"
 import Image from "next/image"
 import { Post, Page, SiteSettings, Category } from '@/types/types'
-import { cn, formatDate } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { Breadcrumbs } from "./breadcrumbs"
 import { ParticlesFull } from "./particles"
 import { Particles } from "@/components/magicui/particles"
 import { Highlighter } from "@/components/magicui/highlighter"
+import { formatDate } from "@/utils/formatDate"
 
 type HomeProps = SiteSettings & Page
 

@@ -12,15 +12,6 @@ export function normalizeUrl(url: string): string {
   return '/' + url.replace(/^\/+/, '')
 }
 
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString)
-
-  return new Intl.DateTimeFormat('es-ES', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(date)
-}
 
 type PageMeta = {
   id: string
@@ -99,12 +90,7 @@ export async function createPageTitle(pageMetaTitle: string | undefined, pageTit
 
 }
 
-export function limitCharacters(text: string, limit: number): string {
-  if (!text) return '';
-  if (text.length <= limit) return text;
 
-  return text.slice(0, limit) + '...';
-}
 
 export function decodeHtmlEntities(text: string): string {
   if (!text) return '';

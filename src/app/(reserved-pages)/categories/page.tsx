@@ -1,6 +1,8 @@
 import { fetchCategories, fetchSiteSettings } from "@/api-fetcher/fetcher"
 import { Link } from "@/components/juankui/optionals/link"
-import { formatDate, limitCharacters } from "@/lib/utils"
+import { formatDate } from "@/utils/formatDate"
+import { limitCharacters } from "@/utils/limitCharacters"
+
 import { Metadata } from "next"
 
 export async function generateMetadata(): Promise<Metadata> {

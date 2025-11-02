@@ -1,7 +1,8 @@
 import { fetchTags } from "@/api-fetcher/fetcher";
 import { Link } from "@/components/juankui/optionals/link";
-import { createPageTitle, formatDate } from "@/lib/utils";
+import { createPageTitle } from "@/lib/utils";
 import { capitalize } from "@/utils/capitalize";
+import { formatDate } from "@/utils/formatDate";
 
 
 export async function generateMetadata() {
