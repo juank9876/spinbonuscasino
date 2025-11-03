@@ -347,7 +347,7 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId, domain }
   //const limit = "5"
   let brandlistyApiKey = process.env.SIDEBAR_BRANDLISTY_API_KEY
   let brandlistyListId = process.env.SIDEBAR_BRANDLISTY_LIST_ID
-  const defaultDomain = process.env.NEXT_PUBLIC_SITE_URL || 'https://spinbonuscasino.com'
+  const defaultDomain = process.env.NEXT_PUBLIC_SITE_URL
 
   if (apiKey !== undefined && listId !== undefined) {
     brandlistyApiKey = apiKey
