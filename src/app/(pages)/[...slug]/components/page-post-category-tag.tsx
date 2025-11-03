@@ -46,12 +46,12 @@ export async function createCategory({ content, searchParams }: { content: { typ
     return (
         <>
             {category.posts.length === 0 ? (
-                <PreCategory category={category} className='flex h-full flex-col items-center justify-center'>
+                <section className='flex h-[40vh] flex-col items-center justify-center'>
 
-                    <span className="text-muted rounded-lg bg-[var(--color-accent)] px-5 py-10 text-xl italic">
+                    <span className="mx-auto text-center text-xl italic">
                         Oops! No posts available in this category.
                     </span>
-                </PreCategory>
+                </section>
             ) : (
                 <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[90vw] lg:gap-5'>
 
@@ -86,12 +86,12 @@ export async function createTag({ content, searchParams }: { content: { type: 't
     return (
         <>
             {tag.posts.length === 0 ? (
-                <PreTag className='flex h-full flex-col items-center justify-center'>
+                <section className='flex h-[40vh] flex-col items-center justify-center'>
 
-                    <span className="text-muted rounded-lg bg-[var(--color-accent)] px-5 py-10 text-xl italic">
+                    <span className="mx-auto text-center text-xl italic">
                         Oops! No posts available in this tag.
                     </span>
-                </PreTag>
+                </section>
             ) : (
                 <PreTag className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
                     <PostsPagination posts={dataWithMeta.data} meta={dataWithMeta.meta} />

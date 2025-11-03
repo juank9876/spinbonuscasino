@@ -106,7 +106,7 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
   try {
     const res = await fetch(url, {
-      next: { revalidate: 5 },
+      next: { revalidate: 5, tags: ['global'] },
       headers: {
         'User-Agent': `MyApp/1.0; https://bonuscasino247.com`
       },
