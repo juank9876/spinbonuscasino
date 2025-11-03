@@ -347,17 +347,22 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId, domain }
   //const limit = "5"
   let brandlistyApiKey = process.env.SIDEBAR_BRANDLISTY_API_KEY
   let brandlistyListId = process.env.SIDEBAR_BRANDLISTY_LIST_ID
+  const defaultDomain = process.env.NEXT_PUBLIC_SITE_URL || 'https://spinbonuscasino.com'
 
   if (apiKey !== undefined && listId !== undefined) {
     brandlistyApiKey = apiKey
     brandlistyListId = listId
   }
+  domain = domain || defaultDomain
+  const url = `https://pro.brandlisty.com/api/v1/list.php?token=${brandlistyApiKey}&hash=${brandlistyListId}`
 
-  domain = domain || 'spinbonuscasino.com'
   const response = await fetch(
-    `https://pro.brandlisty.com/api/v1/list.php?token=${brandlistyApiKey}&hash=${brandlistyListId}`,
+    url,
     {
       method: 'GET',
+      headers: {
+        'User-Agent': `MyApp/1.0; ${domain}`
+      },
     }
   )
 
@@ -371,7 +376,6 @@ export async function fetchBrandlistyApi({ countryCode, apiKey, listId, domain }
 }
 
 export async function getUserCountry({ ip }: { ip: string }): Promise<string> {
-
   const baseUrl = "https://api.ipinfo.io/lite/"
   try {
     const res = await fetch(baseUrl + `${ip}` + `?token=${process.env.IPINFO_TOKEN}`);

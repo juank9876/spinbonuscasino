@@ -299,7 +299,7 @@ export function BrandlistyCardOriginal({ operator, index }: BrandlistyIndex) {
   const stars = parseFloat(operator.stars_rating) || 0;
 
   return (
-    <div className="mb-4 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">
+    <div className="mb-4  rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">
       <div className="flex w-full flex-col lg:flex-row">
         {/* Columna Izquierda - Logo y Badge */}
         <div className="flex w-full flex-shrink-0 flex-col items-center bg-gradient-to-br from-gray-200 to-white pb-2 lg:w-1/3">

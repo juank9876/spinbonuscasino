@@ -10,7 +10,7 @@ export async function BrandlistySidebarSsr() {
 
   return (
     <div className="flex w-full max-w-full flex-col gap-4 bg-gray-50 p-4 lg:max-w-sm mx-auto">
-      {brandlistyList.map((operator, index) => (
+      {brandlistyList.slice(0, 5).map((operator, index) => (
         <BrandlistyCardSidebar key={operator.id} operator={operator} index={index} />
       ))}
     </div>
@@ -18,12 +18,14 @@ export async function BrandlistySidebarSsr() {
 }
 
 export async function BrandlistyOriginalSsr({ apiKey, listId }: { apiKey: string; listId: string }) {
+  console.log(apiKey, listId)
   const headerslist = await headers();
   const countryCode = headerslist.get('x-user-country') || 'WW'
   const brandlistyList = await fetchBrandlistyApi({ countryCode: countryCode, apiKey: apiKey, listId: listId, domain: 'spinbonuscasino.com' });
 
+  console.log(brandlistyList)
   return (
-    <div className="flex w-full flex-col bg-gray-50">
+    <div className="w-full flex-col bg-gray-50">
       {brandlistyList.map((operator, index) => (
         <BrandlistyCardOriginal key={operator.id} operator={operator} index={index} />
       ))}
