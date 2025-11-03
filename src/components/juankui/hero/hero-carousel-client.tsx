@@ -1,12 +1,12 @@
 'use client'
 
-import { Post } from "@/types/types";
 import { useState, useEffect } from "react";
 import { Link } from "../optionals/link";
-import { cn, limitCharacters, decodeHtmlEntities } from "@/lib/utils";
+import { cn, decodeHtmlEntities } from "@/lib/utils";
 import Image from "next/image";
 import { config } from "@/config/config";
 import { FeaturedContent } from "@/api-fetcher/fetcher";
+import { limitCharacters } from "@/utils/limitCharacters";
 
 export function HeroCarouselClient({ featuredContent }: { featuredContent: FeaturedContent[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
