@@ -55,7 +55,7 @@ function LayoutBody({
           </div>
           {hasHomepage && <Footer />}
         </div>
-        <CookieConsent cookies={cookies} />
+        {hasHomepage && <CookieConsent cookies={cookies} />}
         <AgeVerificationPopup ageVerification={ageVerification} />
       </Providers>
     </body>
