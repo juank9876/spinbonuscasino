@@ -78,9 +78,6 @@ export async function createMetadata(slug: string): Promise<Metadata> {
                 "facebook-pixel": settings.facebook_pixel || "",
                 "custom-css": settings.custom_css || "",
                 "custom-js": settings.custom_js || "",
-                "schema-data": page?.schema_data
-                    ? JSON.stringify(page.schema_data)
-                    : "",
             },
         };
     }
@@ -89,12 +86,8 @@ export async function createMetadata(slug: string): Promise<Metadata> {
         return {
             title: await createPageTitle(category?.meta_title, settings?.site_title) || settings.site_title,
             description: capitalize(category?.meta_description) || settings.site_description,
-            other: {
-
-                "schema-data": category?.schema_data
-                    ? JSON.stringify(category.schema_data)
-                    : "",
-            },
+            other: {},
+            // Schema data se maneja directamente en el componente de página
         }
     }
     else {

@@ -11,7 +11,6 @@ import { AgeVerificationPopup } from "@/components/juankui/age-verification";
 import { settings as cssSettings } from "@/config/debug-log";
 import { generateCssVariables, generateThemeColors, ThemeColors } from "@/utils/theme-colors";
 import { AgeVerification, SiteSettings } from "@/types/types";
-import { SchemaJson } from "./seo/schemaJson";
 import { headers } from "next/headers";
 
 
@@ -99,7 +98,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           hasHomepage={hasHomepage}
         >
           {children}
-          <SchemaJson jsonLD={JSON.stringify(settings.schema_data)} />
         </LayoutBody>
       </html>
     </ViewTransitions>

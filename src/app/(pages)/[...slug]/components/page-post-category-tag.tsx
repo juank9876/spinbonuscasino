@@ -6,17 +6,21 @@ import { PostsPagination } from '@/components/juankui/posts-with-pagination'
 import { PrePage } from '@/components/juankui/pre-rendered/pre-page'
 import { PreTag } from '@/components/juankui/pre-rendered/pre-tag'
 import { Page, Post, Category, Tag } from '@/types/types'
+import { SchemaJson } from '@/app/seo/schemaJson'
 
 
 export function createPage({ content }: { content: { type: 'page', data: Page } }) {
     const page = content.data
     return (
-        <PrePage page={page}>
-            <HtmlRenderer
-                html={page.html_content}
-                cssContent={page.css_content || undefined}
-            />
-        </PrePage>
+        <>
+            <SchemaJson jsonLD={page.schema_data} />
+            <PrePage page={page}>
+                <HtmlRenderer
+                    html={page.html_content}
+                    cssContent={page.css_content || undefined}
+                />
+            </PrePage>
+        </>
     )
 
 }
@@ -25,9 +29,12 @@ export function createPost({ content }: { content: { type: 'post', data: { post:
     const post = content.data.post
 
     return (
-        <PrePost post={post} >
-            <HtmlRenderer html={post.html_content} cssContent={post.css_content || undefined} />
-        </PrePost>
+        <>
+            <SchemaJson jsonLD={post.schema_data} />
+            <PrePost post={post} >
+                <HtmlRenderer html={post.html_content} cssContent={post.css_content || undefined} />
+            </PrePost>
+        </>
     )
 }
 
@@ -45,6 +52,7 @@ export async function createCategory({ content, searchParams }: { content: { typ
 
     return (
         <>
+            <SchemaJson jsonLD={category.schema_data as object | null} />
             {category.posts.length === 0 ? (
                 <section className='flex h-[40vh] flex-col items-center justify-center'>
 
