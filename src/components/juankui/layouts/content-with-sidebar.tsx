@@ -61,14 +61,6 @@ export function ContentWithSidebar({
     const spacerEnabled = config.components.sidebar.spacer.enabled;
     const spacerWidth = config.components.sidebar.spacer.width;
 
-    console.log('DEBUG SIDEBAR:', {
-        showWidget,
-        showWidgetType: typeof showWidget,
-        hasSidebarComponents,
-        sidebarConfig,
-        showSidebar,
-        comparison: showWidget === 1
-    })
     return (
         <Section className={`pt-8 flex justify-center items-center ${className}`}>
             <div className={showSidebar ? `flex lg:flex-row flex-col justify-center lg:items-start items-center ${containerGap} ${layoutWidth}` : `flex justify-center ${contentMaxWidth}`}>
