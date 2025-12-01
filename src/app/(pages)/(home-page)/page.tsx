@@ -7,6 +7,7 @@ import { CustomHTMLRenderer } from "../../seo/customScripts";
 import { handleRedirect } from '@/utils/handleRedirect'
 import { ArrowRight, Construction, HomeIcon } from 'lucide-react'
 import { Link } from '@/components/juankui/optionals/link'
+import { SchemaJson } from '@/app/seo/schemaJson'
 
 
 
@@ -68,15 +69,16 @@ export default async function Home() {
   }
 
   if (homePage) return (
-    <PreHomePage
-      settings={settings}
-      pageProps={homePage}
-    >
-
-      <HtmlRenderer cssContent={homePage.css_content || undefined} html={homePage.html_content} />
-      <CustomHTMLRenderer content={customScripts.custom_scripts} />
-    </PreHomePage>
-
+    <>
+      <SchemaJson jsonLD={homePage.schema_data} />
+      <PreHomePage
+        settings={settings}
+        pageProps={homePage}
+      >
+        <HtmlRenderer cssContent={homePage.css_content || undefined} html={homePage.html_content} />
+        <CustomHTMLRenderer content={customScripts.custom_scripts} />
+      </PreHomePage>
+    </>
   )
   return <UnderConstruction />
 }
