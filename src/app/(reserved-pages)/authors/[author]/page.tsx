@@ -3,16 +3,20 @@ import NotFound from "@/app/not-found";
 import { getContentAuthor, getContentData, getContentDataTag } from "@/lib/fetch-data/getPageOrPostData";
 import { PostsPagination } from "../../../../components/juankui/posts-with-pagination";
 import { Post } from "@/types/types";
+import { createPageWithDescription } from "@/utils/metadata-generator";
 
 export async function generateMetadata({ params }: { params: Promise<{ author: string }> }) {
-  const { author } = await params
-  const authorContent = await getContentAuthor(author)
+  const { author } = await params;
+  const authorContent = await getContentAuthor(author);
+
+  const pageMeta = await createPageWithDescription(authorContent?.data.name);
 
   return {
+    ...pageMeta, // esto agrega title y description
     robots: {
-      index: authorContent?.data.robots_index === "index"
-    }
-  }
+      index: authorContent?.data.robots_index === "index",
+    },
+  };
 }
 
 export default async function AuthorPage({ params, searchParams }: { params: Promise<{ author: string }>, searchParams?: Promise<{ page?: string }> }) {
@@ -37,7 +41,7 @@ export default async function AuthorPage({ params, searchParams }: { params: Pro
     <main className="flex h-full w-full flex-1 flex-col items-center justify-center">
 
       <div className="max-w-[90vw]">
-        <h2 className="mb-10 text-center text-2xl font-bold text-slate-200">
+        <h2 className="mb-10 text-center text-2xl font-bold text-slate-700">
           All posts of
         </h2>
         <PostsPagination posts={posts} meta={meta} />

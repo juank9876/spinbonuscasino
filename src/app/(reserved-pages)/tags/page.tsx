@@ -1,15 +1,12 @@
 import { fetchTags } from "@/api-fetcher/fetcher";
 import { Link } from "@/components/juankui/optionals/link";
-import { createPageTitle } from "@/lib/utils";
-import { capitalize } from "@/utils/capitalize";
+
 import { formatDate } from "@/utils/formatDate";
+import { createPageWithDescription } from "@/utils/metadata-generator";
 
 
 export async function generateMetadata() {
-    return {
-        title: await createPageTitle("Tags", "Tags"),
-        description: capitalize("This is the categories site"),
-    }
+    return createPageWithDescription("Tags", "Tags")
 }
 
 export default async function TagPage() {
@@ -43,7 +40,7 @@ export default async function TagPage() {
     }
 
     return (
-        <main className="flex flex-1 flex-col ">
+        <main className="flex flex-1 flex-col items-center justify-center">
             <h2 className="text-4xl md:text-5xl font-bold  mb-6 text-center ">
                 Tags
             </h2>

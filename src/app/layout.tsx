@@ -13,7 +13,27 @@ import { generateCssVariables, generateThemeColors, ThemeColors } from "@/utils/
 import { AgeVerification, SiteSettings } from "@/types/types";
 import { headers } from "next/headers";
 
+export async function generateMetadata() {
+  const settings = await fetchSiteSettings();
+  return {
 
+    icons: [
+      {
+        rel: "icon",
+        url: settings.favicon || "",
+        sizes: "32x32",
+        type: "image/png",
+      },
+    ],
+
+    other: {
+      "google-analytics": settings.ga_tracking_id || "",
+      "facebook-pixel": settings.facebook_pixel || "",
+      "custom-css": settings.custom_css || "",
+      "custom-js": settings.custom_js || "",
+    },
+  }
+}
 
 export async function fetchLayoutData() {
   const [settings, cookies, ageVerification] = await Promise.all([
@@ -49,7 +69,7 @@ function LayoutBody({
       <Providers>
         <div className="max-w-screen flex min-h-[100dvh] h-full flex-col">
           {hasHomepage && <Header />}
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col bg-dark">
             {children}
           </div>
           {hasHomepage && <Footer />}

@@ -1,3 +1,4 @@
+import NotFound from "@/app/not-found";
 import { CategoryHierarchy } from "./hierarchy"
 
 
@@ -18,9 +19,10 @@ export default async function CategoriesPage() {
     )
     const dataRaw = await data.json()
     const categories = dataRaw.data
-    return (
+    if (process.env.CATEGORIES_HIERARCHY === "true") return (
         <div className="w-full h-screen overflow-hidden">
             <CategoryHierarchy categories={categories} />
         </div>
     )
+    return <NotFound />
 }

@@ -7,7 +7,7 @@ import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Po
 export type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
   "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots" | "sitemap" |
-  "custom-scripts" | "tag" | "featured-content" | "important-categories"
+  "custom-scripts" | "tag" | "featured-content" | "important-categories" | "plugin-status" | "matches"
 
 export const methods: MethodType[] = [
   "category-posts",
@@ -35,7 +35,9 @@ export const methods: MethodType[] = [
   "custom-scripts",
   "tag",
   "featured-content",
-  "important-categories"
+  "important-categories",
+  "plugin-status",
+  "matches"
 ]
 
 interface FetcherParams {
@@ -53,6 +55,8 @@ interface FetcherParams {
   limit?: number
   posts_per_category?: number
   silent?: boolean
+  plugin?: string
+  status?: string
 }
 
 export interface ResponseInterface<T = unknown> {
@@ -82,7 +86,7 @@ export async function fetcher<T>(params: FetcherParams & { with_meta: true }): P
 export async function fetcher<T>(params: FetcherParams & { with_meta?: false }): Promise<T>;
 
 export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T> | null> {
-  const { method, id, type, slug, category_id, path, pagination, per_page, with_meta, tag_id, author_id, limit, posts_per_category, silent = false } = params
+  const { method, id, type, slug, category_id, path, pagination, per_page, with_meta, tag_id, author_id, limit, posts_per_category, silent = false, plugin, status } = params
   const apiDomain = process.env.API_DOMAIN || "https://intercms.dev"
   const domain = process.env.NEXT_PUBLIC_SITE_URL || "https://spinbonuscasino.com"
   const baseUrl = `${apiDomain}/api/v2/data.php`
@@ -101,7 +105,9 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
     (tag_id ? `&tag_id=${tag_id}` : ``) +
     (author_id ? `&author_id=${author_id}` : ``) +
     (limit ? `&limit=${limit}` : ``) +
-    (posts_per_category ? `&posts_per_category=${posts_per_category}` : ``)
+    (posts_per_category ? `&posts_per_category=${posts_per_category}` : ``) +
+    (plugin ? `&plugin=${plugin}` : ``) +
+    (status ? `&status=${status}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
   try {
@@ -429,6 +435,47 @@ export interface ImportantCategory {
 
 export async function fetchImportantCategories({ limit, posts_per_category }: { limit?: number, posts_per_category?: number }) {
   return fetcher<ImportantCategory[]>({ method: "important-categories", limit, posts_per_category });
+}
+
+export interface PluginStatus {
+  plugin: "matches" | string,
+  enabled: boolean
+}
+export async function fetchPluginStatus({ plugin }: { plugin: "matches" | string }) {
+  return fetcher<PluginStatus>({ method: "plugin-status", plugin });
+}
+
+interface Match {
+  id: 1,
+  home_team: string,
+  away_team: string,
+  competition: string,
+  sport: string,
+  match_date: string,
+  match_time: string,
+  status: string,
+  is_featured: number,
+  home_logo: string,
+  away_logo: string,
+  cta_url: string
+}
+interface MatchesResponse {
+  matches: Match[]
+  widget_config: {
+    title: string,
+    show_logos: boolean,
+    show_competition: boolean,
+    show_date: boolean,
+    show_time: boolean,
+    show_cta: boolean,
+    cta_text: string,
+    max_matches: number
+  }
+  count: number
+  grouped: boolean
+}
+export async function fetchMatches({ status }: { status?: "scheduled" }) {
+  return fetcher<MatchesResponse>({ method: "matches", status });
 }
 
 // Example URL:

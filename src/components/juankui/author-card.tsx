@@ -2,7 +2,7 @@ import { Author } from "@/types/types";
 import Image from "next/image";
 import { Link } from "./optionals/link";
 
-export function AuthorCard ({ author }: { author: Author }) {
+export function AuthorCard({ author }: { author: Author }) {
 
     let socialLinks: Record<string, string> = {};
     if (typeof author.social_links === 'string') {

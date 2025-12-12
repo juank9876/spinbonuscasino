@@ -67,7 +67,7 @@ export async function createMetadata(slug: string): Promise<Metadata> {
             icons: [
                 {
                     rel: "icon",
-                    url: settings.favicon || "/logo-1.png",
+                    url: settings.favicon || "",
                     sizes: "32x32",
                     type: "image/png",
                 },

@@ -2,11 +2,15 @@
 import { fetchArticles } from "@/api-fetcher/fetcher";
 import { PostsPagination } from "../../../components/juankui/posts-with-pagination";
 import { Post } from "@/types/types";
+import { createPageWithDescription } from "@/utils/metadata-generator";
 
 type Props = {
     searchParams?: Promise<{ page?: string }>;
 };
 
+export async function generateMetadata() {
+    return createPageWithDescription("Blog", "Blog")
+}
 
 export default async function BlogWithPostsPage({ searchParams }: Props) {
     const currentPage = Number((await searchParams)?.page || 1)

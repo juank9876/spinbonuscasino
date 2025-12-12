@@ -5,8 +5,18 @@ import { getContentData, getContentDataTag } from "@/lib/fetch-data/getPageOrPos
 import { handleRedirect } from "@/utils/handleRedirect";
 import { PostsPagination } from "../../../../components/juankui/posts-with-pagination";
 import { Post } from "@/types/types";
+import { createPageWithDescription } from "@/utils/metadata-generator";
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const content = await getContentDataTag(slug)
 
+    const pageMeta = await createPageWithDescription(content?.data.name);
+
+    return {
+        ...pageMeta, // esto agrega title y description
+    };
+}
 
 export default async function TagsPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams?: Promise<{ page?: string }> }) {
     const { slug } = await params

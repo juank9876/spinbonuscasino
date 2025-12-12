@@ -28,12 +28,11 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
 
 
   return (
-    <section className="relative flex min-h-[60vh] lg:h-full w-full flex-col items-center justify-end overflow-hidden mb-10 bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)]">
+    <section className="relative flex max-h-[50vh] py-30 h-fit lg:h-full w-full flex-col items-center justify-center overflow-hidden mb-10 bg-gradient-to-b from-slate-950 via-blue-700 to-blue-600">
 
 
-      <div className=" py-20 w-full flex h-full flex-col items-center justify-center ">
+      <div className=" w-full flex h-full flex-col items-start justify-start ">
         <div className="flex flex-col w-full items-center justify-center space-y-5">
-          <CasinoBadge />
 
           <Highlighter action="highlight" color="#8200db" animationDuration={3000} >
             <h1 className="text-center md:text-[64px] font-inter md:leading-[72px] font-bold  text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center bg-gradient-to-r from-slate-200 via-slate-4300 to-white bg-clip-text text-transparent animate-pulse">
@@ -44,35 +43,6 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
             {meta_description}
           </p>
 
-
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-5">
-            <ButtonRipple className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 shadow-lg shadow-orange-500/25 transform hover:scale-105 transition-all">
-              <span className="text-xs md:text-sm font-bold">🎰 JUGAR AHORA</span>
-              <Dice6 className="ml-2 inline w-4 h-4 md:w-5 md:h-5 animate-spin" />
-            </ButtonRipple>
-
-            <LinkRipple href="#" className=" shadow-lg shadow-green-500/25 transform hover:scale-105 transition-all">
-              <span className="text-xs md:text-sm font-bold">🎁 RECLAMAR BONO</span>
-              <Gift className="ml-2 inline w-4 h-4 md:w-5 md:h-5 animate-bounce" />
-            </LinkRipple>
-          </div>
-
-          {/* Responsible Gaming Notice */}
-          <div className=" text-center">
-            <p className="text-white/60 text-xs md:text-sm">
-              🔞 Solo para mayores de 18 años | Juega con responsabilidad
-            </p>
-          </div>
-
-          <p className="text-white/60 text-xs md:text-sm italic">Visto en</p>
-
-          <Image
-            src="/inter-logo.webp"
-            alt="hero"
-            width={120}
-            height={120}
-            className=" opacity-60"
-          />
         </div>
 
 

@@ -29,10 +29,8 @@ export default async function CategoriesPage() {
     const categories = await fetchCategories()
 
     return (
-        <main className=" flex w-full flex-1 flex-col items-center justify-center pb-10">
-            <h1 className="text-4xl md:text-5xl font-bold  mb-6 text-center ">
-                Categories
-            </h1>
+        <main className=" flex w-full flex-1 flex-col items-center justify-center py-20">
+
             <div className="container mx-auto px-4 ">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {categories?.map((category) => (

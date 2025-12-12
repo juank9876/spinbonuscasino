@@ -5,11 +5,11 @@ import { limitCharacters } from '@/utils/limitCharacters'
 import { Link } from '@/components/juankui/optionals/link'
 import { Post } from '@/types/types'
 import { formatDate } from '@/utils/formatDate'
+import { fetchSiteSettings } from '@/api-fetcher/fetcher'
+
+
 
 export function CardPostCategory({ post }: { post: Post }) {
-
-
-  // Resultado: /tips/premier-league/article-slug
   return (
     <>
       {/*Card para PC*/}
@@ -17,14 +17,14 @@ export function CardPostCategory({ post }: { post: Post }) {
         href={post.seo_url || "#"}
         className="
           group relative hidden lg:flex 
-          w-[300px] h-[550px] to-blue-950
+          w-[300px] max-h-[550px] to-blue-950
            transition-all duration-500 
            p-5 flex-col
         "
       >
 
         {/* Imagen fija */}
-        <div className="relative w-full h-[200px] min-h-[200px] overflow-hidden rounded-md shadow-md transition-transform duration-300">
+        <div className="relative w-full h-fit min-h-[200px] overflow-hidden rounded-md shadow-md transition-transform duration-300">
           <Image
             src={
               post.featured_image ||
@@ -42,11 +42,11 @@ export function CardPostCategory({ post }: { post: Post }) {
         {/* Contenido */}
         <div className="flex flex-1 flex-col justify-between">
           <div className="space-y-1">
-            <h2 className="text-start text-xl font-semibold leading-tight tracking-tight hover:underline mt-4">
-              {post.title}
+            <h2 className="text-start text-xl font-semibold leading-tight tracking-tight hover:underline mt-4 text-darkmode-light">
+              {limitCharacters(post.title, 40)}
             </h2>
 
-            <p className="text-sm leading-relaxed text-gray-600 padding-none">
+            <p className="text-sm leading-relaxed text-darkmode padding-none">
               {limitCharacters(post.excerpt, 120)}
             </p>
           </div>
@@ -68,8 +68,8 @@ export function CardPostCategory({ post }: { post: Post }) {
               </div >
 
               <div className="flex flex-col items-start gap-1">
-                <span className="text-xs font-semibold text-gray-600">{post.author_name?.toUpperCase()}</span>
-                <span className="text-xs font-normal text-gray-600">
+                <span className="text-xs font-semibold text-darkmode">{post.author_name?.toUpperCase()}</span>
+                <span className="text-xs font-normal text-darkmode">
                   {formatDate(post.updated_at)}
                 </span>
               </div>
@@ -81,7 +81,7 @@ export function CardPostCategory({ post }: { post: Post }) {
 
 
       {/*Card para movil*/}
-      < Card className="duration-500 relative w-full overflow-hidden border-none p-0 shadow-lg transition hover:shadow-xl hover:shadow-[var(--color-accent-dark)]/20 lg:hidden" >
+      <Card className="duration-500 relative w-full overflow-hidden border-none p-0 shadow-lg transition hover:shadow-xl hover:shadow-[var(--color-accent-dark)]/20 lg:hidden" >
         <Link
           href={post.seo_url}
           className="block w-full">
@@ -99,18 +99,18 @@ export function CardPostCategory({ post }: { post: Post }) {
             />
 
             {/* Overlay con gradiente para mejor legibilidad */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/50"></div>
 
             {/* Contenido centrado */}
-            <CardContent className="absolute inset-0 z-10 flex h-full flex-col justify-between p-6 text-white">
-              <div className="mt-4 space-y-3 max-w-[90%]">
+            <CardContent className="absolute inset-0 z-10 flex h-full flex-col justify-end p-6 text-white">
+              <div className="mt-4 max-w-[90%]">
                 <div className="inline-block rounded-full bg-[var(--color-accent)] px-3 py-1 text-xs font-medium text-white shadow-md">
                   {post.category_name}
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight">{post.title}</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight">{limitCharacters(post.title, 60)}</h2>
                 <p className="text-sm text-white/90 font-medium">{formatDate(post.updated_at)}</p>
-                <p className="text-base text-white/80 line-clamp-3 leading-relaxed">
-                  {post.excerpt}
+                <p className="text-xs text-white/80 mb-2">
+                  {limitCharacters(post.excerpt, 120)}
                 </p>
               </div>
 
